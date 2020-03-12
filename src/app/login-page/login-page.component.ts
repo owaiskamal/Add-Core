@@ -51,7 +51,7 @@ export class LoginPageComponent implements OnInit {
           detail: "Welcome " + this.userName + "!"
         });
 
-     sessionStorage.setItem('token', res.detailData.accessToken);
+     sessionStorage.setItem('token', res.accessToken);
      sessionStorage.setItem('username', this.userName);
      sessionStorage.setItem('menuitem' , res.detailData.detail)
      var name = 'usama';
@@ -59,6 +59,14 @@ export class LoginPageComponent implements OnInit {
          setTimeout(() => {
            this.router.navigateByUrl("/adminpage");
         }, 500);
+      }
+      else if(res.code == "03")
+      {
+        this.messageService.add({
+          severity: "error",
+          summary: "Status",
+          detail: res.description
+        });
       }
     },
     (error)=> {

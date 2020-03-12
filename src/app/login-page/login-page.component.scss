@@ -8,7 +8,7 @@
     font-size: 26px;
     margin-left: 25%;
     text-align: center;
-   
+
 }
 
 :host ::ng-deep .ui-progressbar .ui-progressbar-value {
@@ -17,7 +17,7 @@
 }
 
 .main_bg{
-   
+
     width: 100%;
     position: absolute;
     top: 0;
@@ -25,12 +25,12 @@
     background: $login-background;
     height: 100%;
     background-size: cover;
-    background-position: top;
+    background-position: left;
 }
 
 @media (max-width: 768px) {
     .main{
-        width: 100%; 
+        width: 100%;
         margin : 20% 0 0 0;
     }
 }
