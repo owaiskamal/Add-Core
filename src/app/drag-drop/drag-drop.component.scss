@@ -5,12 +5,12 @@
 }
 :host ::ng-deep .ui-picklist  .ui-button {
 
-    background-color: #98c44f!important;
-    border: 1px solid #98c44f!important;
+    background-color: #00458a!important;
+    border: 1px solid #00458a!important;
  }
 
  :host ::ng-deep .ui-picklist .ui-picklist-filter-container .ui-picklist-filter-icon{
-    color: #98c44f!important;
+    color: #00458a!important;
  }
  :host ::ng-deep .ui-picklist .ui-picklist-list .ui-picklist-item.ui-state-highlight
  {
@@ -20,3 +20,9 @@
  {
    border-color: green;
  }
+
+ .create_template_btn{
+  background-color: #00458a!important;
+  border-color: #00458a!important;
+ }
+

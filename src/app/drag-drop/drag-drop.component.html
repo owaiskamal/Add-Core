@@ -2,7 +2,7 @@
 <p-card>
 <div class="drag_drop" style="margin-left:25px;">
   <div class="form-group ui-g-12 ">
-    <label for="sel1">Select Type:</label>
+    <label for="sel1" style="margin-right:2px;">Select Type:</label>
     <p-dropdown
       (onChange)="changeValue()"
       [options]="program_types"
@@ -45,7 +45,7 @@
 <div class="text-center" style="margin-top:10px;">
   <button
     pButton
-    class="ui-button-success"
+    class="ui-button-success create_template_btn"
     type="submit"
     (click)="create()"
     style="font-weight: bold; width: 30%;"
