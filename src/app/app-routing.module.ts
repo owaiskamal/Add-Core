@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: 'changepassword',component:ChangePasswordPageComponent},
   {path: '', component:LoginPageComponent},
 
-{path:'adminpage', component: AppLayoutComponent,
+{path:'adminpage', component: AppLayoutComponent, canActivate : [AuthGuard],
   children:
   [
     {path:'formtemplate',component:FormTemplateComponent},
@@ -32,9 +32,9 @@ const routes: Routes = [
 },
   {path: 'loginsettings' , component : LoginSecuritiesPageComponent,canActivate: [AuthGuard]},
  // {path: 'objectform' , component : ObjectFormComponent},
- 
- 
- 
+
+
+
 ];
 
 @NgModule({

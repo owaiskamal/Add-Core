@@ -19,10 +19,10 @@ export class UserauthService {
     return this.http.post<any>(environment.apiUrl, user);
   }
 
-  userLogout(username): Observable<any>
+  userLogout(UserID): Observable<any>
   {
     let user = {
-      username,
+      UserID  ,
       Password : ""
     };
     return this.http.post<any>(environment.logoutUrl , user);
