@@ -1,0 +1,98 @@
+<p-toast position="top-right" [style]="{'margin-top':'100px'}"></p-toast>
+<div  class="main_container ui-card">
+    <div class="ui-fluid ui-g" >
+        <div class="form-group ui-g-12 ">
+         <label for="sel1">Select Type:</label>
+         <p-dropdown [options]="program_types" [(ngModel)]="progtype" (change)="ChangingValue()" optionLabel="prog_type"></p-dropdown>
+       </div>
+   
+    
+<div class="ui-g-12">
+    <form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+    <p-panel header="Template Creator">
+        
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" >
+            <div class="ui-grid-row">
+               <div class="ui-grid-col-2">
+                  Enter Sequence *:
+               </div>
+               <div class="ui-grid-col-6">
+                <input pInputText type="number" formControlName = "sequence"  placeholder="Sequence"/>
+               </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Types *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <p-dropdown [options]="types" formControlName="datatype" optionLabel="obj_type"></p-dropdown>
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-message severity="error" text="Datatype is required" *ngIf="!userform.controls['datatype'].valid&&userform.controls['datatype'].dirty"></p-message>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                   Name *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <input pInputText type="text" formControlName = "name"  placeholder="Name"/>
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-message severity="error" text="Name is required" *ngIf="!userform.controls['name'].valid&&userform.controls['name'].dirty"></p-message>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Placeholder *:
+                </div>
+                <div class="ui-grid-col-6">
+                    
+                    <input pInputText type="text" formControlName="placeholder" placeholder="Placeholder"/>
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-message severity="error" text="Placeholder is required" *ngIf="!userform.controls['placeholder'].valid&&userform.controls['placeholder'].dirty"></p-message>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Label *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <input pInputText type="text" formControlName="label" placeholder="Label"/>
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-message severity="error" text="Label is required" *ngIf="!userform.controls['label'].valid&&userform.controls['label'].dirty"></p-message>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Required/Not Required:
+                </div>
+                <div class="ui-grid-col-6">
+                    <p-checkbox  formControlName="touched" binary="true"></p-checkbox>
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-message severity="error" text="Checkbox must be checked/unchecked"*ngIf="userform.value.touched==false&&userform.controls['touched'].dirty"></p-message>
+                </div>
+            </div>
+        
+            <div class="ui-grid-row">
+              
+                <div class="ui-grid-col-6">
+                    <button
+                    pButton
+                    type="submit"
+                    class="ui-button-success ui-button-rounded"
+                    [disabled]="!userform.valid || userform.value.touched==false"
+                    label="Submit"
+                    style="margin-top: 0px;font-weight: bold;"
+                  ></button>
+                </div>
+                <div class="ui-grid-col-4"></div>
+            </div>
+        </div>
+    </p-panel>
+</form>
+</div>
+</div> </div>

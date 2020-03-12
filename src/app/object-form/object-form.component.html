@@ -1,0 +1,17 @@
+<h3 class="first">Object Setup</h3>
+<div class="ui-g">
+
+    
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <label>Object Name</label>
+            <input id="input" type="text" name="Object Name" placeholder="Object Name">      
+        </div>
+    </div>
+
+
+    <div class="ui-g-12 ui-md-4">
+        <p-dropdown [options]="types" [(ngModel)]="selectedType" placeholder="Select Type" optionLabel="obj_type" [showClear]="true"></p-dropdown>
+        <p>Selected Type: {{selectedType ? selectedType.obj_type : 'none'}}</p>
+    </div>
+</div>

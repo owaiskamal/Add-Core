@@ -1,0 +1,65 @@
+<p-dialog header="Modal Display" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+    [draggable]="true" [resizable]="false">
+     
+    <div *ngFor="let field of modals">
+      <p><strong>Firstname:</strong>{{field.firstName}}</p>
+      <hr>
+      <p><strong>Lastname:</strong>{{field.lastName}}</p>
+      <hr>
+      <p><strong>Program:</strong>{{field.program}}</p>
+      <hr>
+      <p><strong>Test field:</strong>{{field.pest}}</p>
+      <hr>
+      <p><strong>Semester:</strong>{{field.semester}}</p>
+
+    </div>
+        <p-footer>
+            <button type="button" pButton icon="pi pi-check" (click)="clearModal()" label="Yes"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="clearModal()" label="No" class="ui-button-secondary"></button>
+        </p-footer>
+</p-dialog>
+
+
+<p-toast [style]="{ marginTop: '80px' }"></p-toast>
+
+
+
+
+<p-card>
+<div class="ui-fluid ui-g" style="width: 80%; margin-left: 10%;">
+<div class="ui-g-12 header">
+  <h1 class="text-center heading">Dynamic Form</h1>
+</div>
+  <div class="form-group ui-g-12 ">
+    <label for="sel1">Select Type:</label>
+    <select
+      class="form-control"
+      [(ngModel)]="selectedType"
+      (change)="ChangingValue()"
+    >
+      <option [ngValue]="type" *ngFor="let type of types">{{
+        type.obj_type
+      }}</option>
+    </select>
+  </div> 
+  <div class="ui-g-12">
+    <div class="card">
+      <div class="card-header">Dynamic Forms</div>
+      <div class="card-body">
+       <!-- <dynamic-form-builder
+
+          *ngIf="!isValid"
+          [fields]="getFields()"
+        >
+      </dynamic-form-builder> -->
+        <dynamic-form-builder
+        *ngIf="isValid"
+        (savedata)=recivemsg($event)
+          [fields]="getFields()"
+        ></dynamic-form-builder>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</p-card>

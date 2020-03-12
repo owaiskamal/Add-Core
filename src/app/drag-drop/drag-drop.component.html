@@ -1,0 +1,56 @@
+<p-toast position="top-right" [style]="{ 'margin-top': '100px' }"></p-toast>
+<p-card>
+<div class="drag_drop" style="margin-left:25px;">
+  <div class="form-group ui-g-12 ">
+    <label for="sel1">Select Type:</label>
+    <p-dropdown
+      (onChange)="changeValue()"
+      [options]="program_types"
+      [(ngModel)]="progtype"
+      optionLabel="prog_type"
+    ></p-dropdown>
+  </div>
+  <p-pickList
+    [source]="sourceArr"
+    [target]="targetArr"
+    sourceHeader="Available"
+    targetHeader="Selected"
+    [responsive]="true"
+    filterBy="name,label,type"
+    dragdrop="true"
+    sourceFilterPlaceholder="Search by Object"
+    targetFilterPlaceholder="Search by Object"
+    [sourceStyle]="{ height: '300px' }"
+    [targetStyle]="{ height: '300px' }"
+  >
+    <ng-template let-field pTemplate="item">
+      <div class="ui-helper-clearfix">
+        <div style="font-size:14px;">
+          <span
+            >Name: <strong>({{ field.name }})</strong></span
+          >
+          -
+          <span
+            >Type: <strong>({{ field.type }})</strong></span
+          >
+          -
+          <span
+            >Label: <strong>({{ field.label }})</strong></span
+          >
+        </div>
+      </div>
+    </ng-template>
+  </p-pickList>
+</div>
+<div class="text-center" style="margin-top:10px;">
+  <button
+    pButton
+    class="ui-button-success"
+    type="submit"
+    (click)="create()"
+    style="font-weight: bold; width: 30%;"
+    label="Create Template"
+  ></button>
+  <!-- <button pButton class="ui-button-success" type="submit" (click)= "sort()" style="font-weight: bold; width: 30%;"  label="sort"></button> -->
+</div>
+</p-card>

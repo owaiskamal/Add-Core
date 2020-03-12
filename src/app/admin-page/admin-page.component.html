@@ -1,0 +1,100 @@
+
+<div #appDrawer [ngClass]="{'sidebar': !this.sidebarOpen}"class="sidenav">
+<ul class="list-unstyled">
+    <li >
+        <span class="mat-list"> 
+                    DashBoard
+        </span>  
+    <hr  style="height:0.5px;width:100%;background-color:rgb(185, 183, 183);" />  
+    </li>
+</ul>
+<app-sidenav *ngFor="let item of links" [item]="item" (messageEvent)="receiveMessage($event)"></app-sidenav>
+</div>
+
+<!-- <ul class="list-unstyled quick-links" *ngFor = "let link of links">
+  
+  
+  <li class="main_link">
+    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed">
+        <i class="pi pi-id-card"></i>{{link.Node}}</a>
+
+
+</li>
+<ul class="collapse list-unstyled" id="paymentSubmenu" *ngFor = "let lin of link.Forms">
+<li class="sub_link"><a class="sub_anchs">{{lin.Name}}</a></li>
+
+</ul> -->
+      <!-- <li class="main_link"><a class="main_link" href="javascript:void();"><i class="pi pi-home"></i>Home</a></li>
+
+<li class="main_link">
+        <a [routerLink]="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed">
+            <i class="pi pi-id-card"></i>Payment Transaction</a>
+
+        
+</li>
+<ul class="collapse list-unstyled" id="paymentSubmenu">
+    <li class="sub_link"><a class="sub_anchs" href="javascript:void();">Create Transaction</a></li>
+    <li class="sub_link" ><a class="sub_anchs"  href="javascript:void();">Bulk Transaction</a></li>
+    
+</ul>
+
+
+    <li class="main_link">
+        <a href="#backSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed">
+            <i class="pi pi-briefcase"></i> Back Office</a>
+
+    </li>
+            <ul class="collapse list-unstyled" id="backSubMenu">
+                <li class="sub_link"><a class="sub_anchs" href="javascript:void();">Stop Cheque</a></li>
+                <li class="sub_link"><a class="sub_anchs" href="javascript:void();">CBS Posting</a></li>
+                
+            </ul>
+    <li class="main_link">
+        <a href="#instrumentSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed">
+            <i class="pi pi-refresh"></i>Instrument Processing</a>
+
+    </li>
+            <ul class="collapse list-unstyled" id="instrumentSubMenu">
+                <li class="sub_link"><a class="sub_anchs" href="javascript:void();">Instrument Printing</a></li>
+                <li class="sub_link"><a class="sub_anchs" href="javascript:void();">Instrument Re-print</a></li>
+                
+            </ul> -->
+ 
+  <nav class="navbar navbar-light bg-light fixed-top" >
+    <div>
+    
+     
+    <a class="btn_side" style="margin-right:20px;" 
+    (click)="toggleNavbar()" >
+    <span class="navbar-toggler-icon"></span></a>
+
+    <a class="navbar-brand" href="javascript:void();">
+      <img class="logo img-responsive" src="assets/images/logo.png" width="80px" height="50px" >
+    </a>
+
+
+</div>
+    
+   
+     
+    <ul class="navbar-nav">
+       <li>
+        
+       </li>
+        <li class=" dropdown " >
+            
+        </li> 
+        
+    </ul>
+    <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="pi pi-ellipsis-v"></i></a>
+    <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+        <a class="dropdown-item" [routerLink]="['/adminpage/formtemplate']"><i class="pi pi-users"></i>Dynamic Forms</a>
+        <a class="dropdown-item"  [routerLink]="['/adminpage/resetpassword']"><i class="pi pi-user-edit"></i>Setting</a>
+        <a class="dropdown-item"  [routerLink]="['/adminpage/templatecreator']"><i class="pi pi-user-edit"></i>Template Creator</a>
+        <button class="dropdown-item" (click)='logout()'><a><i class="pi pi-sign-out"></i>Logout</a></button>
+    </div> 
+
+    
+  </nav>
+  
+    

@@ -1,0 +1,22 @@
+@media (max-width: 768px) {
+    .drag_drop {
+        margin-top: 100px;
+    }
+}
+:host ::ng-deep .ui-picklist  .ui-button {
+
+    background-color: #98c44f!important;
+    border: 1px solid #98c44f!important;
+ }
+
+ :host ::ng-deep .ui-picklist .ui-picklist-filter-container .ui-picklist-filter-icon{
+    color: #98c44f!important;
+ }
+ :host ::ng-deep .ui-picklist .ui-picklist-list .ui-picklist-item.ui-state-highlight
+ {
+   background-color: green;
+ }
+ :host ::ng-deep .ui-picklist .ui-picklist-list .ui-picklist-item.ui-state-highlight:enabled:focus
+ {
+   border-color: green;
+ }

@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeicons/primeicons.css";
+@import "../node_modules/primeng/resources/themes/nova-light/theme.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+
+$font-primary: 'Poppins',Arial, sans-serif;
+
+body ,html
+{
+    height: 100%;
+    font-family: $font-primary;
+}

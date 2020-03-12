@@ -1,0 +1,37 @@
+ a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    justify-content: center;
+    color: white;
+    display: flex;
+    justify-content:inherit;
+  } 
+
+:host{
+.mat-list-item.active {
+   background-color: rgba($color: #919191ce, $alpha: 1);
+ }
+ &:hover,
+ &:focus {
+   >.mat-list-item:not(.expanded) {
+      background-color: rgba($color: #616161, $alpha: 1)!important;
+   }
+ }
+}
+
+//  a:hover
+//  {
+//     background-color: rgba($color: #98c44f, $alpha: 0.7);
+//     cursor: pointer;
+//  }
+
+
+ .main_link :hover{
+   
+    color:white;;
+    background-color: rgba($color: #616161, $alpha: 0.7);
+    cursor: pointer;
+ }
+
+ 
+
