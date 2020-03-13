@@ -43,7 +43,6 @@ export class SidenavComponent implements OnInit {
     //console.log(item);
    
     if (!item.Forms || !item.Forms.length) {
-     
       this.route.navigate(['adminpage/'+item.RLink]);
       this.navService.closeNav(true);
       this.messageEvent.emit("gjnhgjhjhgjhgjhgjhgjhgjhgjh");
