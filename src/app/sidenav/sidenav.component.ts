@@ -27,7 +27,7 @@ export class SidenavComponent implements OnInit {
   visibleSidebar1 = true;
   messa = "ASdasdasdasdasdasdasd1q231231"
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
-  constructor(public route : Router , public navService: NavService) { 
+  constructor(public route : Router , public navService: NavService) {
     if (this.depth === undefined) {
       this.depth = 0;
     }
@@ -35,16 +35,16 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit(): void {
     this.ariaExpanded = this.expanded;
-   
+
   }
 
   onItemClick(item)
   {
     //console.log(item);
-   
+
     if (!item.Forms || !item.Forms.length) {
-     
-      this.route.navigate([item.RLink]);
+
+      this.route.navigate(['adminpage/'+item.RLink]);
       this.navService.closeNav(true);
       this.messageEvent.emit("gjnhgjhjhgjhgjhgjhgjhgjhgjh");
     }
@@ -52,6 +52,6 @@ export class SidenavComponent implements OnInit {
       this.expanded = !this.expanded;
     }
   }
-  
+
 
 }
