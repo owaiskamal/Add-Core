@@ -41,6 +41,9 @@
 :host ::ng-deep .ui-card{
     border-radius:20px;
     background-color: #f8f9fe;
+
+    border: 0;
+    box-shadow: 0 1px 3px rgba(50,50,93,.15), 0 1px 0 rgba(0,0,0,.02)
 }
 
 .main
@@ -70,7 +73,7 @@
   border-bottom-left-radius: 0;
 
 }
-/* 
+/*
 .input_style:focus{
     outline-style:none;
 } */
