@@ -41,7 +41,6 @@
 :host ::ng-deep .ui-card{
     border-radius:20px;
     background-color: #f8f9fe;
-
 }
 
 .main
@@ -69,7 +68,12 @@
   border-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+
 }
+/* 
+.input_style:focus{
+    outline-style:none;
+} */
 
 
 :host ::ng-deep .ui-progressbar .ui-progressbar-value {

@@ -35,6 +35,7 @@ import { DragDropComponent } from './drag-drop/drag-drop.component';
 import {PickListModule} from 'primeng/picklist';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import {MegaMenuModule} from 'primeng/megamenu';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import {MegaMenuModule} from 'primeng/megamenu';
     AppLayoutComponent,
     TemplateCreatorComponent,
     DragDropComponent,
-    SidenavComponent
+    SidenavComponent,
+    
   ],
   imports: [
     BrowserModule,
