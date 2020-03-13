@@ -10,6 +10,10 @@
     background:  linear-gradient(90deg ,rgba(2, 0, 124, 0.918), rgba(69, 106, 226, 0.808)) ;
 }
 
+:host ::ng-deep .ui-card{
+    border-radius:20px;
+}
+
 .main
 {
     margin-top: 15%;
@@ -18,7 +22,7 @@
     font-size: 26px;
     margin-left: 25%;
     text-align: center;
-
+    
 }
 
 :host ::ng-deep .ui-progressbar .ui-progressbar-value {
@@ -41,6 +45,6 @@
 @media (max-width: 768px) {
     .main{
         width: 100%;
-        margin : 25% 0 0 0;
+        margin : 35% 0 0 0;
     }
 }
