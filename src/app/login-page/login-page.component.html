@@ -4,36 +4,39 @@
 <p-toast position="top-right"></p-toast>
 <div
   class="ui-g main"
- 
+
 >
 
   <p-card class="ui-g-12 card_body">
     <div>
     <p-header>
-     
-      <h2 style="font-family:monospace; font-weight:bold; top:5px;">Login</h2>
+
+      <h2 class="header_style">Login</h2>
     </p-header>
-    </div>  
+    </div>
       <!-- <p>{{ ipAddress }}</p> -->
-    
+
     <div class="ui-g ui-fluid ">
-      <hr style="height:2px;width:100%;background-color:#00458a;" />
-      <form style="width:100%; height:100%;" #myForm="ngForm">
+      <hr class="hr_style"/>
+      <form class="form_style" #myForm="ngForm">
         <div class="ui-g">
           <div class="ui-md-2 ui-lg-3"></div>
           <div class="ui-md-8 ui-lg-6 ui-sm-12">
-            <div class="ui-inputgroup">
-              <span class="ui-inputgroup-addon" style="width: 20%;"
-                ><i class="pi pi-user-edit" style="font-size: 1.5em;"></i
+            <div class="ui-inputgroup input-group-alternative">
+              <div class="input-group-prepend">
+              <span class="input-group-text input_text_style"
+                ><i class="pi pi-user input_icon"></i
               ></span>
+            </div>
               <input
+
                 type="text"
                 required
                 placeholder="Username"
                 [(ngModel)]="userName"
                 name="UserName"
-                pInputText
-                autofocus
+                class="form-control input_style"
+
               />
             </div>
           </div>
@@ -42,23 +45,24 @@
         <div class="ui-g">
           <div class="ui-md-2 ui-lg-3"></div>
           <div class="ui-md-8 ui-lg-6 ui-sm-12">
-            <div class="ui-inputgroup">
-              <span class="ui-inputgroup-addon" style="width: 20%;">
-                <i class="pi pi-lock" style="font-size: 1.5em;"></i>
-              </span>
-
+            <div class="ui-inputgroup input-group-alternative">
+              <div class="input-group-prepend">
+              <span class="input-group-text input_text_style"
+                ><i class="pi pi-lock input_icon"></i
+              ></span>
+            </div>
               <input
                 type="password"
-                placeholder="Password"
                 required
+                placeholder="Password"
                 [(ngModel)]="password"
-                name="Password"
-                pInputText
+                name="password"
+                class="form-control input_style"
+
               />
             </div>
           </div>
         </div>
-
         <div class="ui-g">
           <div class="ui-md-2 ui-lg-3"></div>
           <div class="ui-md-8 ui-lg-6 ui-sm-12">
@@ -69,7 +73,6 @@
               (click)="loginUser()"
               (keyup.enter)="loginUser()"
               label="Submit"
-              style="margin-top: 0px;width:100%; font-weight: bold;"
             ></button>
           </div>
         </div>
