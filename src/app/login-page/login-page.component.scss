@@ -1,13 +1,47 @@
 @import "src/theme.scss";
 
+
+.header_style{
+  font-family:monospace;
+  font-weight:bold;
+  top:5px;
+}
+
+.form_style{
+  width:100%;
+  height:100%;
+}
+
+.hr_style{
+  height:2px;width:100%;background-color:#00458a;
+}
+
+.input_text_style{
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: white;
+}
+.input_icon{
+  color: #8898aa;
+}
 .login_btn{
     background-color: #00458a!important;
     border-color: #00458a!important;
+    margin-top: 0px;width:100%; font-weight: bold;
+}
+.input_icon{
+  color: #8898aa;
 }
 
 .login_btn:hover{
 
     background:  linear-gradient(90deg ,rgba(2, 0, 124, 0.918), rgba(69, 106, 226, 0.808)) ;
+}
+
+:host ::ng-deep .ui-card{
+    border-radius:20px;
+    background-color: #f8f9fe;
+
 }
 
 .main
@@ -20,6 +54,23 @@
     text-align: center;
 
 }
+.input-group-alternative
+{
+  transition: box-shadow .15s ease;
+  border: 0;
+  box-shadow: 0 1px 3px rgba(50,50,93,.15), 0 1px 0 rgba(0,0,0,.02)
+
+}
+
+.input_style{
+  color: #8898aa;
+  padding-left : 0;
+  font-size: .875rem;
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 
 :host ::ng-deep .ui-progressbar .ui-progressbar-value {
 
@@ -41,6 +92,6 @@
 @media (max-width: 768px) {
     .main{
         width: 100%;
-        margin : 25% 0 0 0;
+        margin : 35% 0 0 0;
     }
 }
