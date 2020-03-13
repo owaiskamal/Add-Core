@@ -4,9 +4,15 @@
     background-color: #00458a!important;
     border-color: #00458a!important;
 }
+
+.login_btn:hover{
+
+    background:  linear-gradient(90deg ,rgba(2, 0, 124, 0.918), rgba(69, 106, 226, 0.808)) ;
+}
+
 .main
 {
-    margin-top: 10%;
+    margin-top: 15%;
     width: 50%;
     height: 50%;
     font-size: 26px;
@@ -35,6 +41,6 @@
 @media (max-width: 768px) {
     .main{
         width: 100%;
-        margin : 20% 0 0 0;
+        margin : 25% 0 0 0;
     }
 }

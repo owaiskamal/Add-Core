@@ -65,8 +65,9 @@
             <button
               pButton
               type="submit"
-              class="ui-button-success ui-button-rounded login_btn"
+              class="ui-button-primary ui-button-rounded login_btn"
               (click)="loginUser()"
+              (keyup.enter)="loginUser()"
               label="Submit"
               style="margin-top: 0px;width:100%; font-weight: bold;"
             ></button>
