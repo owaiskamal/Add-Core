@@ -5,25 +5,41 @@ import { NavlinksService } from './navlinks.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { NavService } from '../nav.service';
 import { UserauthService } from '../userauth.service';
+import { trigger, state, transition, animate, style } from '@angular/animations';
+
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
-  styleUrls: ['./admin-page.component.scss']
+  styleUrls: ['./admin-page.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+      state('in', style({
+        transform: 'translate3d(0,0,0)'
+      })),
+      state('out', style({
+        transform: 'translate3d(100%, 0, 0)'
+      })),
+      transition('in => out', animate('400ms ease-in-out')),
+      transition('out => in', animate('400ms ease-in-out'))
+    ]),
+  ]
 })
 export class AdminPageComponent implements OnInit ,AfterViewInit  {
   items: MenuItem[];
   visibleSidebar1: boolean;
-  mobile:boolean;
+
   @Input() depth: number;
   myDiv;
-
+  menuState:string = 'out';
+  
   private renderer: Renderer2
   @ViewChild('appDrawer') appDrawer : boolean
   @ViewChild(SidenavComponent) sidenav;
-  constructor(private router:Router,private navlinkservice: NavlinksService , private navService : NavService , private userService : UserauthService) {
+  constructor(private router:Router,private navlinkservice: NavlinksService , private navService : NavService , private userService : UserauthService ) {
     if (this.depth === undefined) {
       this.depth = 0;
     }
+    
 
    }
   navbarOpen = false;
@@ -74,7 +90,7 @@ receiveMessage(event:string)
 }
 toggleNavbar() {
 
-
+  this.menuState = this.menuState === 'out' ? 'in' : 'out';
   this.sidebarOpen = !this.sidebarOpen;
 }
 

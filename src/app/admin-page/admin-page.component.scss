@@ -3,10 +3,10 @@
 .sidenav {
     height: 100%;
     width: 270px;
-    position: absolute;
+    position: fixed;
     z-index: 1;
-   
-    left: 0;
+    right: auto;
+    left: -277px;
     background: $sidenav-background;
   
     background-size: cover;
@@ -95,13 +95,13 @@
   //   .sidenav a {font-size: 18px;}
   // }
   @media (max-width: 768px) {
-    .btn_side {
-        display: inline;
-    }
-    
-    .sidebar{
-      display: none;
-    }
+      .btn_side {
+          display: inline;
+      }
+      
+      // .sidebar{
+      //   display: none;
+      // }    
     
 }
 
@@ -109,7 +109,10 @@
  
  color:#00458a;
 }
-
+.dropdown-item:hover{
+  background-color: #00458a;
+  opacity: 0.9;
+}
 /* footer */
 
 
