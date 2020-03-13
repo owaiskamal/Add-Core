@@ -31,7 +31,7 @@ export class AdminPageComponent implements OnInit ,AfterViewInit  {
   @Input() depth: number;
   myDiv;
   menuState:string = 'out';
-  
+
   private renderer: Renderer2
   @ViewChild('appDrawer') appDrawer : boolean
   @ViewChild(SidenavComponent) sidenav;
@@ -39,7 +39,7 @@ export class AdminPageComponent implements OnInit ,AfterViewInit  {
     if (this.depth === undefined) {
       this.depth = 0;
     }
-    
+
 
    }
   navbarOpen = false;
@@ -98,13 +98,19 @@ logout() {
   var data = sessionStorage.getItem('username')
   this.userService.userLogout(data).subscribe(res=>{
     console.log(res);
-
-  })
-  // remove user from local storage to log user out
-  sessionStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   sessionStorage.removeItem('username');
   sessionStorage.removeItem('menuitem')
   this.router.navigateByUrl("");
+
+  },
+  (error)=>
+  {
+    console.log("Logout Not Working" , error);
+
+  })
+  // remove user from local storage to log user out
+
   //this.currentUserSubject.next(null);
 }
 adminpage(){
