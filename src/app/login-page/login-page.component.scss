@@ -2,9 +2,8 @@
 
 
 .header_style{
-  font-family:Arial, Helvetica, sans-serif;
+  font-family:monospace;
   font-weight:bold;
-  color: #505964;
   top:5px;
 }
 
@@ -105,7 +104,7 @@
 
 :host ::ng-deep .ui-progressbar .ui-progressbar-value {
 
-   background: #00458a!important;
+   background: #008000!important;
 }
 
 .main_bg{
