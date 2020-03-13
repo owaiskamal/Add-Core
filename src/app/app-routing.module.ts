@@ -17,6 +17,7 @@ import { DragDropComponent } from './drag-drop/drag-drop.component';
 
 
 
+
 const routes: Routes = [
   {path: 'changepassword',component:ChangePasswordPageComponent},
   {path: '', component:LoginPageComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
     {path:'formtemplate',component:FormTemplateComponent},
     {path : 'resetpassword' , component : ResetPasswordPageComponent},
     {path:'templatecreator',component: TemplateCreatorComponent},
-    {path:'dragdrop',component:DragDropComponent}
+    {path:'List',component:DragDropComponent},
+    
   ]
 },
   {path: 'loginsettings' , component : LoginSecuritiesPageComponent,canActivate: [AuthGuard]},
