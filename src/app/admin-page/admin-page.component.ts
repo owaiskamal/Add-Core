@@ -70,9 +70,13 @@ onResize(event?) {
       this.myDiv = null;
 
     }
-    else
+    else if( window.innerWidth > 365)
     {
       this.menuState = 'out';
+    }
+    else if(window.innerWidth < 365)
+    {
+      this.menuState = 'in';
     }
 
 }
