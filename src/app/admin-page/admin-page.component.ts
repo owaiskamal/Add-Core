@@ -58,7 +58,7 @@ onResize(event?) {
 
    this.screenWidth = window.innerWidth;
    console.log(this.screenWidth);
-   if(window.innerWidth < 365 && this.myDiv === null)
+   if(window.innerWidth < 365 && this.myDiv !='dropdown')
     {
       this.menuState = 'in';
       console.log("hello conp");

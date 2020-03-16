@@ -17,27 +17,11 @@
   height:2px;width:100%;background-color:#00458a;
 }
 
-.input_text_style{
-  background-color: #fff;
-    border: 1px solid #e3e3e3;
-    border-radius: 30px;
-    color: #555;
-    transition: color .3s ease-in-out,border-color .3s ease-in-out,background-color .3s ease-in-out;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-right: 0;
-  // background-color: white;
-}
-.input_icon{
-  color: #8898aa;
-}
+
 .login_btn{
     background-color: #00458a!important;
     border-color: #00458a!important;
     margin-top: 0px;width:100%; font-weight: bold;
-}
-.input_icon{
-  color: #8898aa;
 }
 
 .login_btn:hover{
@@ -63,24 +47,33 @@
     text-align: center;
 
 }
-// .input-group-alternative
-// {
-//   // transition: box-shadow .15s ease;
-//   // border: 0;
-//   // box-shadow: 0 1px 3px rgba(50,50,93,.15), 0 1px 0 rgba(0,0,0,.02)
 
-// }
 
-.input_style:focus
-{
-  border: 1px solid #030d9e;
-  box-shadow: none;
-  outline: 0!important;
-  color: #2c2c2c;
+:host ::ng-deep .ui-progressbar .ui-progressbar-value {
+
+   background: #090080!important;
+
 }
+.input-icons i { 
+  position: absolute; 
+} 
 
-.input_style{
+.input-icons { 
+  width: 100%; 
+  margin-bottom: 10px; 
+} 
 
+.icon { 
+  padding: 10px; 
+  color: #00458a; 
+  min-width: 50px; 
+  text-align: left; 
+} 
+
+.input-field { 
+  width: 100%; 
+  padding: 10px; 
+  text-indent: 20px; 
   background-color: white;
   border: 1px solid #e3e3e3;
   border-radius: 30px;
@@ -89,25 +82,25 @@
   font-size: .9571em;
   transition: color .3s ease-in-out,border-color .3s ease-in-out,background-color .3s ease-in-out;
   box-shadow: none;
-  // color: #8898aa;
-  // padding-left : 0;
-  // font-size: .875rem;
-  // border-left: 0;
-  // border-top-left-radius: 0;
-  // border-bottom-left-radius: 0;
+} 
 
+.input-field:focus{
+  border: 1px solid #00458a;
+  box-shadow: none;
+  outline: 0!important;
+  color: #2c2c2c;
 }
-/*
-.input_style:focus{
-    outline-style:none;
-} */
+
+ .fa-lock{
+    font-size: 16px;   
+} 
 
 
-:host ::ng-deep .ui-progressbar .ui-progressbar-value {
 
-   background: #090080!important;
+ 
 
-}
+
+
 
 .main_bg{
 
