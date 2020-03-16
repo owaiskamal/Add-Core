@@ -10,11 +10,11 @@
  }
  :host ::ng-deep .ui-picklist .ui-picklist-list .ui-picklist-item.ui-state-highlight
  {
-   background-color: green;
+   background-color: #00458a!important;
  }
  :host ::ng-deep .ui-picklist .ui-picklist-list .ui-picklist-item.ui-state-highlight:enabled:focus
  {
-   border-color: green;
+   border-color: #00458a!important;
  }
 
  .create_template_btn{
