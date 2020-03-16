@@ -67,7 +67,7 @@
    <!--  <a class="btn_side" style="margin-right:20px;"
     (click)="toggleNavbar()" >
     <span class="navbar-toggler-icon"></span></a> -->
-    <a class="btn_side" (click)="toggleNavbar()" >
+    <a class="btn_side" (click)="toggleNavbar($event)" >
         <span class="navbar-toggler-icon"></span>
     </a>
 
@@ -80,7 +80,7 @@
 
 
 
-   
+
     <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="pi pi-ellipsis-v"></i></a>
     <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
         <a class="dropdown-item" [routerLink]="['/adminpage/formtemplate']"><i class="pi pi-users"></i>Dynamic Forms</a>

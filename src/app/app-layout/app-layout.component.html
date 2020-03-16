@@ -1,7 +1,6 @@
 <app-admin-page></app-admin-page>
-<div class="main">
-   
-<router-outlet></router-outlet>
+<div class="main" [@routerTransition]="getState(o)">
+
+<router-outlet #o="outlet"></router-outlet>
 
 </div>
-    
