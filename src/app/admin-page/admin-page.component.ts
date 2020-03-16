@@ -66,7 +66,7 @@ onResize(event?) {
     }
     else if (window.innerWidth < 364 && this.myDiv === 'dropdown'){
       this.menuState = 'out';
-      console.log("hello comnponent");
+      console.log("hello moppo");
       this.myDiv = null;
 
     }
