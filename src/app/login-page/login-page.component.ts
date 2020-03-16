@@ -44,13 +44,13 @@ export class LoginPageComponent implements OnInit {
       }
 
        else if(res.code == "00") {
-        this.showProgress = true;
+        
         this.messageService.add({
           severity: "success",
           summary: "Login Successfully",
           detail: "Welcome " + this.userName + "!"
         });
-
+        this.showProgress = true;
      sessionStorage.setItem('token', res.accessToken);
      sessionStorage.setItem('username', this.userName);
      sessionStorage.setItem('menuitem' , res.detailData.detail)
@@ -58,7 +58,7 @@ export class LoginPageComponent implements OnInit {
      localStorage.setItem('name',name);
          setTimeout(() => {
            this.router.navigateByUrl("/adminpage");
-        }, 500);
+        }, 1000);
       }
       else if(res.code == "03")
       {
