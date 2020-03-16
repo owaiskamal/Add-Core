@@ -6,6 +6,7 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 import { NavService } from '../nav.service';
 import { UserauthService } from '../userauth.service';
 import { trigger, state, transition, animate, style } from '@angular/animations';
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: 'app-admin-page',
@@ -22,26 +23,59 @@ import { trigger, state, transition, animate, style } from '@angular/animations'
       transition('in => out', animate('400ms ease-in-out')),
       transition('out => in', animate('400ms ease-in-out'))
     ]),
-  ]
+  ],
+  host : {
+    "(window:click)" : "onResize()"
+  }
+
+
 })
 export class AdminPageComponent implements OnInit ,AfterViewInit  {
   items: MenuItem[];
   visibleSidebar1: boolean;
 
   @Input() depth: number;
-  myDiv;
+  myDiv: any;
   menuState:string = 'out';
 
   private renderer: Renderer2
   @ViewChild('appDrawer') appDrawer : boolean
   @ViewChild(SidenavComponent) sidenav;
+  screenHeight: number;
+  screenWidth: number;
   constructor(private router:Router,private navlinkservice: NavlinksService , private navService : NavService , private userService : UserauthService ) {
     if (this.depth === undefined) {
       this.depth = 0;
     }
 
 
+    this.onResize();
+
+
    }
+   @HostListener('window:resize', ['$event'])
+onResize(event?) {
+
+   this.screenWidth = window.innerWidth;
+   console.log(this.screenWidth);
+   if(window.innerWidth < 365 && this.myDiv === null)
+    {
+      this.menuState = 'in';
+      console.log("hello conp");
+
+    }
+    else if (window.innerWidth < 364 && this.myDiv === 'dropdown'){
+      this.menuState = 'out';
+      console.log("hello comnponent");
+      this.myDiv = null;
+
+    }
+    else
+    {
+      this.menuState = 'out';
+    }
+
+}
   navbarOpen = false;
   sidebarOpen = true;
   public links = [];
@@ -49,8 +83,12 @@ export class AdminPageComponent implements OnInit ,AfterViewInit  {
 
   ngOnInit() {
 
+
+
 this.getLinks();
 }
+
+
 ngAfterViewInit()
 {
 
@@ -60,6 +98,14 @@ ngAfterViewInit()
 
 
 }
+// outsideClick()
+// {
+//   this.menuState = 'in'
+//   console.log("side out");
+
+//  // this.sidebarOpen = !this.sidebarOpen;
+// }
+
 /* onItemClick($event)
 {
   console.log($event);
@@ -84,12 +130,14 @@ getLinks() {
 receiveMessage(event:string)
 {
 
-  this.myDiv.style.display = 'none';
+  console.log(event);
+  this.myDiv = event;
+
 
   //this.sidebarOpen = $event;
 }
-toggleNavbar() {
-
+toggleNavbar($event) {
+  $event.stopPropagation();
   this.menuState = this.menuState === 'out' ? 'in' : 'out';
   this.sidebarOpen = !this.sidebarOpen;
 }

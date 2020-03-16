@@ -25,11 +25,11 @@ const routes: Routes = [
 {path:'adminpage', component: AppLayoutComponent, canActivate : [AuthGuard],
   children:
   [
-    {path:'formtemplate',component:FormTemplateComponent},
-    {path : 'resetpassword' , component : ResetPasswordPageComponent},
-    {path:'templatecreator',component: TemplateCreatorComponent},
-    {path:'List',component:DragDropComponent},
-    
+    {path:'formtemplate',component:FormTemplateComponent , data : {state : 'admimpage/formtemplate'}},
+    {path : 'resetpassword' , component : ResetPasswordPageComponent ,data : {state : 'admimpage/resetpassword'}},
+    {path:'templatecreator',component: TemplateCreatorComponent ,data : {state : 'admimpage/templatecreator'}},
+    {path:'List',component:DragDropComponent , data : {state : 'admimpage/List'}},
+
   ]
 },
   {path: 'loginsettings' , component : LoginSecuritiesPageComponent,canActivate: [AuthGuard]},
