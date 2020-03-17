@@ -25,6 +25,10 @@ export class DragDropComponent implements OnInit {
   deleteArary: any [];
   updateReq : boolean;
   deleteReq: boolean;
+  displayBasic: boolean;
+  displayPosition: boolean;
+
+    position: string;
   constructor(private dataservice:DragDropService,private templateCreator:TemplateCreatorService,
     private messageService:MessageService,
     private templateService:TemplateService,
@@ -144,21 +148,20 @@ onMove(){
     }
 
   }
-delete(){
-  this.confirmationService.confirm({
-    message: 'Are you sure that you want to proceed?',
-    header: 'Confirmation',
-    icon: 'pi pi-exclamation-triangle',
-    accept: () => {
-        this.confirmdelete();
-    },
-    reject: () => {
-        console.log("rejected");
-        
-    }
-});
+delete(position: string){
+  this.position = position;
+  this.displayPosition = true;
+ 
 }
-
+rejectDelete(){
+  this.displayPosition = false;
+  
+ this.targetArr = [...this.targetArr , ...this.deleteArary]
+  
+  console.log(this.targetArr);
+  
+  this.sourceArr = this.sourceArr.filter(val => this.deleteArary.every(val1 => val.id !== val1.id));
+}
 confirmdelete()
 {
   let obj = {};
@@ -187,7 +190,8 @@ confirmdelete()
   }
 }
   
-
+ngOnDestroy() {
+}
   
   create(){
     let obj = {};

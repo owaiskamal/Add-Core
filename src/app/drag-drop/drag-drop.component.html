@@ -1,5 +1,5 @@
 <p-toast position="top-right" [style]="{ 'margin-top': '100px' }"></p-toast>
-<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<!-- <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog> -->
 <p-card>
 <div class="drag_drop" style="margin-top: 2px;">
   <div class="form-group ui-g-12 ">
@@ -68,7 +68,14 @@
   <!-- <button pButton class="ui-button-success" type="submit" (click)= "sort()" style="font-weight: bold; width: 30%;"  label="sort"></button> -->
 </div>
 <div class="text-center" style="margin-top:10px;" *ngIf = "deleteReq">
-  <button type="button" (click)="delete()" pButton icon="pi pi-times" label="Delete"></button>
+  <button type="button" (click)="delete('top')" pButton icon="pi pi-times" label="Delete"></button>
+  <p-dialog header="Godfather I" [(visible)]="displayPosition"  [position]="position" [modal]="true"   [style]="{width: '50vw'}" [baseZIndex]="10000">
+    Are you sure you want to delete?
+<p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="confirmdelete()" label="Yes"></button>
+    <button type="button" pButton icon="pi pi-times" (click)="rejectDelete()" label="No" class="ui-button-secondary"></button>
+</p-footer>
+</p-dialog>
   <!-- <button pButton class="ui-button-success" type="submit" (click)= "sort()" style="font-weight: bold; width: 30%;"  label="sort"></button> -->
 </div>
 
