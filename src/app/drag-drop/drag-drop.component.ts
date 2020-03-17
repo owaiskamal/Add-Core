@@ -22,7 +22,7 @@ export class DragDropComponent implements OnInit {
   @Output() onMoveToTarget: EventEmitter<any> = new EventEmitter();
   @Output() onMoveToSource: EventEmitter<any> = new EventEmitter();
   updateArray : any[];
-  deleteArary: any [];
+  deleteArary: any [] = [];
   updateReq : boolean;
   deleteReq: boolean;
   displayBasic: boolean;
@@ -114,11 +114,13 @@ onMove(){
     this.updateArray = $event.items;
     console.log('updated array',this.updateArray);
     this.updateReq = true;
-
+     this.deleteReq = false;
   }
   deletable($event){
-    console.log("source delete")
-   this.deleteArary = $event.items;
+    let arr = [];
+    arr =$event.items
+   this.deleteArary = [...this.deleteArary , ...arr];
+   console.log(this.deleteArary)
    this.deleteReq = true;
   }
   update()
