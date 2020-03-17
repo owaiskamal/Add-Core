@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { DragDropService } from './drag-drop.service';
 import { TemplateCreatorService } from '../template-creator.service';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { types_dragdrop, Programs_dragdrop } from './drag-drop.model';
  import { of } from 'rxjs';
 import { TemplateService } from '../template.service';
@@ -10,7 +10,8 @@ import { TemplateService } from '../template.service';
 @Component({
   selector: 'app-drag-drop',
   templateUrl: './drag-drop.component.html',
-  styleUrls: ['./drag-drop.component.scss']
+  styleUrls: ['./drag-drop.component.scss'],
+  providers: [ConfirmationService]
 })
 export class DragDropComponent implements OnInit {
   sourceArr: any[];
@@ -19,11 +20,15 @@ export class DragDropComponent implements OnInit {
   progtype : Programs_dragdrop;
   program_types: Programs_dragdrop[];
   @Output() onMoveToTarget: EventEmitter<any> = new EventEmitter();
+  @Output() onMoveToSource: EventEmitter<any> = new EventEmitter();
   updateArray : any[];
-  updateReq : boolean
+  deleteArary: any [];
+  updateReq : boolean;
+  deleteReq: boolean;
   constructor(private dataservice:DragDropService,private templateCreator:TemplateCreatorService,
     private messageService:MessageService,
-    private templateService:TemplateService
+    private templateService:TemplateService,
+    private confirmationService: ConfirmationService
     ) {
     this.types = [
       {obj_type : "Enter Text"},
@@ -71,6 +76,7 @@ export class DragDropComponent implements OnInit {
 
 
   }
+ 
 onMove(){
   //this.sourceCars = this.sourceCars.filter(val=>!this.targetCars.includes(val))
 
@@ -102,9 +108,14 @@ onMove(){
   updatetable($event)
   {
     this.updateArray = $event.items;
-    console.log(this.updateArray);
+    console.log('updated array',this.updateArray);
     this.updateReq = true;
 
+  }
+  deletable($event){
+    console.log("source delete")
+   this.deleteArary = $event.items;
+   this.deleteReq = true;
   }
   update()
   {
@@ -133,6 +144,51 @@ onMove(){
     }
 
   }
+delete(){
+  this.confirmationService.confirm({
+    message: 'Are you sure that you want to proceed?',
+    header: 'Confirmation',
+    icon: 'pi pi-exclamation-triangle',
+    accept: () => {
+        this.confirmdelete();
+    },
+    reject: () => {
+        console.log("rejected");
+        
+    }
+});
+}
+
+confirmdelete()
+{
+  let obj = {};
+
+  for(let f of this.deleteArary){
+    obj = f.id;
+    console.log(obj);
+
+      this.dataservice.deleteData(this.progtype.prog_type , obj).subscribe(res =>{
+        
+        this.messageService.add({
+          severity: "success",
+          summary: "Fields deleted successfully",
+          detail: "Field name: " + f.label
+        });
+        this.deleteReq = false
+      },(error)=>{
+        console.log(error);
+        this.messageService.add({
+          severity: "error",
+          summary: "Template not deleted",
+          detail: "Connection Timed out"
+        });
+      }
+      )
+  }
+}
+  
+
+  
   create(){
     let obj = {};
     let newArr ={};
