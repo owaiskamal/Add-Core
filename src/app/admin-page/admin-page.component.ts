@@ -58,23 +58,25 @@ onResize(event?) {
 
    this.screenWidth = window.innerWidth;
    console.log(this.screenWidth);
-   if(window.innerWidth < 365 && this.myDiv !='dropdown')
+   if(window.innerWidth <= 768 && this.myDiv !='dropdown')
     {
       this.menuState = 'in';
       console.log("hello conp");
 
     }
-    else if (window.innerWidth < 364 && this.myDiv === 'dropdown'){
+    else if (window.innerWidth <= 768 && this.myDiv === 'dropdown'){
       this.menuState = 'out';
       console.log("hello moppo");
       this.myDiv = null;
+      console.log(this.myDiv , "asdasd");
+
 
     }
-    else if( window.innerWidth > 365)
+    else if( window.innerWidth >= 768)
     {
       this.menuState = 'out';
     }
-    else if(window.innerWidth < 365)
+    else if(window.innerWidth <= 768)
     {
       this.menuState = 'in';
     }

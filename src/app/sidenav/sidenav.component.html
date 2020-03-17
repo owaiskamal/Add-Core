@@ -2,13 +2,13 @@
 
 <ul class="list-unstyled">
   <li class="main_link"  (click)="onItemClick(item)" [ngStyle]="{'margin-left': (depth * 12) + 'px'}">
-  
-    <a class="mat-list-item" [ngClass]="{'active': item.RLink ? route.isActive(item.RLink, true): false, 'expanded': expanded}"> 
-     
+
+    <a class="mat-list-item" [ngClass]="{'active': item.RLink ? route.isActive(item.RLink, true): false, 'expanded': expanded}">
+
         <i  [ngClass]="{'pi pi-id-card' : item.Forms && item.Forms.length}"></i>{{item.Node || item.Name}}
-      
+
         <span  *ngIf="item.Forms && item.Forms.length">
-            <i class="pi pi-angle-down" [@indicatorRotate]="expanded ? 'expanded': 'collapsed'"></i>
+            <i class="pi pi-angle-down " [@indicatorRotate]="expanded ? 'expanded': 'collapsed'"></i>
         </span></a>
           <hr *ngIf="expanded" style="height:0.1px;width:100%;background-color:rgb(185, 183, 183);" />
 

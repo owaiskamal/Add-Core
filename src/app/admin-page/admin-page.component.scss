@@ -8,18 +8,19 @@
     right: auto;
     left: -277px;
     background: $sidenav-background;
-  
+    font-family:'Carrois Gothic';
+
     background-size: cover;
     background-position: top;
     //overflow-x: hidden;
     padding-top: 20px;
-    
+
     transition: 0.5s;
-    
+
    overflow-y: auto;
    scrollbar-width: thin;
    box-shadow:  0px 0px 29px rgba(0, 0, 0, 0.432);
-   
+
   }
   .mat-list{
         padding: 10px 0px 0px 16px;
@@ -27,7 +28,7 @@
          justify-content: center;
          color: white;
          font-weight: 700;
-        
+
         display: flex;
         justify-content:inherit;
   }
@@ -38,7 +39,7 @@
 //     color: white;
 //     display: flex;
 //     justify-content:inherit;
-//   } 
+//   }
 
 // :host{
 // .mat-list-item.active {
@@ -51,7 +52,7 @@
 //    }
 //  }
 // }
- 
+
   .sidenav::-webkit-scrollbar {
     width: 8px;
     }
@@ -60,26 +61,26 @@
     // url("src/assets/images/sidenav_bg.jpg") no-repeat;
     .sidenav::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    box-shadow:  inset 0 0 6px rgba(0,0,0,0.3); 
+    box-shadow:  inset 0 0 6px rgba(0,0,0,0.3);
     border-radius: 10px;
     }
 
   /* sidenav */
- 
+
 
   .nav-item {
     margin: auto;
   }
 
 
-  
+
   .main {
     margin-left: 200px; /* Same as the width of the sidenav */
    // font-size: 28px; /* Increased text to enable scrolling */
     //padding: 0px 10px;
-    
+
   }
-  
+
  .btn_side
  {
    display: none;
@@ -98,15 +99,15 @@
       .btn_side {
           display: inline;
       }
-      
+
       // .sidebar{
       //   display: none;
-      // }    
-    
+      // }
+
 }
 
 .pi-ellipsis-v{
- 
+
  color:#00458a;
 }
 .dropdown-item:hover{
