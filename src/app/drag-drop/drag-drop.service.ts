@@ -12,4 +12,9 @@ export class DragDropService {
   getData():Observable<any>{
      return this.http.get(environment.baseUrl + 'data');
   }
+  deleteData(obj,id):Observable<any>{
+    console.log(id , "serv");
+    
+    return this.http.delete(environment.baseUrl + obj + '/' + id);
+  }
 }

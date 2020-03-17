@@ -35,6 +35,8 @@ import { DragDropComponent } from './drag-drop/drag-drop.component';
 import {PickListModule} from 'primeng/picklist';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import {MegaMenuModule} from 'primeng/megamenu';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import {MegaMenuModule} from 'primeng/megamenu';
     MessageModule,
     MessagesModule,
     PickListModule,
-    MegaMenuModule
+    MegaMenuModule,
+    ConfirmDialogModule
   ],
   providers: [
     MessageService,
