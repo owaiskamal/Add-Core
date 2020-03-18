@@ -56,27 +56,38 @@
   ></button>
   <!-- <button pButton class="ui-button-success" type="submit" (click)= "sort()" style="font-weight: bold; width: 30%;"  label="sort"></button> -->
 </div>
-<div class="text-center" style="margin-top:10px;" *ngIf="updateReq && !deleteReq">
+<div class="text-center" style="margin-top:10px;" *ngIf="updateReq">
   <button
     pButton
     class="ui-button-success update_template_btn"
     type="submit"
-    (click)="update()"
+    (click)="update('top')"
     style="font-weight: bold; width: 30%;"
     label="Update Template"
   ></button>
+  <p-dialog header="Delete Confirmation" [(visible)]="displayPositionUpdate"  [position]="positionUpdate"    [style]="{width: '50vw'}" [baseZIndex]="10000">
+    Are you sure you want to update these fields?
+    <hr>
+    <ul class="list-group">
+        <li  *ngFor="let update of modalUpdateArray; index as i" class="list-group-item"> {{i+1}}. {{update.label}}</li>
+    </ul>
+<p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="confirmUpdate()" label="Yes"></button>
+    <button type="button" pButton icon="pi pi-times" (click)="rejectUpdate()" label="No" class="ui-button-secondary"></button>
+</p-footer>
+</p-dialog>
   <!-- <button pButton class="ui-button-success" type="submit" (click)= "sort()" style="font-weight: bold; width: 30%;"  label="sort"></button> -->
 </div>
-<div class="text-center" style="margin-top:10px;" *ngIf = "deleteReq">
-  <button 
-  type="button" 
-  class="ui-button-danger" 
-  (click)="delete('top')" 
+<div class="text-center" style="margin-top:10px;" *ngIf="deleteReq">
+  <button
+  type="button"
+  class="ui-button-danger"
+  (click)="delete('top')"
   style="font-weight: bold; width: 30%;"
-  pButton 
+  pButton
   label="Delete">
   </button>
-  <p-dialog header="Godfather I" [(visible)]="displayPosition"  [position]="position"    [style]="{width: '50vw'}" [baseZIndex]="10000">
+  <p-dialog header="Delete Confirmation" [(visible)]="displayPosition"  [position]="position"    [style]="{width: '50vw'}" [baseZIndex]="10000">
     Are you sure you want to delete these fields?
     <hr>
     <ul class="list-group">
