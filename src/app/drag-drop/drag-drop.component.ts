@@ -24,12 +24,14 @@ export class DragDropComponent implements OnInit {
   updateArray : any[] = [];
   deleteArary: any [] = [];
   modalArray: any[];
+  modalUpdateArray: any[];
   updateReq : boolean;
   deleteReq: boolean;
   displayBasic: boolean;
   displayPosition: boolean;
-
+  displayPositionUpdate: boolean;
     position: string;
+    positionUpdate: string;
   constructor(private dataservice:DragDropService,private templateCreator:TemplateCreatorService,
     private messageService:MessageService,
     private templateService:TemplateService,
@@ -117,18 +119,20 @@ onMove(){
     arr =$event.items
    this.updateArray = [...this.updateArray , ...arr];
     console.log('updated array',this.updateArray);
-
+    this.deleteArary =[];
+    console.log(this.deleteArary , "deletearray");
      this.deleteReq = false;
   }
-  deletable($event){
-    let arr = [];
-    arr =$event.items
-   this.deleteArary = [...this.deleteArary , ...arr];
-   console.log(this.deleteArary)
-   this.deleteReq = true;
-  }
-  update()
+  
+  update(position:string)
   {
+    this.positionUpdate = position;
+    this.displayPositionUpdate = true;
+    this.modalUpdateArray = this.updateArray;
+    
+    
+  }
+  confirmUpdate(){
     let obj = {};
     for (let f of this.updateArray)
     {
@@ -138,28 +142,51 @@ onMove(){
       this.templateCreator.updateTemplate(obj , this.progtype.prog_type).subscribe(res =>{
         this.messageService.add({
           severity: "success",
-          summary: "Fields added successfully",
+          summary: "Fields updated successfully",
           detail: "Field name: " + f.label
         });
-        this.updateReq = false
+        this.updateReq = false;
+        this.updateArray=[];
+        this.modalUpdateArray = [];
+        this.displayPositionUpdate = false;
       },(error)=>{
         console.log(error);
         this.messageService.add({
           severity: "error",
-          summary: "Template not created",
+          summary: "Template not updated",
           detail: "Connection Timed out"
         });
       }
       )
     }
-
+  }
+  rejectUpdate(){
+    this.displayPositionUpdate = false;
+  
+   this.sourceArr = [...this.sourceArr , ...this.updateArray]
+  
+    console.log(this.sourceArr);
+  
+    this.targetArr = this.targetArr.filter(val => this.updateArray.every(val1 => val.id !== val1.id));
+    this.modalUpdateArray = this.updateArray;
+    this.modalUpdateArray = [];
+    this.updateArray =[];
   }
 delete(position: string){
   this.position = position;
   this.displayPosition = true;
   this.modalArray = this.deleteArary;
-
-
+  
+}
+deletable($event){
+  let arr = [];
+  arr =$event.items
+ this.deleteArary = [...this.deleteArary , ...arr];
+ console.log(this.deleteArary)
+ this.updateArray =[]
+  console.log(this.updateArray , "deletearray");
+ this.deleteReq = true;
+ this.updateReq = false;
 }
 rejectDelete(){
   this.displayPosition = false;
