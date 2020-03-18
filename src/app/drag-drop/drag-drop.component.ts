@@ -21,7 +21,7 @@ export class DragDropComponent implements OnInit {
   program_types: Programs_dragdrop[];
   @Output() onMoveToTarget: EventEmitter<any> = new EventEmitter();
   @Output() onMoveToSource: EventEmitter<any> = new EventEmitter();
-  updateArray : any[];
+  updateArray : any[] = [];
   deleteArary: any [] = [];
   modalArray: any[];
   updateReq : boolean;
@@ -81,7 +81,7 @@ export class DragDropComponent implements OnInit {
 
 
   }
- 
+
 onMove(){
   //this.sourceCars = this.sourceCars.filter(val=>!this.targetCars.includes(val))
 
@@ -112,9 +112,12 @@ onMove(){
   }
   updatetable($event)
   {
-    this.updateArray = $event.items;
-    console.log('updated array',this.updateArray);
     this.updateReq = true;
+    let arr = [];
+    arr =$event.items
+   this.updateArray = [...this.updateArray , ...arr];
+    console.log('updated array',this.updateArray);
+
      this.deleteReq = false;
   }
   deletable($event){
@@ -155,15 +158,16 @@ delete(position: string){
   this.position = position;
   this.displayPosition = true;
   this.modalArray = this.deleteArary;
- 
+
+
 }
 rejectDelete(){
   this.displayPosition = false;
-  
+
  this.targetArr = [...this.targetArr , ...this.deleteArary]
-  
+
   console.log(this.targetArr);
-  
+
   this.sourceArr = this.sourceArr.filter(val => this.deleteArary.every(val1 => val.id !== val1.id));
   this.modalArray = this.deleteArary;
   this.modalArray = [];
@@ -178,13 +182,16 @@ confirmdelete()
     console.log(obj);
 
       this.dataservice.deleteData(this.progtype.prog_type , obj).subscribe(res =>{
-        
+
         this.messageService.add({
           severity: "success",
           summary: "Fields deleted successfully",
           detail: "Field name: " + f.label
         });
         this.deleteReq = false
+        this.deleteArary=[];
+        this.modalArray = [];
+        this.displayPosition = false;
       },(error)=>{
         console.log(error);
         this.messageService.add({
@@ -196,10 +203,10 @@ confirmdelete()
       )
   }
 }
-  
+
 ngOnDestroy() {
 }
-  
+
   create(){
     let obj = {};
     let newArr ={};
