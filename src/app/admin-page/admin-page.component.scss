@@ -3,12 +3,12 @@
 .sidenav {
     height: 100%;
     width: 270px;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     right: auto;
     left: -277px;
     background: $sidenav-background;
-    font-family:'Carrois Gothic';
+    font-family: 'Work Sans', sans-serif;
 
     background-size: cover;
     background-position: top;
