@@ -59,7 +59,7 @@
 <div class="text-center" style="margin-top:10px;" *ngIf="updateReq && !deleteReq">
   <button
     pButton
-    class="ui-button-success create_template_btn"
+    class="ui-button-success update_template_btn"
     type="submit"
     (click)="update()"
     style="font-weight: bold; width: 30%;"
@@ -68,9 +68,20 @@
   <!-- <button pButton class="ui-button-success" type="submit" (click)= "sort()" style="font-weight: bold; width: 30%;"  label="sort"></button> -->
 </div>
 <div class="text-center" style="margin-top:10px;" *ngIf = "deleteReq">
-  <button type="button" class="ui-button-danger" (click)="delete('top')" pButton icon="pi pi-times" label="Delete"></button>
-  <p-dialog header="Godfather I" [(visible)]="displayPosition"  [position]="position" [modal]="true"   [style]="{width: '50vw'}" [baseZIndex]="10000">
-    Are you sure you want to delete?
+  <button 
+  type="button" 
+  class="ui-button-danger" 
+  (click)="delete('top')" 
+  style="font-weight: bold; width: 30%;"
+  pButton 
+  label="Delete">
+  </button>
+  <p-dialog header="Godfather I" [(visible)]="displayPosition"  [position]="position"    [style]="{width: '50vw'}" [baseZIndex]="10000">
+    Are you sure you want to delete these fields?
+    <hr>
+    <ul class="list-group">
+        <li  *ngFor="let del of modalArray; index as i" class="list-group-item"> {{i+1}}. {{del.label}}</li>
+    </ul>
 <p-footer>
     <button type="button" pButton icon="pi pi-check" (click)="confirmdelete()" label="Yes"></button>
     <button type="button" pButton icon="pi pi-times" (click)="rejectDelete()" label="No" class="ui-button-secondary"></button>

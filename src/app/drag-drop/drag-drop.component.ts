@@ -23,6 +23,7 @@ export class DragDropComponent implements OnInit {
   @Output() onMoveToSource: EventEmitter<any> = new EventEmitter();
   updateArray : any[];
   deleteArary: any [] = [];
+  modalArray: any[];
   updateReq : boolean;
   deleteReq: boolean;
   displayBasic: boolean;
@@ -153,6 +154,7 @@ onMove(){
 delete(position: string){
   this.position = position;
   this.displayPosition = true;
+  this.modalArray = this.deleteArary;
  
 }
 rejectDelete(){
@@ -163,6 +165,9 @@ rejectDelete(){
   console.log(this.targetArr);
   
   this.sourceArr = this.sourceArr.filter(val => this.deleteArary.every(val1 => val.id !== val1.id));
+  this.modalArray = this.deleteArary;
+  this.modalArray = [];
+  this.deleteArary =[];
 }
 confirmdelete()
 {
