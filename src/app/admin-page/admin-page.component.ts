@@ -23,6 +23,25 @@ import { HostListener } from "@angular/core";
       transition('in => out', animate('400ms ease-in-out')),
       transition('out => in', animate('400ms ease-in-out'))
     ]),
+    trigger('hamburguerX', [
+      state('hamburguer', style({})),
+      state('topX', style({
+         transform: 'rotate(45deg)',
+        transformOrigin: 'left',
+        margin : '4px'
+      })),
+      state('hide', style({
+        opacity: 0
+      })),
+      state('bottomX', style({
+         transform: 'rotate(-45deg)',
+        transformOrigin: 'left',
+        margin : '4px'
+      })),
+
+      transition('topX => *', animate('0.2s')),
+
+    ]),
   ],
   host : {
     "(window:click)" : "onResize()"
@@ -33,7 +52,7 @@ import { HostListener } from "@angular/core";
 export class AdminPageComponent implements OnInit ,AfterViewInit  {
   items: MenuItem[];
   visibleSidebar1: boolean;
-
+  isHamburguer = true;
   @Input() depth: number;
   myDiv: any;
   menuState:string = 'out';
@@ -62,6 +81,7 @@ onResize(event?) {
     {
       this.menuState = 'in';
       console.log("hello conp");
+      this.isHamburguer = true;
 
     }
     else if (window.innerWidth <= 768 && this.myDiv === 'dropdown'){
@@ -79,6 +99,7 @@ onResize(event?) {
     else if(window.innerWidth <= 768)
     {
       this.menuState = 'in';
+      this.isHamburguer = true;
     }
 
 }
@@ -144,8 +165,10 @@ receiveMessage(event:string)
 }
 toggleNavbar($event) {
   $event.stopPropagation();
+
   this.menuState = this.menuState === 'out' ? 'in' : 'out';
   this.sidebarOpen = !this.sidebarOpen;
+  this.isHamburguer = !this.isHamburguer;
 }
 
 logout() {

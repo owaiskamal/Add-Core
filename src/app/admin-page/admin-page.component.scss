@@ -22,6 +22,24 @@
    box-shadow:  0px 0px 29px rgba(0, 0, 0, 0.432);
 
   }
+  .navbaricon
+  {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 10px;
+    vertical-align: middle;
+    content: "";
+    background: no-repeat center center;
+    background-size: 100% 100%;
+  }
+  .icon-bar {
+    width: 22px;
+    height: 4px;
+    background: rgb(143, 143, 143);
+    margin: 2px;
+    position: relative;
+  }
   .mat-list{
         padding: 10px 0px 0px 16px;
          text-decoration: none;
