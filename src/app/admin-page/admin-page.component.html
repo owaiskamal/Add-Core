@@ -68,10 +68,14 @@
     (click)="toggleNavbar()" >
     <span class="navbar-toggler-icon"></span></a> -->
     <a class="btn_side" (click)="toggleNavbar($event)" >
-        <span class="navbar-toggler-icon"></span>
+      <span class="navbaricon">
+      <div class="icon-bar" [@hamburguerX]="isHamburguer ? 'hamburguer' : 'topX'"></div>
+      <div class="icon-bar" [@hamburguerX]="isHamburguer ? 'hamburguer' : 'hide'"></div>
+      <div class="icon-bar" [@hamburguerX]="isHamburguer ? 'hamburguer' : 'bottomX'"></div>
+    </span>
     </a>
 
-    <a class="navbar-brand" href="javascript:void();">
+    <a class="navbar-item" >
       <img class="logo img-responsive" src="assets/images/logo.png" width="80px" height="50px" >
     </a>
 
