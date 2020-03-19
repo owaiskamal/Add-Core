@@ -40,7 +40,7 @@ import { HostListener } from "@angular/core";
       })),
 
       transition('topX => *', animate('0.2s')),
-
+      
     ]),
   ],
   host : {
@@ -76,7 +76,7 @@ export class AdminPageComponent implements OnInit ,AfterViewInit  {
 onResize(event?) {
 
    this.screenWidth = window.innerWidth;
-   console.log(this.screenWidth);
+  /*  console.log(this.screenWidth); */
    if(window.innerWidth <= 768 && this.myDiv !='dropdown')
     {
       this.menuState = 'in';

@@ -133,12 +133,27 @@ onMove(){
     
   }
   confirmUpdate(){
-    let obj = {};
+    let obj = {
+      id: null,
+      type: "",
+      required: null,  
+      name: "",
+      placeholder:"",
+      value: "",
+      label: "",
+      sequence: null
+    };
     for (let f of this.updateArray)
     {
-      obj = f;
+      obj.id = f.id;
+      obj.type = f.type;
+      obj.required = f.required
+      obj.name = f.name;
+      obj.placeholder = f.placeholder
+      obj.label = f.label;
+      obj.sequence = this.updateArray.findIndex(p => p.id == f.id);
 
-      console.log(obj);
+      
       this.templateCreator.updateTemplate(obj , this.progtype.prog_type).subscribe(res =>{
         this.messageService.add({
           severity: "success",
@@ -236,7 +251,7 @@ ngOnDestroy() {
 
   create(){
     let obj = {};
-    let newArr ={};
+   
     this.targetArr = this.targetArr.filter(val => this.sourceArr.every(val1 => val.id !== val1.id));
     console.log(this.targetArr);
 
