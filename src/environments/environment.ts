@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl :    "http://localhost:3000/",
-  apiUrl:   "http://132.147.160.71/AddCoreAPI/api/Core/GetUserLogin",
-  logoutUrl : "http://132.147.160.71/AddCoreAPI/api/Core/SetUserStatus"    // "http://localhost:44391/sampleApi/"
+  baseUrl :    "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/",
+  apiUrl:   "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/GetUserLogin",
+  logoutUrl : "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/SetUserStatus"    // "http://localhost:44391/sampleApi/"
 };
 
 /*
