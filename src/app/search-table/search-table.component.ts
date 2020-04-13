@@ -1,16 +1,21 @@
 import { Component, OnInit } from "@angular/core";
 import { TableDataService } from "./table-data.service";
 import { FilterUtils } from "primeng/utils";
+import {ActivatedRoute} from "@angular/router";
 @Component({
   selector: "app-search-table",
   templateUrl: "./search-table.component.html",
   styleUrls: ["./search-table.component.scss"]
 })
 export class SearchTableComponent implements OnInit {
-  constructor(private tableDataService: TableDataService) {}
+  constructor(private tableDataService: TableDataService,private _route: ActivatedRoute) {
+    this.formID = this._route.snapshot.paramMap.get('id');
+  }
+  
   userLists: Object = [];
   totalrecords: number;
   userList: any[] = [];
+  formID: any;
   cols: any[] = [];
   ngOnInit(): void {
     this.getuserdata();
@@ -28,8 +33,11 @@ export class SearchTableComponent implements OnInit {
     };
   }
   getuserdata() {
-    this.tableDataService.getTableData().subscribe(res => {
-      this.userLists = res;
+    this.tableDataService.getTableData(this.formID).subscribe(res => {
+
+    console.log("SetupView",JSON.parse(res.detailData.detail));
+   
+     this.userLists = JSON.parse(res.detailData.detail);
       console.log(this.userLists);
       this.userList = Object.values(this.userLists);
       this.totalrecords = this.userList.length;
@@ -40,11 +48,12 @@ export class SearchTableComponent implements OnInit {
           field: Object.keys(this.userLists[0])[i]
         };
       }
-      console.log(this.totalrecords, "asdasd");
+      console.log(this.totalrecords, "asdasd");  
 
       //this.userarray.push(this.userList);
     });
 
     //console.log(this.userarray);
   }
+ 
 }

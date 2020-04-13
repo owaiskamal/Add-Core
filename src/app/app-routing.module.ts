@@ -31,7 +31,8 @@ const routes: Routes = [
     {path : 'resetpassword' , component : ResetPasswordPageComponent ,data : {state : 'admimpage/resetpassword'}},
     {path:'templatecreator',component: TemplateCreatorComponent ,data : {state : 'admimpage/templatecreator'}},
     {path:'List',component:DragDropComponent,data : {state : 'admimpage/List'}},
-    {path: 'searchtable',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}}
+    {path: 'searchtable',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}},
+    {path: 'searchtable/:id',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}}
 
   ]
 },

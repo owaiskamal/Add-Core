@@ -43,9 +43,10 @@ export class SidenavComponent implements OnInit {
     //console.log(item);
 
     if (!item.Forms || !item.Forms.length) {
-      this.route.navigate(['adminpage/'+item.RLink]);
+      
+      this.route.navigate(['adminpage/searchtable/'+item.id]);
       this.navService.closeNav(true);
-
+      
     }
     if (item.Forms && item.Forms.length) {
       this.expanded = !this.expanded;
