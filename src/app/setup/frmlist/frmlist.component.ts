@@ -15,11 +15,13 @@ export class FrmlistComponent implements OnInit {
    
    }
    userLists: Object = [];
+   tableHeader: String;
    totalrecords: number;
    userList: any[] = [];
    formID: any;
    cols: any[] = [];
   ngOnInit(): void {
+    this.cols = [];
     this._route.params.subscribe(params => {
       this.formID = params['id']
       console.log("URL id has changed")
@@ -38,8 +40,9 @@ export class FrmlistComponent implements OnInit {
     };
   }
   getuserdata() {
+    
     this.tableDataService.getTableData(this.formID).subscribe(res => {
-
+    this.tableHeader = res.description; 
     console.log("SetupView",JSON.parse(res.detailData.detail));
    
      this.userLists = JSON.parse(res.detailData.detail);

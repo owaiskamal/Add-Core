@@ -9,7 +9,7 @@
       [scrollable]="true"
     >
       <ng-template pTemplate="caption">
-        List of Employees
+           <h3 style="font-weight: bold;">{{tableHeader}}</h3>
         <div class="ui-g ui-sm-12 ui-md-8" style="text-align: right">
           <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
           <input
@@ -52,7 +52,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="summary">
-        There are {{ dt.totalRecords }} Records
+         {{ dt.totalRecords }} Records
       </ng-template>
     </p-table>
   </p-card>
