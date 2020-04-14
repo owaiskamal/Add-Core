@@ -44,7 +44,7 @@ export class SidenavComponent implements OnInit {
 
     if (!item.Forms || !item.Forms.length) {
       
-      this.route.navigate(['adminpage/searchtable/'+item.id]);
+      this.route.navigate(['adminpage/'+item.RLink+'/' +item.id]);
       this.navService.closeNav(true);
       
     }

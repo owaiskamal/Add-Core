@@ -1,3 +1,4 @@
+import { FrmlistComponent } from './setup/frmlist/frmlist.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -13,7 +14,7 @@ import { FormTemplateComponent } from './form-template/form-template.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { TemplateCreatorComponent } from './template-creator/template-creator.component';
 import { DragDropComponent } from './drag-drop/drag-drop.component';
-import { SearchTableComponent } from './search-table/search-table.component';
+//import { SearchTableComponent } from './search-table/search-table.component';
 
 
 
@@ -31,9 +32,9 @@ const routes: Routes = [
     {path : 'resetpassword' , component : ResetPasswordPageComponent ,data : {state : 'admimpage/resetpassword'}},
     {path:'templatecreator',component: TemplateCreatorComponent ,data : {state : 'admimpage/templatecreator'}},
     {path:'List',component:DragDropComponent,data : {state : 'admimpage/List'}},
-    {path: 'searchtable',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}},
-    {path: 'searchtable/:id',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}}
-
+    //{path: 'searchtable',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}},
+    //{path: 'searchtable/:id',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}}
+     {path:'List/:id',component:FrmlistComponent,data : {state : 'adminpage/setup/frmlist'}}
   ]
 },
   {path: 'loginsettings' , component : LoginSecuritiesPageComponent,canActivate: [AuthGuard]},
