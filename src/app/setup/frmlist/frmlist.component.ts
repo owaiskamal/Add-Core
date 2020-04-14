@@ -11,7 +11,8 @@ import {ActivatedRoute} from "@angular/router";
 export class FrmlistComponent implements OnInit {
 
   constructor(private tableDataService: TableDataService,private _route: ActivatedRoute) {
-    this.formID = this._route.snapshot.paramMap.get('id');
+    //this.formID = this._route.snapshot.paramMap.get('id');
+   
    }
    userLists: Object = [];
    totalrecords: number;
@@ -19,8 +20,11 @@ export class FrmlistComponent implements OnInit {
    formID: any;
    cols: any[] = [];
   ngOnInit(): void {
-    this.getuserdata();
-
+    this._route.params.subscribe(params => {
+      this.formID = params['id']
+      console.log("URL id has changed")
+      this.getuserdata(); 
+  });
     FilterUtils["custom"] = (value, filter): boolean => {
       if (filter === undefined || filter === null || filter.trim() === "") {
         return true;
