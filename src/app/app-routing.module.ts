@@ -34,7 +34,7 @@ const routes: Routes = [
     {path:'List',component:DragDropComponent,data : {state : 'admimpage/List'}},
     //{path: 'searchtable',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}},
     //{path: 'searchtable/:id',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}}
-     {path:'List/:id',component:FrmlistComponent,data : {state : 'adminpage/setup/frmlist'}}
+     {path:'List/:id',component:FrmlistComponent,data : {state : 'admimpage/setup/frmlist'}}
   ]
 },
   {path: 'loginsettings' , component : LoginSecuritiesPageComponent,canActivate: [AuthGuard]},
