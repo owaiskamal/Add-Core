@@ -50,6 +50,7 @@ export class FrmlistComponent implements OnInit {
       this.userList = Object.values(this.userLists);
       this.totalrecords = this.userList.length;
       // this.cols = Object.keys(this.userLists[0]);
+      this.cols = [];
       for (var i = 0; i < Object.keys(this.userLists[0]).length; i++) {
         this.cols[i] = {
           header: Object.keys(this.userLists[0])[i],
