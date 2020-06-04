@@ -9,8 +9,16 @@ import { environment } from 'src/environments/environment';
 export class TableDataService {
 
   constructor(private http:HttpClient) { }
-  getTableData() : Observable<any>
+  getTableData(formID) : Observable<any>
   {
-    return this.http.get(environment.baseUrl + 'data');
+    const UserID = sessionStorage.getItem('username');
+    const AccessToken = sessionStorage.getItem('token');
+    let setup = {
+      formID,
+      UserID,
+      AccessToken
+    };
+
+    return this.http.post(environment.setupUrl,setup);
   }
 }

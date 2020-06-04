@@ -11,7 +11,7 @@ export class NavlinksService {
   constructor(private http:HttpClient) { }
   getLinks():Observable<any>{
     
-    return this.http.get(environment.baseUrl + "menulinks");
+    return this.http.get(environment.baseUrl + "GetSetupListView");
     
   }
 }

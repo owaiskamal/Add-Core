@@ -36,7 +36,8 @@ import {PickListModule} from 'primeng/picklist';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import { SearchTableComponent } from './search-table/search-table.component';
+//import { SearchTableComponent } from './search-table/search-table.component';
+import { FrmlistComponent } from './setup/frmlist/frmlist.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { SearchTableComponent } from './search-table/search-table.component';
     TemplateCreatorComponent,
     DragDropComponent,
     SidenavComponent,
-    SearchTableComponent,
+    //SearchTableComponent,
+    FrmlistComponent,
     
   ],
   imports: [
