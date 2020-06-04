@@ -2,7 +2,7 @@
 .main {
     margin-left: 270px;
     margin-top: 70px;
-
+    overflow: auto;
     padding: 3% !important;
     background-color: #efeff6;
     height: 100%; /* Same as the width of the sidenav */
@@ -14,7 +14,7 @@
     .main {
       margin-top: 70px;
       margin:70px 0 auto;
-
+      overflow: auto;
     }
   }
 

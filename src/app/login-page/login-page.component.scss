@@ -103,6 +103,7 @@
   left: 0;
   background: $login-background;
   height: 100%;
+  overflow: auto;
   background-size: cover;
   background-position: left;
 }
@@ -111,5 +112,17 @@
   .main {
     width: 100%;
     margin: 35% 0 0 0;
+    footer
+{
+  min-height:100%;
+  margin-bottom: -40px; /* Put negative height of the footer here */
+  padding-bottom: 40px;
+}
+.container
+{
+  position: fixed;
+}
   }
 }
+
+
