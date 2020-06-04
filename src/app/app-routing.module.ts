@@ -14,6 +14,7 @@ import { FormTemplateComponent } from './form-template/form-template.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { TemplateCreatorComponent } from './template-creator/template-creator.component';
 import { DragDropComponent } from './drag-drop/drag-drop.component';
+import { FrmCreateTransComponent } from './frm-create-trans/frm-create-trans.component';
 //import { SearchTableComponent } from './search-table/search-table.component';
 
 
@@ -23,7 +24,7 @@ import { DragDropComponent } from './drag-drop/drag-drop.component';
 const routes: Routes = [
   {path: 'changepassword',component:ChangePasswordPageComponent},
   {path: '', component:LoginPageComponent},
- 
+
 {path:'adminpage', component: AppLayoutComponent, canActivate : [AuthGuard],
 
   children:
@@ -34,7 +35,8 @@ const routes: Routes = [
     {path:'List',component:DragDropComponent,data : {state : 'admimpage/List'}},
     //{path: 'searchtable',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}},
     //{path: 'searchtable/:id',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}}
-     {path:'List/:id',component:FrmlistComponent,data : {state : 'admimpage/setup/frmlist'}}
+     {path:'List/:id',component:FrmlistComponent,data : {state : 'admimpage/setup/frmlist'}},
+     {path:'frmCreateTrans/:id' , component: FrmCreateTransComponent , data :{state : 'adminpage/frmCreateTrans'}}
   ]
 },
   {path: 'loginsettings' , component : LoginSecuritiesPageComponent,canActivate: [AuthGuard]},

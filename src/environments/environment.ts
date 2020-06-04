@@ -8,7 +8,7 @@ export const environment = {
   apiUrl:   "http://132.147.160.71/AddCoreAPI/API/Core/GetUserLogin",
   logoutUrl : "http://132.147.160.71/AddCoreAPI/API/Core/SetUserStatus",
   setupUrl: "http://132.147.160.71/AddCoreAPI/API/Core/GetSetupListView",
-  tabledataUrl:"http://localhost:3000/"    // "http://localhost:44391/sampleApi/"
+  createTrans:"http://132.147.160.71/AddCoreAPI/API/Core/SetNewTxnView"    // "http://localhost:44391/sampleApi/"
 };
 
 /*
