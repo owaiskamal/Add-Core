@@ -38,6 +38,7 @@ import {MegaMenuModule} from 'primeng/megamenu';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 //import { SearchTableComponent } from './search-table/search-table.component';
 import { FrmlistComponent } from './setup/frmlist/frmlist.component';
+import { FrmCreateTransComponent } from './frm-create-trans/frm-create-trans.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { FrmlistComponent } from './setup/frmlist/frmlist.component';
     SidenavComponent,
     //SearchTableComponent,
     FrmlistComponent,
+    FrmCreateTransComponent,
     
   ],
   imports: [
