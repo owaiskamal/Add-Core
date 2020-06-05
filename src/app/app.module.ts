@@ -1,6 +1,6 @@
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { ChangePasswordPageComponent } from "./change-password-page/change-password-page.component";
-//import { PushNotificationsModule } from 'ng-push';
+import { PushNotificationsModule } from 'ng-push';
 import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
@@ -84,7 +84,7 @@ import { FrmCreateTransComponent } from './frm-create-trans/frm-create-trans.com
     PickListModule,
     MegaMenuModule,
     ConfirmDialogModule,
-    //PushNotificationsModule
+    PushNotificationsModule
   ],
   providers: [
     MessageService,
