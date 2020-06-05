@@ -12,7 +12,7 @@ export class FrmlistComponent implements OnInit {
 
   constructor(private tableDataService: TableDataService,private _route: ActivatedRoute) {
     //this.formID = this._route.snapshot.paramMap.get('id');
-   
+
    }
    userLists: Object = [];
    tableHeader: String;
@@ -25,7 +25,7 @@ export class FrmlistComponent implements OnInit {
     this._route.params.subscribe(params => {
       this.formID = params['id']
       console.log("URL id has changed")
-      this.getuserdata(); 
+      this.getuserdata();
   });
     FilterUtils["custom"] = (value, filter): boolean => {
       if (filter === undefined || filter === null || filter.trim() === "") {
@@ -40,11 +40,11 @@ export class FrmlistComponent implements OnInit {
     };
   }
   getuserdata() {
-    
+
     this.tableDataService.getTableData(this.formID).subscribe(res => {
-    this.tableHeader = res.description; 
-    console.log("SetupView",JSON.parse(res.detailData.detail));
-   
+    this.tableHeader = res.description;
+    console.log("SetupView",res);
+
      this.userLists = JSON.parse(res.detailData.detail);
       console.log(this.userLists);
       this.userList = Object.values(this.userLists);
@@ -57,7 +57,7 @@ export class FrmlistComponent implements OnInit {
           field: Object.keys(this.userLists[0])[i]
         };
       }
-      console.log(this.totalrecords, "asdasd");  
+      console.log(this.totalrecords, "asdasd");
 
       //this.userarray.push(this.userList);
     });

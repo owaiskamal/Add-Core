@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { UserauthService } from "../userauth.service";
 import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-
+import { PushNotificationService} from '../push-notification.service';
 
 @Component({
   selector: "app-login-page",
@@ -16,8 +16,12 @@ export class LoginPageComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
     private authService: UserauthService,
-    private http:HttpClient
-  ) {}
+    private http:HttpClient,
+    private _notificationService: PushNotificationService,
+    
+  ) {
+    this._notificationService.requestPermission();
+  }
 
   userName:string;
   password:string;
@@ -26,7 +30,25 @@ export class LoginPageComponent implements OnInit {
   ipAddress: '';
   ngOnInit() {
     //this.getIPAddress();
+  
   }
+getNotifications(){
+  let data: Array < any >= [];
+  data.push({
+      'title': 'Approval',
+      'alertContent': 'This is First Alert -- By Debasis Saha'
+  });
+  navigator.serviceWorker.register('../../sw.js');
+  Notification.requestPermission(function(result) {
+    if (result === 'granted') {
+      navigator.serviceWorker.ready.then(function(registration) {
+        registration.showNotification('Notification with ServiceWorker');
+      });
+    }
+  });
+  this._notificationService.getNotification(data);
+}
+
 
 
      loginUser() {
@@ -44,7 +66,7 @@ export class LoginPageComponent implements OnInit {
       }
 
        else if(res.code == "00") {
-        
+        this.getNotifications();
         this.messageService.add({
           severity: "success",
           summary: "Login Successfully",

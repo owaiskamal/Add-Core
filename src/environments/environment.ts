@@ -8,7 +8,7 @@ export const environment = {
   apiUrl:   "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/GetUserLogin",
   logoutUrl : "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/SetUserStatus",
   setupUrl: "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/GetSetupListView",
-  tabledataUrl:"http://localhost:3000/"    // "http://localhost:44391/sampleApi/"
+  createTrans:"http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/SetNewTxnView"    // "http://localhost:44391/sampleApi/"
 };
 
 /*
