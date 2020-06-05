@@ -24,10 +24,11 @@ export class FrmCreateTransComponent implements OnInit {
     this._route.params.subscribe(params => {
       this.formID = params['id']
       console.log("URL id has changed")
+      this.UserID = sessionStorage.getItem('username');
+      this.AccessToken = sessionStorage.getItem('token');
       this.getTransCreation();
   });
-  this.UserID = sessionStorage.getItem('username');
-  this.AccessToken = sessionStorage.getItem('token');
+ 
   this.products  = [
     {name: 'New York', code: 'NY'},
     {name: 'Rome', code: 'RM'},
