@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  baseUrl :    "http://132.147.160.71/AddCoreAPI/API/Core/",
-  apiUrl:   "http://132.147.160.71/AddCoreAPI/API/Core/GetUserLogin",
-  logoutUrl : "http://132.147.160.71/AddCoreAPI/API/Core/SetUserStatus",
-  setupUrl: "http://132.147.160.71/AddCoreAPI/API/Core/GetSetupListView",
-  createTrans:"http://132.147.160.71/AddCoreAPI/API/Core/SetNewTxnView"    // "http://localhost:44391/sampleApi/"
+  baseUrl :    "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/",
+  apiUrl:   "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/GetUserLogin",
+  logoutUrl : "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/SetUserStatus",
+  setupUrl: "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/GetSetupListView",
+  createTrans:"http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/SetNewTxnView"    // "http://localhost:44391/sampleApi/"
 };
 
 /*
