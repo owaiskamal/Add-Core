@@ -11,9 +11,15 @@ export class FrmCreateTransComponent implements OnInit {
   formID: any;
   AccessToken: string;
   UserID: string;
-
-  constructor(private _route : ActivatedRoute , private transService : CreateTransService) { }
-
+  selectedProduct: string;
+  selectedAccount: string;
+  products: Object[] = [];
+  accounts: Object[] = [];
+  templates: Object[] = [];
+  constructor(private _route : ActivatedRoute , private transService : CreateTransService) {
+   
+   }
+ 
   ngOnInit(): void {
     this._route.params.subscribe(params => {
       this.formID = params['id']
@@ -22,7 +28,29 @@ export class FrmCreateTransComponent implements OnInit {
   });
   this.UserID = sessionStorage.getItem('username');
   this.AccessToken = sessionStorage.getItem('token');
+  this.products  = [
+    {name: 'New York', code: 'NY'},
+    {name: 'Rome', code: 'RM'},
+    {name: 'London', code: 'LDN'},
+    {name: 'Istanbul', code: 'IST'},
+    {name: 'Paris', code: 'PRS'}
+];
+this.accounts  = [
+  {name: 'New York', code: 'NY'},
+  {name: 'Rome', code: 'RM'},
+  {name: 'London', code: 'LDN'},
+  {name: 'Istanbul', code: 'IST'},
+  {name: 'Paris', code: 'PRS'}
+];
+this.templates  = [
+  {name: 'New York', code: 'NY'},
+  {name: 'Rome', code: 'RM'},
+  {name: 'London', code: 'LDN'},
+  {name: 'Istanbul', code: 'IST'},
+  {name: 'Paris', code: 'PRS'}
+];
   }
+  
   getTransCreation() {
     this.transService.getCreateTransaction(this.formID , this.UserID , this.AccessToken ).subscribe(res =>{
       console.log('detail data' , res);

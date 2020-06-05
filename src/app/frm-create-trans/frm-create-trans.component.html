@@ -1,1 +1,35 @@
-<p>frm-create-trans works!</p>
+<h3>Create Transaction</h3>
+<div class="ui-g ui-fluid">
+    <div class="ui-md-6 ui-lg-6">
+        <label for="companytitle">Company title</label>
+        <input id="companytitle" type="text" pInputText> 
+    </div>
+    <div class="ui-md-6 ui-lg-6">
+        <label for="producttitle">Product title</label>
+        <p-dropdown [options]="products" [(ngModel)]="selectedProduct" placeholder="Select a Product" optionLabel="name" [showClear]="true"></p-dropdown>
+        <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p>
+    </div>
+    <div class="ui-md-6 ui-lg-6">
+        <label for="accountitle">Account title</label>
+        <p-dropdown [options]="accounts" [(ngModel)]="selectedAccount" placeholder="Select an account" optionLabel="name" [showClear]="true"></p-dropdown>
+        <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p>
+    </div>
+    <div class="ui-md-6 ui-lg-6">
+        <label for="filetemplate">File template</label>
+        <p-dropdown [options]="templates" [(ngModel)]="selectedTemplate" placeholder="Select a template" optionLabel="name" [showClear]="true"></p-dropdown>
+        <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p>
+    </div>
+  
+ <!--    <div class="p-field p-col-12 p-md-6">
+        <label for="city">City</label>
+        <input id="city" type="text" pInputText> 
+    </div>
+    <div class="p-field p-col-12 p-md-3">
+        <label for="state">State</label>
+        <p-dropdown inputId="state" [options]="states" [(ngModel)]="selectedState" placeholder="Select" optionLabel="name"></p-dropdown>
+    </div>
+    <div class="p-field p-col-12 p-md-3">
+        <label for="zip">Zip</label>
+        <input id="zip" type="text" pInputText> 
+    </div> -->
+</div>
