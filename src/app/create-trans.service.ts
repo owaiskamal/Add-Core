@@ -17,6 +17,7 @@ export class CreateTransService {
        UserID : UserID ,
         AccessToken : AccessToken
     }
+    console.log(obj,"Create transaction object")
     return this.http.post(environment.createTrans , obj)
   }
 }

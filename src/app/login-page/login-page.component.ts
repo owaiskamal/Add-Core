@@ -54,7 +54,7 @@ getNotifications(){
      loginUser() {
     this.authService.userAuth(this.userName, this.password).pipe(first()).subscribe(res => {
 
-      console.log(res);
+      console.log(res,"Complete response");
       if (res.code == "-1") {
 
         this.messageService.add({
