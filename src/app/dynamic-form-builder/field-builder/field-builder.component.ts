@@ -4,21 +4,24 @@ import { Subject } from 'rxjs';
 @Component({
   selector: "field-builder",
   template: `
-    <div class="form-group row" [formGroup]="form" >
+    <div [formGroup]="form" >
+      
+    
       <label
-        class="col-md-3 text-center form-control-label"
+        class="form-control-label"
         [attr.for]="field.ColumnLabel"
       >
         {{ field.ColumnLabel }}
         <strong class="text-danger" *ngIf="field.Mandatory == 'Y'">*</strong>
       </label>
-      <div class="col-md-9" [ngSwitch]="field.DataType">
+      <div [ngSwitch]="field.DataType">
         <textbox *ngSwitchCase="'T'"   [field]="field" [form]="form"></textbox>
         <dropdown
           *ngSwitchCase="'dropdown'"
           [field]="field"
           [form]="form"
         ></dropdown>
+        <textboxnum *ngSwitchCase="'C'"  [field]="field" [form]="form"></textboxnum>
         <checkbox
           *ngSwitchCase="'checkbox'"
           [field]="field"
@@ -34,7 +37,6 @@ import { Subject } from 'rxjs';
         </div>
       
       </div>
-      
     </div>
   `
 })

@@ -11,7 +11,7 @@ import { FileComponent } from './atoms/file';
 import { CheckBoxComponent } from './atoms/checkbox';
 import { RadioComponent } from './atoms/radio';
 import {FileUploadModule} from 'primeng/fileupload';
-
+import {TextBoxComponentNum} from './atoms/textboxnum'
 
 @NgModule({
   imports: [
@@ -26,7 +26,8 @@ import {FileUploadModule} from 'primeng/fileupload';
     DropDownComponent,
     CheckBoxComponent,
     FileComponent,
-    RadioComponent
+    RadioComponent,
+    TextBoxComponentNum
   ],
   exports: [DynamicFormBuilderComponent],
   providers: []

@@ -3,18 +3,18 @@ import { FormGroup } from '@angular/forms';
 
 // text,email,tel,textarea,password, 
 @Component({
-    selector: 'textbox',
+    selector: 'textboxnum',
     template: `
       <div [formGroup]="form">
        
-        <input class="form-control"  [id]="field?.name" [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel">
+        <input class="form-control" type="number" [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel">
         <!-- <textarea *ngIf="field.multiline"  [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
          class="form-control" [placeholder]="field.placeholder"></textarea> -->
-         
+         <!-- <input class="form-control"  [id]="field?.name" [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel"> -->
       </div> 
     `
 })
-export class TextBoxComponent {
+export class TextBoxComponentNum {
     @Input() field:any = {};
     @Input() form:FormGroup;
     get isValid() { return this.form.controls[this.field.ColumnName].valid; }
