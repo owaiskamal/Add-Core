@@ -5,9 +5,12 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'dynamic-form-builder',
   template: `
-    <form  [formGroup]="form" class="form-horizontal">
-      <div *ngFor="let field of fields">
+    <form  [formGroup]="form" class="form-row">
+      
+      <div *ngFor="let field of fields" class="form-group col-md-6">
+         
           <field-builder [field]="field" [form]="form"></field-builder>
+        
       </div>
       <div class="form-row"></div>
       <div class="form-group row">
