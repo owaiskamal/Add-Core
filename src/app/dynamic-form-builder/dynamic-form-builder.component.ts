@@ -56,15 +56,17 @@ export class DynamicFormBuilderComponent implements OnInit , OnChanges {
  {
   let fieldsCtrls = {};
   for (let f of this.fields) {
-    if (f.type != 'checkbox') {
-      fieldsCtrls[f.name] = new FormControl(f.value || '', Validators.required)
-    } else {
-      let opts = {};
-      for (let opt of f.options) {
-        opts[opt.key] = new FormControl(opt.value);
-      }
-      fieldsCtrls[f.name] = new FormGroup(opts)
-    }
+    // if (f.IsLookup == 'checkbox') {
+      fieldsCtrls[f.ColumnName] = new FormControl(f.DefaultValue || '', Validators.required)
+      console.log("data F " , f);
+      
+    // } else {
+    //   let opts = {};
+    //   for (let opt of f.options) {
+    //     opts[opt.key] = new FormControl(opt.value);
+    //   }
+    //   fieldsCtrls[f.ColumnName] = new FormGroup(opts)
+    // }
   }
   this.form = new FormGroup(fieldsCtrls);
  }

@@ -6,17 +6,17 @@ import { FormGroup } from '@angular/forms';
     selector: 'textbox',
     template: `
       <div [formGroup]="form">
-        <input *ngIf="!field.multiline" [attr.type]="field.type" class="form-control"  [id]="field?.name" [name]="field?.name" [formControlName]="field?.name" [placeholder]= "field.placeholder">
-        <textarea *ngIf="field.multiline"  [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
-         class="form-control" [placeholder]="field.placeholder"></textarea>
+        <input   class="form-control"  [id]="field?.name" [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel">
+        <!-- <textarea *ngIf="field.multiline"  [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
+         class="form-control" [placeholder]="field.placeholder"></textarea> -->
       </div> 
     `
 })
 export class TextBoxComponent {
     @Input() field:any = {};
     @Input() form:FormGroup;
-    get isValid() { return this.form.controls[this.field.name].valid; }
-    get isDirty() { return this.form.controls[this.field.name].dirty; }
+    get isValid() { return this.form.controls[this.field.ColumnName].valid; }
+    get isDirty() { return this.form.controls[this.field.ColumnName].dirty; }
   
     constructor() {
 

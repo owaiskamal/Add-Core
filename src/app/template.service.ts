@@ -11,7 +11,7 @@ export class TemplateService {
   constructor(private http:HttpClient) { }
   getTemplates(obj):Observable<any>{
     console.log("obj" , obj)
-    return this.http.get(environment.baseUrl + "SetNewTxnView");
+    return this.http.get(environment.fakeJson + "TxnTemplateDtl");
     
   }
   
