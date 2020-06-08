@@ -25,26 +25,12 @@
 
 
 
-<p-card>
-<div class="ui-fluid ui-g" style="margin-left: 10%;">
+
+<div class="ui-fluid ui-g">
 <div class="ui-g-12 header">
-  <h1 class="text-center heading">Dynamic Form</h1>
-</div>
-  <div class="form-group ui-g-12">
-    <label for="sel1">Select Type:</label>
-    <select
-      class="form-control"
-      [(ngModel)]="selectedType"
-      (change)="ChangingValue()"
-    >
-      <option [ngValue]="type" *ngFor="let type of types">{{
-        type.obj_type
-      }}</option>
-    </select>
-  </div> 
+ 
   <div class="ui-g-12 " style="width: 100%;">
     <div class="card">
-      <div class="card-header">Dynamic Forms</div>
       <div class="card-body">
        <!-- <dynamic-form-builder
 
@@ -62,4 +48,3 @@
     </div>
   </div>
 </div>
-</p-card>

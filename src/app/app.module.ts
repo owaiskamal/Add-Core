@@ -39,6 +39,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 //import { SearchTableComponent } from './search-table/search-table.component';
 import { FrmlistComponent } from './setup/frmlist/frmlist.component';
 import { FrmCreateTransComponent } from './frm-create-trans/frm-create-trans.component';
+import {CalendarModule} from 'primeng/calendar';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { FrmCreateTransComponent } from './frm-create-trans/frm-create-trans.com
     PickListModule,
     MegaMenuModule,
     ConfirmDialogModule,
-    PushNotificationsModule
+    PushNotificationsModule,
+    CalendarModule
   ],
   providers: [
     MessageService,

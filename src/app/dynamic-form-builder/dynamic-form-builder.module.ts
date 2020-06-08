@@ -12,12 +12,17 @@ import { CheckBoxComponent } from './atoms/checkbox';
 import { RadioComponent } from './atoms/radio';
 import {FileUploadModule} from 'primeng/fileupload';
 import {TextBoxComponentNum} from './atoms/textboxnum'
+import {CalendarModule} from 'primeng/calendar';
+import {DatePickerComponent} from './atoms/datapicker'
+import {InputNumberModule} from 'primeng/inputnumber';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    CalendarModule,
+    InputNumberModule
   ],
   declarations: [
     DynamicFormBuilderComponent,
@@ -27,7 +32,8 @@ import {TextBoxComponentNum} from './atoms/textboxnum'
     CheckBoxComponent,
     FileComponent,
     RadioComponent,
-    TextBoxComponentNum
+    TextBoxComponentNum,
+    DatePickerComponent
   ],
   exports: [DynamicFormBuilderComponent],
   providers: []
