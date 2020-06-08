@@ -17,6 +17,7 @@ export class FrmCreateTransComponent implements OnInit {
   products: Object[] = [];
   accounts: Object[] = [];
   templates: Object[] = [];
+  rawData :any[] = []
   constructor(private _route : ActivatedRoute , private transService : CreateTransService) {
    
    }
@@ -56,6 +57,10 @@ this.templates  = [
   getTransCreation() {
     this.transService.getCreateTransaction(this.formID , this.UserID , this.AccessToken ).subscribe(res =>{
       console.log('detail data' , res);
+        this.rawData.push(res.detailData.detail);
+        console.log("RawData" , this.rawData);
+        
+      
 
     })
   }

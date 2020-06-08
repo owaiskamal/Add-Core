@@ -7,13 +7,13 @@ import { Subject } from 'rxjs';
     <div class="form-group row" [formGroup]="form" >
       <label
         class="col-md-3 text-center form-control-label"
-        [attr.for]="field.label"
+        [attr.for]="field.ColumnLabel"
       >
-        {{ field.label }}
-        <strong class="text-danger" *ngIf="field.required">*</strong>
+        {{ field.ColumnLabel }}
+        <strong class="text-danger" *ngIf="field.Mandatory == 'Y'">*</strong>
       </label>
-      <div class="col-md-9" [ngSwitch]="field.type">
-        <textbox *ngSwitchCase="'text'"   [field]="field" [form]="form"></textbox>
+      <div class="col-md-9" [ngSwitch]="field.DataType">
+        <textbox *ngSwitchCase="'T'"   [field]="field" [form]="form"></textbox>
         <dropdown
           *ngSwitchCase="'dropdown'"
           [field]="field"
@@ -30,7 +30,7 @@ import { Subject } from 'rxjs';
           class="alert alert-danger my-1 p-2 fadeInDown animated"
           *ngIf="!isValid && isDirty"
         >
-          {{ field.label }} is required
+          {{ field.ColumnLabel }} is required
         </div>
       
       </div>
@@ -42,15 +42,18 @@ export class FieldBuilderComponent {
   @Input() field: any;
   @Input() form: any;
 
-
+  
   get isValid() {
-    return this.form.controls[this.field.name].valid;
+    return this.form.controls[this.field.ColumnName].valid;
   }
   get isDirty() {
-    return this.form.controls[this.field.name].dirty;
+    return this.form.controls[this.field.ColumnName].dirty;
   }
 
   
-  constructor() {}
+  constructor() {
+   
+    
+  }
 
 }
