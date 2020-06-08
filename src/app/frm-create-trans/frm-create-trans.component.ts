@@ -13,6 +13,7 @@ export class FrmCreateTransComponent implements OnInit {
   UserID: string;
   selectedProduct: string;
   selectedAccount: string;
+  selectedTemplate: string;
   products: Object[] = [];
   accounts: Object[] = [];
   templates: Object[] = [];
