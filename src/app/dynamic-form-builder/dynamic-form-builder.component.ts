@@ -5,21 +5,20 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'dynamic-form-builder',
   template: `
-    <form  [formGroup]="form" class="form-row">
+    <form  [formGroup]="form">
       
-      <div *ngFor="let field of fields" class="form-group col-md-6">
+    <div class="ui-g ui-fluid">
+      <div *ngFor="let field of fields" class="ui-md-6">
          
           <field-builder [field]="field" [form]="form"></field-builder>
         
       </div>
-      <div class="form-row"></div>
-      <div class="form-group row">
-        <div class="col-md-3"></div>
-        <div class="col-md-9">
-          <button type="submit" (click)= "saveData()"  class="btn btn-primary">Save</button>
-        </div>
-      </div>
+   </div>
+   <div class="ui-md-2">
+   <button type="submit" (click)= "saveData()" pButton  label="Save"></button>
+   </div>
     </form>
+    
   `,
 })
 export class DynamicFormBuilderComponent implements OnInit , OnChanges {

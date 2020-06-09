@@ -5,8 +5,7 @@ import { Subject } from 'rxjs';
   selector: "field-builder",
   template: `
     <div [formGroup]="form" >
-      
-    
+   
       <label
         class="form-control-label"
         [attr.for]="field.ColumnLabel"

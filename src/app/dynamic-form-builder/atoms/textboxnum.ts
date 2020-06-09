@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
     template: `
       <div [formGroup]="form">
        
-        <input *ngIf="field.DataType == 'N'"  class="form-control" type="number" [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel"/>
+        <p-inputNumber *ngIf="field.DataType == 'N'"   [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel"></p-inputNumber>
         <p-inputNumber *ngIf="field.DataType == 'C'" [formControlName]="field.ColumnName"  mode="currency" currency="PKR" locale="en-IN"></p-inputNumber>
         <!-- <textarea *ngIf="field.multiline"  [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
          class="form-control" [placeholder]="field.placeholder"></textarea> -->
