@@ -20,6 +20,8 @@ export class FormTemplateComponent implements OnInit {
   uploadedFiles: any[] = [];
   displayModal : Boolean;
   modals : any[] = [];
+  transactionArr : any[] = [];
+  invoiceArr : any[] = [];
   
   constructor(
     private messageService: MessageService,
@@ -56,6 +58,11 @@ export class FormTemplateComponent implements OnInit {
       .subscribe(res => {
         console.log("Eae", res);
         this.fields = res;
+        console.log(this.fields , "fafafa");
+         this.transactionArr = this.fields.filter(v => v.MasterDetail == 'O')
+         this.invoiceArr = this.fields.filter(v => v.MasterDetail == 'I')
+        
+        
         this.isValid = true;
       });
   }
@@ -69,7 +76,7 @@ export class FormTemplateComponent implements OnInit {
      this.displayModal = true; 
  }
   getFields() {
-    return this.fields;
+    return this.transactionArr;
   }
   clearModal(){
     

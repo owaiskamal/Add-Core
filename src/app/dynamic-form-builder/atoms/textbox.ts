@@ -11,7 +11,7 @@ import { FormGroup } from '@angular/forms';
         <!-- <textarea *ngIf="field.multiline"  [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
          class="form-control" [placeholder]="field.placeholder"></textarea> --> 
         
-           <input type="text"  [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel" pInputText>
+           <input type="text" style="font-weight:500;"  [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel" pInputText>
           
       </div> 
     `

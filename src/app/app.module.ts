@@ -40,6 +40,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { FrmlistComponent } from './setup/frmlist/frmlist.component';
 import { FrmCreateTransComponent } from './frm-create-trans/frm-create-trans.component';
 import {CalendarModule} from 'primeng/calendar';
+import {TabViewModule} from 'primeng/tabview';
 
 
 @NgModule({
@@ -58,8 +59,7 @@ import {CalendarModule} from 'primeng/calendar';
     SidenavComponent,
     //SearchTableComponent,
     FrmlistComponent,
-    FrmCreateTransComponent,
-    
+    FrmCreateTransComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +86,8 @@ import {CalendarModule} from 'primeng/calendar';
     MegaMenuModule,
     ConfirmDialogModule,
     PushNotificationsModule,
-    CalendarModule
+    CalendarModule,
+    TabViewModule
   ],
   providers: [
     MessageService,

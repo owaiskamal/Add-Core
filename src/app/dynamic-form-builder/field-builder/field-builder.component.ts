@@ -9,11 +9,15 @@ import { Subject } from 'rxjs';
       <label
         class="form-control-label"
         [attr.for]="field.ColumnLabel"
+        style="font-weight : 700 ;"
       >
         {{ field.ColumnLabel }}
         <strong class="text-danger" *ngIf="field.Mandatory == 'Y'">*</strong>
       </label>
-      <div [ngSwitch]="field.DataType">
+      <div *ngIf="field.MasterDetail == 'I'">
+        MY NAME IS KHAN
+      </div>
+      <div *ngIf="field.MasterDetail == 'O'"  [ngSwitch]="field.DataType">
         <textbox *ngSwitchCase="'T'"   [field]="field" [form]="form"></textbox>
         <dropdown
           *ngSwitchCase="'dropdown'"
