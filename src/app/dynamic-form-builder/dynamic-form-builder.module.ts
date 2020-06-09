@@ -16,6 +16,8 @@ import {CalendarModule} from 'primeng/calendar';
 import {DatePickerComponent} from './atoms/datapicker'
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputTextModule} from 'primeng/inputtext';
+import {TabViewModule} from 'primeng/tabview';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import {InputTextModule} from 'primeng/inputtext';
     FileUploadModule,
     CalendarModule,
     InputNumberModule,
-    InputTextModule
+    InputTextModule,
+    TabViewModule
   ],
   declarations: [
     DynamicFormBuilderComponent,
