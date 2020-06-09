@@ -15,14 +15,15 @@ import {TextBoxComponentNum} from './atoms/textboxnum'
 import {CalendarModule} from 'primeng/calendar';
 import {DatePickerComponent} from './atoms/datapicker'
 import {InputNumberModule} from 'primeng/inputnumber';
-
+import {InputTextModule} from 'primeng/inputtext';
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FileUploadModule,
     CalendarModule,
-    InputNumberModule
+    InputNumberModule,
+    InputTextModule
   ],
   declarations: [
     DynamicFormBuilderComponent,

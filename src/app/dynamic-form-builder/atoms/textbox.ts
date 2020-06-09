@@ -7,10 +7,12 @@ import { FormGroup } from '@angular/forms';
     template: `
       <div [formGroup]="form">
        
-        <input class="form-control"  [id]="field?.name" [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel">
+        <!-- input class="form-control"  [id]="field?.name" [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel"> -->
         <!-- <textarea *ngIf="field.multiline"  [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
-         class="form-control" [placeholder]="field.placeholder"></textarea> -->
-         
+         class="form-control" [placeholder]="field.placeholder"></textarea> --> 
+        
+           <input type="text"  [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel" pInputText>
+          
       </div> 
     `
 })
