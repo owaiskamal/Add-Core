@@ -6,9 +6,13 @@
     display: flex;
     justify-content:inherit;
 
-
   }
-  
+  .align-angle-down{
+   vertical-align: middle;
+  }
+  .align-card-icon{
+   padding-top: 1px;
+  }
 :host{
 .mat-list-item.active {
    background-color: rgba($color: #919191ce, $alpha: 1);
