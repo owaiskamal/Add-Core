@@ -45,6 +45,14 @@ export class SidenavComponent implements OnInit {
     if (!item.Forms || !item.Forms.length) {
       
       this.route.navigate(['adminpage/'+item.RLink+'/' +item.id]);
+      if(this.route.isActive('adminpage/'+item.RLink+'/' +item.id , true))
+      {
+      console.log('is active' );
+      }
+      else {
+        console.log('not active');
+        
+      }
       this.navService.closeNav(true);
       
     }
