@@ -22,6 +22,34 @@
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
     </div>
 
-    <app-form-template></app-form-template>
+    <!-- App Form Template Start -->
+    
+<div class="ui-fluid ui-g">
+    <div class="ui-g-12 header">
+     
+      <div class="ui-g-12 " style="width: 100%;">
+           <!-- <dynamic-form-builder
+    
+              *ngIf="!isValid"
+              [fields]="getFields()"
+            >
+          </dynamic-form-builder> -->
+          <p-tabView>
+            
+            <p-tabPanel style="margin-right: 2%;" header = "Transaction">
+            <dynamic-form-builder
+            *ngIf="isValid"
+            (savedata)=recivemsg($event)
+              [fields]="getFields()"
+            ></dynamic-form-builder>
+          </p-tabPanel>
+          <p-tabPanel style="margin-left: 10%;" header = "Invoice" *ngIf="invoiceArr != null">
+            yoyoyoyoyoyo
+          </p-tabPanel>
+          </p-tabView>
+          </div>
+        </div>
+     </div>
+     <!-- App Form Template End -->
 </div>
 </p-card>

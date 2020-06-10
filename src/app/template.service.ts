@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
 export class TemplateService {
 
   constructor(private http:HttpClient) { }
-  getTemplates(obj):Observable<any>{
-    console.log("obj" , obj)
+  getTemplates():Observable<any>{
+    //console.log("obj" , obj)
     return this.http.get(environment.fakeJson + "TxnTemplateDtl");
     
   }
