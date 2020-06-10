@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
     <form  [formGroup]="form">
       
     <div class="ui-g ui-fluid">
-      <div *ngFor="let field of fields" class="ui-md-6">
+      <div *ngFor="let field of fields" class="ui-md-6 col-sm-12">
          
           <field-builder [field]="field" [form]="form"></field-builder>
         
