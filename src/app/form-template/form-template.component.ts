@@ -54,7 +54,7 @@ export class FormTemplateComponent implements OnInit {
 
   getTemplates() {
     this.templateService
-      .getTemplates(this.selectedType.obj_type)
+      .getTemplates()
       .subscribe(res => {
         console.log("Eae", res);
         this.fields = res;

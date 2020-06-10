@@ -29,4 +29,9 @@ export class CreateTransService {
   {
     return this.http.get(environment.accountsJson)
   }
+  getTemplates():Observable<any>{
+    //console.log("obj" , obj)
+    return this.http.get(environment.fakeJson + "TxnTemplateDtl");
+    
+  }
 }
