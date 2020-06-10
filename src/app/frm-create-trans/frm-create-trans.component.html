@@ -2,21 +2,21 @@
 <p-card>
     <h3>Create Transaction</h3>
 <div class="ui-g ui-fluid">
-    <div class="ui-md-6 ui-lg-6 col-md-6 col-sm-12">
+    <div class="ui-md-6 ui-lg-6 col-md-6 ui-sm-12">
         <label for="companytitle">Company title</label>
         <input id="companytitle" type="text" pInputText> 
     </div>
-    <div class="ui-md-6 ui-lg-6 col-sm-12">
+    <div class="ui-md-6 ui-lg-6 ui-sm-12">
         <label for="producttitle">Product title</label>
         <p-dropdown [options]="products" [(ngModel)]="selectedProduct" placeholder="Select a Product" optionLabel="ProName" [showClear]="true"></p-dropdown>
        <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
     </div>
-    <div class="ui-md-6 ui-lg-6 col-sm-12">
+    <div class="ui-md-6 ui-lg-6 ui-sm-12">
         <label for="accountitle">Account title</label>
         <p-dropdown [options]="accounts" [(ngModel)]="selectedAccount" placeholder="Select an account" optionLabel="AcTitel" [showClear]="true"></p-dropdown>
        <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
     </div>
-    <div class="ui-md-6 ui-lg-6 col-sm-12">
+    <div class="ui-md-6 ui-lg-6 ui-sm-12">
         <label for="filetemplate">File template</label>
         <p-dropdown [options]="templates" [(ngModel)]="selectedTemplate" placeholder="Select a template" optionLabel="name" [showClear]="true"></p-dropdown>
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
