@@ -1,8 +1,8 @@
+import { CreateTransService } from './../create-trans.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CreateTransService } from '../create-trans.service';
+
 import { MessageService } from "primeng/api";
-import { TemplateService } from "../template.service";
 import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-frm-create-trans',
@@ -33,7 +33,7 @@ export class FrmCreateTransComponent implements OnInit {
   constructor(private _route : ActivatedRoute , 
     private transService : CreateTransService,
     private messageService: MessageService,
-    private templateService: TemplateService) {
+   ) {
     
       
    }
@@ -68,7 +68,7 @@ this.templates  = [
     this.getTemplates();
   }
   getTemplates() {
-    this.templateService
+    this.transService
       .getTemplates()
       .subscribe(res => {
         console.log("Eae", res);

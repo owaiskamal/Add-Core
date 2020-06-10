@@ -54,7 +54,7 @@ export class DragDropComponent implements OnInit {
     this.targetArr = []
 
     this.templateService
-      .getTemplates(this.progtype.prog_type)
+      .getTemplates()
       .subscribe(res => {
 
         console.log("Data is here", res);
