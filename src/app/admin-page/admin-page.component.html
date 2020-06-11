@@ -87,6 +87,8 @@
 
     <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="pi pi-ellipsis-v"></i></a>
     <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+        
+        <div style="text-align: center;"><span>{{userName}}</span></div>
         <a class="dropdown-item" [routerLink]="['/adminpage/formtemplate']"><i class="pi pi-users"></i>Dynamic Forms</a>
         <a class="dropdown-item"  [routerLink]="['/adminpage/resetpassword']"><i class="pi pi-user-edit"></i>Setting</a>
         <a class="dropdown-item"  [routerLink]="['/adminpage/templatecreator']"><i class="pi pi-user-edit"></i>Template Creator</a>

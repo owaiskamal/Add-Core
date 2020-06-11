@@ -53,6 +53,7 @@ export class AdminPageComponent implements OnInit ,AfterViewInit  {
   items: MenuItem[];
   visibleSidebar1: boolean;
   isHamburguer = true;
+  userName: string;
   @Input() depth: number;
   myDiv: any;
   menuState:string = 'out';
@@ -110,8 +111,6 @@ onResize(event?) {
 
   ngOnInit() {
 
-
-
 this.getLinks();
 }
 
@@ -143,6 +142,7 @@ ngAfterViewInit()
 // <app-sidenav *ngFor="let item of links" [item]="item"></app-sidenav>
 // </div>
 getLinks() {
+  this.userName = sessionStorage.getItem('username')
   var data = sessionStorage.getItem('menuitem')
   console.log(JSON.parse(data));
 
