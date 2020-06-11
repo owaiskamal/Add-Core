@@ -4,9 +4,13 @@
       [value]="userList"
       [columns]="cols"
       [paginator]="true"
+      styleClass="ui-table-customers"
       [responsive]="true"
       [rows]="10"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+      [rowHover]="true"
       [scrollable]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     >
       <ng-template pTemplate="caption">
            <h3 style="font-weight: bold;">{{tableHeader}}</h3>
@@ -51,9 +55,7 @@
           </td>
         </tr>
       </ng-template>
-      <ng-template pTemplate="summary">
-         {{ dt.totalRecords }} Records
-      </ng-template>
+    
     </p-table>
   </p-card>
   
