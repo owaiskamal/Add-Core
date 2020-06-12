@@ -11,7 +11,8 @@ export const environment = {
   createTrans:"http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/SetNewTxnView",    // "http://localhost:44391/sampleApi/"
   fakeJson : "http://localhost:3000/",
   productsJson : "http://localhost:3000/Products",
-  accountsJson : "http://localhost:3000/Account"
+  accountsJson : "http://localhost:3000/Account",
+  txnFields : "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/SetTxnFieldView"
 };
 
 /*
