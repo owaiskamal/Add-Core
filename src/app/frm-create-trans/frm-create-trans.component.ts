@@ -45,9 +45,8 @@ export class FrmCreateTransComponent implements OnInit {
       this.UserID = sessionStorage.getItem('username');
       this.AccessToken = sessionStorage.getItem('token');
       this.getTransCreation();
-      this.getAccounts();
-      this.getProducts();
-      this.getTemplates();
+     
+      
   });
  
   this.products  = [
@@ -57,28 +56,24 @@ this.accounts  = [
  
 ];
 this.templates  = [
-  {name: 'New York', code: 'NY'},
-  {name: 'Rome', code: 'RM'},
-  {name: 'London', code: 'LDN'},
-  {name: 'Istanbul', code: 'IST'},
-  {name: 'Paris', code: 'PRS'}
+ 
 ];
   }
-  ChangingValue() {
-    this.getTemplates();
-  }
-  getTemplates() {
+
+  getTemplates(ev) {
+    var RequestType = "";
+    
     this.transService
-      .getTemplates()
+      .getTemplates(this.UserID , this.AccessToken , this.formID , RequestType , this.selectedTemplate['ConfCode'])
       .subscribe(res => {
-        console.log("Eae", res);
-        this.fields = res;
-        console.log(this.fields , "fafafa");
-         this.transactionArr = this.fields.filter(v => v.MasterDetail == 'O')
-         this.invoiceArr = this.fields.filter(v => v.MasterDetail == 'I')
+        console.log("Eae", res.detailData.detail);
+        // this.fields = res;
+        // console.log(this.fields , "fafafa");
+        //  this.transactionArr = this.fields.filter(v => v.MasterDetail == 'O')
+        //  this.invoiceArr = this.fields.filter(v => v.MasterDetail == 'I')
         
         
-        this.isValid = true;
+        // this.isValid = true;
       });
   }
   recivemsg(obj){
@@ -93,26 +88,43 @@ this.templates  = [
 getFields() {
   return this.transactionArr;
 }
+OnProductChange($event){
+  console.log(this.selectedProduct['ProCode'] , "PRODUCTS");
+
+  var RawAccounts = this.rawData['Account'];
+  console.log(this.rawData['Account'] , "data");
+  
+  this.accounts = RawAccounts.filter((k: { ProCode: any; }) => k.ProCode == this.selectedProduct['ProCode'])
+
+  var RawTemplates = this.rawData['TxnTemplate'];
+  if(RawTemplates.filter(k => k.ProCode == this.selectedProduct['ProCode'] ) == '')
+  {
+    this.templates = this.rawData['TxnTemplate']
+  }
+  else
+  {
+    this.templates = RawTemplates.filter(k => k.ProCode == this.selectedProduct['ProCode'] )
+  }
+  
+}
   getTransCreation() {
     this.transService.getCreateTransaction(this.formID , this.UserID , this.AccessToken ).subscribe(res =>{
-      console.log('detail data' , res);
+      console.log('detail data' , JSON.parse(res.detailData.detail));
+      this.rawData = JSON.parse(res.detailData.detail);
+
        // this.rawData.push(res.detailData.detail);
-        //console.log("RawData" , this.rawData); 
+        console.log("RawData" , this.rawData['Products']); 
+        this.products = this.rawData['Products'];
+         
+          
+
     })
   }
   
   getProducts(){
-    this.transService.getProducts().subscribe(res =>{
-      //console.log('Products' , res);
-      this.products = res;
-      console.log('Products Names' , this.products);
-    })
+    
   }
   getAccounts(){
-    this.transService.getAccounts().subscribe(res =>{
-      console.log('Accounts' , res);
-      this.accounts = res;
-      console.log('Account Names' , this.accounts);
-    })
+   
   }
 }

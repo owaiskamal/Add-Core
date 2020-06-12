@@ -8,17 +8,17 @@
     </div>
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
         <label for="producttitle">Product title</label>
-        <p-dropdown [options]="products" [(ngModel)]="selectedProduct" placeholder="Select a Product" optionLabel="ProName" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="products" [(ngModel)]="selectedProduct" (onChange)="OnProductChange($event)" placeholder="Select a Product" optionLabel="ProName" [showClear]="true"></p-dropdown>
        <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
     </div>
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
         <label for="accountitle">Account title</label>
-        <p-dropdown [options]="accounts" [(ngModel)]="selectedAccount" placeholder="Select an account" optionLabel="AcTitel" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="accounts" [(ngModel)]="selectedAccount" name="selectedAccount" placeholder="Select an account" optionLabel="AcTitel" [showClear]="true"></p-dropdown>
        <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
     </div>
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
         <label for="filetemplate">File template</label>
-        <p-dropdown [options]="templates" [(ngModel)]="selectedTemplate" placeholder="Select a template" optionLabel="name" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="templates" [(ngModel)]="selectedTemplate" (onChange)="getTemplates($event)"  placeholder="Select a template" optionLabel="ConfName" [showClear]="true"></p-dropdown>
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
     </div>
 

@@ -21,17 +21,23 @@ export class CreateTransService {
     console.log(obj,"Create transaction object")
     return this.http.post(environment.createTrans , obj)
   }
-  getProducts():Observable<any>
-  {
-    return this.http.get(environment.productsJson).pipe(map(res => res));
-  }
-  getAccounts():Observable<any>
-  {
-    return this.http.get(environment.accountsJson)
-  }
-  getTemplates():Observable<any>{
+  // getProducts():Observable<any>
+  // {
+  //   return this.http.get(environment.productsJson).pipe(map(res => res));
+  // }
+  // getAccounts():Observable<any>
+  // {
+  //   return this.http.get(environment.accountsJson)
+  // }
+  getTemplates(UserID , AccessToken , formID , RequestType , selectedTemplate):Observable<any>{
+    let obj = {
+      formID : formID ,
+      UserID : UserID ,
+       AccessToken : AccessToken,
+       RequestType : RequestType,
+       RequestBy : selectedTemplate
+    }
     //console.log("obj" , obj)
-    return this.http.get(environment.fakeJson + "TxnTemplateDtl");
-    
+   return this.http.post(environment.txnFields , obj )    
   }
 }
