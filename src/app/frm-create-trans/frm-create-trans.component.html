@@ -18,7 +18,7 @@
     </div>
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
         <label for="filetemplate">File template</label>
-        <p-dropdown [options]="templates" [(ngModel)]="selectedTemplate" (onChange)="getTemplates($event)"  placeholder="Select a template" optionLabel="ConfName" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="templates" [(ngModel)]="selectedTemplate" (onChange)="getTemplates()"  placeholder="Select a template" optionLabel="ConfName" [showClear]="true"></p-dropdown>
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
     </div>
 
@@ -43,7 +43,7 @@
               [fields]="getFields()"
             ></dynamic-form-builder>
           </p-tabPanel>
-          <p-tabPanel style="margin-left: 10%;" header = "Invoice" *ngIf="invoiceArr != null">
+          <p-tabPanel style="margin-left: 10%;" header = "Invoice" *ngIf="invoiceArr.length > 0">
             yoyoyoyoyoyo
           </p-tabPanel>
           </p-tabView>
