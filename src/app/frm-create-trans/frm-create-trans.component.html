@@ -2,10 +2,10 @@
 <p-card>
     <h3>Create Transaction</h3>
 <div class="ui-g ui-fluid">
-    <div class="ui-md-6 ui-lg-6 col-md-6 ui-sm-12">
+   <!--  <div class="ui-md-6 ui-lg-6 col-md-6 ui-sm-12">
         <label for="companytitle">Company title</label>
         <input id="companytitle" type="text" pInputText> 
-    </div>
+    </div> -->
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
         <label for="producttitle">Product title</label>
         <p-dropdown [options]="products" [(ngModel)]="selectedProduct" (onChange)="OnProductChange($event)" placeholder="Select a Product" optionLabel="ProName" [showClear]="true"></p-dropdown>
@@ -23,10 +23,13 @@
     </div>
 
     <!-- App Form Template Start -->
-    
+    <div class="ui-md-6 ui-lg-6 ui-sm-12">
+      <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
+  </div>
+  
 <div class="ui-fluid ui-g">
    
-     
+    
       <div class="ui-g-12 " style="width: 100%;">
            <!-- <dynamic-form-builder
     
@@ -34,7 +37,7 @@
               [fields]="getFields()"
             >
           </dynamic-form-builder> -->
-          <p-tabView>
+          <p-tabView *ngIf="fields.length > 0">
             
             <p-tabPanel style="margin-right: 2%;" header = "Transaction">
             <dynamic-form-builder
