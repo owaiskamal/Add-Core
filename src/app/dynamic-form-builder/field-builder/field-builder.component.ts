@@ -14,10 +14,8 @@ import { Subject } from 'rxjs';
         {{ field.ColumnLabel }}
         <strong class="text-danger" *ngIf="field.Mandatory == 'Y'">*</strong>
       </label>
-      <div *ngIf="field.MasterDetail == 'I'">
-        MY NAME IS KHAN
-      </div>
-      <div *ngIf="field.MasterDetail == 'O'"  [ngSwitch]="field.DataType">
+      
+      <div   [ngSwitch]="field.DataType">
         <textbox *ngSwitchCase="'T'"   [field]="field" [form]="form"></textbox>
         <dropdown
           *ngSwitchCase="'dropdown'"

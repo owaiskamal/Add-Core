@@ -75,7 +75,12 @@ export class DynamicFormBuilderComponent implements OnInit , OnChanges {
  saveData(){
    this.savedata.emit(this.form.getRawValue());
    console.log("loggg" , this.form.getRawValue());
-   
+   for (let f of this.fields) {
+     if(f.masterDetail == 'I')
+     {
+       
+     }
+   }
     this.form.reset();
      
  }
