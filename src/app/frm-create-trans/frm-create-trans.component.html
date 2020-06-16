@@ -7,17 +7,17 @@
         <input id="companytitle" type="text" pInputText> 
     </div> -->
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
-        <label for="producttitle">Product title</label>
+        <label style="font-weight: 700;" for="producttitle">Product title</label>
         <p-dropdown [options]="products" [(ngModel)]="selectedProduct" (onChange)="OnProductChange($event)" placeholder="Select a Product" optionLabel="ProName" [showClear]="true"></p-dropdown>
        <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
     </div>
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
-        <label for="accountitle">Account title</label>
+        <label style="font-weight: 700;" for="accountitle">Account title</label>
         <p-dropdown [options]="accounts" [(ngModel)]="selectedAccount" name="selectedAccount" placeholder="Select an account" optionLabel="AcTitel" [showClear]="true"></p-dropdown>
        <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
     </div>
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
-        <label for="filetemplate">File template</label>
+        <label style="font-weight: 700;" for="filetemplate">File template</label>
         <p-dropdown [options]="templates" [(ngModel)]="selectedTemplate" (onChange)="getTemplates()"  placeholder="Select a template" optionLabel="ConfName" [showClear]="true"></p-dropdown>
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
     </div>
@@ -47,7 +47,71 @@
             ></dynamic-form-builder>
           </p-tabPanel>
           <p-tabPanel style="margin-left: 10%;" header = "Invoice" *ngIf="invoiceArr.length > 0">
-            yoyoyoyoyoyo
+            <dynamic-form-builder
+            *ngIf="isValid"
+            (savedata)=recivemsg($event)
+              [fields]="invoiceArr"
+            ></dynamic-form-builder>
+            <!-- <p-table [columns]="cols" [value]="cars" selectionMode="single" [(selection)]="selectedCar"  [paginator]="true" [rows]="15">
+              <ng-template pTemplate="caption">
+                  List of Cars
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                  <tr>
+                      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                          {{col.header}}
+                          <p-sortIcon [field]="col.field"></p-sortIcon>
+                      </th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr [pSelectableRow]="rowData">
+                      <td *ngFor="let col of columns">
+                          {{rowData[col.field]}}
+                      </td>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="summary" let-rowData>
+                  <div style="text-align:left">
+                      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add"></button>
+                  </div>
+              </ng-template>    
+          </p-table>
+          
+          <p-dialog header="Car Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+              <div class="p-grid ui-fluid" *ngIf="car">
+                  <div class="p-col-4">
+                      <label for="vin">Vin</label>
+                  </div>
+                  <div class="p-col-8">
+                      <input pInputText id="vin" [(ngModel)]="car.vin" autofocus />
+                  </div>
+                  <div class="p-col-4">
+                      <label for="year">Year</label>
+                  </div>
+                  <div class="p-col-8">
+                      <input pInputText id="year" [(ngModel)]="car.year" />
+                  </div>
+                  <div class="p-col-4">
+                      <label for="brand">Brand</label>
+                  </div>
+                  <div class="p-col-8">
+                      <input pInputText id="brand" [(ngModel)]="car.brand" />
+                  </div>
+                  <div class="p-col-4">
+                      <label for="color">Color</label>
+                  </div>
+                  <div class="p-col-8">
+                      <input pInputText id="color" [(ngModel)]="car.color" />
+                  </div>
+              </div>
+              <p-footer>
+                  <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                      <button type="button" pButton icon="pi pi-times" (click)="delete()" label="Delete"></button>
+                      <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
+                  </div>
+              </p-footer>
+          </p-dialog> -->
           </p-tabPanel>
           </p-tabView>
           </div>
