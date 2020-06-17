@@ -6,19 +6,19 @@ import { Subject } from 'rxjs';
   selector: 'dynamic-form-builder',
   template: `
     <form  [formGroup]="form">
-      
+
     <div class="ui-g ui-fluid">
       <div *ngFor="let field of fields" class="ui-md-6 ui-sm-12">
-         
+
           <field-builder [field]="field" [form]="form"></field-builder>
-        
+
       </div>
    </div>
    <div class="ui-md-2">
    <button type="submit" (click)= "saveData()" pButton  label="Save"></button>
    </div>
     </form>
-    
+
   `,
 })
 export class DynamicFormBuilderComponent implements OnInit , OnChanges {
@@ -61,7 +61,7 @@ export class DynamicFormBuilderComponent implements OnInit , OnChanges {
     // if (f.IsLookup == 'checkbox') {
       fieldsCtrls[f.ColumnName] = new FormControl(f.DefaultValue || '', Validators.required)
       console.log("data F " , f);
-      
+
     // } else {
     //   let opts = {};
     //   for (let opt of f.options) {
@@ -78,10 +78,10 @@ export class DynamicFormBuilderComponent implements OnInit , OnChanges {
    for (let f of this.fields) {
      if(f.masterDetail == 'I')
      {
-       
+
      }
    }
     this.form.reset();
-     
+
  }
 }

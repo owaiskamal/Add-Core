@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+
 
 // text,email,tel,textarea,password,
 @Component({
@@ -12,7 +13,7 @@ import { FormGroup } from '@angular/forms';
         </div>
         <p-inputNumber *ngIf="field.DataType == 'C'" style="font-weight:500;" [formControlName]="field.ColumnName"  mode="currency" currency="PKR" locale="en-IN"></p-inputNumber>
      <div  class="p-field p-col">
-        <button  pButton *ngIf="field.ISBTNVERIFY == 'Y'"  style="font-weight:900;" type="button" label="verify" class="ui-button-rounded  ui-button-warning"></button>
+        <button  pButton *ngIf="field.ISBTNVERIFY == 'Y'"(click)= "onSaveData($event)"  style="font-weight:900;" type="button" label="verify" class="ui-button-rounded  ui-button-warning"></button>
 </div>
         <!-- <textarea *ngIf="field.multiline"  [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
          class="form-control" [placeholder]="field.placeholder"></textarea> -->
@@ -25,10 +26,16 @@ import { FormGroup } from '@angular/forms';
 export class TextBoxComponentNum {
     @Input() field:any = {};
     @Input() form:FormGroup;
+    @Output() saveData = new EventEmitter();
     get isValid() { return this.form.controls[this.field.ColumnName].valid; }
     get isDirty() { return this.form.controls[this.field.ColumnName].dirty; }
 
     constructor() {
+
+    }
+    onSaveData($event)
+    {
+      console.log(this.form.getRawValue().BENEACNO , "asdasdasd");
 
     }
   }
