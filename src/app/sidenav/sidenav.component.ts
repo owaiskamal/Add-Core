@@ -14,8 +14,19 @@ import { NavService } from '../nav.service';
       state('collapsed', style({transform: 'rotate(0deg)'})),
       state('expanded', style({transform: 'rotate(180deg)'})),
       transition('expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4,0.0,0.2,1)')
+        animate('500ms cubic-bezier(0.4,0.0,0.2,1)')
       ),
+    ]),
+    trigger('dropdown',[
+      state('collapsed', style({
+        opacity: 0
+      })),
+      state('expanded', style({
+        opacity: 1
+      })),
+      transition('collapsed => expanded', animate('400ms ease-in-out')),
+      transition('expanded => collapsed', animate('400ms ease-in-out'))
+
     ])
   ]
 })
@@ -43,7 +54,7 @@ export class SidenavComponent implements OnInit {
     //console.log(item);
 
     if (!item.Forms || !item.Forms.length) {
-      
+
       this.route.navigate(['adminpage/'+item.RLink+'/' +item.id]);
       if(this.route.isActive('adminpage/'+item.RLink+'/' +item.id , true))
       {
@@ -51,10 +62,10 @@ export class SidenavComponent implements OnInit {
       }
       else {
         console.log('not active');
-        
+
       }
       this.navService.closeNav(true);
-      
+
     }
     if (item.Forms && item.Forms.length) {
       this.expanded = !this.expanded;

@@ -17,7 +17,7 @@
 </ul>
 
 
-<div *ngIf="expanded">
+<div *ngIf="expanded"  [@dropdown]="expanded ? 'expanded': 'collapsed'">
 <app-sidenav *ngFor="let child of item.Forms" [item] = "child" [depth]="depth+1"></app-sidenav>
 </div>
 

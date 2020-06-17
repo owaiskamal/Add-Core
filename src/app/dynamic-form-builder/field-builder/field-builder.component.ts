@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   selector: "field-builder",
   template: `
     <div [formGroup]="form" >
-   
+
       <label
         class="form-control-label"
         [attr.for]="field.ColumnLabel"
@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
         {{ field.ColumnLabel }}
         <strong class="text-danger" *ngIf="field.Mandatory == 'Y'">*</strong>
       </label>
-      
+
       <div   [ngSwitch]="field.DataType">
         <textbox *ngSwitchCase="'T'"   [field]="field" [form]="form"></textbox>
         <dropdown
@@ -22,7 +22,7 @@ import { Subject } from 'rxjs';
           [field]="field"
           [form]="form"
         ></dropdown>
-        <textboxnum *ngSwitchCase="'N'"  [field]="field" [form]="form"></textboxnum>
+        <textboxnum  *ngSwitchCase="'N'"  [field]="field" [form]="form"></textboxnum>
         <textboxnum *ngSwitchCase="'C'"  [field]="field" [form]="form"></textboxnum>
         <calender *ngSwitchCase="'D'"  [field]="field" [form]="form"></calender>
         <checkbox
@@ -38,7 +38,7 @@ import { Subject } from 'rxjs';
         >
           {{ field.ColumnLabel }} is required
         </div>
-      
+
       </div>
     </div>
   `
@@ -47,7 +47,7 @@ export class FieldBuilderComponent {
   @Input() field: any;
   @Input() form: any;
 
-  
+
   get isValid() {
     return this.form.controls[this.field.ColumnName].valid;
   }
@@ -55,10 +55,10 @@ export class FieldBuilderComponent {
     return this.form.controls[this.field.ColumnName].dirty;
   }
 
-  
+
   constructor() {
-   
-    
+
+
   }
 
 }
