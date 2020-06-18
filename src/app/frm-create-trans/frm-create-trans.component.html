@@ -47,11 +47,40 @@
             ></dynamic-form-builder>
           </p-tabPanel>
           <p-tabPanel style="margin-left: 10%;" header = "Invoice" *ngIf="invoiceArr.length > 0">
-            <dynamic-form-builder
+           <!--  <dynamic-form-builder
             *ngIf="isValid"
             (savedata)=recivemsg($event)
               [fields]="invoiceArr"
-            ></dynamic-form-builder>
+            ></dynamic-form-builder> -->
+            <form [formGroup]="dynamicForm">
+         
+                  <div *ngFor="let ticket of t.controls; let i = index">
+                    <div [formGroup]="ticket">
+                      <div>
+                         <!--  <label for="firstname1">{{ temp[i].id }}</label> -->
+                          <input
+                            pInput
+                            type="text"
+                            placeholder="Name"
+                            formControlName="name"
+                            class="form-control"
+                          />
+                       
+                      </div>
+                    </div>
+                  </div>
+               <!--    <button
+                    style="margin-left: 800px;"
+                    mat-button
+                    color="primary"
+                    type="submit"
+                    (click)="onSubmit(dynamicForm.getRawValue())"
+                    [disabled]="authService.isLoggedIn == false"
+                  >
+                    <span class="fa fa-save"></span> Save
+                  </button> -->
+               
+              </form>
             <p-table *ngIf="invoiceData.length > 0" [columns]="cols" [value]="invoiceValues" selectionMode="single" [(selection)]="selectedCar"  [paginator]="true" [rows]="15">
               <ng-template pTemplate="caption">
                   List of Cars

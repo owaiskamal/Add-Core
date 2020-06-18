@@ -3,7 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { MessageService } from "primeng/api";
-import { FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  Validators,
+  FormControl,
+} from "@angular/forms";
 @Component({
   selector: 'app-frm-create-trans',
   templateUrl: './frm-create-trans.component.html',
@@ -45,9 +51,11 @@ export class FrmCreateTransComponent implements OnInit {
   invoiceData: any[] = [];
   invoiceValues: any[] = [];
   totalrecords: number;
+  dynamicForm: FormGroup;
   constructor(private _route : ActivatedRoute , 
     private transService : CreateTransService,
     private messageService: MessageService,
+    private formBuilder: FormBuilder
    ) {
     
       
@@ -61,7 +69,9 @@ export class FrmCreateTransComponent implements OnInit {
       this.AccessToken = sessionStorage.getItem('token');
       this.getTransCreation();
      
-      
+      this.dynamicForm = this.formBuilder.group({
+        tickets: new FormArray([]),
+      });
   });
  
   this.products  = [
@@ -74,7 +84,12 @@ this.templates  = [
  
 ];
   }
-
+  get f() {
+    return this.dynamicForm.controls;
+  }
+  get t() {
+    return this.f.tickets as FormArray;
+  }
   getTemplates(ev) {
     var RequestType = "";
     
@@ -101,6 +116,10 @@ this.templates  = [
 getFields() {
   return this.transactionArr;
 }
+
+/* getInvoiceFields(){
+  return this.invoiceArr;
+} */
 
 getuserdata(invoiceDataparam) {
 
