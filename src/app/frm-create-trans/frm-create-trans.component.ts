@@ -42,6 +42,9 @@ export class FrmCreateTransComponent implements OnInit {
   modals : any[] = [];
   transactionArr : any[] = [];
   invoiceArr : any[] = [];
+  invoiceData: any[] = [];
+  invoiceValues: any[] = [];
+  totalrecords: number;
   constructor(private _route : ActivatedRoute , 
     private transService : CreateTransService,
     private messageService: MessageService,
@@ -91,10 +94,35 @@ this.templates  = [
   recivemsg(obj){
    
     
+    this.invoiceData.push(obj);
+    console.log(this.invoiceData,"Invoice saved data");
+    this.getuserdata(this.invoiceData);
 }
 getFields() {
   return this.transactionArr;
 }
+
+getuserdata(invoiceDataparam) {
+
+ console.log(invoiceDataparam,"invoice daat param");
+    this.invoiceValues = Object.values(invoiceDataparam);
+    this.totalrecords = this.invoiceValues.length;
+    // this.cols = Object.keys(this.userLists[0]);
+    this.cols = [];
+    for (var i = 0; i < Object.keys(invoiceDataparam[0]).length; i++) {
+      this.cols[i] = {
+        header: Object.keys(invoiceDataparam[0])[i],
+        field: Object.keys(invoiceDataparam[0])[i]
+      };
+    }
+    console.log(this.totalrecords, "asdasd");
+
+  //  this.userarray.push(this.userList);
+}
+
+  //console.log(this.userarray);
+
+
 OnProductChange($event){
   console.log(this.selectedProduct['ProCode'] , "PRODUCTS");
 
@@ -134,28 +162,28 @@ OnProductChange($event){
   getAccounts(){
    
   }
-//   showDialogToAdd() {
-//     this.newCar = true;
-//     this.car = {};
-//     this.displayDialog = true;
-// }
-// save() {
-//   let cars = [...this.cars];
-//   if (this.newCar)
-//       cars.push(this.car);
-//   else
-//       cars[this.cars.indexOf(this.selectedCar)] = this.car;
+   showDialogToAdd() {
+     this.newCar = true;
+     this.car = {};
+     this.displayDialog = true;
+ }
+ save() {
+   let cars = [...this.cars];
+  if (this.newCar)
+      cars.push(this.car);
+  else
+      cars[this.cars.indexOf(this.selectedCar)] = this.car;
 
-//   this.cars = cars;
-//   this.car = null;
-//   this.displayDialog = false;
-// }
-// delete() {
-//   let index = this.cars.indexOf(this.selectedCar);
-//   this.cars = this.cars.filter((val, i) => i != index);
-//   this.car = null;
-//   this.displayDialog = false;
-// }
+   this.cars = cars;
+   this.car = null;
+   this.displayDialog = false;
+ }
+ delete() {
+   let index = this.cars.indexOf(this.selectedCar);
+  this.cars = this.cars.filter((val, i) => i != index);
+  this.car = null;
+   this.displayDialog = false;
+ }
 
 
 
