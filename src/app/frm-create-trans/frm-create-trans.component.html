@@ -55,12 +55,12 @@
             <form [formGroup]="invForm">
                 <div class="ui-g ui-fluid">
                 <div *ngFor="let f of invoiceArr" class="ui-md-6 ui-sm-12">
-                <label>{{f.ColumnLabel}}</label>
+                <label style="font-weight : 700 ;">{{f.ColumnLabel}}</label>
                     <div [ngSwitch]= "f.DataType">
                     <input *ngSwitchCase="'T'" pInputText [formControlName]="f.ColumnName" [placeholder]= "f.ColumnLabel">
                     <p-inputNumber *ngSwitchCase="'N'" style="font-weight:500;"  [name]="f?.ColumnName" [formControlName]="f?.ColumnName" [placeholder]= "f.ColumnLabel"></p-inputNumber>
                     <p-inputNumber *ngSwitchCase="'C'" style="font-weight:500;" [formControlName]="f.ColumnName"  mode="currency" currency="PKR" locale="en-IN"></p-inputNumber>
-                    <p-calendar *ngSwitchCase="'D'" [formControlName]="f?.ColumnName"></p-calendar>
+                    <p-calendar *ngSwitchCase="'D'" dateFormat="dd.mm.yy" [formControlName]="f?.ColumnName"></p-calendar>
                     </div>
                 </div>
             </div>
@@ -100,9 +100,9 @@
           </p-table>
           
         <p-dialog header="Form Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
-              <div class="p-grid ui-fluid" *ngFor="let col of cols">
+              <div class="p-grid ui-fluid" *ngFor="let col of invoiceheader">
                   <div class="p-col-4" >
-                      <label>{{col.header}}</label>
+                      <label style="font-weight : 700 ;">{{col.header}}</label>
                   </div>
                   <div class="p-col-8">
                       <input pInputText [(ngModel)]="col.field" />

@@ -55,6 +55,7 @@ export class FrmCreateTransComponent implements OnInit,OnChanges{
   totalrecords: number;
   dynamicForm: FormGroup;
   dialogData: any[] = [];
+  invoiceheader: any[] = [];
   constructor(private _route : ActivatedRoute , 
     private transService : CreateTransService,
     private messageService: MessageService,
@@ -207,44 +208,52 @@ OnProductChange($event){
   }
    showDialogToAdd(e) {
      this.newCar = true;
-     this.car = {};
+     this.car = [];
      this.displayDialog = true;
      console.log(e);
-     console.log(this.invoiceValues,"fields data")
-     console.log(e.data.keys,"keys")
-     this.convert(e.data, e.data.keys);
- }
-  convert(object, keys) {
-  Object.keys(object).forEach(function (k) {
-      if (object[k] && typeof object[k] === 'object') {
-          this.convert(object[k], keys);
-      }
-      if (keys.indexOf(k) !== -1 && !Array.isArray(object[k])) {
-          object[k] = [object[k]];
-      }
-  });
-  console.log(object,"Converted object");
+     this.car.push(e.data);
+     console.log(this.car , "nraml");
+     this.invoiceheader =[]
+  //   this.invoiceheader = Object.keys(this.car);
+  for (var i = 0; i < Object.keys(this.car[0]).length; i++) {
+    this.invoiceheader[i] = {
+      header: Object.keys(this.car[0])[i],
+      field: Object.values(this.car[0])[i]
+    };
+  }
   
-}
-
+  
+  
+     
+ }
+  
  save() {
-   let cars = [...this.cars];
-  if (this.newCar)
-      cars.push(this.car);
-  else
-      cars[this.cars.indexOf(this.selectedCar)] = this.car;
+   let cars = [...this.invoiceValues];
+   var result = {};
+   for (var i = 0; i < this.invoiceheader.length; i++) {
+     result[this.invoiceheader[i].header] = this.invoiceheader[i].field;
+   }   
+      cars[this.invoiceValues.indexOf(this.selectedCar)] = result;
 
-   this.cars = cars;
-   this.car = null;
+   this.invoiceValues = cars;
+   console.log("NEW INVOICES UPADEAE" , this.invoiceValues);
+   result= null;
+   this.invoiceheader = null;
    this.displayDialog = false;
  }
  delete() {
-   let index = this.cars.indexOf(this.selectedCar);
-  this.cars = this.cars.filter((val, i) => i != index);
-  this.car = null;
+   let index = this.invoiceValues.indexOf(this.selectedCar);
+  this.invoiceValues = this.invoiceValues.filter((val, i) => i != index);
+  this.invoiceheader = null;
    this.displayDialog = false;
  }
-
+ cloneCar(c: any): any {
+  let car = {};
+  for (let prop in c) {
+      car[prop] = c[prop];
+  }
+  return car;
+}
 
 
 }
