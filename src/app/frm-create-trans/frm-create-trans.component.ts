@@ -26,7 +26,7 @@ export class FrmCreateTransComponent implements OnInit {
   accounts: Object[] = [];
   templates: Object[] = [];
   rawData :any[] = []
-  public form: FormGroup;
+  public invForm = new FormGroup({});
   unsubcribe: any;
   displayDialog: boolean;
 
@@ -84,12 +84,7 @@ this.templates  = [
  
 ];
   }
-  get f() {
-    return this.dynamicForm.controls;
-  }
-  get t() {
-    return this.f.tickets as FormArray;
-  }
+ 
   getTemplates(ev) {
     var RequestType = "";
     
@@ -101,7 +96,11 @@ this.templates  = [
         console.log(this.fields , "fafafa");
          this.transactionArr = this.fields.filter(v => v.MasterDetail == 'O')
          this.invoiceArr = this.fields.filter(v => v.MasterDetail == 'I')
-        
+         if(this.invoiceArr.length > 0)
+         {
+           this.createInvoice();
+
+         }
         
         this.isValid = true;
       });
@@ -109,9 +108,23 @@ this.templates  = [
   recivemsg(obj){
    
     
-    this.invoiceData.push(obj);
-    console.log(this.invoiceData,"Invoice saved data");
-    this.getuserdata(this.invoiceData);
+    // this.invoiceData.push(obj);
+    // console.log(this.invoiceData,"Invoice saved data");
+    // this.getuserdata(this.invoiceData);
+}
+addInvData()
+{
+  this.invoiceData.push(this.invForm.getRawValue());
+  console.log("INVOICE DATA" , this.invoiceData);
+  
+ this.getuserdata(this.invoiceData);
+ this.invForm.reset()
+}
+createInvoice()
+{
+  this.invoiceArr.forEach(x => {
+    this.invForm.addControl(x.ColumnName, new FormControl(x.DefaultValue,Validators.required));
+  });
 }
 getFields() {
   return this.transactionArr;

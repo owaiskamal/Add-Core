@@ -8,7 +8,7 @@
     </div> -->
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
         <label style="font-weight: 700;" for="producttitle">Product title</label>
-        <p-dropdown [options]="products" [(ngModel)]="selectedProduct" (onChange)="OnProductChange($event)" placeholder="Select a Product" optionLabel="ProName" [showClear]="true"></p-dropdown>
+        <p-dropdown autofocus="true" [options]="products" [(ngModel)]="selectedProduct" (onChange)="OnProductChange($event)" placeholder="Select a Product" optionLabel="ProName" [showClear]="true"></p-dropdown>
        <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
     </div>
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
@@ -52,35 +52,22 @@
             (savedata)=recivemsg($event)
               [fields]="invoiceArr"
             ></dynamic-form-builder> -->
-            <form [formGroup]="dynamicForm">
-         
-                  <div *ngFor="let ticket of t.controls; let i = index">
-                    <div [formGroup]="ticket">
-                      <div>
-                         <!--  <label for="firstname1">{{ temp[i].id }}</label> -->
-                          <input
-                            pInput
-                            type="text"
-                            placeholder="Name"
-                            formControlName="name"
-                            class="form-control"
-                          />
-                       
-                      </div>
+            <form [formGroup]="invForm">
+                <div class="ui-g ui-fluid">
+                <div *ngFor="let f of invoiceArr" class="ui-md-6 ui-sm-12">
+                <label>{{f.ColumnLabel}}</label>
+                    <div [ngSwitch]= "f.DataType">
+                    <input *ngSwitchCase="'T'" pInputText [formControlName]="f.ColumnName" [placeholder]= "f.ColumnLabel">
+                    <p-inputNumber *ngSwitchCase="'N'" style="font-weight:500;"  [name]="f?.ColumnName" [formControlName]="f?.ColumnName" [placeholder]= "f.ColumnLabel"></p-inputNumber>
+                    <p-inputNumber *ngSwitchCase="'C'" style="font-weight:500;" [formControlName]="f.ColumnName"  mode="currency" currency="PKR" locale="en-IN"></p-inputNumber>
+                    <p-calendar *ngSwitchCase="'D'" [formControlName]="f?.ColumnName"></p-calendar>
+                </div>
+                </div>
+                <div class="ui-md-2">
+                    <button type="submit" (click)= "addInvData()" pButton  label="Add"></button>
                     </div>
-                  </div>
-               <!--    <button
-                    style="margin-left: 800px;"
-                    mat-button
-                    color="primary"
-                    type="submit"
-                    (click)="onSubmit(dynamicForm.getRawValue())"
-                    [disabled]="authService.isLoggedIn == false"
-                  >
-                    <span class="fa fa-save"></span> Save
-                  </button> -->
-               
-              </form>
+            </div>
+            </form>
             <p-table *ngIf="invoiceData.length > 0" [columns]="cols" [value]="invoiceValues" selectionMode="single" [(selection)]="selectedCar"  [paginator]="true" [rows]="15">
               <ng-template pTemplate="caption">
                   List of Cars
