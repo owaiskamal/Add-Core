@@ -8,7 +8,7 @@
     </div> -->
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
         <label style="font-weight: 700;" for="producttitle">Product title</label>
-        <p-dropdown autofocus="true" [options]="products" [(ngModel)]="selectedProduct" (onChange)="OnProductChange($event)" placeholder="Select a Product" optionLabel="ProName" [showClear]="true"></p-dropdown>
+        <p-dropdown [autofocus]="true" #myDropdown [options]="products" [(ngModel)]="selectedProduct" (onChange)="OnProductChange($event)" placeholder="Select a Product" optionLabel="ProName" [showClear]="true"></p-dropdown>
        <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
     </div>
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
@@ -61,14 +61,19 @@
                     <p-inputNumber *ngSwitchCase="'N'" style="font-weight:500;"  [name]="f?.ColumnName" [formControlName]="f?.ColumnName" [placeholder]= "f.ColumnLabel"></p-inputNumber>
                     <p-inputNumber *ngSwitchCase="'C'" style="font-weight:500;" [formControlName]="f.ColumnName"  mode="currency" currency="PKR" locale="en-IN"></p-inputNumber>
                     <p-calendar *ngSwitchCase="'D'" [formControlName]="f?.ColumnName"></p-calendar>
-                </div>
-                </div>
-                <div class="ui-md-2">
-                    <button type="submit" (click)= "addInvData()" pButton  label="Add"></button>
                     </div>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-lg-6 ui-md-12 ui-sm-12">
+                <button type="submit" icon="pi pi-plus" (click)= "addInvData()" pButton  label="Add"></button>
+               </div>
+               <div class="ui-lg-6 ui-md-12 ui-sm-12">
+                <button type="button" pButton icon="pi pi-times" (click)="deleteInvData()" label="Delete All"></button>
+               </div>
             </div>
             </form>
-            <p-table *ngIf="invoiceData.length > 0" [columns]="cols" [value]="invoiceValues" selectionMode="single" [(selection)]="selectedCar"  [paginator]="true" [rows]="15">
+            <p-table (onRowSelect)="showDialogToAdd($event)" *ngIf="invoiceData.length > 0" [columns]="cols" [value]="invoiceValues" selectionMode="single" [(selection)]="selectedCar"  [paginator]="true" [rows]="15">
               <ng-template pTemplate="caption">
                   List of Cars
               </ng-template>
@@ -94,15 +99,15 @@
               </ng-template>    
           </p-table>
           
-         <!--  <p-dialog header="Car Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
-              <div class="p-grid ui-fluid" *ngIf="car">
-                  <div class="p-col-4">
-                      <label for="vin">Vin</label>
+        <p-dialog header="Form Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+              <div class="p-grid ui-fluid" *ngFor="let col of cols">
+                  <div class="p-col-4" >
+                      <label>{{col.header}}</label>
                   </div>
                   <div class="p-col-8">
-                      <input pInputText id="vin" [(ngModel)]="car.vin" autofocus />
+                      <input pInputText [(ngModel)]="col.field" />
                   </div>
-                  <div class="p-col-4">
+                <!--   <div class="p-col-4">
                       <label for="year">Year</label>
                   </div>
                   <div class="p-col-8">
@@ -119,7 +124,7 @@
                   </div>
                   <div class="p-col-8">
                       <input pInputText id="color" [(ngModel)]="car.color" />
-                  </div>
+                  </div> -->
               </div> 
               <p-footer>
                   <div class="ui-dialog-buttonpane ui-helper-clearfix">
@@ -127,7 +132,7 @@
                       <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
                   </div>
               </p-footer>
-           </p-dialog> -->
+           </p-dialog> 
           </p-tabPanel>
           </p-tabView>
           </div>

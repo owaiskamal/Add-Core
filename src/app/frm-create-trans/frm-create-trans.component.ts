@@ -1,5 +1,6 @@
+import { FrmlistComponent } from './../setup/frmlist/frmlist.component';
 import { CreateTransService } from './../create-trans.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, enableProdMode, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { MessageService } from "primeng/api";
@@ -10,12 +11,13 @@ import {
   Validators,
   FormControl,
 } from "@angular/forms";
+import { Dropdown } from 'primeng/dropdown';
 @Component({
   selector: 'app-frm-create-trans',
   templateUrl: './frm-create-trans.component.html',
   styleUrls: ['./frm-create-trans.component.scss']
 })
-export class FrmCreateTransComponent implements OnInit {
+export class FrmCreateTransComponent implements OnInit,OnChanges{
   formID: any;
   AccessToken: string;
   UserID: string;
@@ -52,6 +54,7 @@ export class FrmCreateTransComponent implements OnInit {
   invoiceValues: any[] = [];
   totalrecords: number;
   dynamicForm: FormGroup;
+  dialogData: any[] = [];
   constructor(private _route : ActivatedRoute , 
     private transService : CreateTransService,
     private messageService: MessageService,
@@ -61,6 +64,7 @@ export class FrmCreateTransComponent implements OnInit {
       
    }
    public fields = [];
+   @ViewChild("myDropdown") myDropdown: Dropdown;
   ngOnInit(): void {
     this._route.params.subscribe(params => {
       this.formID = params['id']
@@ -68,12 +72,10 @@ export class FrmCreateTransComponent implements OnInit {
       this.UserID = sessionStorage.getItem('username');
       this.AccessToken = sessionStorage.getItem('token');
       this.getTransCreation();
-     
-      this.dynamicForm = this.formBuilder.group({
-        tickets: new FormArray([]),
-      });
+      
+      
   });
- 
+  
   this.products  = [
     
 ];
@@ -83,8 +85,14 @@ this.accounts  = [
 this.templates  = [
  
 ];
+
   }
- 
+  ngAfterViewInit() {
+    this.myDropdown.applyFocus();
+  }
+  ngOnChanges(){
+    
+  }
   getTemplates(ev) {
     var RequestType = "";
     
@@ -119,6 +127,9 @@ addInvData()
   
  this.getuserdata(this.invoiceData);
  this.invForm.reset()
+}
+deleteInvData(){
+  this.invoiceData = []
 }
 createInvoice()
 {
@@ -194,11 +205,28 @@ OnProductChange($event){
   getAccounts(){
    
   }
-   showDialogToAdd() {
+   showDialogToAdd(e) {
      this.newCar = true;
      this.car = {};
      this.displayDialog = true;
+     console.log(e);
+     console.log(this.invoiceValues,"fields data")
+     console.log(e.data.keys,"keys")
+     this.convert(e.data, e.data.keys);
  }
+  convert(object, keys) {
+  Object.keys(object).forEach(function (k) {
+      if (object[k] && typeof object[k] === 'object') {
+          this.convert(object[k], keys);
+      }
+      if (keys.indexOf(k) !== -1 && !Array.isArray(object[k])) {
+          object[k] = [object[k]];
+      }
+  });
+  console.log(object,"Converted object");
+  
+}
+
  save() {
    let cars = [...this.cars];
   if (this.newCar)
