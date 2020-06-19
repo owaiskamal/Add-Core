@@ -41,6 +41,7 @@ import { FrmlistComponent } from './setup/frmlist/frmlist.component';
 import { FrmCreateTransComponent } from './frm-create-trans/frm-create-trans.component';
 import {CalendarModule} from 'primeng/calendar';
 import {TabViewModule} from 'primeng/tabview';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import {TabViewModule} from 'primeng/tabview';
     ConfirmDialogModule,
     PushNotificationsModule,
     CalendarModule,
-    TabViewModule
+    TabViewModule,
+    InputNumberModule
   ],
   providers: [
     MessageService,
