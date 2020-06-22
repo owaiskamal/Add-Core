@@ -56,6 +56,7 @@ export class FrmCreateTransComponent implements OnInit,OnChanges{
   dynamicForm: FormGroup;
   dialogData: any[] = [];
   invoiceheader: any[] = [];
+ 
   constructor(private _route : ActivatedRoute , 
     private transService : CreateTransService,
     private messageService: MessageService,
@@ -240,6 +241,22 @@ OnProductChange($event){
    result= null;
    this.invoiceheader = null;
    this.displayDialog = false;
+ }
+ submitMaster(){
+  /*  console.log(this.selectedProduct,"selectedProduct");
+   console.log(this.selectedAccount,"selectedAccount");
+   console.log(this.selectedTemplate,"selectedTemplate"); */
+   let masterObj = {
+     ProCode: this.selectedProduct['ProCode'],
+     ProductName: this.selectedProduct['ProName'],
+     Behaviour: this.selectedProduct['ProName'],
+     DRAccountNo: this.selectedAccount['AC'],
+     DRAccTitle: this.selectedAccount['AcTitel'],
+     ConfigID: this.selectedTemplate['ConfCode'],
+     ConfigDesc: this.selectedTemplate['ConfName']
+   }
+   console.log(masterObj,"Master Object")
+   
  }
  delete() {
    let index = this.invoiceValues.indexOf(this.selectedCar);

@@ -45,6 +45,7 @@
             (savedata)=recivemsg($event)
               [fields]="getFields()"
             ></dynamic-form-builder>
+            <button type="submit" pButton icon="pi pi-check" (click)="submitMaster()" label="Submit"></button>
           </p-tabPanel>
           <p-tabPanel style="margin-left: 10%;" header = "Invoice" *ngIf="invoiceArr.length > 0">
            <!--  <dynamic-form-builder
@@ -73,9 +74,10 @@
                </div>
             </div>
             </form>
+           
             <p-table (onRowSelect)="showDialogToAdd($event)" *ngIf="invoiceData.length > 0" [columns]="cols" [value]="invoiceValues" selectionMode="single" [(selection)]="selectedCar"  [paginator]="true" [rows]="15">
               <ng-template pTemplate="caption">
-                  List of Cars
+                 Invoice Details
               </ng-template>
               <ng-template pTemplate="header" let-columns>
                   <tr>
@@ -129,7 +131,7 @@
               <p-footer>
                   <div class="ui-dialog-buttonpane ui-helper-clearfix">
                       <button type="button" pButton icon="pi pi-times" (click)="delete()" label="Delete"></button>
-                      <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
+                      <button type="button" pButton icon="pi pi-check" (click)="save()" label="Update"></button>
                   </div>
               </p-footer>
            </p-dialog> 
