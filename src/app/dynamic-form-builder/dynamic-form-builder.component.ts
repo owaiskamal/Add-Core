@@ -14,9 +14,9 @@ import { Subject } from 'rxjs';
 
       </div>
    </div>
-   <div class="ui-md-2">
+   <!-- <div class="ui-md-2">
    <button type="submit" (click)= "saveData()" pButton  label="Save"></button>
-   </div>
+   </div> -->
     </form>
 
   `,
@@ -74,13 +74,7 @@ export class DynamicFormBuilderComponent implements OnInit , OnChanges {
  }
  saveData(){
    this.savedata.emit(this.form.getRawValue());
-   console.log("loggg" , this.form.getRawValue());
-   for (let f of this.fields) {
-     if(f.masterDetail == 'I')
-     {
-
-     }
-   }
+   //console.log("loggg" , this.form.getRawValue());
     this.form.reset();
 
  }

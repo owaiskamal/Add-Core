@@ -58,10 +58,10 @@
                 <div *ngFor="let f of invoiceArr" class="ui-md-6 ui-sm-12">
                 <label style="font-weight : 700 ;">{{f.ColumnLabel}}</label>
                     <div [ngSwitch]= "f.DataType">
-                    <input *ngSwitchCase="'T'" pInputText [formControlName]="f.ColumnName" [placeholder]= "f.ColumnLabel">
+                    <input *ngSwitchCase="'T'" pInputText [formControlName]="f.ColumnName " [placeholder]= "f.ColumnLabel">
                     <p-inputNumber *ngSwitchCase="'N'" style="font-weight:500;"  [name]="f?.ColumnName" [formControlName]="f?.ColumnName" [placeholder]= "f.ColumnLabel"></p-inputNumber>
                     <p-inputNumber *ngSwitchCase="'C'" style="font-weight:500;" [formControlName]="f.ColumnName"  mode="currency" currency="PKR" locale="en-IN"></p-inputNumber>
-                    <p-calendar *ngSwitchCase="'D'" dateFormat="dd.mm.yy" [formControlName]="f?.ColumnName"></p-calendar>
+                    <p-calendar *ngSwitchCase="'D'" dateFormat="dd.mm.yy" (onSelect)="changeFormat($event)"  [formControlName]="f?.ColumnName"></p-calendar>
                     </div>
                 </div>
             </div>

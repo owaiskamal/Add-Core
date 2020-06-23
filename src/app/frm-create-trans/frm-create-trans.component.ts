@@ -12,6 +12,9 @@ import {
   FormControl,
 } from "@angular/forms";
 import { Dropdown } from 'primeng/dropdown';
+import { DynamicFormBuilderComponent } from '../dynamic-form-builder/dynamic-form-builder.component';
+import { DatePipe } from '@angular/common';
+import { merge } from 'rxjs';
 @Component({
   selector: 'app-frm-create-trans',
   templateUrl: './frm-create-trans.component.html',
@@ -33,7 +36,7 @@ export class FrmCreateTransComponent implements OnInit,OnChanges{
   displayDialog: boolean;
 
   car: any = {};
-
+  valueDate :any = {};
   selectedCar: any;
 
   newCar: boolean;
@@ -56,6 +59,7 @@ export class FrmCreateTransComponent implements OnInit,OnChanges{
   dynamicForm: FormGroup;
   dialogData: any[] = [];
   invoiceheader: any[] = [];
+  transactionData : any[] = []
  
   constructor(private _route : ActivatedRoute , 
     private transService : CreateTransService,
@@ -67,6 +71,7 @@ export class FrmCreateTransComponent implements OnInit,OnChanges{
    }
    public fields = [];
    @ViewChild("myDropdown") myDropdown: Dropdown;
+   @ViewChild(DynamicFormBuilderComponent) child : DynamicFormBuilderComponent;
   ngOnInit(): void {
     this._route.params.subscribe(params => {
       this.formID = params['id']
@@ -117,6 +122,7 @@ this.templates  = [
   }
   recivemsg(obj){
    
+   this.transactionData = obj;
     
     // this.invoiceData.push(obj);
     // console.log(this.invoiceData,"Invoice saved data");
@@ -125,6 +131,19 @@ this.templates  = [
 addInvData()
 {
   this.invoiceData.push(this.invForm.getRawValue());
+ console.log( this.invForm.get("DOCDT").value);
+// Object.assign(this.invoiceData[this.invoiceData.findIndex(el => el === this.valueDate)], this.valueDate)
+if(this.valueDate != null)
+{
+  for( let i = this.invoiceData.length ; i>this.invoiceData.length-1 ; i--)
+  {
+   // console.log(merge(this.invoiceData[i] , this.valueDate));
+   let foo = Object.assign(this.invoiceData[i-1] , this.valueDate)
+    console.log(foo , 'updated data');
+    
+  }  
+}
+
   console.log("INVOICE DATA" , this.invoiceData);
   
  this.getuserdata(this.invoiceData);
@@ -147,6 +166,34 @@ getFields() {
   return this.invoiceArr;
 } */
 
+changeFormat(e)
+{
+  console.log(e , "new DATE");
+  
+  const pipe = new DatePipe('en-US')
+  const date = pipe.transform(e , 'shortDate')
+  console.log(date , " format");
+ // this.valueDate = date;
+  this.invoiceArr.forEach(user => {
+    if(user.DataType == "D")
+    {
+     const name = user.ColumnName;
+    // console.log(nDate , "coloumn Name");
+     
+   this.valueDate = {
+     [name] : date
+   }
+
+   console.log(this.valueDate , "new DATA");
+   
+      // this.invForm.patchValue({
+      //   [user.ColumnName]:this.valueDate});
+
+    }
+   
+})
+
+}
 getuserdata(invoiceDataparam) {
 
  console.log(invoiceDataparam,"invoice daat param");
@@ -243,10 +290,13 @@ OnProductChange($event){
    this.displayDialog = false;
  }
  submitMaster(){
+  this.child.saveData();
   /*  console.log(this.selectedProduct,"selectedProduct");
    console.log(this.selectedAccount,"selectedAccount");
    console.log(this.selectedTemplate,"selectedTemplate"); */
-   let masterObj = {
+   let masterObj =
+    {
+      master : {
      ProCode: this.selectedProduct['ProCode'],
      ProductName: this.selectedProduct['ProName'],
      Behaviour: this.selectedProduct['ProName'],
@@ -254,9 +304,20 @@ OnProductChange($event){
      DRAccTitle: this.selectedAccount['AcTitel'],
      ConfigID: this.selectedTemplate['ConfCode'],
      ConfigDesc: this.selectedTemplate['ConfName']
-   }
-   console.log(masterObj,"Master Object")
+   },
+
+   transactions : this.transactionData,
+   invdata : this.invoiceValues
+  }
    
+  
+    console.log(masterObj);
+
+    this.transService.postMasterTransaction(masterObj).subscribe(res =>{
+      console.log(res);
+      
+    })
+    
  }
  delete() {
    let index = this.invoiceValues.indexOf(this.selectedCar);

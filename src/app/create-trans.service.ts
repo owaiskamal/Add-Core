@@ -40,4 +40,9 @@ export class CreateTransService {
     //console.log("obj" , obj)
    return this.http.post(environment.txnFields , obj )    
   }
+
+  postMasterTransaction(masterobj): Observable<Object>
+  {
+    return this.http.post(environment.test + "detail" , masterobj);
+  }
 }
