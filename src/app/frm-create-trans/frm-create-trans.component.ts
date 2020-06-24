@@ -6,7 +6,7 @@ import {
   ViewChild,
   OnChanges,
   ChangeDetectorRef,
-  AfterViewInit
+  AfterViewInit,
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
@@ -25,9 +25,9 @@ import { DatePipe } from "@angular/common";
   selector: "app-frm-create-trans",
   templateUrl: "./frm-create-trans.component.html",
   styleUrls: ["./frm-create-trans.component.scss"],
-  
 })
-export class FrmCreateTransComponent implements OnInit, OnChanges , AfterViewInit {
+export class FrmCreateTransComponent
+  implements OnInit, OnChanges, AfterViewInit {
   formID: any;
   AccessToken: string;
   UserID: string;
@@ -51,7 +51,7 @@ export class FrmCreateTransComponent implements OnInit, OnChanges , AfterViewIni
   cars: any[] = [];
 
   cols: any[] = [];
-  product : true;
+  product: true;
   /* types: type[]; */
   /*   selectedType: type; */
   isValid: boolean = false;
@@ -67,9 +67,10 @@ export class FrmCreateTransComponent implements OnInit, OnChanges , AfterViewIni
   dialogData: any[] = [];
   invoiceheader: any[] = [];
   transactionData: any[] = [];
-  dynform : boolean = true;
+  dynform: boolean = true;
 
-  constructor(private cdref: ChangeDetectorRef,
+  constructor(
+    private cdref: ChangeDetectorRef,
     private _route: ActivatedRoute,
     private transService: CreateTransService,
     private messageService: MessageService,
@@ -79,7 +80,7 @@ export class FrmCreateTransComponent implements OnInit, OnChanges , AfterViewIni
     this.accounts = [];
     this.templates = [];
   }
-  
+
   public fields = [];
   @ViewChild("myDropdown") myDropdown: Dropdown;
   @ViewChild(DynamicFormBuilderComponent) child: DynamicFormBuilderComponent;
@@ -91,18 +92,14 @@ export class FrmCreateTransComponent implements OnInit, OnChanges , AfterViewIni
       this.AccessToken = sessionStorage.getItem("token");
       this.getTransCreation();
     });
-    
-
-   
   }
-  
+
   ngAfterViewInit() {
-  //  this.cdref.detectChanges();
-  setTimeout(() => {
-    this.myDropdown.focus();
-  }, 1);  
- 
-       }
+    //  this.cdref.detectChanges();
+    setTimeout(() => {
+      this.myDropdown.focus();
+    }, 1);
+  }
 
   ngOnChanges() {}
   getTemplates(ev) {
@@ -130,12 +127,10 @@ export class FrmCreateTransComponent implements OnInit, OnChanges , AfterViewIni
 
         this.isValid = true;
         setTimeout(() => {
-          if(!this.child.form.valid)
-          {
+          if (!this.child.form.valid) {
             this.dynform = false;
-          }  
+          }
         }, 1);
-        
       });
   }
   recivemsg(obj) {

@@ -6,7 +6,13 @@ import {
   EventEmitter,
   OnChanges,
 } from "@angular/core";
-import { FormGroup, FormControl, Validators, ControlContainer, FormGroupDirective } from "@angular/forms";
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ControlContainer,
+  FormGroupDirective,
+} from "@angular/forms";
 import { Subject } from "rxjs";
 
 @Component({
@@ -23,7 +29,9 @@ import { Subject } from "rxjs";
    </div> -->
     </form>
   `,
-  viewProviders: [ { provide: ControlContainer, useExisting: FormGroupDirective }]
+  viewProviders: [
+    { provide: ControlContainer, useExisting: FormGroupDirective },
+  ],
 })
 export class DynamicFormBuilderComponent implements OnInit, OnChanges {
   @Output() onSubmit = new EventEmitter();

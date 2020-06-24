@@ -1,54 +1,52 @@
 @import "src/theme.scss";
 /* sidenav */
 .sidenav {
-    height: 100%;
-    width: 270px;
-    position: absolute;
-    z-index: 1;
-    right: auto;
-    left: -277px;
-    background: $sidenav-background;
-    font-family: 'Work Sans', sans-serif;
-    background-size: cover;
-    background-position: top;
-    //overflow-x: hidden;
-    padding-top: 20px;
+  height: 100%;
+  width: 270px;
+  position: absolute;
+  z-index: 1;
+  right: auto;
+  left: -277px;
+  background: $sidenav-background;
+  font-family: "Work Sans", sans-serif;
+  background-size: cover;
+  background-position: top;
+  //overflow-x: hidden;
+  padding-top: 20px;
 
-    transition: 0.5s;
+  transition: 0.5s;
 
-   overflow-y: auto;
-   scrollbar-width: thin;
-   box-shadow:  8px 0px 5px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  box-shadow: 8px 0px 5px rgba(0, 0, 0, 0.5);
+}
+.navbaricon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 10px;
+  vertical-align: middle;
+  content: "";
+  background: no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-bar {
+  width: 22px;
+  height: 4px;
+  background: rgb(143, 143, 143);
+  margin: 2px;
+  position: relative;
+}
+.mat-list {
+  padding: 10px 0px 0px 16px;
+  text-decoration: none;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
 
-  }
-  .navbaricon
-  {
-    display: inline-block;
-    width: 1.5em;
-    height: 1.5em;
-    margin-right: 10px;
-    vertical-align: middle;
-    content: "";
-    background: no-repeat center center;
-    background-size: 100% 100%;
-  }
-  .icon-bar {
-    width: 22px;
-    height: 4px;
-    background: rgb(143, 143, 143);
-    margin: 2px;
-    position: relative;
-  }
-  .mat-list{
-        padding: 10px 0px 0px 16px;
-         text-decoration: none;
-         justify-content: center;
-         color: white;
-         font-weight: 700;
-
-        display: flex;
-        justify-content:inherit;
-  }
+  display: flex;
+  justify-content: inherit;
+}
 //   a {
 //     padding: 6px 8px 6px 16px;
 //     text-decoration: none;
@@ -70,74 +68,64 @@
 //  }
 // }
 
-  .sidenav::-webkit-scrollbar {
-    width: 8px;
-    }
-    // background:
-    // linear-gradient(-180deg ,rgba(165, 190, 105, 0.404), rgb(73, 104, 2)),
-    // url("src/assets/images/sidenav_bg.jpg") no-repeat;
-    .sidenav::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    box-shadow:  inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    }
+.sidenav::-webkit-scrollbar {
+  width: 8px;
+}
+// background:
+// linear-gradient(-180deg ,rgba(165, 190, 105, 0.404), rgb(73, 104, 2)),
+// url("src/assets/images/sidenav_bg.jpg") no-repeat;
+.sidenav::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
 
-  /* sidenav */
+/* sidenav */
 
+.nav-item {
+  margin: auto;
+}
 
-  .nav-item {
-    margin: auto;
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  // font-size: 28px; /* Increased text to enable scrolling */
+  //padding: 0px 10px;
+}
+
+.btn_side {
+  display: none;
+}
+
+.navbar-brand {
+  color: #00458a;
+}
+
+// @media screen and (max-height: 450px) {
+//   .sidenav {padding-top: 15px;}
+//   .sidenav a {font-size: 18px;}
+// }
+@media (max-width: 768px) {
+  .btn_side {
+    display: inline;
   }
 
-
-
-  .main {
-    margin-left: 200px; /* Same as the width of the sidenav */
-   // font-size: 28px; /* Increased text to enable scrolling */
-    //padding: 0px 10px;
-
-  }
-
- .btn_side
- {
-   display: none;
- }
-
- .navbar-brand{
-   color: #00458a;
- }
-
-
-  // @media screen and (max-height: 450px) {
-  //   .sidenav {padding-top: 15px;}
-  //   .sidenav a {font-size: 18px;}
+  // .sidebar{
+  //   display: none;
   // }
-  @media (max-width: 768px) {
-      .btn_side {
-          display: inline;
-      }
-
-      // .sidebar{
-      //   display: none;
-      // }
-
 }
 
-.fixed-top
-{
-  box-shadow: 0px 1px 17px rgba(0,0,0,0.5);
+.fixed-top {
+  box-shadow: 0px 1px 17px rgba(0, 0, 0, 0.5);
 }
 
-.pi-ellipsis-v{
-
- color:#00458a;
+.pi-ellipsis-v {
+  color: #00458a;
 }
-.dropdown-item:hover{
+.dropdown-item:hover {
   background-color: #00458a;
   color: white;
   opacity: 0.9;
 }
 /* footer */
-
 
 // /* footer */linear-gradient(rgba(146, 190, 43, 0.726)),

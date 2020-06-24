@@ -1,27 +1,32 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input } from "@angular/core";
+import { FormGroup } from "@angular/forms";
 import { MessageService } from "primeng/api";
 
-// text,email,tel,textarea,password, 
+// text,email,tel,textarea,password,
 @Component({
-    selector: 'file',
-    template: `
-      <div [formGroup]="form">
-       
-            
-      <p-fileUpload *ngIf="!field.value" name="demo[]" customUpload="true" (uploadHandler)="field.onUpload($event)" 
-        multiple="multiple" accept="image/*" maxFileSize="1000000">
-    <ng-template pTemplate="content">
-        <ul *ngIf="uploadedFiles.length">
-            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-        </ul>
-    </ng-template>
-</p-fileUpload>
-</div>
-
-
-    `,
-   /*  styles:[
+  selector: "file",
+  template: `
+    <div [formGroup]="form">
+      <p-fileUpload
+        *ngIf="!field.value"
+        name="demo[]"
+        customUpload="true"
+        (uploadHandler)="field.onUpload($event)"
+        multiple="multiple"
+        accept="image/*"
+        maxFileSize="1000000"
+      >
+        <ng-template pTemplate="content">
+          <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">
+              {{ file.name }} - {{ file.size }} bytes
+            </li>
+          </ul>
+        </ng-template>
+      </p-fileUpload>
+    </div>
+  `,
+  /*  styles:[
       
       .drop-container {
         background: #fff;
@@ -69,25 +74,21 @@ import { MessageService } from "primeng/api";
     ] */
 })
 export class FileComponent {
-    @Input() field:any = {};
-    @Input() form:FormGroup;
-    get isValid() { return this.form.controls[this.field.name].valid; }
-    get isDirty() { return this.form.controls[this.field.name].dirty; }
-    isHovering: boolean;
-    uploadedFiles: any[] = [];
-    constructor(private messageService: MessageService) {
+  @Input() field: any = {};
+  @Input() form: FormGroup;
+  get isValid() {
+    return this.form.controls[this.field.name].valid;
+  }
+  get isDirty() {
+    return this.form.controls[this.field.name].dirty;
+  }
+  isHovering: boolean;
+  uploadedFiles: any[] = [];
+  constructor(private messageService: MessageService) {}
 
-    }
-    
-
-     
-  
-    toggleHover($event)
-    {
-      
-    }
-    ngOnChange(){
-      console.log(this.field.value);
-      // this.field.value.
-    }
+  toggleHover($event) {}
+  ngOnChange() {
+    console.log(this.field.value);
+    // this.field.value.
+  }
 }
