@@ -8,7 +8,6 @@
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
       <label style="font-weight: 700;" for="producttitle">Product title</label>
       <p-dropdown
-        [autofocus]="true"
         #myDropdown
         [options]="products"
         [(ngModel)]="selectedProduct"
@@ -17,6 +16,7 @@
         optionLabel="ProName"
         [showClear]="true"
       ></p-dropdown>
+
       <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
     </div>
     <div class="ui-md-6 ui-lg-6 ui-sm-12">
@@ -228,7 +228,7 @@
           [disabled]="
             !invForm.valid ||
             invForm.value.touched == false ||
-            !child.form.valid
+            !this.child?.form.valid
           "
           type="submit"
           pButton
