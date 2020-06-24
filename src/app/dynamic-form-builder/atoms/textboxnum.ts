@@ -8,13 +8,12 @@ import { FormGroup } from '@angular/forms';
     template: `
       <div class="p-fluid p-formgrid p-grid" [formGroup]="form">
 
-      <div  class="p-field p-col">
-        <p-inputNumber class="p-field p-col" *ngIf="field.DataType == 'N'" style="font-weight:500;"  [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel"></p-inputNumber>
-        </div>
-        <p-inputNumber *ngIf="field.DataType == 'C'" style="font-weight:500;" [formControlName]="field.ColumnName"  mode="currency" currency="PKR" locale="en-IN"></p-inputNumber>
-     <div  class="p-field p-col">
-        <button  pButton *ngIf="field.ISBTNVERIFY == 'Y'"(click)= "onSaveData($event)"  style="font-weight:900;" type="button" label="verify" class="ui-button-rounded  ui-button-warning"></button>
-</div>
+      <div  class="ui-inputgroup p-md-6">
+        <p-inputNumber class="p-field p-col" *ngIf="field.DataType == 'N'" style="font-weight:500;width : 100%"  [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel"></p-inputNumber>
+        <button  pButton *ngIf="field.ISBTNVERIFY == 'Y'"(click)= "onSaveData($event)"  style="font-weight:900;" type="button" label="verify" class="  ui-button-warning"></button> 
+      </div>
+        <p-inputNumber *ngIf="field.DataType == 'C'" style="font-weight:500;width : 100%" [formControlName]="field.ColumnName"  mode="currency" currency="PKR" locale="en-IN"></p-inputNumber>
+   
         <!-- <textarea *ngIf="field.multiline"  [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
          class="form-control" [placeholder]="field.placeholder"></textarea> -->
          <!-- <input class="form-control"  [id]="field?.name" [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel"> -->

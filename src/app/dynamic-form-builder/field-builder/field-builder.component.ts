@@ -34,7 +34,7 @@ import { Subject } from 'rxjs';
         <file *ngSwitchCase="'file'" [field]="field" [form]="form"></file>
         <div
           class="alert alert-danger my-1 p-2 fadeInDown animated"
-          *ngIf="!isValid && isDirty"
+          *ngIf="!isValid && isDirty && field.Mandatory == 'Y'"
         >
           {{ field.ColumnLabel }} is required
         </div>
