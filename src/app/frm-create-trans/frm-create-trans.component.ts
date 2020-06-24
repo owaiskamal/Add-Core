@@ -4,11 +4,9 @@ import {
   Component,
   OnInit,
   ViewChild,
-  ElementRef,
-  enableProdMode,
   OnChanges,
-  AfterContentChecked,
   ChangeDetectorRef,
+  AfterViewInit
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
@@ -16,21 +14,20 @@ import { MessageService } from "primeng/api";
 import {
   FormBuilder,
   FormGroup,
-  FormArray,
   Validators,
   FormControl,
 } from "@angular/forms";
 import { Dropdown } from "primeng/dropdown";
 import { DynamicFormBuilderComponent } from "../dynamic-form-builder/dynamic-form-builder.component";
 import { DatePipe } from "@angular/common";
-import { merge } from "rxjs";
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 @Component({
   selector: "app-frm-create-trans",
   templateUrl: "./frm-create-trans.component.html",
   styleUrls: ["./frm-create-trans.component.scss"],
+  
 })
-export class FrmCreateTransComponent implements OnInit, OnChanges , AfterContentChecked {
+export class FrmCreateTransComponent implements OnInit, OnChanges , AfterViewInit {
   formID: any;
   AccessToken: string;
   UserID: string;
@@ -54,7 +51,7 @@ export class FrmCreateTransComponent implements OnInit, OnChanges , AfterContent
   cars: any[] = [];
 
   cols: any[] = [];
-
+  product : true;
   /* types: type[]; */
   /*   selectedType: type; */
   isValid: boolean = false;
@@ -70,13 +67,19 @@ export class FrmCreateTransComponent implements OnInit, OnChanges , AfterContent
   dialogData: any[] = [];
   invoiceheader: any[] = [];
   transactionData: any[] = [];
+  dynform : boolean = true;
 
   constructor(private cdref: ChangeDetectorRef,
     private _route: ActivatedRoute,
     private transService: CreateTransService,
     private messageService: MessageService,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+    this.products = [];
+    this.accounts = [];
+    this.templates = [];
+  }
+  
   public fields = [];
   @ViewChild("myDropdown") myDropdown: Dropdown;
   @ViewChild(DynamicFormBuilderComponent) child: DynamicFormBuilderComponent;
@@ -88,20 +91,19 @@ export class FrmCreateTransComponent implements OnInit, OnChanges , AfterContent
       this.AccessToken = sessionStorage.getItem("token");
       this.getTransCreation();
     });
-
-    this.products = [];
-    this.accounts = [];
-    this.templates = [];
-  }
-  ngAfterViewInit() {
     
-  }
-  ngAfterContentChecked()
-  {
-      this.cdref.detectChanges();
-      this.myDropdown.applyFocus();
 
+   
   }
+  
+  ngAfterViewInit() {
+  //  this.cdref.detectChanges();
+  setTimeout(() => {
+    this.myDropdown.focus();
+  }, 1);  
+ 
+       }
+
   ngOnChanges() {}
   getTemplates(ev) {
     var RequestType = "";
@@ -127,6 +129,13 @@ export class FrmCreateTransComponent implements OnInit, OnChanges , AfterContent
         }
 
         this.isValid = true;
+        setTimeout(() => {
+          if(!this.child.form.valid)
+          {
+            this.dynform = false;
+          }  
+        }, 1);
+        
       });
   }
   recivemsg(obj) {
