@@ -28,10 +28,13 @@ import {trigger, animate, style, group, animateChild, query, stagger, transition
 export class AppLayoutComponent implements OnInit {
 
   constructor() { }
-
+   urlEmpty : boolean
   ngOnInit() {
   }
   getState(outlet) {
+    console.log(outlet.activatedRouteData);
+   
+    
     return outlet.activatedRouteData.state;
   }
 }

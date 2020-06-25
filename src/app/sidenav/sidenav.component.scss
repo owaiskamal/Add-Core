@@ -15,7 +15,11 @@
   }
 :host{
 .mat-list-item.active {
-   background-color: rgba($color: #616161, $alpha: 1);
+   background-color: #ffffff;
+   color: #3c4858;
+   opacity: 1;
+   box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(60,72,88,.4);
+ 
 
  }
  &:hover,
@@ -28,7 +32,14 @@
 }
 
 .active {
-   background-color: rgba($color: #919191ce, $alpha: 1);
+   color: #ffffff;
+   opacity: 1;
+   box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(60,72,88,.4);
+ }
+
+ .headactive
+ {
+   background-color: rgba($color: #555555ce, $alpha: 1);
 
  }
 
