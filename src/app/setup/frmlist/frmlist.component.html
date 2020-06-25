@@ -1,4 +1,9 @@
-<p-card>
+<p-card class="ui-card">
+  <p-header class="ui-card-header">
+    <div class="card-text">
+      {{ tableHeader }}
+  </div>
+</p-header>
   <p-table
     #dt
     [value]="userList"
@@ -14,7 +19,6 @@
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   >
     <ng-template pTemplate="caption">
-      <h3 style="font-weight: bold;">{{ tableHeader }}</h3>
       <div class="ui-g ui-sm-12 ui-md-8" style="text-align: right;">
         <i class="pi pi-search" style="margin: 4px 4px 0 0;"></i>
         <input

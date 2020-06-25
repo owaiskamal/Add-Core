@@ -9,8 +9,10 @@
 
 $font-primary: "Courier New", Courier, monospace;
 
-html , body {
+ body {
 
   height: 100%;
-
+  position: fixed;
+  width: 100%;
+  padding-bottom: 3%;
 }

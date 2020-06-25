@@ -189,3 +189,44 @@
         }
     }
 }
+
+:host ::ng-deep .ui-card{
+    border-radius: 6px;
+}
+.ui-card-header
+{
+    background-color: #1f89ce;
+    z-index: 3!important;
+}
+.ui-card [class*=ui-card-header-]
+{
+
+    margin: 0 15px;
+    padding: 0;
+    position: relative;
+}
+
+:host ::ng-deep .ui-card .ui-card-body
+{
+
+    padding-top: 4em;
+    padding-right: 2em;
+    padding-bottom: 2em;
+    padding-left: 2em;
+    
+}
+.card-text
+{
+    border-radius: 3px;
+    background-color: rgb(66, 66, 66);
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: medium;
+    padding: 15px;
+    margin-top: -20px;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-bottom: 1%;
+    float: left;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(39, 39, 39, 0.4)
+}

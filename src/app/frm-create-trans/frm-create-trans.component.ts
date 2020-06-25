@@ -298,7 +298,9 @@ export class FrmCreateTransComponent
     this.child.saveData();
     /*  console.log(this.selectedProduct,"selectedProduct");
    console.log(this.selectedAccount,"selectedAccount");
+
    console.log(this.selectedTemplate,"selectedTemplate"); */
+  
     let masterObj = {
       master: {
         ProCode: this.selectedProduct["ProCode"],

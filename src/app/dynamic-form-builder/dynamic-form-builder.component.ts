@@ -70,10 +70,19 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
     let fieldsCtrls = {};
     for (let f of this.fields) {
       // if (f.IsLookup == 'checkbox') {
+        if(f.Mandatory === 'Y')
+        {
       fieldsCtrls[f.ColumnName] = new FormControl(
         f.DefaultValue || "",
         Validators.required
       );
+        }
+        else{
+          fieldsCtrls[f.ColumnName] = new FormControl(
+            f.DefaultValue || ""
+          );
+
+        }
       console.log("data F ", f);
 
       // } else {

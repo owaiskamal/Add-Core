@@ -1,5 +1,9 @@
-<p-card>
-  <h3>Create Transaction</h3>
+<p-card class="ui-card">
+  <p-header class="ui-card-header">
+    <div class="card-text">
+    Create Transaction
+  </div>
+</p-header>
   <div class="ui-g ui-fluid">
     <!--  <div class="ui-md-6 ui-lg-6 col-md-6 ui-sm-12">
         <label for="companytitle">Company title</label>
@@ -116,6 +120,10 @@
                 <div class="ui-lg-6 ui-md-12 ui-sm-12">
                   <button
                     type="submit"
+                    [disabled]="
+                    !invForm.valid ||
+                    invForm.value.touched == false
+                  "
                     icon="pi pi-plus"
                     (click)="addInvData()"
                     pButton
@@ -140,6 +148,7 @@
               [columns]="cols"
               [value]="invoiceValues"
               selectionMode="single"
+              [responsive]= "true"
               [(selection)]="selectedCar"
               [paginator]="true"
               [rows]="15"
@@ -157,7 +166,9 @@
               </ng-template>
               <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr [pSelectableRow]="rowData">
+                  
                   <td *ngFor="let col of columns">
+                    <span class="ui-column-title">{{ col.header }}</span>
                     {{ rowData[col.field] }}
                   </td>
                 </tr>
@@ -227,8 +238,7 @@
         <button
           *ngIf="fields.length > 0"
           [disabled]="
-            !invForm.valid ||
-            invForm.value.touched == false ||
+          
             !this.child?.form.valid
           "
           type="submit"
