@@ -186,10 +186,17 @@ export class FrmCreateTransComponent
   }
   createInvoice() {
     this.invoiceArr.forEach((x) => {
+      if(x.Mandatory == 'Y')
       this.invForm.addControl(
         x.ColumnName,
         new FormControl(x.DefaultValue, Validators.required)
       );
+      else{
+        this.invForm.addControl(
+          x.ColumnName,
+          new FormControl(x.DefaultValue)
+        );
+      }
     });
   }
   getFields() {
@@ -349,6 +356,7 @@ export class FrmCreateTransComponent
     console.log(masterObj);
 
     this.transService.postMasterTransaction(masterObj).subscribe((res) => {
+      this.invoiceValues = []
       this.messageService.add({
         severity: "success",
         summary: "Transaction Created"   

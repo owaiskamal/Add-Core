@@ -18,6 +18,17 @@
     background-color: rgb(39, 39, 39);
     border: 1px solid rgb(39, 39, 39);
 }
+:host ::ng-deep  .ui-tabview.ui-tabview-top .ui-tabview-nav li:focus
+{
+    box-shadow: 0 0 0 0.2em rgb(66, 66, 66);
+
+}
+
+:host ::ng-deep  .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight
+{
+    color: #FFFFFF;
+    background-color: rgb(66, 66, 66);
+}
 .ui-card-header
 {
     background-color: #1f89ce;
