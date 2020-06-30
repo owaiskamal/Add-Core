@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { TableDataService } from "./table-data.service";
 import { FilterUtils } from "primeng/utils";
 import { ActivatedRoute } from "@angular/router";
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: "app-frmlist",
@@ -11,7 +12,8 @@ import { ActivatedRoute } from "@angular/router";
 export class FrmlistComponent implements OnInit {
   constructor(
     private tableDataService: TableDataService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private messageService : MessageService
   ) {
     //this.formID = this._route.snapshot.paramMap.get('id');
   }
@@ -60,6 +62,13 @@ export class FrmlistComponent implements OnInit {
       console.log(this.totalrecords, "asdasd");
 
       //this.userarray.push(this.userList);
+    },
+    (error) =>
+    { this.messageService.add({
+      severity: "warn",
+      summary: "Connection Failed",
+      detail: "Connection Timed Out"
+    });
     });
 
     //console.log(this.userarray);
