@@ -7,6 +7,17 @@
 :host ::ng-deep .ui-card{
     border-radius: 6px;
 }
+:host ::ng-deep  .ui-tabview.ui-tabview-top .ui-tabview-nav .ui-tabview-selected
+{
+    background-color: rgb(66, 66, 66);
+    border: 1px solid rgb(66, 66, 66);
+}
+
+:host ::ng-deep  .ui-tabview.ui-tabview-top .ui-tabview-nav .ui-tabview-selected:hover
+{
+    background-color: rgb(39, 39, 39);
+    border: 1px solid rgb(39, 39, 39);
+}
 .ui-card-header
 {
     background-color: #1f89ce;

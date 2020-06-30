@@ -8,9 +8,12 @@
 
 
 $font-primary: "Courier New", Courier, monospace;
-
+html *
+{
+  -webkit-font-smoothing: antialiased;
+}
  body {
-
+ 
   height: 100%;
   position: fixed;
   width: 100%;

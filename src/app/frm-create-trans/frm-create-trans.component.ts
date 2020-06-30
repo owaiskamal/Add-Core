@@ -74,7 +74,8 @@ export class FrmCreateTransComponent
     private _route: ActivatedRoute,
     private transService: CreateTransService,
     private messageService: MessageService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    
   ) {
     this.products = [];
     this.accounts = [];
@@ -119,6 +120,10 @@ export class FrmCreateTransComponent
         console.log("Eae", JSON.parse(res.detailData.detail));
         this.fields = JSON.parse(res.detailData.detail);
         console.log(this.fields, "fafafa");
+        if(this.fields.length > 0)
+        {
+
+       
         this.transactionArr = this.fields.filter((v) => v.MasterDetail == "O");
         this.invoiceArr = this.fields.filter((v) => v.MasterDetail == "I");
         if (this.invoiceArr.length > 0) {
@@ -131,6 +136,21 @@ export class FrmCreateTransComponent
             this.dynform = false;
           }
         }, 1);
+      }
+      else{
+        this.messageService.add({
+          severity: "warn",
+          summary: "No template found"
+        });
+      }
+      },
+      (error) =>
+      {
+        this.messageService.add({
+          severity: "error",
+          summary: "Connection Failed",
+          detail: "Connection Timed Out"
+        });
       });
   }
   recivemsg(obj) {
@@ -258,6 +278,16 @@ export class FrmCreateTransComponent
         // this.rawData.push(res.detailData.detail);
         console.log("RawData", this.rawData["Products"]);
         this.products = this.rawData["Products"];
+      }, 
+      (error)=>
+      {setTimeout(() => {
+        this.messageService.add({
+          severity: "error",
+          summary: "Connection Failed",
+          detail: "Template not Found"
+        });
+      }, 2000);
+      
       });
   }
 
@@ -302,7 +332,7 @@ export class FrmCreateTransComponent
    console.log(this.selectedTemplate,"selectedTemplate"); */
   
     let masterObj = {
-      master: {
+      Master: {
         ProCode: this.selectedProduct["ProCode"],
         ProductName: this.selectedProduct["ProName"],
         Behaviour: this.selectedProduct["ProName"],
@@ -312,14 +342,25 @@ export class FrmCreateTransComponent
         ConfigDesc: this.selectedTemplate["ConfName"],
       },
 
-      transactions: this.transactionData,
-      invdata: this.invoiceValues,
+      Transactions: this.transactionData,
+      Invoice: this.invoiceValues,
     };
 
     console.log(masterObj);
 
     this.transService.postMasterTransaction(masterObj).subscribe((res) => {
-      console.log(res);
+      this.messageService.add({
+        severity: "success",
+        summary: "Transaction Created"   
+      
+         });
+    },
+    (error)=>{
+      this.messageService.add({
+        severity: "error",
+        summary: "Connection Failed",
+        detail: "Check Data Connection"
+      });
     });
   }
   delete() {
