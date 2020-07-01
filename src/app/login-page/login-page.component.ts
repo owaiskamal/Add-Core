@@ -66,7 +66,7 @@ getNotifications(){
       }
 
        else if(res.code == "00") {
-        this.getNotifications();
+        //this.getNotifications();
         this.messageService.add({
           severity: "success",
           summary: "Login Successfully",

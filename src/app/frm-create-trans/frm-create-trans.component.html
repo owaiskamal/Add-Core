@@ -1,4 +1,4 @@
-<p-toast  [style]="{'margin-top':'4%'}" position="top-right"></p-toast>
+<p-toast  position="top-right"></p-toast>
 
 <p-card class="ui-card">
   <p-header class="ui-card-header">
@@ -63,7 +63,7 @@
               [fields]="getFields()"
             >
           </dynamic-form-builder> -->
-        <p-tabView *ngIf="fields.length > 0">
+        <p-tabView *ngIf="fields.length > 0"  (onChange)="onTabChange($event)">
           <p-tabPanel style="margin-right: 2%;" header="Transaction">
             <dynamic-form-builder
               *ngIf="isValid"
@@ -134,6 +134,7 @@
                 </div>
                 <div class="ui-lg-6 ui-md-12 ui-sm-12">
                   <button
+                  class="ui-button-secondary"
                     type="button"
                     pButton
                     icon="pi pi-times"
@@ -219,6 +220,7 @@
               <p-footer>
                 <div class="ui-dialog-buttonpane ui-helper-clearfix">
                   <button
+                  
                     type="button"
                     pButton
                     icon="pi pi-times"
@@ -238,7 +240,7 @@
           </p-tabPanel>
         </p-tabView>
         <div class="ui-g">
-        <div class="ui-lg-6">
+        <div class="ui-lg-6 ui-md-12 ui-sm-12">
         <button
           *ngIf="fields.length > 0"
           [disabled]="
@@ -252,13 +254,14 @@
           label="Submit"
         ></button>
       </div>
-    <div class="ui-lg-6">
+    <div class="ui-lg-6 ui-md-12 ui-sm-12">
         <button  *ngIf="fields.length > 0"
+        class="ui-button-secondary"
         type="button"
         pButton
         icon="pi pi-times"
         (click)="clearField()"
-        label="Clear"
+        label="Clear All"
       ></button>
     </div>
       </div>

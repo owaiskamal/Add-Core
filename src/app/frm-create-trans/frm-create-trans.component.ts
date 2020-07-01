@@ -31,6 +31,7 @@ export class FrmCreateTransComponent
   formID: any;
   AccessToken: string;
   UserID: string;
+  tabIndex: number;
   selectedProduct: string;
   selectedAccount: string;
   selectedTemplate: string;
@@ -183,6 +184,8 @@ export class FrmCreateTransComponent
   }
   clearField(){
     this.invForm.reset();
+    this.child.form.reset();
+    this.invoiceValues = [];
   }
   deleteInvData() {
     this.invoiceData = [];
@@ -334,6 +337,10 @@ export class FrmCreateTransComponent
     this.invoiceheader = null;
     this.displayDialog = false;
   }
+  onTabChange(event) {
+    console.log("TAB INDEX",event.index);
+    this.tabIndex = event.index;
+} 
   submitMaster() {
     this.child.saveData();
     /*  console.log(this.selectedProduct,"selectedProduct");
