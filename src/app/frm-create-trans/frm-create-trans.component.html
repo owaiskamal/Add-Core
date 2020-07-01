@@ -237,6 +237,8 @@
             </p-dialog>
           </p-tabPanel>
         </p-tabView>
+        <div class="ui-g">
+        <div class="ui-lg-6">
         <button
           *ngIf="fields.length > 0"
           [disabled]="
@@ -249,6 +251,17 @@
           (click)="submitMaster()"
           label="Submit"
         ></button>
+      </div>
+    <div class="ui-lg-6">
+        <button  *ngIf="fields.length > 0"
+        type="button"
+        pButton
+        icon="pi pi-times"
+        (click)="clearField()"
+        label="Clear"
+      ></button>
+    </div>
+      </div>
       </div>
     </div>
     <!-- App Form Template End -->
