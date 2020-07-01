@@ -181,6 +181,9 @@ export class FrmCreateTransComponent
     this.getuserdata(this.invoiceData);
     this.invForm.reset();
   }
+  clearField(){
+    this.invForm.reset();
+  }
   deleteInvData() {
     this.invoiceData = [];
   }
