@@ -349,6 +349,9 @@ export class FrmCreateTransComponent
    console.log(this.selectedTemplate,"selectedTemplate"); */
   
     let masterObj = {
+      FormID: this.formID,
+      UserID: this.UserID,
+      AccessToken: this.AccessToken,
       Master: {
         ProCode: this.selectedProduct["ProCode"],
         ProductName: this.selectedProduct["ProName"],
