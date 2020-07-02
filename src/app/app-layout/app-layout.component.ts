@@ -32,7 +32,6 @@ export class AppLayoutComponent implements OnInit {
   ngOnInit() {
   }
   getState(outlet) {
-    console.log(outlet.activatedRouteData);
    
     
     return outlet.activatedRouteData.state;

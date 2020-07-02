@@ -13,7 +13,7 @@ export const environment = {
   productsJson : "http://localhost:3000/Products",
   accountsJson : "http://localhost:3000/Account",
   txnFields : "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/SetTxnFieldView",
-  test :    "http://localhost:3000/"
+  test :    "http://crpl.cr-pl.com:81/AddCoreAPI/API/Core/SubmitNewTxn"
 };
 
 /*

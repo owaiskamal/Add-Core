@@ -14,6 +14,7 @@ import {
   FormGroupDirective,
 } from "@angular/forms";
 import { Subject } from "rxjs";
+import { formatNumber, DatePipe } from '@angular/common';
 
 @Component({
   selector: "dynamic-form-builder",
@@ -37,6 +38,8 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
   @Output() onSubmit = new EventEmitter();
   @Output() savedata = new EventEmitter();
   @Input() fields: any[] = [];
+  transFormData : any[]=[];
+  valueDate : any = {};
   resetFormSubject: Subject<boolean> = new Subject<boolean>();
   form: FormGroup;
   constructor() {}
@@ -96,8 +99,65 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
     this.form = new FormGroup(fieldsCtrls);
   }
   saveData() {
-    this.savedata.emit(this.form.getRawValue());
-    //console.log("loggg" , this.form.getRawValue());
+    this.transFormData = [];
+    this.transFormData.push(this.form.getRawValue());
+
+    this.fields.forEach((user)=>{
+      if(user.DataType == "D")
+      {
+        const name = user.ColumnName;
+          console.log(name , "name");
+          
+        this.transFormData.forEach((t)=>{
+          var formkey =Object.keys(t)
+          var formValues = Object.values(t);
+          formkey.forEach(element => {
+            if(element == name)
+            {
+             var index =formkey.indexOf(name)
+                console.log(index);
+
+                var nDate= formValues[index];
+                const pipe = new DatePipe("en-US");
+                const fDate = pipe.transform(nDate, "dd/MM/yyyy");
+                console.log(fDate , "date is ");
+               
+                this.valueDate = {
+                  [name]: fDate
+                };
+                        
+
+                
+            }
+          });
+        
+          
+        })
+        if (this.valueDate != null) {
+          for (
+            let i = 0;
+            i < this.transFormData.length;
+            i++
+          ) {
+            // console.log(merge(this.invoiceData[i] , this.valueDate));
+            let foo = Object.assign(this.transFormData[i], this.valueDate);
+            console.log(foo, "updated data");
+          }
+        }
+        console.log(this.transFormData  , "UDatate Dadsd");
+
+        
+        
+       }
+     
+    })
+    this.savedata.emit(this.transFormData[0]);
+    
     this.form.reset();
+    
+    //this.savedata.emit(this.form.getRawValue());
+
+    //console.log("loggg" , this.form.getRawValue());
+   
   }
 }

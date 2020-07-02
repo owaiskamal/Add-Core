@@ -43,6 +43,6 @@ export class CreateTransService {
 
   postMasterTransaction(masterobj): Observable<Object>
   {
-    return this.http.post(environment.test + "detail" , masterobj);
+    return this.http.post(environment.test  , masterobj);
   }
 }
