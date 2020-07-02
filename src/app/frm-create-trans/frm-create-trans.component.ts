@@ -155,6 +155,8 @@ export class FrmCreateTransComponent
       });
   }
   recivemsg(obj) {
+    console.log(obj , "recieved");
+    
     this.transactionData = obj;
 
     // this.invoiceData.push(obj);
@@ -217,7 +219,7 @@ export class FrmCreateTransComponent
     console.log(e, "new DATE");
 
     const pipe = new DatePipe("en-US");
-    const date = pipe.transform(e, "shortDate");
+    const date = pipe.transform(e, "dd/MM/yyyy");
     console.log(date, " format");
     // this.valueDate = date;
     this.invoiceArr.forEach((user) => {
@@ -355,7 +357,7 @@ export class FrmCreateTransComponent
       Master: {
         ProCode: this.selectedProduct["ProCode"],
         ProductName: this.selectedProduct["ProName"],
-        Behaviour: this.selectedProduct["ProName"],
+        Behaviour: this.selectedProduct["ProBehavior"],
         DRAccountNo: this.selectedAccount["AC"],
         DRAccTitle: this.selectedAccount["AcTitel"],
         ConfigID: this.selectedTemplate["ConfCode"],
@@ -369,7 +371,8 @@ export class FrmCreateTransComponent
     console.log(masterObj);
 
     this.transService.postMasterTransaction(masterObj).subscribe((res) => {
-      this.invoiceValues = []
+      this.invoiceData = [];
+
       this.messageService.add({
         severity: "success",
         summary: "Transaction Created"   
