@@ -3,7 +3,7 @@
 <ul class="list-unstyled" >
   <li class="main_link"  (click)="onItemClick(item)" [ngStyle]="{'margin-left': (depth * 12) + 'px'}">
 
-    <a class="mat-list-item"  [ngClass]="{'active': item.RLink ? route.isActive('adminpage/'+item.RLink+'/' +item.id, true): false, 'expanded': expanded}">
+    <a class="mat-list-item"   [ngClass]="{'active': item.RLink ? route.isActive('adminpage/'+item.RLink+'/' +item.id, true): false, 'expanded': expanded}">
 
         <i class="align-card-icon" [ngClass]="{'pi pi-id-card' : item.Forms && item.Forms.length}"></i>{{item.Node || item.Name}}
 
@@ -17,8 +17,8 @@
 </ul>
 
 
-<div *ngIf="expanded"  [@dropdown]="expanded ? 'expanded': 'collapsed'">
-<app-sidenav *ngFor="let child of item.Forms" [item] = "child" [depth]="depth+1"></app-sidenav>
+<div *ngIf="expanded" [@dropdown]="expanded ? 'expanded': 'collapsed'">
+<app-sidenav  *ngFor="let child of item.Forms" [item] = "child" [depth]="depth+1"></app-sidenav>
 </div>
 
 

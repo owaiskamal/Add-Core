@@ -18,16 +18,29 @@ import { NavService } from '../nav.service';
       ),
     ]),
     trigger('dropdown',[
-      state('collapsed', style({
+     /*  state('collapsed', style({
         opacity: 0
       })),
       state('expanded', style({
         opacity: 1
       })),
-      transition('collapsed => expanded', animate('400ms ease-in-out')),
-      transition('expanded => collapsed', animate('400ms ease-in-out'))
-
-    ])
+      transition('collapsed => expanded', animate('800ms ease-in-out')),
+      transition('expanded => collapsed', animate('800ms ease-in-out')) */
+    /*   state('collapsed', style({transform: 'rotate(0deg)'})),
+      state('expanded', style({transform: 'rotate(180deg)'})),
+      transition('expanded <=> collapsed',
+        animate('10000ms cubic-bezier(0.4,0.0,0.2,1)')
+      ), */
+      transition(':enter', [
+        style({ opacity: 0}),
+        animate('300ms ease-in', style({transform: 'translateY(0.1%)',opacity: 1}))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1}),
+        animate('300ms ease-out', style({transform: 'translateY(-10%)', opacity: 0}))
+      ])
+    ]
+  )
   ]
 })
 export class SidenavComponent implements OnInit {
