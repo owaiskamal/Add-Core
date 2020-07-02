@@ -33,11 +33,11 @@ import { NavService } from '../nav.service';
       ), */
       transition(':enter', [
         style({ opacity: 0}),
-        animate('300ms ease-in', style({transform: 'translateY(0.1%)',opacity: 1}))
+        animate('500ms ease-in', style({opacity: 1}))
       ]),
       transition(':leave', [
         style({ opacity: 1}),
-        animate('300ms ease-out', style({transform: 'translateY(-10%)', opacity: 0}))
+        animate('500ms ease-in', style({ opacity: 0}))
       ])
     ]
   )
