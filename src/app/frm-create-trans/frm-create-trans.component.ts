@@ -324,7 +324,9 @@ export class FrmCreateTransComponent
       };
     }
   }
-
+  typeOf(value) {
+    return typeof value;
+  }
   save() {
     let cars = [...this.invoiceValues];
     var result = {};
@@ -380,10 +382,13 @@ export class FrmCreateTransComponent
          });
     },
     (error)=>{
+      this.invoiceData = [];
+      console.log(error.error,'invoice error')
+     
       this.messageService.add({
         severity: "error",
         summary: "Connection Failed",
-        detail: "Check Data Connection"
+        detail: error.error.title
       });
     });
   }

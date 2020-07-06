@@ -198,7 +198,8 @@
                   <label style="font-weight: 700;">{{ col.header }}</label>
                 </div>
                 <div class="p-col-8">
-                  <input pInputText [(ngModel)]="col.field" />
+                  <p-inputNumber *ngIf="typeOf(col.field) === 'number'"  [(ngModel)]="col.field"></p-inputNumber>
+                  <input *ngIf="typeOf(col.field) === 'string'" pInputText [(ngModel)]="col.field" />
                 </div>
                 <!--   <div class="p-col-4">
                       <label for="year">Year</label>
