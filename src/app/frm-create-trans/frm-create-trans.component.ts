@@ -7,9 +7,10 @@ import {
   OnChanges,
   ChangeDetectorRef,
   AfterViewInit,
+  Inject,
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-
+import * as xlsx from 'xlsx';
 import { MessageService } from "primeng/api";
 import {
   FormBuilder,
@@ -25,6 +26,7 @@ import { DatePipe } from "@angular/common";
   selector: "app-frm-create-trans",
   templateUrl: "./frm-create-trans.component.html",
   styleUrls: ["./frm-create-trans.component.scss"],
+  
 })
 export class FrmCreateTransComponent
   implements OnInit, OnChanges, AfterViewInit {
@@ -39,6 +41,7 @@ export class FrmCreateTransComponent
   accounts: Object[] = [];
   templates: Object[] = [];
   rawData: any[] = [];
+  jsonArr: any[] = [];
   public invForm = new FormGroup({});
   unsubcribe: any;
   displayDialog: boolean;
@@ -84,8 +87,10 @@ export class FrmCreateTransComponent
   }
 
   public fields = [];
+  @Inject('ImageURL') public ImageURL
   @ViewChild("myDropdown") myDropdown: Dropdown;
   @ViewChild(DynamicFormBuilderComponent) child: DynamicFormBuilderComponent;
+ 
   ngOnInit(): void {
     this._route.params.subscribe((params) => {
       this.formID = params["id"];
@@ -405,4 +410,65 @@ export class FrmCreateTransComponent
     }
     return car;
   }
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+        const worksheet = xlsx.utils.json_to_sheet(this.invoiceData);
+        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, "primengTable");
+    });
+  }
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    import("file-saver").then(FileSaver => {
+        let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+        let EXCEL_EXTENSION = '.xlsx';
+        const data: Blob = new Blob([buffer], {
+            type: EXCEL_TYPE
+        });
+        FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    });
 }
+
+onBasicUpload(event){
+/*   console.log(event,"file event")
+  for(let file of event.files) {
+    this.uploadedFiles.push(file);
+}
+
+this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''}); */
+/* console.log(event,"eventt")
+let input = event.files;
+let reader: FileReader = new FileReader();
+reader.readAsText(input[0]);
+reader.onload = (e) => {
+  let csv  = reader.result;
+  alert(csv);
+  console.log(csv);
+} */
+let workBook = null;
+let jsonData = null;
+const reader = new FileReader();
+const file = event.files[0];
+console.log(file,"file is here");
+
+reader.onload = (event) => {
+  const data = reader.result;
+  workBook = xlsx.read(data, { type: 'binary' });
+  jsonData = workBook.SheetNames.reduce((initial, name) => {
+    const sheet = workBook.Sheets[name];
+    initial[name] = xlsx.utils.sheet_to_json(sheet);
+    console.log(jsonData,"jsonDAta");
+    
+    return initial;
+  }, {});
+  const dataString = JSON.stringify(jsonData);
+  console.log(dataString,"stringify data");
+  this.jsonArr = JSON.parse(dataString)
+  console.log(this.jsonArr,"parsed json");
+  console.log(Object.keys(this.jsonArr['data'][0]))
+  
+}
+reader.readAsBinaryString(file);
+}
+
+  }

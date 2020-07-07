@@ -143,6 +143,12 @@
                     (click)="deleteInvData()"
                     label="Delete All"
                   ></button>
+                 
+                </div>
+                <div class="ui-helper-clearfix ui-lg-6 ui-md-12 ui-sm-12">
+                  
+                  <!-- <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button> -->
+                  <p-fileUpload mode="basic" customUpload="true"  name="demo[]" accept=".xlsx,application/msexcel" maxFileSize="1000000" (uploadHandler)="onBasicUpload($event)"></p-fileUpload>
                 </div>
               </div>
             </form>
@@ -159,6 +165,7 @@
               [rows]="15"
             >
               <ng-template pTemplate="caption">
+               
                 Invoice Details
               </ng-template>
               <ng-template pTemplate="header" let-columns>
