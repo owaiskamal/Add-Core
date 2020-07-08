@@ -456,10 +456,10 @@ reader.onload = (ev) => {
   console.log(ev , "asdasdad");
   
   const data = reader.result;
-  workBook = xlsx.read(data, { type: 'binary' , cellDates: true });
+  workBook = xlsx.read(data, { type: 'binary'  ,cellDates: true });
   jsonData = workBook.SheetNames.reduce((initial, name) => {
     const sheet = workBook.Sheets[name];
-    initial[name] = xlsx.utils.sheet_to_json(sheet);
+    initial[name] = xlsx.utils.sheet_to_json(sheet , {raw:false,dateNF:'dd/mm/yyyy'});
     
     return initial;
   }, {});
@@ -470,6 +470,8 @@ reader.onload = (ev) => {
   console.log(Object.keys(this.jsonArr['data'][0]))
   this.invoiceData = this.invForm.getRawValue();
 this.expectedSequence = Object.keys(this.invoiceData);
+console.log(this.expectedSequence , "this is seq");
+
 
 const sortObject = (obj) =>
   Object.fromEntries(
