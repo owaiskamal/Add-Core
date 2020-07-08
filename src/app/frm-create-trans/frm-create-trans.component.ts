@@ -22,6 +22,7 @@ import { Dropdown } from "primeng/dropdown";
 import { DynamicFormBuilderComponent } from "../dynamic-form-builder/dynamic-form-builder.component";
 import { DatePipe } from "@angular/common";
 
+
 @Component({
   selector: "app-frm-create-trans",
   templateUrl: "./frm-create-trans.component.html",
@@ -45,7 +46,7 @@ export class FrmCreateTransComponent
   public invForm = new FormGroup({});
   unsubcribe: any;
   displayDialog: boolean;
-
+  expectedSequence :any[]= []
   car: any = {};
   valueDate: any = {};
   selectedCar: any;
@@ -410,24 +411,24 @@ export class FrmCreateTransComponent
     }
     return car;
   }
-  exportExcel() {
-    import("xlsx").then(xlsx => {
-        const worksheet = xlsx.utils.json_to_sheet(this.invoiceData);
-        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-        this.saveAsExcelFile(excelBuffer, "primengTable");
-    });
-  }
-  saveAsExcelFile(buffer: any, fileName: string): void {
-    import("file-saver").then(FileSaver => {
-        let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-        let EXCEL_EXTENSION = '.xlsx';
-        const data: Blob = new Blob([buffer], {
-            type: EXCEL_TYPE
-        });
-        FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-    });
-}
+//   exportExcel() {
+//     import("xlsx").then(xlsx => {
+//         const worksheet = xlsx.utils.json_to_sheet(this.invoiceData);
+//         const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+//         const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+//         this.saveAsExcelFile(excelBuffer, "primengTable");
+//     });
+//   }
+//   saveAsExcelFile(buffer: any, fileName: string): void {
+//     import("file-saver").then(FileSaver => {
+//         let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+//         let EXCEL_EXTENSION = '.xlsx';
+//         const data: Blob = new Blob([buffer], {
+//             type: EXCEL_TYPE
+//         });
+//         FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+//     });
+// }
 
 onBasicUpload(event){
 /*   console.log(event,"file event")
@@ -451,13 +452,14 @@ const reader = new FileReader();
 const file = event.files[0];
 console.log(file,"file is here");
 
-reader.onload = (event) => {
+reader.onload = (ev) => {
+  console.log(ev , "asdasdad");
+  
   const data = reader.result;
-  workBook = xlsx.read(data, { type: 'binary' });
+  workBook = xlsx.read(data, { type: 'binary' , cellDates: true });
   jsonData = workBook.SheetNames.reduce((initial, name) => {
     const sheet = workBook.Sheets[name];
     initial[name] = xlsx.utils.sheet_to_json(sheet);
-    console.log(jsonData,"jsonDAta");
     
     return initial;
   }, {});
@@ -466,9 +468,35 @@ reader.onload = (event) => {
   this.jsonArr = JSON.parse(dataString)
   console.log(this.jsonArr,"parsed json");
   console.log(Object.keys(this.jsonArr['data'][0]))
+  this.invoiceData = this.invForm.getRawValue();
+this.expectedSequence = Object.keys(this.invoiceData);
+
+const sortObject = (obj) =>
+  Object.fromEntries(
+    Object.entries(obj).sort(
+      ([a], [b]) => this.expectedSequence.indexOf(a) - this.expectedSequence.indexOf(b)
+    )
+  );
+console.log(sortObject ,"soreee");
+
+const updated = this.jsonArr['data'].map(sortObject);
+console.log(updated , "QWEQE");
+this.invoiceValues = updated
+
+// for(let i = 0 ; i< da.length ; i++)
+// {
+//   if(da[i] != la[i])
+//   {
+//     console.log( i , "oh yeah");
+//    arr.push(i);
+//   }
+//   console.log(arr , "Asdasd");
   
+// }
+// console.log(this.array_move(da , arr[1] , arr[0]), "Asdasdashdkasgdjhasgdjhasgajhg");
 }
 reader.readAsBinaryString(file);
-}
 
-  }
+
+}
+ }
