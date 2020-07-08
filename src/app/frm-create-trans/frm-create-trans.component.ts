@@ -497,8 +497,11 @@ this.invoiceValues = updated
 // }
 // console.log(this.array_move(da , arr[1] , arr[0]), "Asdasdashdkasgdjhasgdjhasgajhg");
 const p =JSON.stringify(this.invoiceValues);
+this.messageService.add({severity:'success', summary:'File uploaded', detail:'Corrected sequence'});
+setTimeout(() => {
+  alert(p);
+}, 1000);
 
-alert(p);
 
 }
 reader.readAsBinaryString(file);
