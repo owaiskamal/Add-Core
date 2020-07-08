@@ -496,6 +496,10 @@ this.invoiceValues = updated
   
 // }
 // console.log(this.array_move(da , arr[1] , arr[0]), "Asdasdashdkasgdjhasgdjhasgajhg");
+const p =JSON.stringify(this.invoiceValues);
+
+alert(p);
+
 }
 reader.readAsBinaryString(file);
 
