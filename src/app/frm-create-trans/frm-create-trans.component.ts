@@ -455,7 +455,7 @@ const file = event.files[0];
 this.invoiceData = this.invForm.getRawValue();
 this.expectedSequence = Object.keys(this.invoiceData);
 console.log(file,"file is here");
-var regex = /(xlsx|csv)$/i
+var regex = /(xlsx|csv|txt)$/i
 var extension = regex.exec(file.name);
 if(extension[0] === 'xlsx')
 {
@@ -517,6 +517,44 @@ setTimeout(() => {
 reader.readAsBinaryString(file);
 
 }
+else if(extension[0] === 'txt'){
+  reader.onload = (ev)=>{
+    const data = reader.result;
+    const txtData = data.toString()
+    console.log(data,"txt data")
+  /*   var lines = txtData.split(' ');
+    for(var line = 0; line < lines.length; line++){
+        console.log(lines[line]);
+    } */
+    const lines = txtData.split(/\n/g);
+
+// Split data by spaces (one or more)
+const wordsPerLine = lines.map(line => line.split(/\s+/g));
+
+// First line are the headings
+const headings = wordsPerLine.shift();
+
+// Combine lines with heading
+const result = wordsPerLine.reduce((all, line) => {
+  const obj:any={};
+  
+  line.forEach((word, index) => {
+    obj[headings[index]] = word;
+  });
+  
+  all.push(obj);
+  
+  return all;
+}, []);
+
+console.log(result);
+
+ };
+
+ reader.readAsText(file)
+  }
+
+
 else
 {
   papa.parse(file, {
