@@ -520,23 +520,24 @@ reader.readAsBinaryString(file);
 else if(extension[0] === 'txt'){
   reader.onload = (ev)=>{
     const data = reader.result;
-    const txtData = data.toString()
+    const txtData = data.toString();
     console.log(data,"txt data")
   /*   var lines = txtData.split(' ');
     for(var line = 0; line < lines.length; line++){
         console.log(lines[line]);
     } */
-    const lines = txtData.split(/\n/g);
+    const lines = txtData.trim().split(/\n/g);
 
-// Split data by spaces (one or more)
-const wordsPerLine = lines.map(line => line.split(/\s+/g));
-
+    // Split data by spaces (one or more)
+    const wordsPerLine = lines.map(line => line.trim().split(/\s+/g));
+    
+    
 // First line are the headings
 const headings = wordsPerLine.shift();
 
 // Combine lines with heading
-const result = wordsPerLine.reduce((all, line) => {
-  const obj:any={};
+const result = wordsPerLine.reduce((all :any, line) => {
+  const obj ={};
   
   line.forEach((word, index) => {
     obj[headings[index]] = word;
@@ -548,6 +549,9 @@ const result = wordsPerLine.reduce((all, line) => {
 }, []);
 
 console.log(result);
+const updated = this.autoFormatter(this.expectedSequence, result);
+console.log(updated , "Asdasda");
+
 
  };
 
