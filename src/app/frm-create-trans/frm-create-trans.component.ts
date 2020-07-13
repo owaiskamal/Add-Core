@@ -1,5 +1,6 @@
 import { FrmlistComponent } from "./../setup/frmlist/frmlist.component";
 import { CreateTransService } from "./../create-trans.service";
+import * as papa from 'papaparse'
 import {
   Component,
   OnInit,
@@ -73,6 +74,7 @@ export class FrmCreateTransComponent
   invoiceheader: any[] = [];
   transactionData: any[] = [];
   dynform: boolean = true;
+  csvArray: any[] = [];
 
   constructor(
     private cdref: ChangeDetectorRef,
@@ -450,7 +452,14 @@ let workBook = null;
 let jsonData = null;
 const reader = new FileReader();
 const file = event.files[0];
+this.invoiceData = this.invForm.getRawValue();
+this.expectedSequence = Object.keys(this.invoiceData);
 console.log(file,"file is here");
+var regex = /(xlsx|csv)$/i
+var extension = regex.exec(file.name);
+if(extension[0] === 'xlsx')
+{
+console.log(extension , "asdasdasdasdasd");
 
 reader.onload = (ev) => {
   console.log(ev , "asdasdad");
@@ -468,21 +477,22 @@ reader.onload = (ev) => {
   this.jsonArr = JSON.parse(dataString)
   console.log(this.jsonArr,"parsed json");
   console.log(Object.keys(this.jsonArr['data'][0]))
-  this.invoiceData = this.invForm.getRawValue();
-this.expectedSequence = Object.keys(this.invoiceData);
+  
 console.log(this.expectedSequence , "this is seq");
 
 
-const sortObject = (obj) =>
-  Object.fromEntries(
-    Object.entries(obj).sort(
-      ([a], [b]) => this.expectedSequence.indexOf(a) - this.expectedSequence.indexOf(b)
-    )
-  );
-console.log(sortObject ,"soreee");
+// const sortObject = (obj) =>
+//   Object.fromEntries(
+//     Object.entries(obj).sort(
+//       ([a], [b]) => this.expectedSequence.indexOf(a) - this.expectedSequence.indexOf(b)
+//     )
+//   );
+// console.log(sortObject ,"soreee");
 
-const updated = this.jsonArr['data'].map(sortObject);
-console.log(updated , "QWEQE");
+// const updated = this.jsonArr['data'].map(sortObject);
+// console.log(updated , "QWEQE");
+const updated = this.autoFormatter(this.expectedSequence , this.jsonArr['data'])
+ console.log(updated , "QWEQE");
 this.invoiceValues = updated
 
 // for(let i = 0 ; i< da.length ; i++)
@@ -506,6 +516,31 @@ setTimeout(() => {
 }
 reader.readAsBinaryString(file);
 
-
 }
- }
+else
+{
+  papa.parse(file, {
+    header: true,
+    skipEmptyLines: true,
+    complete: (result,file) => {
+      console.log(result);
+      this.csvArray = result.data;
+      const updated = this.autoFormatter(this.expectedSequence , this.csvArray)
+  console.log(updated ," csv data");
+
+    }
+  });
+    
+}
+}
+autoFormatter(expectedSequence , convArray)
+{
+  const sortObject = (obj) =>
+  Object.fromEntries(
+    Object.entries(obj).sort(
+      ([a], [b]) => expectedSequence.indexOf(a) - expectedSequence.indexOf(b)
+    )
+  );
+  return convArray.map(sortObject);
+}
+}
