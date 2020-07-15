@@ -17,11 +17,7 @@ import { Subject } from 'rxjs';
 
       <div   [ngSwitch]="field.DataType">
         <textbox *ngSwitchCase="'T'"   [field]="field" [form]="form"></textbox>
-        <dropdown
-          *ngSwitchCase="'dropdown'"
-          [field]="field"
-          [form]="form"
-        ></dropdown>
+        
         <textboxnum  *ngSwitchCase="'N'"  [field]="field" [form]="form"></textboxnum>
         <textboxnum *ngSwitchCase="'C'"  [field]="field" [form]="form"></textboxnum>
         <calender *ngSwitchCase="'D'"  [field]="field" [form]="form"></calender>

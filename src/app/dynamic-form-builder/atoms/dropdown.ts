@@ -6,12 +6,13 @@ import { FormGroup } from "@angular/forms";
   template: `
     <div [formGroup]="form">
       <select
+      *ngIf="field.IsLookup == 'Y'"
         class="form-control"
-        [id]="field.name"
-        [formControlName]="field.name"
+        [id]="field?.ColumnName"
+        [formControlName]="field?.ColumnName"
       >
-        <option *ngFor="let opt of field.options" [value]="opt.key">{{
-          opt.label
+        <option *ngFor="let opt of array" [value]="opt.key">{{
+          opt
         }}</option>
       </select>
     </div>
@@ -20,6 +21,19 @@ import { FormGroup } from "@angular/forms";
 export class DropDownComponent {
   @Input() field: any = {};
   @Input() form: FormGroup;
-
-  constructor() {}
+  array :any[] = []
+  constructor() {
+    console.log(this.field ,"sdasdasdas");
+    
+    for(let f of this.field)
+    {
+      var subMenu = f.LookupVal;
+      console.log(f.LookupVal , "drop");
+      
+      //var array = [];
+     this.array = subMenu.split('|');
+      console.log(this.array , "dropdowns");
+    
+    }
+  }
 }

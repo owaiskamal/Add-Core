@@ -72,7 +72,7 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
   ngOnChanges() {
     let fieldsCtrls = {};
     for (let f of this.fields) {
-      // if (f.IsLookup == 'checkbox') {
+      //  if (f.IsLookup != 'Y') {
         if(f.Mandatory === 'Y')
         {
       fieldsCtrls[f.ColumnName] = new FormControl(
@@ -89,8 +89,15 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
       console.log("data F ", f);
 
       // } else {
-      //   let opts = {};
-      //   for (let opt of f.options) {
+      //  var subMenu = f.LookupVal;
+      //   console.log(f.LookupVal , "dadad");
+        
+      //   var array = [];
+      //   array = subMenu.split('|');
+      //   console.log(array , "this is splitted");
+        
+      //    let opts = {};
+      //   for (let opt of array) {
       //     opts[opt.key] = new FormControl(opt.value);
       //   }
       //   fieldsCtrls[f.ColumnName] = new FormGroup(opts)

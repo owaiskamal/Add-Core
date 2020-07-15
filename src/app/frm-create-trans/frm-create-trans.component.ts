@@ -295,7 +295,7 @@ export class FrmCreateTransComponent
     this.transService
       .getCreateTransaction(this.formID, this.UserID, this.AccessToken)
       .subscribe((res) => {
-        console.log("detail data", JSON.parse(res.detailData.detail));
+        console.log( res ,"detail data");
         this.rawData = JSON.parse(res.detailData.detail);
 
         // this.rawData.push(res.detailData.detail);
@@ -354,12 +354,17 @@ export class FrmCreateTransComponent
     this.tabIndex = event.index;
 } 
   submitMaster() {
+    if(!this.child.form.valid)
+   {
+      return;
+   }
     this.child.saveData();
     /*  console.log(this.selectedProduct,"selectedProduct");
    console.log(this.selectedAccount,"selectedAccount");
 
    console.log(this.selectedTemplate,"selectedTemplate"); */
   
+   
     let masterObj = {
       FormID: this.formID,
       UserID: this.UserID,

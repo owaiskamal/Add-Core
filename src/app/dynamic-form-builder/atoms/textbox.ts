@@ -12,16 +12,27 @@ import { FormGroup } from "@angular/forms";
 
       <input
         type="text"
+        *ngIf="field.IsLookup == 'N'"
         style="font-weight:500;"
         [attr.maxLength]="field.MaxLeng"
         [formControlName]="field?.ColumnName"
         [placeholder]="field.ColumnLabel"
         pInputText
       />
+      <select
+      *ngIf="field.IsLookup == 'Y'"
+        class="form-control"
+        [id]="field?.ColumnName"
+        [formControlName]="field?.ColumnName"
+      >
+        <option *ngFor="let opt of field.LookupVal.split('|')" [value]="opt">{{
+          opt
+        }}</option>
+      </select>
     </div>
   `,
 })
-export class TextBoxComponent {
+export class TextBoxComponent  {
   @Input() field: any = {};
   @Input() form: FormGroup;
   get isValid() {
@@ -30,6 +41,9 @@ export class TextBoxComponent {
   get isDirty() {
     return this.form.controls[this.field.ColumnName].dirty;
   }
-
-  constructor() {}
+  
+  constructor() {
+    
+    
+  }
 }
