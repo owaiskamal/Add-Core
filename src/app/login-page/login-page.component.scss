@@ -34,6 +34,11 @@
   );
 }
 
+.disableCss:hover {
+  background: #dddddd;
+  cursor: default;
+}
+
 :host ::ng-deep .ui-card {
   border-radius: 20px;
   background-color: #f8f9fe;

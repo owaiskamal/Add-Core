@@ -4,7 +4,7 @@ import { FormGroup } from "@angular/forms";
 @Component({
   selector: "dropdown",
   template: `
-    <div [formGroup]="form">
+    <!-- <div [formGroup]="form">
       <select
       *ngIf="field.IsLookup == 'Y'"
         class="form-control"
@@ -15,7 +15,8 @@ import { FormGroup } from "@angular/forms";
           opt
         }}</option>
       </select>
-    </div>
+      
+    </div> -->
   `,
 })
 export class DropDownComponent {

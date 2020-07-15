@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
@@ -25,15 +26,27 @@ import { FormGroup } from "@angular/forms";
         [id]="field?.ColumnName"
         [formControlName]="field?.ColumnName"
       >
-        <option *ngFor="let opt of field.LookupVal.split('|')" [value]="opt">{{
+        <option class="option_style" *ngFor="let opt of field.LookupVal.split('|')" [value]="opt">{{
           opt
         }}</option>
       </select>
+      
+   
+     <!--  <p-dropdown *ngIf="field.IsLookup == 'Y'" [options]="field.LookupVal.split('|')" 
+        [id]="field?.ColumnName"
+        [formControlName]="field?.ColumnName"
+      [showClear]="true">
+      <ng-template let-item pTemplate="selectedItem">
+        <b style="vertical-align:middle">{{item}}</b>
+    </ng-template>
+    </p-dropdown> -->
+     
     </div>
   `,
 })
 export class TextBoxComponent  {
   @Input() field: any = {};
+  
   @Input() form: FormGroup;
   get isValid() {
     return this.form.controls[this.field.ColumnName].valid;
@@ -44,6 +57,6 @@ export class TextBoxComponent  {
   
   constructor() {
     
-    
+   
   }
 }
