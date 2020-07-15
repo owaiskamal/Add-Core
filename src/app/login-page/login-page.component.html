@@ -61,6 +61,8 @@
                 class="ui-button-primary ui-button-rounded login_btn"
                 (click)="loginUser()"
                 (keyup.enter)="loginUser()"
+                [ngClass]="{'disableCss': !userName || !password}"
+                [disabled]="!userName || !password"
                 label="Submit"
               ></button>
             </div>
