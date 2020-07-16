@@ -81,7 +81,7 @@ export class FrmCreateTransComponent
     private _route: ActivatedRoute,
     private transService: CreateTransService,
     private messageService: MessageService,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder
     
   ) {
     this.products = [];
@@ -387,6 +387,7 @@ export class FrmCreateTransComponent
 
     this.transService.postMasterTransaction(masterObj).subscribe((res) => {
       this.invoiceData = [];
+console.log(res , "jhjh");
 
       this.messageService.add({
         severity: "success",

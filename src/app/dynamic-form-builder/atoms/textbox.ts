@@ -20,7 +20,7 @@ import { FormGroup } from "@angular/forms";
         [placeholder]="field.ColumnLabel"
         pInputText
       />
-      <select
+      <!-- <select
       *ngIf="field.IsLookup == 'Y'"
         class="form-control"
         [id]="field?.ColumnName"
@@ -30,16 +30,14 @@ import { FormGroup } from "@angular/forms";
           opt
         }}</option>
       </select>
-      
+       -->
    
-     <!--  <p-dropdown *ngIf="field.IsLookup == 'Y'" [options]="field.LookupVal.split('|')" 
+      <p-dropdown *ngIf="field.IsLookup == 'Y'" [options]="array" [optionLabel]="array.label"
         [id]="field?.ColumnName"
         [formControlName]="field?.ColumnName"
+        [placeholder]="field.ColumnLabel"
       [showClear]="true">
-      <ng-template let-item pTemplate="selectedItem">
-        <b style="vertical-align:middle">{{item}}</b>
-    </ng-template>
-    </p-dropdown> -->
+    </p-dropdown>
      
     </div>
   `,
@@ -54,8 +52,30 @@ export class TextBoxComponent  {
   get isDirty() {
     return this.form.controls[this.field.ColumnName].dirty;
   }
-  
+  array :any  = {};
   constructor() {
+
+    setTimeout(() => {
+      console.log(this.field , "ASdasdasdasdsdsdasdasdasdsvcxvxcv");
+        if(this.field.IsLookup == 'Y'){
+        var subMenu = this.field.LookupVal;
+        console.log(this.field.LookupVal , "drop");
+        
+        //var array = [];
+      //  this.array = subMenu.split('|');
+      //   console.log(this.array , "dropdowns");
+
+        this.array = this.field.LookupVal.split('|').map((o) => ({
+          label: o,
+          value: o,
+        }))
+        console.log(this.array, "arrat");
+        
+        }
+      
+    
+    }, 1000);
+    
     
    
   }
