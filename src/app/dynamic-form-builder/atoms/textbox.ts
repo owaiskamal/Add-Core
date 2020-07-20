@@ -32,7 +32,7 @@ import { FormGroup } from "@angular/forms";
       </select>
        -->
    
-      <p-dropdown *ngIf="field.IsLookup == 'Y'" [options]="array" [optionLabel]="array.label"
+      <p-dropdown *ngIf="field.IsLookup == 'Y'" [options]="array" [optionLabel]="array['value']"
         [id]="field?.ColumnName"
         [formControlName]="field?.ColumnName"
         [placeholder]="field.ColumnLabel"
@@ -53,6 +53,8 @@ export class TextBoxComponent  {
     return this.form.controls[this.field.ColumnName].dirty;
   }
   array :any  = {};
+  testArray :any[] = []
+  testObj : any = {};
   constructor() {
 
     setTimeout(() => {
@@ -64,12 +66,25 @@ export class TextBoxComponent  {
         //var array = [];
       //  this.array = subMenu.split('|');
       //   console.log(this.array , "dropdowns");
+    
+      const table =
+      this.field.LookupVal.split('|') //["key:value","key:value"]
+  .map(pair => pair.split("-"));
 
-        this.array = this.field.LookupVal.split('|').map((o) => ({
-          label: o,
-          value: o,
-        }))
-        console.log(this.array, "arrat");
+          console.log(table , "asdasdskda");
+
+    
+this.array = table.map((o) => ({
+label : o[1],
+value : o[0]
+}))
+      //console.log(results , "askjdaskhdakhweg");
+      
+        // this.array = this.field.LookupVal.split('|').map((o ) => ({
+        //   label: o,
+        //   value: o,
+        // }))
+         console.log(this.array, "arrat");
         
         }
       
