@@ -385,15 +385,23 @@ export class FrmCreateTransComponent
 
     console.log(masterObj);
 
-    this.transService.postMasterTransaction(masterObj).subscribe((res) => {
+      this.transService.postMasterTransaction(masterObj).subscribe((res:any) => {
       this.invoiceData = [];
-console.log(res , "jhjh");
-
-      this.messageService.add({
-        severity: "success",
-        summary: "Transaction Created"   
-      
-         });
+      console.log(res , "jhjh");
+      if(res.code == "-1"){
+        this.messageService.add({
+          severity: "error",
+          summary: res.description
+          
+           });
+       }
+       else if(res.code == "0"){
+        this.messageService.add({
+          severity: "success",
+          summary: res.description
+          
+           });
+       }
     },
     (error)=>{
       this.invoiceData = [];
