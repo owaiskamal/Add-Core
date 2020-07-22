@@ -65,6 +65,9 @@
 :host ::ng-deep .ui-toast{
     margin-top: 6%;
 }
+:host ::ng-deep .ui-dialog .ui-dialog-content{
+    min-height: 200px;
+}
 @media (max-width: 768px) {
     :host ::ng-deep .ui-card .ui-card-body
     {
