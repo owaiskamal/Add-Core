@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { FrmlistComponent } from "./../setup/frmlist/frmlist.component";
 import { CreateTransService } from "./../create-trans.service";
 import * as papa from 'papaparse'
@@ -22,6 +23,7 @@ import {
 import { Dropdown } from "primeng/dropdown";
 import { DynamicFormBuilderComponent } from "../dynamic-form-builder/dynamic-form-builder.component";
 import { DatePipe } from "@angular/common";
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -39,16 +41,23 @@ export class FrmCreateTransComponent
   selectedProduct: string;
   selectedAccount: string;
   selectedTemplate: string;
+  selectedDelivered:string;
   products: Object[] = [];
   accounts: Object[] = [];
   templates: Object[] = [];
   rawData: any[] = [];
   jsonArr: any[] = [];
+  delieveredTo:any[] = [];
+  delivertoArray:any[] = []
+  popupDropdown:any[] = [];
+  array :any  = {};
   public invForm = new FormGroup({});
   unsubcribe: any;
   displayDialog: boolean;
+  displayDeliverDialog:boolean;
   expectedSequence :any[]= []
   car: any = {};
+  popupConfig:any = [];
   valueDate: any = {};
   selectedCar: any;
 
@@ -72,6 +81,7 @@ export class FrmCreateTransComponent
   dynamicForm: FormGroup;
   dialogData: any[] = [];
   invoiceheader: any[] = [];
+  popupConfigData:any[]= [];
   transactionData: any[] = [];
   dynform: boolean = true;
   csvArray: any[] = [];
@@ -166,7 +176,7 @@ export class FrmCreateTransComponent
     console.log(obj , "recieved");
     
     this.transactionData = obj;
-
+    console.log(this.transactionData,"before transactipn")
     // this.invoiceData.push(obj);
     // console.log(this.invoiceData,"Invoice saved data");
     // this.getuserdata(this.invoiceData);
@@ -267,6 +277,7 @@ export class FrmCreateTransComponent
 
   OnProductChange($event) {
     console.log(this.selectedProduct["ProCode"], "PRODUCTS");
+    console.log(this.selectedProduct["ProBehavior"], "Product Behavior");
     this.transactionArr = [];
     this.invoiceArr = [];
 
@@ -301,6 +312,11 @@ export class FrmCreateTransComponent
         // this.rawData.push(res.detailData.detail);
         console.log("RawData", this.rawData["Products"]);
         this.products = this.rawData["Products"];
+        this.delieveredTo = this.rawData["DeliverTo"];
+        console.log(this.delieveredTo,"popup Data")
+        this.popupDropdown = Object.keys(this.delieveredTo)
+        console.log(this.popupDropdown,"popup dropdown");
+        console.log(Object.values(this.delieveredTo),"input fields config");
       }, 
       (error)=>
       {setTimeout(() => {
@@ -353,6 +369,111 @@ export class FrmCreateTransComponent
     console.log("TAB INDEX",event.index);
     this.tabIndex = event.index;
 } 
+OnDeliveredChange(event){
+console.log(event.value,"delievered change");
+console.log(this.delieveredTo[event.value],"event delievered value");
+this.popupConfigData = [];
+this.popupConfig = [];
+this.popupConfig.push(this.delieveredTo[event.value]);
+console.log(this.popupConfig,"popconfig");
+
+for (var i = 0; i < Object.keys(this.popupConfig[0]).length; i++) {
+  this.popupConfigData[i] = {
+    header: Object.keys(this.popupConfig[0])[i],
+    field: ""
+  };
+}
+}
+mainSubmit(){
+  let masterObj = {
+    FormID: this.formID,
+    UserID: this.UserID,
+    AccessToken: this.AccessToken,
+    Master: {
+      ProCode: this.selectedProduct["ProCode"],
+      ProductName: this.selectedProduct["ProName"],
+      Behaviour: this.selectedProduct["ProBehavior"],
+      DRAccountNo: this.selectedAccount["AC"],
+      DRAccTitle: this.selectedAccount["AcTitel"],
+      ConfigID: this.selectedTemplate["ConfCode"],
+      ConfigDesc: this.selectedTemplate["ConfName"],
+    },
+
+    Transactions: this.transactionData,
+    Invoice: this.invoiceValues,
+
+  };
+  
+  console.log(this.convertToString(masterObj),"convert to string");
+  console.log(masterObj);
+  this.transService.postMasterTransaction(masterObj).subscribe((res:any) => {
+
+    this.invoiceData = [];
+    this.displayDeliverDialog = false
+    console.log(res , "jhjh");
+    if(res.code == "-1"){
+      this.messageService.add({
+        severity: "error",
+        summary: res.description
+        
+         });
+     }
+     else if(res.code == "0"){
+      this.messageService.add({
+        severity: "success",
+        summary: res.description
+        
+         });
+     }
+  },
+  (error)=>{
+    this.invoiceData = [];
+    console.log(error.error,'invoice error')
+   
+    this.messageService.add({
+      severity: "error",
+      summary: "Connection Failed",
+      detail: error.error.title
+    });
+  });
+}
+convertToString(obj){
+  Object.keys(obj).forEach(i=>{
+    if(typeof(obj[i])==='object'){
+      return this.convertToString(obj[i]);
+    }
+    obj[i] = '' + obj[i]; 
+  })
+   return obj;
+  
+}
+submitPopup(){
+  console.log(this.popupConfigData,"popup config");
+  let deliverTo = {};
+  this.delivertoArray = [];
+/*   this.popupConfigData.forEach(element => {
+    console.log(element.header,"eleemnt ehader");
+    deliverTo = {
+      [element.header]: element.field
+    }
+    this.delivertoArray.push(deliverTo);
+    
+  
+  }); */
+  //this.transactionData.concat(this.delivertoArray)
+  console.log(this.delivertoArray,"delivertoarray");
+  console.log(this.transactionData,"transactionData");
+//console.log(table,"table");
+
+for(let i = 0 ;i < this.popupConfigData.length;i++){
+  deliverTo[this.popupConfigData[i].header] = this.popupConfigData[i].field
+}
+    this.delivertoArray.push(deliverTo);
+this.transactionData['deliverto'] = deliverTo;
+this.mainSubmit();
+console.log(this.transactionData,"new trasactionata");
+
+}
   submitMaster() {
     if(!this.child.form.valid)
    {
@@ -364,28 +485,34 @@ export class FrmCreateTransComponent
 
    console.log(this.selectedTemplate,"selectedTemplate"); */
   
+   if(this.selectedProduct["ProBehavior"]=="K" || this.selectedProduct["ProBehavior"]=="P"|| 
+   this.selectedProduct["ProBehavior"]=="D" ||  this.selectedProduct["ProBehavior"]=="S"){
+     this.displayDeliverDialog = true
+    
+    
+     console.log(this.displayDeliverDialog,"checking dialog");
+     console.log("Product true");
+    
+     this.array = this.popupDropdown.map((o) => ({
+      label : o,
+      value : o
+      }))
+      console.log(this.array,"dropdown array")
    
-    let masterObj = {
-      FormID: this.formID,
-      UserID: this.UserID,
-      AccessToken: this.AccessToken,
-      Master: {
-        ProCode: this.selectedProduct["ProCode"],
-        ProductName: this.selectedProduct["ProName"],
-        Behaviour: this.selectedProduct["ProBehavior"],
-        DRAccountNo: this.selectedAccount["AC"],
-        DRAccTitle: this.selectedAccount["AcTitel"],
-        ConfigID: this.selectedTemplate["ConfCode"],
-        ConfigDesc: this.selectedTemplate["ConfName"],
-      },
+   }
+   else{
+     this.displayDeliverDialog = false;
+     console.log(this.displayDeliverDialog,"checking dialog");
+     console.log("Product false");
+     this.mainSubmit();
+   }
 
-      Transactions: this.transactionData,
-      Invoice: this.invoiceValues,
-    };
 
-    console.log(masterObj);
+//    console.log(masterObj);
 
-      this.transService.postMasterTransaction(masterObj).subscribe((res:any) => {
+    
+
+     /*  this.transService.postMasterTransaction(masterObj).subscribe((res:any) => {
       this.invoiceData = [];
       console.log(res , "jhjh");
       if(res.code == "-1"){
@@ -412,7 +539,7 @@ export class FrmCreateTransComponent
         summary: "Connection Failed",
         detail: error.error.title
       });
-    });
+    }); */
   }
   delete() {
     let index = this.invoiceValues.indexOf(this.selectedCar);

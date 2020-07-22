@@ -247,6 +247,8 @@
                 </div>
               </p-footer>
             </p-dialog>
+
+
           </p-tabPanel>
         </p-tabView>
         <div class="ui-g">
@@ -263,6 +265,43 @@
           (click)="submitMaster()"
           label="Submit"
         ></button>
+         <!-- Deliver to dialog start -->
+         <p-dialog
+         header="Deliver Info"
+         [(visible)]="displayDeliverDialog"
+         *ngIf="displayDeliverDialog"
+         [focusOnShow]="false"
+         showEffect="fade"
+         [modal]="true"
+         [style]="{width: '300px'}"
+         styleClass= "delivery_dialog"
+         [baseZIndex]="10000"
+         
+       >
+         <p-dropdown [options]="array" [optionLabel]="array.value"
+          placeholder="Deliver to"
+          [showClear]="true"
+          (onChange)="OnDeliveredChange($event)"
+          [(ngModel)]="selectedDelivered"
+          tabindex="1"
+          >
+        </p-dropdown>
+        <div class="p-grid ui-fluid" *ngFor="let col of popupConfigData">
+          <div class="p-col-4">
+            <label style="font-weight: 700;">{{ col.header }}</label>
+          </div>
+          <div class="p-col-8">
+           
+            <input pInputText  [(ngModel)]="col.field" [placeholder]="col.header" />
+          </div>
+         </div>
+        <p-footer>
+          <button type="button" pButton icon="pi pi-check" (click)="submitPopup()" label="Submit"></button>
+          <button type="button" pButton icon="pi pi-times" (click)="displayDeliverDialog=false" label="No" class="ui-button-secondary"></button>
+      </p-footer>
+       </p-dialog>
+
+<!-- Deliver to dialog end -->
       </div>
     <div class="ui-lg-6 ui-md-12 ui-sm-12">
         <button  *ngIf="fields.length > 0"
