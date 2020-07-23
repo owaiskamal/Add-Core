@@ -21,6 +21,7 @@ import {
   style,
 } from "@angular/animations";
 import { HostListener } from "@angular/core";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "app-admin-page",
@@ -93,8 +94,10 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
     private router: Router,
     private navlinkservice: NavlinksService,
     private navService: NavService,
-    private userService: UserauthService
+    private userService: UserauthService,
+    private title : Title
   ) {
+    this.title.setTitle('CR-PL - Admin Page')
     if (this.depth === undefined) {
       this.depth = 0;
     }
