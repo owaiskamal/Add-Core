@@ -5,6 +5,7 @@ import { UserauthService } from "../userauth.service";
 import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { PushNotificationService} from '../push-notification.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "app-login-page",
@@ -18,9 +19,10 @@ export class LoginPageComponent implements OnInit {
     private authService: UserauthService,
     private http:HttpClient,
     private _notificationService: PushNotificationService,
-    
+    private title : Title
   ) {
     this._notificationService.requestPermission();
+    this.title.setTitle('CR-PL - Login page')
   }
 
   userName:string;

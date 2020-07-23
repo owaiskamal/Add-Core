@@ -12,7 +12,7 @@ export class AppComponent {
    */
   constructor(private title : Title) {
 
-    this.title.setTitle( SampleJson.AppSettings[0].Title);
+   // this.title.setTitle( SampleJson.AppSettings[0].Title);
 
   }
 

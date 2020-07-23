@@ -2,6 +2,7 @@ import { Component, OnInit, Input, HostBinding, Output ,EventEmitter } from '@an
 import { Router } from '@angular/router';
 import { trigger, state, transition, animate, style } from '@angular/animations';
 import { NavService } from '../nav.service';
+import { Title } from '@angular/platform-browser';
 
 
 
@@ -51,7 +52,7 @@ export class SidenavComponent implements OnInit {
   visibleSidebar1 = true;
   messa = "ASdasdasdasdasdasdasd1q231231"
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
-  constructor(public route : Router , public navService: NavService) {
+  constructor(public route : Router , public navService: NavService , private title : Title) {
     if (this.depth === undefined) {
       this.depth = 0;
     }
@@ -69,7 +70,11 @@ export class SidenavComponent implements OnInit {
     if (!item.Forms || !item.Forms.length) {
 
       this.route.navigate(['adminpage/'+item.RLink+'/' +item.id]);
+      console.log(item , "new daa");
+      
+    this.title.setTitle( 'CR-PL - '+item.Name);
       if(this.route.isActive('adminpage/'+item.RLink+'/' +item.id , true))
+
       {
       console.log('is active' );
       }
