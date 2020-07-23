@@ -97,7 +97,6 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
     private userService: UserauthService,
     private title : Title
   ) {
-    this.title.setTitle('CR-PL - Admin Page')
     if (this.depth === undefined) {
       this.depth = 0;
     }
@@ -131,6 +130,8 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getLinks();
+    
+    this.title.setTitle('CR-PL - Admin Page')
   }
 
   ngAfterViewInit() {
@@ -200,6 +201,8 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
     //this.currentUserSubject.next(null);
   }
   adminpage() {
-    this.router.navigateByUrl("adminpage");
+    this.router.navigateByUrl("adminpage"); 
+    
+    this.title.setTitle('CR-PL - Admin Page')
   }
 }
