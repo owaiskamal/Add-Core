@@ -200,7 +200,10 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
 
     //this.currentUserSubject.next(null);
   }
-  adminpage() {
+  changeTitle()
+{
+  this.title.setTitle('CR-PL - Admin Page')
+}  adminpage() {
     this.router.navigateByUrl("adminpage"); 
     
     this.title.setTitle('CR-PL - Admin Page')
