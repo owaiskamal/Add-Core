@@ -42,7 +42,7 @@
       <p-dropdown
         [options]="templates"
         [(ngModel)]="selectedTemplate"
-        (onChange)="getTemplates()"
+        (onChange)="getTemplates($event)"
         placeholder="Select a template"
         optionLabel="ConfName"
         [showClear]="true"
