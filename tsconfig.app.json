@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": []
@@ -12,6 +12,7 @@
     "src/**/*.d.ts"
   ],
   "angularCompilerOptions": {
+    "experimentalDecorators": true,
     "enableIvy": false
   }
 }
