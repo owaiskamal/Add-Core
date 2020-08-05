@@ -6,11 +6,11 @@ import { FormGroup } from "@angular/forms";
   selector: "textboxnum",
   template: `
     <div class="p-fluid p-formgrid p-grid" [formGroup]="form">
-      <div class="ui-inputgroup p-md-6">
+      <div class="p-inputgroup p-col-12" >  
         <p-inputNumber
-          class="p-field p-col"
+          class=" p-col"
           *ngIf="field.DataType == 'N'"
-          style="font-weight:500;width : 100%"
+        
           [name]="field?.ColumnName"
           [formControlName]="field?.ColumnName"
           [placeholder]="field.ColumnLabel"
@@ -22,12 +22,12 @@ import { FormGroup } from "@angular/forms";
           style="font-weight:900;"
           type="button"
           label="verify"
-          class="  ui-button-warning"
+          class="  p-button-warning"
         ></button>
       </div>
       <p-inputNumber
         *ngIf="field.DataType == 'C'"
-        style="font-weight:500;width : 100%"
+    
         [formControlName]="field.ColumnName"
         mode="currency"
         currency="PKR"
@@ -39,6 +39,7 @@ import { FormGroup } from "@angular/forms";
       <!-- <input class="form-control"  [id]="field?.name" [name]="field?.ColumnName" [formControlName]="field?.ColumnName" [placeholder]= "field.ColumnLabel"> -->
     </div>
   `,
+  styles:['p-inputnumber {width : 100% ; font-weight : 500}']
 })
 export class TextBoxComponentNum {
   @Input() field: any = {};

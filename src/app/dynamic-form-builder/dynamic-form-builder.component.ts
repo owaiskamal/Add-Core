@@ -20,12 +20,12 @@ import { formatNumber, DatePipe } from '@angular/common';
   selector: "dynamic-form-builder",
   template: `
     <form [formGroup]="form">
-      <div class="ui-g ui-fluid">
-        <div *ngFor="let field of fields" class="ui-md-6 ui-sm-12">
+      <div class="p-grid p-fluid">
+        <div *ngFor="let field of fields" class="p-md-6 p-sm-12">
           <field-builder [field]="field" [form]="form"></field-builder>
         </div>
       </div>
-      <!-- <div class="ui-md-2">
+      <!-- <div class="p-md-2">
    <button type="submit" (click)= "saveData()" pButton  label="Save"></button>
    </div> -->
     </form>

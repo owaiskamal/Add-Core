@@ -1,6 +1,6 @@
 <p-toast  [style]="{'margin-top':'4%'}" position="top-right"></p-toast>
-<p-card class="ui-card">
-  <p-header class="ui-card-header">
+<p-card class="p-card">
+  <p-header class="p-card-header">
     <div class="card-text">
       {{ tableHeader }}
   </div>
@@ -20,7 +20,7 @@
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   >
     <ng-template pTemplate="caption">
-      <div class="ui-g ui-sm-12 ui-md-8" style="text-align: right;">
+      <div class="p-grid p-sm-12 p-md-8" style="text-align: right;">
         <i class="pi pi-search" style="margin: 4px 4px 0 0;"></i>
         <input
           type="text"

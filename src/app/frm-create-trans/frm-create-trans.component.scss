@@ -1,10 +1,10 @@
-.focus  .ui-dropdown, .focus  .ui-multiselect {
+.focus  .p-dropdown, .focus  .p-multiselect {
     -moz-box-shadow: 0px 0px 5px #1f89ce;
     -webkit-box-shadow: 0px 0px 5px #1f89ce;
     box-shadow: 0px 0px 5px #1f89ce;
 }
 
-:host ::ng-deep .ui-dropdown
+:host ::ng-deep .p-dropdown
 {
     width: 100%;
     box-shadow: 0 1px 3px #32325d26, 0 1px 0 rgb(121 72 72 / 2%);
@@ -13,46 +13,58 @@
     align-items: center;
 }
 
-:host ::ng-deep .ui-dropdown:focus
+:host ::ng-deep .p-dropdown:focus
 { 
      box-shadow: 0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba(0,0,0,.08)!important;
      border: none;
  
 }
-:host ::ng-deep .ui-card{
+:host ::ng-deep .p-card{
     background-color: #f4f5f7!important;
     border-radius: 12px;
     box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
     margin-bottom: 3em;
 }
-:host ::ng-deep  .ui-tabview.ui-tabview-top .ui-tabview-nav .ui-tabview-selected
+:host ::ng-deep .p-tabview
+{
+    padding-top: 2em;
+    margin-left: 1em;
+    margin-right:1em ;
+}
+.btnPadding {
+    width: 100%;
+    margin-left: 1px;
+    padding-top: 1em;
+
+}
+:host ::ng-deep  .p-tabview .p-tabview-nav .p-tabview-selected
 {
     background-color: rgb(66, 66, 66);
     border: 1px solid rgb(66, 66, 66);
 }
 
-:host ::ng-deep  .ui-tabview.ui-tabview-top .ui-tabview-nav .ui-tabview-selected:hover
+:host ::ng-deep  .p-tabview .p-tabview-nav .p-tabview-selected:hover
 {
     background-color: rgb(39, 39, 39);
     border: 1px solid rgb(39, 39, 39);
 }
-:host ::ng-deep  .ui-tabview.ui-tabview-top .ui-tabview-nav li:focus
+:host ::ng-deep  .p-tabview .p-tabview-nav li:focus
 {
     box-shadow: 0 0 0 0.2em rgb(66, 66, 66);
 
 }
 
-:host ::ng-deep  .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight
+:host ::ng-deep  .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-state-highlight
 {
     color: #FFFFFF;
     background-color: rgb(66, 66, 66);
 }
-.ui-card-header
+.p-card-header
 {
     background-color: #1f89ce;
     z-index: 3!important;
 }
-.ui-card [class*=ui-card-header-]
+.p-card [class*=p-card-header-]
 {
 
     margin: 0 15px;
@@ -60,7 +72,7 @@
     position: relative;
 }
 
-:host ::ng-deep .ui-card .ui-card-body
+:host ::ng-deep .p-card .p-card-body
 {
     padding: 4em;
 }
@@ -79,14 +91,15 @@
     float: left;
     box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(39, 39, 39, 0.4)
 }
-:host ::ng-deep .ui-toast{
+:host ::ng-deep .p-toast{
     margin-top: 6%;
 }
-:host ::ng-deep .ui-dialog .ui-dialog-content{
+:host ::ng-deep .p-dialog .p-dialog-content{
     min-height: 200px;
+    padding: 1rem 1.5rem 2rem 1.5rem;
 }
 @media (max-width: 768px) {
-    :host ::ng-deep .ui-card .ui-card-body
+    :host ::ng-deep .p-card .p-card-body
     {
         padding-top: 4em;
         padding-right: 2em;
@@ -94,10 +107,10 @@
         padding-left: 2em;
         
     }
-    :host ::ng-deep .ui-toast{
+    :host ::ng-deep .p-toast{
         margin-top: 20%;
     }
-    :host ::ng-deep .ui-card{
+    :host ::ng-deep .p-card{
         margin-top: 2em;
         margin-bottom: 4em;
     }

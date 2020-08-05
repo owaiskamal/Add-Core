@@ -573,7 +573,7 @@ console.log(this.transactionData,"new trasactionata");
 //     });
 // }
 
-onBasicUpload(event){
+onBasicUpload(event : any){
 /*   console.log(event,"file event")
   for(let file of event.files) {
     this.uploadedFiles.push(file);

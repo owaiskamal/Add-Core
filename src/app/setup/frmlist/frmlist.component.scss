@@ -188,21 +188,21 @@
             }
         }
     }
-    :host ::ng-deep .ui-card{
+    :host ::ng-deep .p-card{
         margin-top: 2em;
         margin-bottom: 4em;
     }
 }
 
-:host ::ng-deep .ui-card{
+:host ::ng-deep .p-card{
     border-radius: 6px;
 }
-.ui-card-header
+.p-card-header
 {
     background-color: #1f89ce;
     z-index: 3!important;
 }
-.ui-card [class*=ui-card-header-]
+.p-card [class*=p-card-header-]
 {
 
     margin: 0 15px;
@@ -210,7 +210,7 @@
     position: relative;
 }
 
-:host ::ng-deep .ui-card .ui-card-body
+:host ::ng-deep .p-card .p-card-body
 {
 
     padding-top: 4em;

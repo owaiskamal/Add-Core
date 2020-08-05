@@ -6,8 +6,8 @@
   ></p-progressBar>
 
   <p-toast position="top-right"></p-toast>
-  <div class="ui-g main">
-    <p-card class="ui-g-12 card_body">
+  <div class="p-grid main">
+    <p-card class="p-col-12 card_body">
       <div>
         <p-header>
           <h2 class="header_style">Sign in</h2>
@@ -15,13 +15,13 @@
       </div>
       <!-- <p>{{ ipAddress }}</p> -->
 
-      <div class="ui-g ui-fluid ">
+      <div class="p-grid p-fluid ">
         <hr class="hr_style" />
         <form class="form_style" #myForm="ngForm">
-          <div class="ui-g">
-            <div class="ui-md-2 ui-lg-3"></div>
-            <div class="ui-md-8 ui-lg-6 ui-sm-12">
-              <div class="ui-inputgroup input-group-alternative input-icons">
+          <div class="p-grid">
+            <div class=" p-md-2 p-lg-3"></div>
+            <div class=" p-md-8 p-lg-6 p-sm-12 ">
+              <div class="p-inputgroup input-group-alternative input-icons">
                 <i class="fa fa-user-circle icon"></i>
 
                 <input
@@ -36,10 +36,10 @@
             </div>
           </div>
 
-          <div class="ui-g">
-            <div class="ui-md-2 ui-lg-3"></div>
-            <div class="ui-md-8 ui-lg-6 ui-sm-12">
-              <div class="ui-inputgroup input-group-alternative input-icons">
+          <div class="p-grid">
+            <div class="p-md-2 p-lg-3"></div>
+            <div class="p-md-8 p-lg-6 p-sm-12">
+              <div class="p-inputgroup input-group-alternative input-icons">
                 <i class="fa fa-lock icon"></i>
                 <input
                   type="password"
@@ -52,13 +52,13 @@
               </div>
             </div>
           </div>
-          <div class="ui-g">
-            <div class="ui-md-2 ui-lg-3"></div>
-            <div class="ui-md-8 ui-lg-6 ui-sm-12">
+          <div class="p-grid">
+            <div class="p-md-2 p-lg-3"></div>
+            <div class="p-md-8 p-lg-6 p-sm-12">
               <button
                 pButton
                 type="submit"
-                class="ui-button-primary ui-button-rounded login_btn"
+                class="p-button-primary p-button-rounded login_btn"
                 (click)="loginUser()"
                 (keyup.enter)="loginUser()"
                 [ngClass]="{'disableCss': !userName || !password}"
@@ -67,13 +67,13 @@
               ></button>
             </div>
           </div>
-          <!--   <div class="ui-g">
-          <div class="ui-md-2 ui-lg-3"></div>
-          <div class="ui-md-8 ui-lg-6 ui-sm-12">
+          <!--   <div class="p-grid">
+          <div class="p-md-2 p-lg-3"></div>
+          <div class="p-md-8 p-lg-6 p-sm-12">
             <button
               pButton
               type="submit"
-              class="ui-button-info ui-button-rounded"
+              class="p-button-info p-button-rounded"
               (click)="changePassword()"
               label="Change Password"
               style="margin-top: 0px;width:100%; font-weight: bold;"
@@ -87,7 +87,7 @@
  <!--  <footer class="py-5">
     <div class="container">
       <div class="row align-items-center">
-        <div class="ui-g-12">
+        <div class="p-grid-12">
           <div class="copyright text-center  text-muted">
             © 2020
             <a
