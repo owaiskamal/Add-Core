@@ -472,7 +472,7 @@ for(let i = 0 ;i < this.popupConfigData.length;i++){
 this.transactionData['deliverto'] = deliverTo;
 this.mainSubmit();
 console.log(this.transactionData,"new trasactionata");
-
+this.popupConfigData = [];
 }
   submitMaster() {
     if(!this.child.form.valid)
