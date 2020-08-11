@@ -1,17 +1,17 @@
 <p-toast  position="top-right"></p-toast>
 
-<p-card class="ui-card">
-  <p-header class="ui-card-header">
+<p-card class="p-card">
+  <p-header class="p-card-header">
     <div class="card-text">
     Create Transaction
   </div>
 </p-header>
-  <div class="ui-g ui-fluid">
-    <!--  <div class="ui-md-6 ui-lg-6 col-md-6 ui-sm-12">
+  <div class="p-grid p-fluid">
+    <!--  <div class="p-md-6 p-lg-6 col-md-6 p-sm-12">
         <label for="companytitle">Company title</label>
         <input id="companytitle" type="text" pInputText> 
     </div> -->
-    <div class="ui-md-6 ui-lg-6 ui-sm-12">
+    <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
       <label style="font-weight: 700;" for="producttitle">Product title</label>
       <p-dropdown
         #myDropdown
@@ -25,7 +25,7 @@
 
       <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
     </div>
-    <div class="ui-md-6 ui-lg-6 ui-sm-12">
+    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
       <label style="font-weight: 700;" for="accountitle">Account title</label>
       <p-dropdown
         [options]="accounts"
@@ -37,7 +37,7 @@
       ></p-dropdown>
       <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
     </div>
-    <div class="ui-md-6 ui-lg-6 ui-sm-12">
+    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
       <label style="font-weight: 700;" for="filetemplate">File template</label>
       <p-dropdown
         [options]="templates"
@@ -51,12 +51,12 @@
     </div>
 
     <!-- App Form Template Start -->
-    <div class="ui-md-6 ui-lg-6 ui-sm-12">
+    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
     </div>
 
-    <div class="ui-fluid ui-g">
-      <div class="ui-g-12" style="width: 100%;">
+    <div class="p-fluid p-grid">
+      <div class="p-grid" >
         <!-- <dynamic-form-builder
     
               *ngIf="!isValid"
@@ -82,8 +82,8 @@
               [fields]="invoiceArr"
             ></dynamic-form-builder> -->
             <form [formGroup]="invForm">
-              <div class="ui-g ui-fluid">
-                <div *ngFor="let f of invoiceArr" class="ui-md-6 ui-sm-12">
+              <div class="p-grid p-fluid">
+                <div *ngFor="let f of invoiceArr" class="p-md-6 p-sm-12">
                   <label style="font-weight: 700;">
                     <strong class="text-danger" *ngIf="f.Mandatory == 'Y'">*</strong>
                     {{ f.ColumnLabel }}</label>
@@ -96,7 +96,7 @@
                     />
                     <p-inputNumber
                       *ngSwitchCase="'N'"
-                      style="font-weight: 500;"
+                     
                       [name]="f?.ColumnName"
                       [formControlName]="f?.ColumnName"
                       [placeholder]="f.ColumnLabel"
@@ -105,7 +105,7 @@
                     
               
                       *ngSwitchCase="'C'"
-                      style="font-weight: 500;"
+                     
                       [formControlName]="f.ColumnName"
                       mode="currency"
                       currency="PKR"
@@ -120,8 +120,8 @@
                   </div>
                 </div>
               </div>
-              <div class="ui-g">
-                <div class="ui-lg-6 ui-md-12 ui-sm-12">
+              <div class="p-grid">
+                <div class="p-lg-6 p-md-12 p-sm-12">
                   <button
                     type="submit"
                     [disabled]="
@@ -134,9 +134,9 @@
                     label="Add"
                   ></button>
                 </div>
-                <div class="ui-lg-6 ui-md-12 ui-sm-12">
+                <div class="p-lg-6 p-md-12 p-sm-12">
                   <button
-                  class="ui-button-secondary"
+                  class="p-button-secondary"
                     type="button"
                     pButton
                     icon="pi pi-times"
@@ -145,9 +145,9 @@
                   ></button>
                  
                 </div>
-                <div class="ui-helper-clearfix ui-lg-6 ui-md-12 ui-sm-12">
+                <div class="p-helper-clearfix p-lg-6 p-md-12 p-sm-12">
                   
-                  <!-- <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button> -->
+                  <!-- <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="p-button-success"></button> -->
                   <p-fileUpload mode="basic" customUpload="true"  name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="1000000" (uploadHandler)="onBasicUpload($event)"></p-fileUpload>
                 </div>
               </div>
@@ -180,7 +180,7 @@
                 <tr [pSelectableRow]="rowData">
                   
                   <td *ngFor="let col of columns">
-                    <span class="ui-column-title">{{ col.header }}</span>
+                    <span class="p-column-title">{{ col.header }}</span>
                     {{ rowData[col.field] }}
                   </td>
                 </tr>
@@ -200,7 +200,7 @@
               [modal]="true"
               [style]="{ width: '300px' }"
             >
-              <div class="p-grid ui-fluid" *ngFor="let col of invoiceheader">
+              <div class="p-grid p-fluid" *ngFor="let col of invoiceheader">
                 <div class="p-col-4">
                   <label style="font-weight: 700;">{{ col.header }}</label>
                 </div>
@@ -228,7 +228,7 @@
                   </div> -->
               </div>
               <p-footer>
-                <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                <div class="p-dialog-buttonpane p-helper-clearfix">
                   <button
                   
                     type="button"
@@ -251,8 +251,8 @@
 
           </p-tabPanel>
         </p-tabView>
-        <div class="ui-g">
-        <div class="ui-lg-6 ui-md-12 ui-sm-12">
+        <div class="p-grid p-col-12 btnPadding">
+        <div class="p-lg-6  p-md-12 p-sm-12">
         <button
           *ngIf="fields.length > 0"
           [disabled]="
@@ -266,46 +266,12 @@
           label="Submit"
         ></button>
          <!-- Deliver to dialog start -->
-         <p-dialog
-         header="Deliver Info"
-         [(visible)]="displayDeliverDialog"
-         *ngIf="displayDeliverDialog"
-         [focusOnShow]="false"
-         showEffect="fade"
-         [modal]="true"
-         [style]="{width: '300px'}"
-         styleClass= "delivery_dialog"
-         [baseZIndex]="10000"
-         
-       >
-         <p-dropdown [options]="array" [optionLabel]="array.value"
-          placeholder="Deliver to"
-          [showClear]="true"
-          (onChange)="OnDeliveredChange($event)"
-          [(ngModel)]="selectedDelivered"
-          tabindex="1"
-          >
-        </p-dropdown>
-        <div class="p-grid ui-fluid" *ngFor="let col of popupConfigData">
-          <div class="p-col-4">
-            <label style="font-weight: 700;">{{ col.header }}</label>
-          </div>
-          <div class="p-col-8">
-           
-            <input pInputText  [(ngModel)]="col.field" [placeholder]="col.header" />
-          </div>
-         </div>
-        <p-footer>
-          <button type="button" pButton icon="pi pi-check" (click)="submitPopup()" label="Submit"></button>
-          <button type="button" pButton icon="pi pi-times" (click)="displayDeliverDialog=false" label="No" class="ui-button-secondary"></button>
-      </p-footer>
-       </p-dialog>
-
+        
 <!-- Deliver to dialog end -->
       </div>
-    <div class="ui-lg-6 ui-md-12 ui-sm-12">
+    <div class="p-lg-6 p-md-12 p-sm-12">
         <button  *ngIf="fields.length > 0"
-        class="ui-button-secondary"
+        class="p-button-secondary"
         type="button"
         pButton
         icon="pi pi-times"
@@ -319,3 +285,36 @@
     <!-- App Form Template End -->
   </div>
 </p-card>
+<p-dialog
+header="Deliver Info"
+[(visible)]="displayDeliverDialog"
+*ngIf="displayDeliverDialog"
+[focusOnShow]="false"
+showEffect="fade"
+[modal]="true"
+[style]="{width: '300px'}"
+styleClass= "delivery_dialog"
+[baseZIndex]="10000"
+
+>
+<p-dropdown [options]="array" [optionLabel]="array.value"
+ placeholder="Deliver to"
+ [showClear]="true"
+ (onChange)="OnDeliveredChange($event)"
+ [(ngModel)]="selectedDelivered"
+ tabindex="1"
+ >
+</p-dropdown>
+<div class="p-col-12" *ngFor="let col of popupConfigData">
+
+   <label style="font-weight: 700;">{{ col.header }}</label>
+ 
+   <input pInputText style="width: 100%;"  [(ngModel)]="col.field" [placeholder]="col.header" />
+ 
+</div>
+<p-footer>
+ <button type="button" pButton icon="pi pi-check" (click)="submitPopup()" label="Submit"></button>
+ <button type="button" pButton icon="pi pi-times" (click)="displayDeliverDialog=false" label="No" class="p-button-secondary"></button>
+</p-footer>
+</p-dialog>
+

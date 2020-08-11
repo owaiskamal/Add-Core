@@ -6,7 +6,7 @@ import { MessageService } from "primeng/api";
 @Component({
   selector: "file",
   template: `
-    <div [formGroup]="form">
+    <!-- <div [formGroup]="form">
       <p-fileUpload
         *ngIf="!field.value"
         name="demo[]"
@@ -24,7 +24,7 @@ import { MessageService } from "primeng/api";
           </ul>
         </ng-template>
       </p-fileUpload>
-    </div>
+    </div> -->
   `,
   /*  styles:[
       
