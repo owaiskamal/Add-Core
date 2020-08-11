@@ -5,7 +5,7 @@
 
     <a class="mat-list-item"   [ngClass]="{'active': item.RLink ? route.isActive('adminpage/'+item.RLink+'/' +item.id, true): false, 'expanded': expanded}">
 
-        <i class="align-card-icon" style="font-size: 0.8em;" [ngClass]="{'pi pi-circle-on' : item.Forms && item.Forms.length}"></i>{{item.Node || item.Name}}
+        <i class="align-card-icon" style="font-size: 0.6em;" [ngClass]="{'pi pi-circle-on' : item.Forms && item.Forms.length}"></i>{{item.Node || item.Name}}
 
         <span  *ngIf="item.Forms && item.Forms.length">
             <i class="pi pi-angle-down align-angle-down" [@indicatorRotate]="expanded ? 'expanded': 'collapsed'"></i>

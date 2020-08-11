@@ -13,6 +13,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ["./login-page.component.scss"]
 })
 export class LoginPageComponent implements OnInit {
+  spinnerIcon: boolean;
   constructor(
     private messageService: MessageService,
     private router: Router,
@@ -54,8 +55,9 @@ getNotifications(){
 
 
      loginUser() {
+       this.spinnerIcon = true;
     this.authService.userAuth(this.userName, this.password).pipe(first()).subscribe(res => {
-
+        this.spinnerIcon = false;
       console.log(res,"Complete response");
       if (res.code == "-1") {
 
