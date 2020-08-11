@@ -23,7 +23,7 @@
     "@types/xlsx": "0.0.36",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.4.1",
-    "class-transformer": "^0.2.3",
+    "class-transformer": ">=0.3.1",
     "css-loader": "^4.2.0",
     "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",
