@@ -20,6 +20,7 @@
   border-color: #00458a !important;
   margin-top: 0px;
   width: 100%;
+  padding: 0.3rem .7rem;
   font-weight: bold;
 }
 
@@ -132,6 +133,10 @@
   position: fixed;
 }
   }
+
+:host ::ng-deep .p-toast {
+  width: 75%;
+}
 }
 
 

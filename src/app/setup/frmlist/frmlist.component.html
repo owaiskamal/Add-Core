@@ -10,9 +10,9 @@
     [value]="userList"
     [columns]="cols"
     [paginator]="true"
-    styleClass="ui-table-customers"
-    [responsive]="true"
+    styleClass="p-table-customers"
     [rows]="10"
+    [responsive]= "true"
     [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[10, 25, 50]"
     [rowHover]="true"
@@ -20,21 +20,23 @@
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   >
     <ng-template pTemplate="caption">
-      <div class="p-grid p-sm-12 p-md-8" style="text-align: right;">
-        <i class="pi pi-search" style="margin: 4px 4px 0 0;"></i>
+      <div class="table-header" >
+        <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
         <input
           type="text"
           pInputText
           placeholder="Global Filter"
           (input)="dt.filterGlobal($event.target.value, 'contains')"
         />
+      </span>
       </div>
     </ng-template>
-    <ng-template pTemplate="colgroup" let-columns>
+    <!-- <ng-template pTemplate="colgroup" let-columns>
       <colgroup>
         <col *ngFor="let col of columns" style="width: 200px;" />
       </colgroup>
-    </ng-template>
+    </ng-template> -->
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -56,7 +58,7 @@
     <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr>
         <td *ngFor="let col of columns">
-          <span class="ui-column-title">{{ col.header }}</span>
+          <span class="p-column-title">{{ col.header }}</span>
           {{ rowData[col.field] }}
         </td>
       </tr>

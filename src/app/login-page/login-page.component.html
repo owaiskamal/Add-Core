@@ -20,7 +20,7 @@
         <form class="form_style" #myForm="ngForm">
           <div class="p-grid">
             <div class=" p-md-2 p-lg-3"></div>
-            <div class=" p-md-8 p-lg-6 p-sm-12 ">
+            <div class="p-col-12 p-md-8 p-lg-6 p-sm-12 ">
               <div class="p-inputgroup input-group-alternative input-icons">
                 <i class="fa fa-user-circle icon"></i>
 
@@ -38,7 +38,7 @@
 
           <div class="p-grid">
             <div class="p-md-2 p-lg-3"></div>
-            <div class="p-md-8 p-lg-6 p-sm-12">
+            <div class="p-col-12 p-md-8 p-lg-6 p-sm-12">
               <div class="p-inputgroup input-group-alternative input-icons">
                 <i class="fa fa-lock icon"></i>
                 <input
@@ -54,7 +54,8 @@
           </div>
           <div class="p-grid">
             <div class="p-md-2 p-lg-3"></div>
-            <div class="p-md-8 p-lg-6 p-sm-12">
+            <div class="p-col-12 p-md-8 p-lg-6 p-sm-12">
+
               <button
                 pButton
                 type="submit"
@@ -62,9 +63,11 @@
                 (click)="loginUser()"
                 (keyup.enter)="loginUser()"
                 [ngClass]="{'disableCss': !userName || !password}"
-                [disabled]="!userName || !password"
+                [disabled]="!userName || !password || spinnerIcon"
                 label="Submit"
-              ></button>
+              >
+              <i *ngIf="spinnerIcon" class="pi pi-spin pi-spinner"></i>
+            </button>
             </div>
           </div>
           <!--   <div class="p-grid">
