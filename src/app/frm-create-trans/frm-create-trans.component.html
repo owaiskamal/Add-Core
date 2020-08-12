@@ -83,7 +83,7 @@
             ></dynamic-form-builder> -->
             <form [formGroup]="invForm">
               <div class="p-grid p-fluid">
-                <div *ngFor="let f of invoiceArr" class="p-md-6 p-sm-12">
+                <div *ngFor="let f of invoiceArr" class="p-col-12 p-md-6 p-sm-12">
                   <label style="font-weight: 700;">
                     <strong class="text-danger" *ngIf="f.Mandatory == 'Y'">*</strong>
                     {{ f.ColumnLabel }}</label>

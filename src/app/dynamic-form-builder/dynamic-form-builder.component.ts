@@ -21,7 +21,7 @@ import { formatNumber, DatePipe } from '@angular/common';
   template: `
     <form [formGroup]="form">
       <div class="p-grid p-fluid">
-        <div *ngFor="let field of fields" class="p-md-6 p-sm-12">
+        <div *ngFor="let field of fields" class="p-col-12 p-md-6 p-sm-12">
           <field-builder [field]="field" [form]="form"></field-builder>
         </div>
       </div>

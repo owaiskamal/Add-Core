@@ -407,6 +407,7 @@ mainSubmit(){
   console.log(this.convertToString(masterObj),"convert to string");
   console.log(masterObj);
   this.transService.postMasterTransaction(masterObj).subscribe((res:any) => {
+    this.popupConfigData = [];
 
     this.invoiceData = [];
     this.displayDeliverDialog = false
@@ -472,7 +473,6 @@ for(let i = 0 ;i < this.popupConfigData.length;i++){
 this.transactionData['deliverto'] = deliverTo;
 this.mainSubmit();
 console.log(this.transactionData,"new trasactionata");
-this.popupConfigData = [];
 }
   submitMaster() {
     if(!this.child.form.valid)
