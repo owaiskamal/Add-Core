@@ -30,11 +30,18 @@ import { Subject } from 'rxjs';
         <file *ngSwitchCase="'file'" [field]="field" [form]="form"></file>
         <div
           class="alert alert-danger my-1 p-2 fadeInDown animated"
-          *ngIf="!isValid && isDirty && field.Mandatory == 'Y'"
+          *ngIf="!isValid && isDirty"
         >
+         <div *ngIf="form.controls[field.ColumnName].errors?.required">
           {{ field.ColumnLabel }} is required
         </div>
-
+          <div
+          *ngIf="form.controls[field.ColumnName].errors?.minlength"
+        >
+          Minimum length should be {{ field.MinLeng }} 
+        </div>
+        </div>
+        
       </div>
     </div>
   `

@@ -93,6 +93,7 @@
                       pInputText
                       [formControlName]="f.ColumnName"
                       [placeholder]="f.ColumnLabel"
+                     
                     />
                     <p-inputNumber
                       *ngSwitchCase="'N'"
@@ -117,8 +118,17 @@
                       (onSelect)="changeFormat($event)"
                       [formControlName]="f?.ColumnName"
                     ></p-calendar>
+                    <div  class="alert alert-danger my-1 p-2 fadeInDown animated" *ngIf="invForm.controls[f.ColumnName].errors?.minlength">
+                    <div
+                   
+                    
+                  >
+                    Minimum length should be {{ f.MinLeng }} 
                   </div>
                 </div>
+                  </div>
+                </div>
+             
               </div>
               <div class="p-grid">
                 <div class="p-lg-6 p-md-12 p-sm-12">
