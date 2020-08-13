@@ -85,6 +85,7 @@ export class FrmCreateTransComponent
   transactionData: any[] = [];
   dynform: boolean = true;
   csvArray: any[] = [];
+  v: any;
 
   constructor(
     private cdref: ChangeDetectorRef,
@@ -212,15 +213,16 @@ export class FrmCreateTransComponent
   }
   createInvoice() {
     this.invoiceArr.forEach((x) => {
+      this.v = x;
       if(x.Mandatory == 'Y')
       this.invForm.addControl(
         x.ColumnName,
-        new FormControl(x.DefaultValue, Validators.required)
+        new FormControl(x.DefaultValue, [Validators.required,Validators.minLength(x.MinLeng)])
       );
       else{
         this.invForm.addControl(
           x.ColumnName,
-          new FormControl(x.DefaultValue)
+          new FormControl(x.DefaultValue,Validators.minLength(x.MinLeng))
         );
       }
     });
@@ -475,7 +477,7 @@ this.mainSubmit();
 console.log(this.transactionData,"new trasactionata");
 }
   submitMaster() {
-    if(!this.child.form.valid)
+    if(!this.child.form.valid || this.invForm.invalid)
    {
       return;
    }
@@ -692,7 +694,10 @@ const result = wordsPerLine.reduce((all :any, line) => {
 console.log(result);
 const updated = this.autoFormatter(this.expectedSequence, result);
 console.log(updated , "Asdasda");
-
+this.messageService.add({severity:'success', summary:'File uploaded', detail:'Corrected sequence'});
+setTimeout(() => {
+  alert(JSON.stringify(updated));
+}, 1000);
 
  };
 

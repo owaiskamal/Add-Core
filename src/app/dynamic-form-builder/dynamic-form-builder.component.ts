@@ -24,6 +24,7 @@ import { formatNumber, DatePipe } from '@angular/common';
         <div *ngFor="let field of fields" class="p-col-12 p-md-6 p-sm-12">
           <field-builder [field]="field" [form]="form"></field-builder>
         </div>
+        
       </div>
       <!-- <div class="p-md-2">
    <button type="submit" (click)= "saveData()" pButton  label="Save"></button>
@@ -77,17 +78,17 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
         {
       fieldsCtrls[f.ColumnName] = new FormControl(
         f.DefaultValue || "",
-        Validators.required
+        [Validators.required,Validators.minLength(f.MinLeng)]
       );
+      
         }
         else{
           fieldsCtrls[f.ColumnName] = new FormControl(
-            f.DefaultValue || ""
+            f.DefaultValue || "" , Validators.minLength(f.MinLeng)
           );
-
         }
       console.log("data F ", f);
-
+     
       // } else {
       //  var subMenu = f.LookupVal;
       //   console.log(f.LookupVal , "dadad");
@@ -103,6 +104,7 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
       //   fieldsCtrls[f.ColumnName] = new FormGroup(opts)
       // }
     }
+    
     this.form = new FormGroup(fieldsCtrls);
   }
   saveData() {
