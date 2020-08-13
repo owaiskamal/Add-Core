@@ -10,7 +10,7 @@ import { FormGroup } from "@angular/forms";
         <p-inputNumber
           class=" p-col"
           *ngIf="field.DataType == 'N'"
-        
+          [attr.maxLength]="field.MaxLeng"
           [name]="field?.ColumnName"
           [formControlName]="field?.ColumnName"
           [placeholder]="field.ColumnLabel"
@@ -27,7 +27,7 @@ import { FormGroup } from "@angular/forms";
       </div>
       <p-inputNumber
         *ngIf="field.DataType == 'C'"
-    
+        [attr.maxLength]="field.MaxLeng"
         [formControlName]="field.ColumnName"
         mode="currency"
         currency="PKR"

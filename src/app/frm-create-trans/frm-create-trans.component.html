@@ -93,11 +93,11 @@
                       pInputText
                       [formControlName]="f.ColumnName"
                       [placeholder]="f.ColumnLabel"
-                     
+                      [attr.maxLength]="f.MaxLeng"
                     />
                     <p-inputNumber
                       *ngSwitchCase="'N'"
-                     
+                      [attr.maxLength]="f.MaxLeng"
                       [name]="f?.ColumnName"
                       [formControlName]="f?.ColumnName"
                       [placeholder]="f.ColumnLabel"
@@ -106,7 +106,7 @@
                     
               
                       *ngSwitchCase="'C'"
-                     
+                      [attr.maxLength]="f.MaxLeng"
                       [formControlName]="f.ColumnName"
                       mode="currency"
                       currency="PKR"
