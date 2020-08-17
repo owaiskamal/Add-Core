@@ -2,7 +2,7 @@
 
 /* sidenav */
 .sidenav {
-  
+
   height: 100%;
   width: 270px;
   position: absolute;
@@ -137,12 +137,16 @@
   color: black;
   font-weight: 600;
   text-decoration: none;
-  
+
 }
 /* footer */
 .dropdown-menu.show
 {box-shadow: 1px 2px 7px 1px rgba(0,0,0,.125);
   margin: 0.125rem 12px 0;
   border-radius: .5em;
+}
+.padding-pi
+{
+  padding: 2px 8px 6px 4px;
 }
 // /* footer */linear-gradient(rgba(146, 190, 43, 0.726)),

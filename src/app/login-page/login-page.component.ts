@@ -33,7 +33,7 @@ export class LoginPageComponent implements OnInit {
   ipAddress: '';
   ngOnInit() {
     //this.getIPAddress();
-  
+
   }
 getNotifications(){
   let data: Array < any >= [];
