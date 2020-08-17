@@ -22,7 +22,7 @@ import { FormGroup } from "@angular/forms";
           style="font-weight:900;"
           type="button"
           label="verify"
-          class="  p-button-warning"
+          class="p-button-warning"
         ></button>
       </div>
       <p-inputNumber
