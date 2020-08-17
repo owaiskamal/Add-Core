@@ -118,14 +118,19 @@
                       (onSelect)="changeFormat($event)"
                       [formControlName]="f?.ColumnName"
                     ></p-calendar>
-                    <div  class="alert alert-danger my-1 p-2 fadeInDown animated" *ngIf="invForm.controls[f.ColumnName].errors?.minlength">
                     <div
-                   
-                    
+                    class="alert alert-danger my-1 p-2 fadeInDown animated"
+                    *ngIf="!invForm.controls[f.ColumnName].valid && invForm.controls[f.ColumnName].dirty"
+                  >
+                   <div *ngIf="invForm.controls[f.ColumnName].errors?.required">
+                    {{ f.ColumnLabel }} is required
+                  </div>
+                    <div
+                    *ngIf="invForm.controls[f.ColumnName].errors?.minlength"
                   >
                     Minimum length should be {{ f.MinLeng }} 
                   </div>
-                </div>
+                  </div>
                   </div>
                 </div>
              
