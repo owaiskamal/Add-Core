@@ -149,4 +149,8 @@
 {
   padding: 2px 8px 6px 4px;
 }
+:host ::ng-deep .p-button .flax .p-button-label
+{
+  flex : none;
+}
 // /* footer */linear-gradient(rgba(146, 190, 43, 0.726)),
