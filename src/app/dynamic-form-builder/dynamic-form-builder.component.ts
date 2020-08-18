@@ -162,7 +162,7 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
     })
     this.savedata.emit(this.transFormData[0]);
     
-    this.form.reset();
+    //this.form.reset();
     
     //this.savedata.emit(this.form.getRawValue());
 

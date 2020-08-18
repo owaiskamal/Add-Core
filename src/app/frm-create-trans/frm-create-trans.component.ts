@@ -415,22 +415,26 @@ mainSubmit(){
     this.displayDeliverDialog = false
     console.log(res , "jhjh");
     if(res.code == "-1"){
+      
       this.messageService.add({
         severity: "error",
         summary: res.description
         
          });
      }
-     else if(res.code == "0"){
+     else if(res.code == "00"){
+      this.child.form.reset();
       this.messageService.add({
         severity: "success",
         summary: res.description
         
          });
+      
      }
   },
   (error)=>{
     this.invoiceData = [];
+
     console.log(error.error,'invoice error')
    
     this.messageService.add({
