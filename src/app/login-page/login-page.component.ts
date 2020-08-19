@@ -6,11 +6,13 @@ import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { PushNotificationService} from '../push-notification.service';
 import { Title } from '@angular/platform-browser';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: "app-login-page",
   templateUrl: "./login-page.component.html",
-  styleUrls: ["./login-page.component.scss"]
+  styleUrls: ["./login-page.component.scss"],
+  providers: [ConfirmationService]
 })
 export class LoginPageComponent implements OnInit {
   spinnerIcon: boolean;
@@ -20,7 +22,9 @@ export class LoginPageComponent implements OnInit {
     private authService: UserauthService,
     private http:HttpClient,
     private _notificationService: PushNotificationService,
-    private title : Title
+    private title : Title,
+    private confirmationService : ConfirmationService,
+    private userService : UserauthService
   ) {
     this._notificationService.requestPermission();
     this.title.setTitle('CR-PL - Login page')
@@ -29,6 +33,7 @@ export class LoginPageComponent implements OnInit {
   userName:string;
   password:string;
   showProgress = false;
+  position : string;
 
   ipAddress: '';
   ngOnInit() {
@@ -60,6 +65,7 @@ getNotifications(){
         this.spinnerIcon = false;
       console.log(res,"Complete response");
       if (res.code == "-1") {
+          console.log(res);
 
         this.messageService.add({
           severity: "error",
@@ -88,11 +94,9 @@ getNotifications(){
       }
       else if(res.code == "03")
       {
-        this.messageService.add({
-          severity: "error",
-          summary: "Status",
-          detail: res.description
-        });
+        console.log(res.description);
+
+        this.sessionLogout("top");
       }
     },
     (error)=> {
@@ -106,6 +110,37 @@ getNotifications(){
   changePassword() {
 
     this.router.navigateByUrl("/changepassword");
+  }
+
+  sessionLogout(position: string)
+  {
+    this.position = position;
+    this.confirmationService.confirm({
+      message: 'Already Logged In, Are you sure you want to Logout from Session?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+    this.userService.userLogout(this.userName).subscribe(
+      (res) => {
+        this.messageService.add({
+          severity: "success",
+          summary: "Status",
+          detail: "User Logout Successfully"
+        });
+        console.log(res);
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("username");
+        sessionStorage.removeItem("menuitem");
+
+      },
+      (error) => {
+        console.log("Logout Not Working", error);
+      }
+    );
+
+      },
+      key : "positionDialog"
+  });
   }
 /*   getIPAddress()
   {

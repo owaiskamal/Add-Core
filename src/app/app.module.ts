@@ -47,6 +47,7 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {SidebarModule} from 'primeng/sidebar';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +98,7 @@ import {SidebarModule} from 'primeng/sidebar';
     InputNumberModule,
     SidebarModule,
     OverlayPanelModule,
-   
+
   ],
   providers: [
     MessageService,
