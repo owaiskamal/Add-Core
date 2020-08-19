@@ -15,6 +15,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { TemplateCreatorComponent } from './template-creator/template-creator.component';
 import { DragDropComponent } from './drag-drop/drag-drop.component';
 import { FrmCreateTransComponent } from './frm-create-trans/frm-create-trans.component';
+import { FrmTransStageComponent } from './frm-trans-stage/frm-trans-stage.component';
 //import { SearchTableComponent } from './search-table/search-table.component';
 
 
@@ -36,7 +37,8 @@ const routes: Routes = [
     //{path: 'searchtable',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}},
     //{path: 'searchtable/:id',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}}
      {path:'List/:id',component:FrmlistComponent,data : {state : 'admimpage/setup/frmlist'}},
-     {path:'frmCreateTrans/:id' , component: FrmCreateTransComponent , data :{state : 'adminpage/frmCreateTrans'}}
+     {path:'frmCreateTrans/:id' , component: FrmCreateTransComponent , data :{state : 'adminpage/frmCreateTrans'}},
+     {path:'frmTransStage/:id' , component: FrmTransStageComponent , data :{state : 'adminpage/frmTransStage'}}
   ]
 },
   {path: 'loginsettings' , component : LoginSecuritiesPageComponent,canActivate: [AuthGuard]},
