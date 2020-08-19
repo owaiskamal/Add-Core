@@ -42,7 +42,10 @@ import { FrmCreateTransComponent } from './frm-create-trans/frm-create-trans.com
 import {CalendarModule} from 'primeng/calendar';
 import {TabViewModule} from 'primeng/tabview';
 import {InputNumberModule} from 'primeng/inputnumber';
-
+import { FrmTransStageComponent } from './frm-trans-stage/frm-trans-stage.component';
+import {FieldsetModule} from 'primeng/fieldset';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {SidebarModule} from 'primeng/sidebar';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
     SidenavComponent,
     //SearchTableComponent,
     FrmlistComponent,
-    FrmCreateTransComponent
+    FrmCreateTransComponent,
+    FrmTransStageComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +73,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
     ButtonModule,
     TableModule,
     DialogModule,
+    FieldsetModule,
     CardModule,
     FormsModule,
     PanelModule,
@@ -89,7 +94,10 @@ import {InputNumberModule} from 'primeng/inputnumber';
     PushNotificationsModule,
     CalendarModule,
     TabViewModule,
-    InputNumberModule
+    InputNumberModule,
+    SidebarModule,
+    OverlayPanelModule,
+   
   ],
   providers: [
     MessageService,
