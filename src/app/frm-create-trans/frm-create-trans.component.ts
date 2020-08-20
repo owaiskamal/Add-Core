@@ -11,7 +11,7 @@ import {
   AfterViewInit,
   Inject,
 } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import * as xlsx from 'xlsx';
 import { MessageService } from "primeng/api";
 import {
@@ -30,7 +30,7 @@ import { stringify } from 'querystring';
   selector: "app-frm-create-trans",
   templateUrl: "./frm-create-trans.component.html",
   styleUrls: ["./frm-create-trans.component.scss"],
-  
+
 })
 export class FrmCreateTransComponent
   implements OnInit, OnChanges, AfterViewInit {
@@ -92,8 +92,9 @@ export class FrmCreateTransComponent
     private _route: ActivatedRoute,
     private transService: CreateTransService,
     private messageService: MessageService,
-    private formBuilder: FormBuilder
-    
+    private formBuilder: FormBuilder,
+    private router : Router
+
   ) {
     this.products = [];
     this.accounts = [];
@@ -104,7 +105,7 @@ export class FrmCreateTransComponent
   @Inject('ImageURL') public ImageURL
   @ViewChild("myDropdown") myDropdown: Dropdown;
   @ViewChild(DynamicFormBuilderComponent) child: DynamicFormBuilderComponent;
- 
+
   ngOnInit(): void {
     this._route.params.subscribe((params) => {
       this.formID = params["id"];
@@ -143,7 +144,7 @@ export class FrmCreateTransComponent
         if(this.fields.length > 0)
         {
 
-       
+
         this.transactionArr = this.fields.filter((v) => v.MasterDetail == "O");
         this.invoiceArr = this.fields.filter((v) => v.MasterDetail == "I");
         if (this.invoiceArr.length > 0) {
@@ -175,7 +176,7 @@ export class FrmCreateTransComponent
   }
   recivemsg(obj) {
     console.log(obj , "recieved");
-    
+
     this.transactionData = obj;
     console.log(this.transactionData,"before transactipn")
     // this.invoiceData.push(obj);
@@ -308,6 +309,8 @@ export class FrmCreateTransComponent
     this.transService
       .getCreateTransaction(this.formID, this.UserID, this.AccessToken)
       .subscribe((res) => {
+        if(res.code == '00')
+      {
         console.log( res ,"detail data");
         this.rawData = JSON.parse(res.detailData.detail);
 
@@ -319,7 +322,24 @@ export class FrmCreateTransComponent
         this.popupDropdown = Object.keys(this.delieveredTo)
         console.log(this.popupDropdown,"popup dropdown");
         console.log(Object.values(this.delieveredTo),"input fields config");
-      }, 
+      }
+      else if (res.code == "-1")
+      {
+        this.messageService.add({
+          severity: "error",
+          summary: "Connection Failed",
+          detail: "Session Expired"
+        });
+
+ sessionStorage.removeItem("token");
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("menuitem");
+          setTimeout(() => {
+            this.router.navigateByUrl('');
+
+          }, 3000);
+          }
+      },
       (error)=>
       {setTimeout(() => {
         this.messageService.add({
@@ -328,7 +348,7 @@ export class FrmCreateTransComponent
           detail: "Template not Found"
         });
       }, 2000);
-      
+
       });
   }
 
@@ -370,7 +390,7 @@ export class FrmCreateTransComponent
   onTabChange(event) {
     console.log("TAB INDEX",event.index);
     this.tabIndex = event.index;
-} 
+}
 OnDeliveredChange(event){
 console.log(event.value,"delievered change");
 console.log(this.delieveredTo[event.value],"event delievered value");
@@ -405,7 +425,7 @@ mainSubmit(){
     Invoice: this.invoiceValues,
 
   };
-  
+
   console.log(this.convertToString(masterObj),"convert to string");
   console.log(masterObj);
   this.transService.postMasterTransaction(masterObj).subscribe((res:any) => {
@@ -415,11 +435,11 @@ mainSubmit(){
     this.displayDeliverDialog = false
     console.log(res , "jhjh");
     if(res.code == "-1"){
-      
+
       this.messageService.add({
         severity: "error",
         summary: res.description
-        
+
          });
      }
      else if(res.code == "00"){
@@ -427,16 +447,16 @@ mainSubmit(){
       this.messageService.add({
         severity: "success",
         summary: res.description
-        
+
          });
-      
+
      }
   },
   (error)=>{
     this.invoiceData = [];
 
     console.log(error.error,'invoice error')
-   
+
     this.messageService.add({
       severity: "error",
       summary: "Connection Failed",
@@ -449,10 +469,10 @@ convertToString(obj){
     if(typeof(obj[i])==='object'){
       return this.convertToString(obj[i]);
     }
-    obj[i] = '' + obj[i]; 
+    obj[i] = '' + obj[i];
   })
    return obj;
-  
+
 }
 submitPopup(){
   console.log(this.popupConfigData,"popup config");
@@ -464,8 +484,8 @@ submitPopup(){
       [element.header]: element.field
     }
     this.delivertoArray.push(deliverTo);
-    
-  
+
+
   }); */
   //this.transactionData.concat(this.delivertoArray)
   console.log(this.delivertoArray,"delivertoarray");
@@ -490,21 +510,21 @@ console.log(this.transactionData,"new trasactionata");
    console.log(this.selectedAccount,"selectedAccount");
 
    console.log(this.selectedTemplate,"selectedTemplate"); */
-  
-   if(this.selectedProduct["ProBehavior"]=="K" || this.selectedProduct["ProBehavior"]=="P"|| 
+
+   if(this.selectedProduct["ProBehavior"]=="K" || this.selectedProduct["ProBehavior"]=="P"||
    this.selectedProduct["ProBehavior"]=="D" ||  this.selectedProduct["ProBehavior"]=="S"){
      this.displayDeliverDialog = true
-    
-    
+
+
      console.log(this.displayDeliverDialog,"checking dialog");
      console.log("Product true");
-    
+
      this.array = this.popupDropdown.map((o) => ({
       label : o,
       value : o
       }))
       console.log(this.array,"dropdown array")
-   
+
    }
    else{
      this.displayDeliverDialog = false;
@@ -516,7 +536,7 @@ console.log(this.transactionData,"new trasactionata");
 
 //    console.log(masterObj);
 
-    
+
 
      /*  this.transService.postMasterTransaction(masterObj).subscribe((res:any) => {
       this.invoiceData = [];
@@ -525,21 +545,21 @@ console.log(this.transactionData,"new trasactionata");
         this.messageService.add({
           severity: "error",
           summary: res.description
-          
+
            });
        }
        else if(res.code == "0"){
         this.messageService.add({
           severity: "success",
           summary: res.description
-          
+
            });
        }
     },
     (error)=>{
       this.invoiceData = [];
       console.log(error.error,'invoice error')
-     
+
       this.messageService.add({
         severity: "error",
         summary: "Connection Failed",
@@ -610,13 +630,13 @@ console.log(extension , "asdasdasdasdasd");
 
 reader.onload = (ev) => {
   console.log(ev , "asdasdad");
-  
+
   const data = reader.result;
   workBook = xlsx.read(data, { type: 'binary'  ,cellDates: true });
   jsonData = workBook.SheetNames.reduce((initial, name) => {
     const sheet = workBook.Sheets[name];
     initial[name] = xlsx.utils.sheet_to_json(sheet , {raw:false,dateNF:'dd/mm/yyyy'});
-    
+
     return initial;
   }, {});
   const dataString = JSON.stringify(jsonData);
@@ -624,7 +644,7 @@ reader.onload = (ev) => {
   this.jsonArr = JSON.parse(dataString)
   console.log(this.jsonArr,"parsed json");
   console.log(Object.keys(this.jsonArr['data'][0]))
-  
+
 console.log(this.expectedSequence , "this is seq");
 
 
@@ -650,7 +670,7 @@ this.invoiceValues = updated
 //    arr.push(i);
 //   }
 //   console.log(arr , "Asdasd");
-  
+
 // }
 // console.log(this.array_move(da , arr[1] , arr[0]), "Asdasdashdkasgdjhasgdjhasgajhg");
 const p =JSON.stringify(this.invoiceValues);
@@ -677,21 +697,21 @@ else if(extension[0] === 'txt'){
 
     // Split data by spaces (one or more)
     const wordsPerLine = lines.map(line => line.trim().split(/\s+/g));
-    
-    
+
+
 // First line are the headings
 const headings = wordsPerLine.shift();
 
 // Combine lines with heading
 const result = wordsPerLine.reduce((all :any, line) => {
   const obj ={};
-  
+
   line.forEach((word, index) => {
     obj[headings[index]] = word;
   });
-  
+
   all.push(obj);
-  
+
   return all;
 }, []);
 
@@ -722,7 +742,7 @@ else
 
     }
   });
-    
+
 }
 }
 autoFormatter(expectedSequence , convArray)
