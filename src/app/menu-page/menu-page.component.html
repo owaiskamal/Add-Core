@@ -95,7 +95,7 @@
       </span>
     </a>
 
-    <a class="navbar-item" (click)="changeTitle()" [routerLink]="['/adminpage']">
+    <a class="navbar-item" (click)="changeTitle()" [routerLink]="['/menu']">
       <img
         class="logo img-responsive"
         src="assets/images/logo.png"
@@ -122,13 +122,13 @@
       <i class="pi padding-pi pi-user"></i>
       <span>{{ userName }}</span>
     </div>
-    <a class="dropdown-item" [routerLink]="['/adminpage/formtemplate']"
+    <a class="dropdown-item" [routerLink]="['/menu/formtemplate']"
       ><i class="pi padding-pi pi-users"></i>Dynamic Forms</a
     >
-    <a class="dropdown-item" [routerLink]="['/adminpage/resetpassword']"
+    <a class="dropdown-item" [routerLink]="['/menu/resetpassword']"
       ><i class="pi padding-pi pi-user-edit"></i>Setting</a
     >
-    <a class="dropdown-item" [routerLink]="['/adminpage/templatecreator']"
+    <a class="dropdown-item" [routerLink]="['/menu/templatecreator']"
       ><i class="pi padding-pi pi-user-edit"></i>Template Creator</a
     >
     <button pButton pRipple type="button" style="margin-left: 10px;width: 100%;"  label="Logout" class=" flax p-button-text " (click)="logout()">

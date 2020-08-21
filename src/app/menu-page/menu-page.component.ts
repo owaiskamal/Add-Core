@@ -24,9 +24,9 @@ import { HostListener } from "@angular/core";
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: "app-admin-page",
-  templateUrl: "./admin-page.component.html",
-  styleUrls: ["./admin-page.component.scss"],
+  selector: "app-menu-page",
+  templateUrl: "./menu-page.component.html",
+  styleUrls: ["./menu-page.component.scss"],
   animations: [
     trigger("slideInOut", [
       state(
@@ -130,7 +130,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getLinks();
-    
+
     this.title.setTitle('CR-PL - Admin Page')
   }
 
@@ -204,8 +204,8 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
 {
   this.title.setTitle('CR-PL - Admin Page')
 }  adminpage() {
-    this.router.navigateByUrl("adminpage"); 
-    
+    this.router.navigateByUrl("menu");
+
     this.title.setTitle('CR-PL - Admin Page')
   }
 }

@@ -19,7 +19,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { AdminPageComponent } from "./admin-page/admin-page.component";
+import { AdminPageComponent } from "./menu-page/menu-page.component";
 import { ResetPasswordPageComponent } from "./reset-password-page/reset-password-page.component";
 import { LoginSecuritiesPageComponent } from "./login-securities-page/login-securities-page.component";
 import { NoopInterceptor } from "./httpconfig.interceptor";

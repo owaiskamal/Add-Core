@@ -89,7 +89,7 @@ getNotifications(){
      var name = 'usama';
      localStorage.setItem('name',name);
          setTimeout(() => {
-           this.router.navigateByUrl("/adminpage");
+           this.router.navigateByUrl("/menu");
         }, 1000);
       }
       else if(res.code == "03")
