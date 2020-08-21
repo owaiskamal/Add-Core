@@ -62,7 +62,9 @@
         margin-bottom: 4em;
     }
 }
-  
+  :host ::ng-deep .p-listbox {
+    border: none;
+  }
 /* :host ::ng-deep .p-fieldset-legend
 {
     width: 25%;

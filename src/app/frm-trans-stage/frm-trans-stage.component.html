@@ -1,6 +1,6 @@
-<p-overlayPanel #op>
+<p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
   <ng-template pTemplate>
-      Content
+    <p-listbox (onDblClick)="selectedFile($event,op)" [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [style]="{'width':'15rem'}"></p-listbox>
   </ng-template>
 </p-overlayPanel>
 <p-card class="p-card ">
@@ -21,7 +21,7 @@
       <div class="p-col-3 p-md-12 pd-lg-12 p-sm-12">
 
 
-      <button type="text" pButton label="Basic" (click)="op.toggle($event)"></button>
+      <button type="text" pButton label="Select file" (click)="op.toggle($event)"></button>
       </div>
         <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
             <p-panel header="Header">
