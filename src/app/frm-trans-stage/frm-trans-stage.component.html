@@ -39,5 +39,17 @@
                     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </p-panel>
         </div>
+        <div class=" p-col-12 p-md-12 p-lg-12 p-sm-12">
+            <p-table
+            selectionMode="single"
+            [responsive]= "true"
+            [paginator]="true"
+            [rows]="15"
+          >
+            <ng-template pTemplate="caption">
+              Transaction Details
+            </ng-template>
+          </p-table>
+        </div>
     </div>
  </p-card>
