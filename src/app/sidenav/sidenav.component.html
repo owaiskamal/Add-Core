@@ -3,7 +3,7 @@
 <ul class="list-unstyled" >
   <li class="main_link"  (click)="onItemClick(item)" [ngStyle]="{'margin-left': (depth * 12) + 'px'}">
 
-    <a class="mat-list-item"   [ngClass]="{'active': item.RLink ? route.isActive('adminpage/'+item.RLink+'/' +item.id, true): false, 'expanded': expanded}">
+    <a class="mat-list-item"   [ngClass]="{'active': item.RLink ? route.isActive('menu/'+item.RLink+'/' +item.id, true): false, 'expanded': expanded}">
 
         <i class="align-card-icon" style="font-size: 0.6em;" [ngClass]="{'pi pi-circle-on' : item.Forms && item.Forms.length}"></i>{{item.Node || item.Name}}
 

@@ -69,11 +69,11 @@ export class SidenavComponent implements OnInit {
 
     if (!item.Forms || !item.Forms.length) {
 
-      this.route.navigate(['adminpage/'+item.RLink+'/' +item.id]);
+      this.route.navigate(['menu/'+item.RLink+'/' +item.id]);
       console.log(item , "new daa");
-      
+
     this.title.setTitle( 'CR-PL - '+item.Name);
-      if(this.route.isActive('adminpage/'+item.RLink+'/' +item.id , true))
+      if(this.route.isActive('menu/'+item.RLink+'/' +item.id , true))
 
       {
       console.log('is active' );

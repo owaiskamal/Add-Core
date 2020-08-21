@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ChangePasswordPageComponent } from './change-password-page/change-password-page.component';
 
-import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminPageComponent } from './menu-page/menu-page.component';
 
 import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
 import { LoginSecuritiesPageComponent } from './login-securities-page/login-securities-page.component';
@@ -26,19 +26,19 @@ const routes: Routes = [
   {path: 'changepassword',component:ChangePasswordPageComponent},
   {path: '', component:LoginPageComponent},
 
-{path:'adminpage', component: AppLayoutComponent, canActivate : [AuthGuard],
+{path:'menu', component: AppLayoutComponent, canActivate : [AuthGuard],
 
   children:
   [
-    {path:'formtemplate',component:FormTemplateComponent , data : {state : 'admimpage/formtemplate'}},
-    {path : 'resetpassword' , component : ResetPasswordPageComponent ,data : {state : 'admimpage/resetpassword'}},
-    {path:'templatecreator',component: TemplateCreatorComponent ,data : {state : 'admimpage/templatecreator'}},
-    {path:'List',component:DragDropComponent,data : {state : 'admimpage/List'}},
+    {path:'formtemplate',component:FormTemplateComponent , data : {state : 'menu/formtemplate'}},
+    {path : 'resetpassword' , component : ResetPasswordPageComponent ,data : {state : 'menu/resetpassword'}},
+    {path:'templatecreator',component: TemplateCreatorComponent ,data : {state : 'menu/templatecreator'}},
+    {path:'List',component:DragDropComponent,data : {state : 'menu/List'}},
     //{path: 'searchtable',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}},
     //{path: 'searchtable/:id',component:SearchTableComponent,data : {state : 'admimpage/searchtable'}}
-     {path:'List/:id',component:FrmlistComponent,data : {state : 'admimpage/setup/frmlist'}},
-     {path:'frmCreateTrans/:id' , component: FrmCreateTransComponent , data :{state : 'adminpage/frmCreateTrans'}},
-     {path:'frmTransStage/:id' , component: FrmTransStageComponent , data :{state : 'adminpage/frmTransStage'}}
+     {path:'List/:id',component:FrmlistComponent,data : {state : 'menu/setup/frmlist'}},
+     {path:'frmCreateTrans/:id' , component: FrmCreateTransComponent , data :{state : 'menu/frmCreateTrans'}},
+     {path:'frmTransStage/:id' , component: FrmTransStageComponent , data :{state : 'menu/frmTransStage'}}
   ]
 },
   {path: 'loginsettings' , component : LoginSecuritiesPageComponent,canActivate: [AuthGuard]},
