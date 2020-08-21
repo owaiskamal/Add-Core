@@ -46,7 +46,7 @@ import { FrmTransStageComponent } from './frm-trans-stage/frm-trans-stage.compon
 import {FieldsetModule} from 'primeng/fieldset';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {SidebarModule} from 'primeng/sidebar';
-
+import {ListboxModule} from 'primeng/listbox';
 
 
 @NgModule({
@@ -99,7 +99,7 @@ import {SidebarModule} from 'primeng/sidebar';
     InputNumberModule,
     SidebarModule,
     OverlayPanelModule,
-
+    ListboxModule
   ],
   providers: [
     MessageService,
