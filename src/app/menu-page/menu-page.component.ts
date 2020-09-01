@@ -131,7 +131,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.getLinks();
 
-    this.title.setTitle('CR-PL - Admin Page')
+    this.title.setTitle('CR-PL - Menu Page')
   }
 
   ngAfterViewInit() {
@@ -202,10 +202,6 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
   }
   changeTitle()
 {
-  this.title.setTitle('CR-PL - Admin Page')
-}  adminpage() {
-    this.router.navigateByUrl("menu");
-
-    this.title.setTitle('CR-PL - Admin Page')
-  }
+  this.title.setTitle('CR-PL - Menu Page')
+}  
 }
