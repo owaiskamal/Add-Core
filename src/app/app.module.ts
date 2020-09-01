@@ -47,6 +47,8 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {SidebarModule} from 'primeng/sidebar';
 import {ListboxModule} from 'primeng/listbox';
+import {RippleModule} from 'primeng/ripple';
+
 
 
 @NgModule({
@@ -99,7 +101,8 @@ import {ListboxModule} from 'primeng/listbox';
     InputNumberModule,
     SidebarModule,
     OverlayPanelModule,
-    ListboxModule
+    ListboxModule,
+    RippleModule
   ],
   providers: [
     MessageService,

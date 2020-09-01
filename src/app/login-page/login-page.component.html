@@ -2,7 +2,7 @@
   <p-progressBar
     *ngIf="showProgress"
     mode="indeterminate"
-    [style]="{ height: '1px' }"
+    [style]="{ height: '2px' }"
   ></p-progressBar>
 
   <p-toast position="top-right"></p-toast>
@@ -65,6 +65,7 @@
                 [ngClass]="{'disableCss': !userName || !password}"
                 [disabled]="!userName || !password || spinnerIcon"
                 label="Submit"
+                pRipple
               >
               <i *ngIf="spinnerIcon" class="pi pi-spin pi-spinner"></i>
             </button>

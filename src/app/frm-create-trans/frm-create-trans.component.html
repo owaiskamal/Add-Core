@@ -9,7 +9,7 @@
   <div class="p-grid p-fluid">
     <!--  <div class="p-md-6 p-lg-6 col-md-6 p-sm-12">
         <label for="companytitle">Company title</label>
-        <input id="companytitle" type="text" pInputText> 
+        <input id="companytitle" type="text" pInputText>
     </div> -->
     <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
       <label style="font-weight: 700;" for="producttitle">Product title</label>
@@ -58,7 +58,7 @@
     <div class="p-fluid p-grid">
       <div class="p-grid" >
         <!-- <dynamic-form-builder
-    
+
               *ngIf="!isValid"
               [fields]="getFields()"
             >
@@ -103,8 +103,8 @@
                       [placeholder]="f.ColumnLabel"
                     ></p-inputNumber>
                     <p-inputNumber
-                    
-              
+
+
                       *ngSwitchCase="'C'"
                       [attr.maxLength]="f.MaxLeng"
                       [formControlName]="f.ColumnName"
@@ -128,12 +128,12 @@
                     <div
                     *ngIf="invForm.controls[f.ColumnName].errors?.minlength"
                   >
-                    Minimum length should be {{ f.MinLeng }} 
+                    Minimum length should be {{ f.MinLeng }}
                   </div>
                   </div>
                   </div>
                 </div>
-             
+
               </div>
               <div class="p-grid">
                 <div class="p-lg-6 p-md-12 p-sm-12">
@@ -158,10 +158,10 @@
                     (click)="deleteInvData()"
                     label="Delete All"
                   ></button>
-                 
+
                 </div>
                 <div class="p-helper-clearfix p-lg-6 p-md-12 p-sm-12">
-                  
+
                   <!-- <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="p-button-success"></button> -->
                   <p-fileUpload mode="basic" customUpload="true"  name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="1000000" (uploadHandler)="onBasicUpload($event)"></p-fileUpload>
                 </div>
@@ -180,7 +180,7 @@
               [rows]="15"
             >
               <ng-template pTemplate="caption">
-               
+
                 Invoice Details
               </ng-template>
               <ng-template pTemplate="header" let-columns>
@@ -193,7 +193,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr [pSelectableRow]="rowData">
-                  
+
                   <td *ngFor="let col of columns">
                     <span class="p-column-title">{{ col.header }}</span>
                     {{ rowData[col.field] }}
@@ -245,7 +245,7 @@
               <p-footer>
                 <div class="p-dialog-buttonpane p-helper-clearfix">
                   <button
-                  
+
                     type="button"
                     pButton
                     icon="pi pi-times"
@@ -271,7 +271,7 @@
         <button
           *ngIf="fields.length > 0"
           [disabled]="
-          
+
             !this.child?.form.valid
           "
           type="submit"
@@ -279,9 +279,10 @@
           icon="pi pi-check"
           (click)="submitMaster()"
           label="Submit"
+          pRipple
         ></button>
          <!-- Deliver to dialog start -->
-        
+
 <!-- Deliver to dialog end -->
       </div>
     <div class="p-lg-6 p-md-12 p-sm-12">
@@ -289,6 +290,7 @@
         class="p-button-secondary"
         type="button"
         pButton
+        pRipple
         icon="pi pi-times"
         (click)="clearField()"
         label="Clear All"
@@ -323,13 +325,13 @@ styleClass= "delivery_dialog"
 <div class="p-col-12" *ngFor="let col of popupConfigData">
 
    <label style="font-weight: 700;">{{ col.header }}</label>
- 
+
    <input pInputText style="width: 100%;"  [(ngModel)]="col.field" [placeholder]="col.header" />
- 
+
 </div>
 <p-footer>
- <button type="button" pButton icon="pi pi-check" (click)="submitPopup()" label="Submit"></button>
- <button type="button" pButton icon="pi pi-times" (click)="displayDeliverDialog=false" label="No" class="p-button-secondary"></button>
+ <button type="button" pRipple pButton icon="pi pi-check" (click)="submitPopup()" label="Submit"></button>
+ <button type="button" pRipple pButton icon="pi pi-times" (click)="displayDeliverDialog=false" label="No" class="p-button-secondary"></button>
 </p-footer>
 </p-dialog>
 
