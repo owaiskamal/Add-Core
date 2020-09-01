@@ -115,7 +115,7 @@ export class FrmCreateTransComponent
       console.log("URL id has changed");
       this.UserID = sessionStorage.getItem("username");
       this.AccessToken = sessionStorage.getItem("token");
-      
+
       this.getTransCreation();
     });
   }
@@ -651,6 +651,14 @@ reader.onload = (ev) => {
 
 console.log(this.expectedSequence , "this is seq");
 
+// for(let i = 1; i<this.jsonArr['data'].length;i++){
+//   console.log(    this.jsonArr['data'][i]  , "datat");
+
+// this.jsonArr['data'][i] = Object.assign({}, ...Object.entries(this.jsonArr['data'][i])
+//          .map(([, prop], index) => ({[this.expectedSequence[index]]: prop})));
+// }
+//          console.log(this.jsonArr['data'] , "changed header");
+//          this.invoiceValues = this.jsonArr['data']
 
 // const sortObject = (obj) =>
 //   Object.fromEntries(
