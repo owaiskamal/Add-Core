@@ -9,11 +9,11 @@ export class FrmTransStageComponent implements OnInit {
   @ViewChild('op', { static: true }) opt: ElementRef;
   constructor() {
     this.cities = [
-      {name: 'New York', code: 'NY'},
-      {name: 'Rome', code: 'RM'},
-      {name: 'London', code: 'LDN'},
-      {name: 'Istanbul', code: 'IST'},
-      {name: 'Paris', code: 'PRS'}
+      {name: 'IFT_txtFile19.txt', code: 'NY'},
+      {name: 'PAK-SUZUKI-10000-xlsx', code: 'RM'},
+      {name: 'PSM09098097961.txt', code: 'LDN'},
+      {name: 'PSM06098097961.txt', code: 'IST'},
+      {name: 'PSM07898097961.txt', code: 'PRS'}
   ];
   }
   cities:any[] = []

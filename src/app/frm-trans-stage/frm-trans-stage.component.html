@@ -1,4 +1,4 @@
-<p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
+<p-overlayPanel  #op [dismissable]="true" [showCloseIcon]="true">
   <ng-template pTemplate>
     <p-listbox (onDblClick)="selectedFile($event,op)" [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [style]="{'width':'15rem'}"></p-listbox>
   </ng-template>
@@ -18,13 +18,13 @@
 
    <!--  <button type="text" pButton label="Basic" (click)="op.toggle($event)"></button> -->
     <div class="p-grid">
-      <div class="p-col-3 p-md-12 pd-lg-12 p-sm-12">
+      <div class="p-col-12 p-md-12 pd-lg-12 p-sm-12">
 
 
-      <button type="text" pButton label="Select file" (click)="op.toggle($event)"></button>
+      <p-button pRipple  type="button"  label="Select file" (click)="op.toggle($event)"></p-button>
       </div>
         <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
-            <p-panel header="Header">
+            <p-panel header="File Detail">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -32,7 +32,7 @@
             </p-panel>
         </div>
         <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
-            <p-panel header="Header">
+            <p-panel header="Action">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -41,14 +41,36 @@
         </div>
         <div class=" p-col-12 p-md-12 p-lg-12 p-sm-12">
             <p-table
+            #dt
+            [rowsPerPageOptions]="[10, 25, 50]"
             selectionMode="single"
             [responsive]= "true"
             [paginator]="true"
             [rows]="15"
           >
             <ng-template pTemplate="caption">
-              Transaction Details
+
+              <div class="table-header" >
+                <span style="font-weight: 700 ; font-size: 1.2rem ; margin-right: 61%;"> Transaction Details</span>
+                <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input
+                  type="text"
+                  pInputText
+                  placeholder="Global Filter"
+                  (input)="dt.filterGlobal($event.target.value, 'contains')"
+                />
+              </span>
+              </div>
             </ng-template>
+            <ng-template pTemplate="header">
+            <tr>
+              <th>Instruction No</th>
+              <th>Product Name</th>
+              <th>Debit Account No</th>
+              <th>Customer Ref No</th>
+          </tr>
+        </ng-template>
           </p-table>
         </div>
     </div>

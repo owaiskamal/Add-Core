@@ -1,7 +1,7 @@
 
 
 <ul class="list-unstyled" >
-  <li class="main_link"  (click)="onItemClick(item)" [ngStyle]="{'margin-left': (depth * 12) + 'px'}">
+  <li class="main_link" pRipple (click)="onItemClick(item)" [ngStyle]="{'margin-left': (depth * 12) + 'px'}">
 
     <a class="mat-list-item"   [ngClass]="{'active': item.RLink ? route.isActive('menu/'+item.RLink+'/' +item.id, true): false, 'expanded': expanded}">
 
