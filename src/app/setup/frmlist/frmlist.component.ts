@@ -3,6 +3,8 @@ import { TableDataService } from "./table-data.service";
 import { FilterUtils } from "primeng/utils";
 import { ActivatedRoute } from "@angular/router";
 import { MessageService } from 'primeng/api';
+import { Title } from '@angular/platform-browser';
+import { __values } from 'tslib';
 
 @Component({
   selector: "app-frmlist",
@@ -13,7 +15,8 @@ export class FrmlistComponent implements OnInit {
   constructor(
     private tableDataService: TableDataService,
     private _route: ActivatedRoute,
-    private messageService : MessageService
+    private messageService : MessageService,
+    private title: Title
   ) {
     //this.formID = this._route.snapshot.paramMap.get('id');
   }
@@ -22,14 +25,18 @@ export class FrmlistComponent implements OnInit {
   totalrecords: number;
   userList: any[] = [];
   formID: any;
+
   cols: any[] = [];
   ngOnInit(): void {
     this.cols = [];
     this._route.params.subscribe((params) => {
       this.formID = params["id"];
-      console.log("URL id has changed");
+      console.log(this._route['data']['_value'],"URL id has changed");
       this.getuserdata();
+      
     });
+     var title1 =this._route.snapshot.paramMap.get('title')
+     this.title.setTitle("CR-PL - " +title1);
     FilterUtils["custom"] = (value, filter): boolean => {
       if (filter === undefined || filter === null || filter.trim() === "") {
         return true;

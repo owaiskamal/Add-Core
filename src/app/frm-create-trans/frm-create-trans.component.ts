@@ -24,6 +24,7 @@ import { Dropdown } from "primeng/dropdown";
 import { DynamicFormBuilderComponent } from "../dynamic-form-builder/dynamic-form-builder.component";
 import { DatePipe } from "@angular/common";
 import { stringify } from 'querystring';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -93,8 +94,8 @@ export class FrmCreateTransComponent
     private transService: CreateTransService,
     private messageService: MessageService,
     private formBuilder: FormBuilder,
-    private router : Router
-
+    private router : Router,
+    private title : Title
   ) {
     this.products = [];
     this.accounts = [];
@@ -109,9 +110,12 @@ export class FrmCreateTransComponent
   ngOnInit(): void {
     this._route.params.subscribe((params) => {
       this.formID = params["id"];
+      var title1 =this._route.snapshot.paramMap.get('title')
+      this.title.setTitle("CR-PL - " +title1);
       console.log("URL id has changed");
       this.UserID = sessionStorage.getItem("username");
       this.AccessToken = sessionStorage.getItem("token");
+      
       this.getTransCreation();
     });
   }
@@ -635,7 +639,7 @@ reader.onload = (ev) => {
   workBook = xlsx.read(data, { type: 'binary'  ,cellDates: true });
   jsonData = workBook.SheetNames.reduce((initial, name) => {
     const sheet = workBook.Sheets[name];
-    initial[name] = xlsx.utils.sheet_to_json(sheet , {header:1, raw:false,dateNF:'dd/mm/yyyy'});
+    initial[name] = xlsx.utils.sheet_to_json(sheet , {raw:false,dateNF:'dd/mm/yyyy'});
 
     return initial;
   }, {});
@@ -645,17 +649,9 @@ reader.onload = (ev) => {
   console.log(this.jsonArr,"parsed json");
   console.log(Object.keys(this.jsonArr['data'][0]))
 
+console.log(this.expectedSequence , "this is seq");
 
 
-// console.log(this.expectedSequence , "this is seq");
-// for(let i = 1; i<this.jsonArr['data'].length;i++){
-//   console.log(    this.jsonArr['data'][i]  , "datat");
-
-// this.jsonArr['data'][i] = Object.assign({}, ...Object.entries(this.jsonArr['data'][i])
-//          .map(([, prop], index) => ({[this.expectedSequence[index]]: prop})));
-// }
-//          console.log(this.jsonArr['data'] , "changed header");
-//          this.invoiceValues = this.jsonArr['data']
 // const sortObject = (obj) =>
 //   Object.fromEntries(
 //     Object.entries(obj).sort(
@@ -666,9 +662,9 @@ reader.onload = (ev) => {
 
 // const updated = this.jsonArr['data'].map(sortObject);
 // console.log(updated , "QWEQE");
-// const updated = this.autoFormatter(this.expectedSequence , this.jsonArr['data'])
-//  console.log(updated , "QWEQE");
-// this.invoiceValues = updated
+const updated = this.autoFormatter(this.expectedSequence , this.jsonArr['data'])
+ console.log(updated , "QWEQE");
+this.invoiceValues = updated
 
 // for(let i = 0 ; i< da.length ; i++)
 // {
@@ -681,11 +677,11 @@ reader.onload = (ev) => {
 
 // }
 // console.log(this.array_move(da , arr[1] , arr[0]), "Asdasdashdkasgdjhasgdjhasgajhg");
-// const p =JSON.stringify(this.invoiceValues);
-// this.messageService.add({severity:'success', summary:'File uploaded', detail:'Corrected sequence'});
-// setTimeout(() => {
-//   alert(p);
-// }, 1000);
+const p =JSON.stringify(this.invoiceValues);
+this.messageService.add({severity:'success', summary:'File uploaded', detail:'Corrected sequence'});
+setTimeout(() => {
+  alert(p);
+}, 1000);
 
 
 }
