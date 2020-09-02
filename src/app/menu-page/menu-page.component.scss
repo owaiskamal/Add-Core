@@ -1,11 +1,21 @@
 @import "~src/theme.scss";
 
+.fixer
+{
+  background-color: transparent!important;
+  box-shadow: none;
+  border-bottom: 1px solid #ddd;
+  /* margin-right: 11px !important; */
+  margin-left: 270px;
+}
+
+
 /* sidenav */
 .sidenav {
 
   height: 100%;
   width: 270px;
-  position: absolute;
+  position: fixed;
   z-index: 1;
   right: auto;
   left: -277px;
@@ -14,7 +24,7 @@
   background-size: cover;
   background-position: top;
   //overflow-x: hidden;
-  padding-top: 90px;
+  padding-top: 16px;
 
   transition: 0.5s;
 
@@ -115,6 +125,41 @@
 @media (max-width: 768px) {
   .btn_side {
     display: inline;
+  }
+
+  .fixer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    margin-left: 0px;
+    background-color: #f8f9fa!important;
+  }
+  .sidenav {
+
+    height: 100%;
+    width: 270px;
+    position: absolute;
+    z-index: 1;
+    right: auto;
+    left: -277px;
+    background: $sidenav-background;
+    font-family: "Work Sans", sans-serif;
+    background-size: cover;
+    background-position: top;
+    //overflow-x: hidden;
+    padding-top: 70px;
+
+    transition: 0.5s;
+
+    overflow-y: auto;
+    scrollbar-width: thin;
+
+    box-shadow: 0px 0px 19px rgba(0, 0, 0, 1);
+
+
+
   }
 
   // .sidebar{

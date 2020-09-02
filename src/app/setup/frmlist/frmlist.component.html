@@ -10,7 +10,7 @@
     [value]="userList"
     [columns]="cols"
     [paginator]="true"
-    styleClass="p-table-customers"
+    styleClass="p-table-customers p-datatable-striped p-datatable-responsive-demo"
     [rows]="10"
     [responsive]= "true"
     [showCurrentPageReport]="true"
@@ -40,7 +40,7 @@
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-          {{ col.header | uppercase }}
+          {{ col.header  }}
           <p-sortIcon [field]="col.field"></p-sortIcon>
         </th>
       </tr>
