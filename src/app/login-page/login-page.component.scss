@@ -4,7 +4,7 @@
   color: #00458a;
   //font-weight: bold;
   top: 5px;
-  font-size: 35px;
+  font-size: 30px !important;
   font-family: BMWTypeNextLatin,Helvetica,Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif !important;
 }
 
@@ -90,7 +90,7 @@
   transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out,
     background-color 0.3s ease-in-out;
   box-shadow: none;
-  
+
 
 }
 
@@ -115,7 +115,7 @@
   overflow: auto;
   background-size: cover;
   background-position: left;
-  
+
 
 }
 

@@ -31,20 +31,20 @@ import { FormGroup } from "@angular/forms";
         }}</option>
       </select>
        -->
-   
+
       <p-dropdown *ngIf="field.IsLookup == 'Y'" [options]="array" [optionLabel]="array['value']"
         [id]="field?.ColumnName"
         [formControlName]="field?.ColumnName"
         [placeholder]="field.ColumnLabel"
       [showClear]="true">
     </p-dropdown>
-     
+
     </div>
   `,
 })
 export class TextBoxComponent  {
   @Input() field: any = {};
-  
+
   @Input() form: FormGroup;
   get isValid() {
     return this.form.controls[this.field.ColumnName].valid;
@@ -62,36 +62,36 @@ export class TextBoxComponent  {
         if(this.field.IsLookup == 'Y'){
         var subMenu = this.field.LookupVal;
         console.log(this.field.LookupVal , "drop");
-        
+
         //var array = [];
       //  this.array = subMenu.split('|');
       //   console.log(this.array , "dropdowns");
-    
+
       const table =
       this.field.LookupVal.split('|') //["key:value","key:value"]
   .map(pair => pair.split("-"));
 
           console.log(table , "asdasdskda");
 
-    
+
 this.array = table.map((o) => ({
 label : o[1],
 value : o[0]
 }))
       //console.log(results , "askjdaskhdakhweg");
-      
+
         // this.array = this.field.LookupVal.split('|').map((o ) => ({
         //   label: o,
         //   value: o,
         // }))
          console.log(this.array, "arrat");
-        
+
         }
-      
-    
+
+
     }, 1000);
-    
-    
-   
+
+
+
   }
 }
