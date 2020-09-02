@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-frm-trans-stage',
@@ -7,7 +9,10 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class FrmTransStageComponent implements OnInit {
   @ViewChild('op', { static: true }) opt: ElementRef;
-  constructor() {
+  constructor(
+    private _route: ActivatedRoute,
+    private title: Title
+  ) {
     this.cities = [
       {name: 'IFT_txtFile19.txt', code: 'NY'},
       {name: 'PAK-SUZUKI-10000-xlsx', code: 'RM'},
@@ -21,6 +26,8 @@ export class FrmTransStageComponent implements OnInit {
 
   visibleSidebar1;
   ngOnInit(): void {
+    var title1 =this._route.snapshot.paramMap.get('title')
+      this.title.setTitle("CR-PL - " +title1);
   }
   selectedFile(event,element){
    element.hide();
