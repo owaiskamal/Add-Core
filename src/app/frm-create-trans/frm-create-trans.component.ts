@@ -212,6 +212,7 @@ export class FrmCreateTransComponent
     this.invForm.reset();
     this.child.form.reset();
     this.invoiceValues = [];
+    this.invoiceData = [];
   }
   deleteInvData() {
     this.invoiceData = [];

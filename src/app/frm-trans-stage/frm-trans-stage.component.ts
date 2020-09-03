@@ -23,8 +23,9 @@ export class FrmTransStageComponent implements OnInit {
   }
   cities:any[] = []
   selectedCity: any;
-
+  cities1: string
   visibleSidebar1;
+  selectedCity1: any;
   ngOnInit(): void {
     var title1 =this._route.snapshot.paramMap.get('title')
       this.title.setTitle("CR-PL - " +title1);

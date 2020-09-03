@@ -48,8 +48,8 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {SidebarModule} from 'primeng/sidebar';
 import {ListboxModule} from 'primeng/listbox';
 import {RippleModule} from 'primeng/ripple';
-
-
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -102,7 +102,9 @@ import {RippleModule} from 'primeng/ripple';
     SidebarModule,
     OverlayPanelModule,
     ListboxModule,
-    RippleModule
+    RippleModule,
+    RadioButtonModule,
+    InputTextareaModule
   ],
   providers: [
     MessageService,
