@@ -9,7 +9,7 @@ export const environment = {
   logoutUrl : "http://132.147.160.71/AddCoreAPI/API/Core/SetUserStatus",
   setupUrl: "http://132.147.160.71/AddCoreAPI/API/Core/GetSetupListView",
   createTrans:"http://132.147.160.71/AddCoreAPI/API/Core/SetNewTxnView",    // "http://localhost:44391/sampleApi/"
-  fakeJson : "http://localhost:3000/",
+  fakeJson : "http://localhost:3000/data",
   productsJson : "http://localhost:3000/Products",
   accountsJson : "http://localhost:3000/Account",
   txnFields : "http://132.147.160.71/AddCoreAPI/API/Core/SetTxnFieldView",

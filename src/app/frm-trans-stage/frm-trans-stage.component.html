@@ -1,6 +1,6 @@
 <p-overlayPanel  #op [dismissable]="true" [showCloseIcon]="true">
   <ng-template pTemplate>
-    <p-listbox (onDblClick)="selectedFile($event,op)" [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [style]="{'width':'15rem'}"></p-listbox>
+    <p-listbox (onDblClick)="selectedFile($event,op)" [options]="filesDropdown" [(ngModel)]="selectedCity" optionLabel="name" [style]="{'width':'15rem'}"></p-listbox>
   </ng-template>
 </p-overlayPanel>
 <p-card class="p-card ">
@@ -27,12 +27,12 @@
       </div>
         <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
             <p-panel header="File Detail" class="detail">
-              <div class="p-grid">
-                <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                <span class="filename_font">Company Name</span>
+              <div class="p-grid" *ngFor="let item of filesArray" >
+                <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 ">
+                <span class="filename_font">{{item.key}}</span>
                 </div>
-                <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                  <span>DAYSWOOD</span>
+                <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 ">
+                  <span>{{item.value}}</span>
                 </div>
                 <hr
                 style="
@@ -41,64 +41,7 @@
                   margin: 0;
                 "
               />
-                   <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                    <span class="filename_font">File Name</span>
-                  </div>
-                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                      <span >COC001.xlsx</span>
-                  </div>
-                  <hr
-                  style="
-
-                    width: 100%;
-                    margin: 0;
-                  "
-                />
-                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                    <span class="filename_font">Upload By</span>
-                  </div>
-                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                      <span>DAYMAKER</span>
-                  </div>
-                  <hr
-                style="
-
-                  width: 100%;
-                  margin: 0;
-                "
-              />
-                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                    <span class="filename_font">Upload Date</span>
-                  </div>
-                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                      <span>31-12-2019</span>
-                  </div>
-                  <hr
-                style="
-
-                  width: 100%;
-                  margin: 0;
-                "
-              />
-                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                    <span class="filename_font">Total Transaction</span>
-                  </div>
-                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                      <span>1</span>
-                  </div>
-                  <hr
-                style="
-
-                  width: 100%;
-                  margin: 0;
-                "
-              />
-                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                    <span class="filename_font">Total Amount</span>
-                  </div>
-                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
-                      <span>10</span>
-                  </div>
+                   
               </div>
             </p-panel>
         </div>
@@ -117,7 +60,7 @@
           <label style="margin-top: 0.5rem;">Action By File: </label>
        </div>
        <div class=" p-field ">
-        <p-dropdown [options]="cities" [(ngModel)]="selectedCity1" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="actions" [(ngModel)]="selectedCity1" placeholder="Select Action" optionLabel="name" [showClear]="true"></p-dropdown>
        </div>
      <div class="p-field ">
       <button pButton pRipple type="button" label="Submit"></button>
@@ -131,13 +74,14 @@
 
 
         <div class=" p-col-12 p-md-12 p-lg-12 p-sm-12">
-            <p-table
+            <p-table [value] = "filesTables"
             #dt
             [rowsPerPageOptions]="[10, 25, 50]"
             selectionMode="single"
             [responsive]= "true"
             [paginator]="true"
             [rows]="15"
+            [filterDelay]="0"  [globalFilterFields]="['CustomeRefNumber','country.name','representative.name','Amount']">
           >
             <ng-template pTemplate="caption">
 
@@ -151,8 +95,8 @@
                   <label for="city7">Authorize All</label>
                   </div>
                   <div class="p-field-checkbox" >
-                    <p-radioButton name="city" value="Regect All" [(ngModel)]="cities1"  inputId="city6"></p-radioButton>
-                    <label for="city6">Regect All</label>
+                    <p-radioButton name="city" value="Reject All" [(ngModel)]="cities1"  inputId="city6"></p-radioButton>
+                    <label for="city6">Reject All</label>
                     </div>
                     <div class="p-field-checkbox"  >
                       <p-radioButton name="city" value="Hold" [(ngModel)]="cities1" inputId="city5"></p-radioButton>
@@ -181,12 +125,18 @@
             </ng-template>
             <ng-template pTemplate="header">
             <tr>
-              <th  pSortableColumn="code">Instruction No  <p-sortIcon field="code" ></p-sortIcon></th>
-              <th pSortableColumn="name">Product Name <p-sortIcon field="name" ></p-sortIcon></th>
-              <th pSortableColumn="category">Debit Account No <p-sortIcon  field="category"></p-sortIcon></th>
-              <th pSortableColumn="quantity">Customer Ref No <p-sortIcon field="quantity" ></p-sortIcon></th>
-          </tr>
+              <th  pSortableColumn="CustomeRefNumber">Customer Ref No <p-sortIcon field="CustomeRefNumber" ></p-sortIcon></th>
+              <th pSortableColumn="Amount">Amount <p-sortIcon field="Amount" ></p-sortIcon></th>
+                       </tr>
         </ng-template>
+        <ng-template pTemplate="body" let-transaction>
+          <tr>
+              <td>{{transaction.CustomeRefNumber}}</td>
+              <td>{{transaction.Amount}}</td>
+             
+          </tr>
+      </ng-template>
+
           </p-table>
         </div>
     </div>
