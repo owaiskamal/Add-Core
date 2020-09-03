@@ -8,7 +8,9 @@
         <div class="card-text">
         Transaction Checker
       </div>
+
     </p-header>
+
 
   <!--   <p-overlayPanel #op>
         <ng-template pTemplate>
@@ -24,21 +26,110 @@
       <p-button pRipple  type="button"  label="Select file" (click)="op.toggle($event)"></p-button>
       </div>
         <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
-            <p-panel header="File Detail">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p-panel header="File Detail" class="detail">
+              <div class="p-grid">
+                <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                <span class="filename_font">Company Name</span>
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                  <span>DAYSWOOD</span>
+                </div>
+                <hr
+                style="
+
+                  width: 100%;
+                  margin: 0;
+                "
+              />
+                   <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                    <span class="filename_font">File Name</span>
+                  </div>
+                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                      <span >COC001.xlsx</span>
+                  </div>
+                  <hr
+                  style="
+
+                    width: 100%;
+                    margin: 0;
+                  "
+                />
+                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                    <span class="filename_font">Upload By</span>
+                  </div>
+                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                      <span>DAYMAKER</span>
+                  </div>
+                  <hr
+                style="
+
+                  width: 100%;
+                  margin: 0;
+                "
+              />
+                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                    <span class="filename_font">Upload Date</span>
+                  </div>
+                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                      <span>31-12-2019</span>
+                  </div>
+                  <hr
+                style="
+
+                  width: 100%;
+                  margin: 0;
+                "
+              />
+                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                    <span class="filename_font">Total Transaction</span>
+                  </div>
+                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                      <span>1</span>
+                  </div>
+                  <hr
+                style="
+
+                  width: 100%;
+                  margin: 0;
+                "
+              />
+                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                    <span class="filename_font">Total Amount</span>
+                  </div>
+                  <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 pad">
+                      <span>10</span>
+                  </div>
+              </div>
             </p-panel>
         </div>
-        <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
-            <p-panel header="Action">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="p-col-6 p-sm-12 p-lg-6 ">
+        <div class="p-grid">
+        <div class=" p-col-12 p-md-12 p-lg-12 p-sm-12 ">
+
+            <p-panel header="Action" class="ActionText">
+              <textarea placeholder="Enter File level comments" class="textareaP"  pInputTextarea autoResize="autoResize"></textarea>
             </p-panel>
         </div>
+
+    <div class="p-formgroup-inline p-col-12 p-lg-12 p-sm-12 p-md-12" >
+
+      <div class="p-field">
+          <label style="margin-top: 0.5rem;">Action By File: </label>
+       </div>
+       <div class=" p-field ">
+        <p-dropdown [options]="cities" [(ngModel)]="selectedCity1" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
+       </div>
+     <div class="p-field ">
+      <button pButton pRipple type="button" label="Submit"></button>
+    </div>
+   <div class="p-field ">
+    <button pButton pRipple type="button"  class="p-button-outlined p-button-secondary" label="Reset"></button>
+   </div>
+  </div>
+</div>
+</div>
+
+
         <div class=" p-col-12 p-md-12 p-lg-12 p-sm-12">
             <p-table
             #dt
@@ -51,24 +142,49 @@
             <ng-template pTemplate="caption">
 
               <div class="table-header" >
-                <span style="font-weight: 700 ; font-size: 1.2rem ; margin-right: 61%;"> Transaction Details</span>
-                <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input
-                  type="text"
-                  pInputText
-                  placeholder="Global Filter"
-                  (input)="dt.filterGlobal($event.target.value, 'contains')"
-                />
-              </span>
+                <div class="p-formgroup-inline">
+
+                  <span style="font-weight: 700 ; font-size: 1.2rem; margin-right:9.3% ;"> Transaction Details</span>
+
+                  <div class="p-field-checkbox"  >
+                  <p-radioButton name="city" value="Authorize All" [(ngModel)]="cities1"  inputId="city7"></p-radioButton>
+                  <label for="city7">Authorize All</label>
+                  </div>
+                  <div class="p-field-checkbox" >
+                    <p-radioButton name="city" value="Regect All" [(ngModel)]="cities1"  inputId="city6"></p-radioButton>
+                    <label for="city6">Regect All</label>
+                    </div>
+                    <div class="p-field-checkbox"  >
+                      <p-radioButton name="city" value="Hold" [(ngModel)]="cities1" inputId="city5"></p-radioButton>
+                      <label for="city5">Hold</label>
+                      </div>
+                      <div class="p-field-checkbox"  >
+                        <p-radioButton name="city" value="Send to Repair" [(ngModel)]="cities1" inputId="city4"></p-radioButton>
+                        <label for="city4">Send to Repair</label>
+                        </div>
+                        <div class="p-field-checkbox"  >
+                          <p-radioButton name="city" value="Resest All" [(ngModel)]="cities1" inputId="city3"></p-radioButton>
+                          <label for="city3">Resest All</label>
+                          </div>
+                  <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                      type="text"
+                      pInputText
+                      placeholder="Global Filter"
+                      (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    />
+                  </span>
+              </div>
+
               </div>
             </ng-template>
             <ng-template pTemplate="header">
             <tr>
-              <th>Instruction No</th>
-              <th>Product Name</th>
-              <th>Debit Account No</th>
-              <th>Customer Ref No</th>
+              <th  pSortableColumn="code">Instruction No  <p-sortIcon field="code" ></p-sortIcon></th>
+              <th pSortableColumn="name">Product Name <p-sortIcon field="name" ></p-sortIcon></th>
+              <th pSortableColumn="category">Debit Account No <p-sortIcon  field="category"></p-sortIcon></th>
+              <th pSortableColumn="quantity">Customer Ref No <p-sortIcon field="quantity" ></p-sortIcon></th>
           </tr>
         </ng-template>
           </p-table>

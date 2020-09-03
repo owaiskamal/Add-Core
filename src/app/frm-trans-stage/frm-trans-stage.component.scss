@@ -51,7 +51,7 @@
         padding-right: 2em;
         padding-bottom: 2em;
         padding-left: 2em;
-        
+
     }
     :host ::ng-deep .p-toast{
         margin-top: 20%;
@@ -64,6 +64,43 @@
 }
   :host ::ng-deep .p-listbox {
     border: none;
+  }
+
+  :host ::ng-deep .p-field-checkbox
+  {
+    margin-bottom: 0;
+    margin-top: 0.7rem;
+  }
+
+  .filename_font{
+    font-weight: bold;
+  }
+
+
+  :host ::ng-deep .ActionText .p-panel .p-panel-content
+  {
+    padding: 0rem;
+    background: none;
+    border: none;
+  }
+  :host ::ng-deep .detail .p-panel .p-panel-content
+  {
+    padding: 1rem .5rem 0 1rem;
+
+  }
+
+  :host ::ng-deep  .textareaP
+  {
+    padding: 0 0 0 0.5rem !important;
+    border-top : none !important;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    width: 100% !important;
+  }
+
+  :host ::ng-deep .pad
+  {
+    padding: 0;
   }
 /* :host ::ng-deep .p-fieldset-legend
 {
