@@ -16,6 +16,7 @@ import {ConfirmationService} from 'primeng/api';
 })
 export class LoginPageComponent implements OnInit {
   spinnerIcon: boolean;
+  passwordShow = false;
   constructor(
     private messageService: MessageService,
     private router: Router,
@@ -111,7 +112,11 @@ getNotifications(){
 
     this.router.navigateByUrl("/changepassword");
   }
+  showPassword()
+  { console.log(this.passwordShow , "asdasdsad");
 
+    this.passwordShow =! this.passwordShow;
+  }
   sessionLogout(position: string)
   {
     this.position = position;

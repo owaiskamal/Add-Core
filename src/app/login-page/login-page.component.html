@@ -40,15 +40,21 @@
             <div class="p-md-2 p-lg-3"></div>
             <div class="p-col-12 p-md-8 p-lg-6 p-sm-12">
               <div class="p-inputgroup input-group-alternative input-icons">
-                <i class="fa fa-lock icon"></i>
+               <a class="nav-item"   (click)="showPassword()"> <i *ngIf="!passwordShow" class="pi pi-eye-slash icon"></i>
+                <i *ngIf="passwordShow" class="pi pi-eye icon"></i>
+              </a>
                 <input
                   type="password"
                   required
                   placeholder="Password"
                   [(ngModel)]="password"
                   name="password"
+                  pPassword
+                  [feedback]='false'
+                  [showPassword]='passwordShow'
                   class="form-control input-field"
                 />
+
               </div>
             </div>
           </div>
