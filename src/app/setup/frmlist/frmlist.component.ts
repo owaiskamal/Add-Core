@@ -65,6 +65,8 @@ export class FrmlistComponent implements OnInit {
           header: Object.keys(this.userLists[0])[i],
           field: Object.keys(this.userLists[0])[i],
         };
+        console.log(this.cols,"colss");
+        
       }
       console.log(this.totalrecords, "asdasd");
 

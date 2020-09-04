@@ -81,6 +81,7 @@
             [responsive]= "true"
             [paginator]="true"
             [rows]="15"
+            [columns] = "cols"
             [filterDelay]="0"  [globalFilterFields]="['CustomeRefNumber','country.name','representative.name','Amount']">
           >
             <ng-template pTemplate="caption">
@@ -123,16 +124,21 @@
 
               </div>
             </ng-template>
-            <ng-template pTemplate="header">
+            <ng-template pTemplate="header" let-columns>
             <tr>
-              <th  pSortableColumn="CustomeRefNumber">Customer Ref No <p-sortIcon field="CustomeRefNumber" ></p-sortIcon></th>
-              <th pSortableColumn="Amount">Amount <p-sortIcon field="Amount" ></p-sortIcon></th>
+              <th *ngFor="let col of columns"  [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
                        </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-transaction>
+        <ng-template pTemplate="body"  let-transaction let-columns="columns">
           <tr>
-              <td>{{transaction.CustomeRefNumber}}</td>
-              <td>{{transaction.Amount}}</td>
+            <td *ngFor="let col of columns">
+              <span class="p-column-title">{{col.header}}</span>
+              {{transaction[col.field]}}
+          </td>
+         
 
           </tr>
       </ng-template>
