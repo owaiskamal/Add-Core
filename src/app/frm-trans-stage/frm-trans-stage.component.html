@@ -126,6 +126,10 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
             <tr>
+              <th style="width: 3rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+
               <th *ngFor="let col of columns"  [pSortableColumn]="col.field">
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
@@ -134,11 +138,14 @@
         </ng-template>
         <ng-template pTemplate="body"  let-transaction let-columns="columns">
           <tr>
+            <td>
+              <p-tableCheckbox [value]="transaction"></p-tableCheckbox>
+          </td>
             <td *ngFor="let col of columns">
               <span class="p-column-title">{{col.header}}</span>
               {{transaction[col.field]}}
           </td>
-         
+
 
           </tr>
       </ng-template>
