@@ -1,6 +1,6 @@
 <p-overlayPanel  #op [dismissable]="true" [showCloseIcon]="true">
   <ng-template pTemplate>
-    <p-listbox (onDblClick)="selectedFile($event,op)" [options]="filesDropdown" [(ngModel)]="selectedCity" optionLabel="name" [style]="{'width':'15rem'}"></p-listbox>
+    <p-listbox (onClick)="selectedFile($event,op)" [options]="filesDropdown" [(ngModel)]="selectedCity" optionLabel="name" [style]="{'width':'15rem'}"></p-listbox>
   </ng-template>
 </p-overlayPanel>
 <p-card class="p-card ">
@@ -23,7 +23,7 @@
       <div class="p-col-12 p-md-12 pd-lg-12 p-sm-12">
 
 
-      <p-button pRipple  type="button"  label="Select file" (click)="op.toggle($event)"></p-button>
+      <p-button pRipple  type="button"  label="Select File" (click)="op.toggle($event)"></p-button>
       </div>
         <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
             <p-panel header="File Detail" class="detail">
@@ -41,7 +41,7 @@
                   margin: 0;
                 "
               />
-                   
+
               </div>
             </p-panel>
         </div>
@@ -133,7 +133,7 @@
           <tr>
               <td>{{transaction.CustomeRefNumber}}</td>
               <td>{{transaction.Amount}}</td>
-             
+
           </tr>
       </ng-template>
 
