@@ -27,12 +27,14 @@ export class FrmTransStageComponent implements OnInit {
   actions:any[] = []
   files:any[] = []
   filesArray:any[] = [];
+  cols: any[] = [];
   selectedCity: any;
   filesDropdown :any  = {};
   cities1: string
   visibleSidebar1;
   selectedCity1: any;
   ngOnInit(): void {
+    this.cols = [];
     var title1 =this._route.snapshot.paramMap.get('title')
       this.title.setTitle("CR-PL - " +title1);
    this.getFilesData();
@@ -80,6 +82,14 @@ export class FrmTransStageComponent implements OnInit {
   console.log(filesTables , "files Tables");
 
   this.filesTables = filesTables['Transactions'];
+  this.cols = [
+    { field: 'CustomeRefNumber', header: 'CustomeRefNumber' },
+    { field: 'Amount', header: 'Amount' },
+   
+  ];
+
+
+
    for (let i = 0; i < Object.keys(filesArray[0]).length; i++) {
     this.filesArray[i] = {
      key : Object.keys(filesArray[0])[i],
