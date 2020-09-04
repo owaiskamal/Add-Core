@@ -28,6 +28,7 @@ export class FrmTransStageComponent implements OnInit {
   files:any[] = []
   filesArray:any[] = [];
   cols: any[] = [];
+  totalrecords: number;
   selectedCity: any;
   filesDropdown :any  = {};
   cities1: string
@@ -82,6 +83,7 @@ export class FrmTransStageComponent implements OnInit {
   console.log(filesTables , "files Tables");
 
   this.filesTables = filesTables['Transactions'];
+  //this.totalrecords = this.filesTables.length;
   this.cols = [
     { field: 'CustomeRefNumber', header: 'CustomeRefNumber' },
     { field: 'Amount', header: 'Amount' },

@@ -63,7 +63,7 @@
               [fields]="getFields()"
             >
           </dynamic-form-builder> -->
-        <p-tabView *ngIf="fields.length > 0"  (onChange)="onTabChange($event)">
+        <p-tabView class="p-col-12" *ngIf="fields.length > 0"  (onChange)="onTabChange($event)">
           <p-tabPanel style="margin-right: 2%;" header="Transaction">
             <dynamic-form-builder
               *ngIf="isValid"
