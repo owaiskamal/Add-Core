@@ -33,7 +33,7 @@ export class FrmTransStageComponent implements OnInit {
   filesDropdown :any  = {};
   cities1: string
   visibleSidebar1;
-  selectedCity1: any;
+  selectedCity1: any[] =[];
   ngOnInit(): void {
     this.cols = [];
     var title1 =this._route.snapshot.paramMap.get('title')
@@ -62,6 +62,8 @@ export class FrmTransStageComponent implements OnInit {
   selectedFile(event,element){
    element.hide();
    this.filesArray =[]
+   var filesArray = []
+   var filesTables = [];
    var selectedFile = ""
    if(event.value.name == undefined)
    {
@@ -87,7 +89,7 @@ export class FrmTransStageComponent implements OnInit {
   this.cols = [
     { field: 'CustomeRefNumber', header: 'CustomeRefNumber' },
     { field: 'Amount', header: 'Amount' },
-   
+
   ];
 
 

@@ -23,10 +23,10 @@
       <div class="p-col-12 p-md-12 pd-lg-12 p-sm-12">
 
 
-      
+
       <span class="p-overlay-badge">
-        <p-button pRipple  type="button"   label="Select File" (click)="op.toggle($event)"></p-button>
-        <span class="p-badge p-badge-info">{{files.length}}</span>
+        <p-button pRipple  type="button"   label="Available File List" (click)="op.toggle($event)"></p-button>
+        <span class="p-badge p-badge-info" style="font-size: .5em">{{files.length}}</span>
     </span>
       </div>
         <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
@@ -140,22 +140,36 @@
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
             </th>
+            <th > Initiator</th>
                        </tr>
         </ng-template>
-        <ng-template pTemplate="body"  let-transaction let-columns="columns">
+        <ng-template pTemplate="body"  let-transaction let-i="rowIndex">
           <tr>
             <td>
               <p-tableCheckbox [value]="transaction"></p-tableCheckbox>
           </td>
-            <td *ngFor="let col of columns">
-              <span class="p-column-title">{{col.header}}</span>
-              {{transaction[col.field]}}
+            <td >
+              <span class="p-column-title">CustomeRefNumber</span>
+              {{transaction.CustomeRefNumber}}
           </td>
+          <td >
+            <span class="p-column-title">Amount</span>
+            {{transaction.Amount}}
+        </td>
+        <td >
 
+
+          <p-dropdown [options]="actions" [(ngModel)]="selectedCity1[i]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
+
+      </td>
 
           </tr>
       </ng-template>
-
+      <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No Transaction found.</td>
+        </tr>
+    </ng-template>
           </p-table>
         </div>
     </div>
