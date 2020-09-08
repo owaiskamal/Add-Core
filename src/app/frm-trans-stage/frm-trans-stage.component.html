@@ -1,6 +1,6 @@
 <p-overlayPanel  #op [dismissable]="true" [showCloseIcon]="true">
   <ng-template pTemplate>
-    <p-listbox (onClick)="selectedFile($event,op)" [options]="filesDropdown" [(ngModel)]="selectedCity" optionLabel="name" [style]="{'width':'15rem'}"></p-listbox>
+    <p-listbox (onClick)="selectedFile($event,op)" [options]="filesDropdown" [(ngModel)]="preSelectFile" optionLabel="name" [style]="{'width':'15rem'}"></p-listbox>
   </ng-template>
 </p-overlayPanel>
 <p-card class="p-card ">
@@ -64,7 +64,7 @@
           <label style="margin-top: 0.5rem;">Action By File: </label>
        </div>
        <div class=" p-field ">
-        <p-dropdown [options]="actions" [(ngModel)]="selectedCity1" placeholder="Select Action" optionLabel="name" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="actions" [(ngModel)]="actionByFile" placeholder="Select Action" optionLabel="name" [showClear]="true"></p-dropdown>
        </div>
      <div class="p-field ">
       <button pButton pRipple type="button" label="Submit"></button>
@@ -98,23 +98,23 @@
                   <span style="font-weight: 700 ; font-size: 1.2rem; margin-right:9.3% ;"> Transaction Details</span>
 
                   <div class="p-field-checkbox"  >
-                  <p-radioButton name="city" value="Authorize All" [(ngModel)]="cities1" (onClick)="authAll()"  inputId="city7"></p-radioButton>
+                  <p-radioButton  name="city" value="Authorize All" [(ngModel)]="fileActions" (onClick)="authAll()"  inputId="city7"></p-radioButton>
                   <label for="city7">Authorize All</label>
                   </div>
                   <div class="p-field-checkbox" >
-                    <p-radioButton name="city" value="Reject All" [(ngModel)]="cities1" (onClick)="authAll()"  inputId="city6"></p-radioButton>
+                    <p-radioButton name="city" value="Reject All" [(ngModel)]="fileActions" (onClick)="authAll()"  inputId="city6"></p-radioButton>
                     <label for="city6">Reject All</label>
                     </div>
                     <div class="p-field-checkbox"  >
-                      <p-radioButton name="city" value="Hold" [(ngModel)]="cities1" (onClick)="authAll()" inputId="city5"></p-radioButton>
+                      <p-radioButton name="city" value="Hold" [(ngModel)]="fileActions" (onClick)="authAll()" inputId="city5"></p-radioButton>
                       <label for="city5">Hold</label>
                       </div>
                       <div class="p-field-checkbox"  >
-                        <p-radioButton name="city" value="Send to Repair" [(ngModel)]="cities1" (onClick)="authAll()" inputId="city4"></p-radioButton>
+                        <p-radioButton name="city" value="Send to Repair" [(ngModel)]="fileActions" (onClick)="authAll()" inputId="city4"></p-radioButton>
                         <label for="city4">Send to Repair</label>
                         </div>
                         <div class="p-field-checkbox"  >
-                          <p-radioButton name="city" value="Resest All" [(ngModel)]="cities1" (onClick)="authAll()"  inputId="city3"></p-radioButton>
+                          <p-radioButton name="city" value="Resest All" [(ngModel)]="fileActions" (onClick)="authAll()"  inputId="city3"></p-radioButton>
                           <label for="city3">Resest All</label>
                           </div>
                   <span class="p-input-icon-left">
@@ -167,7 +167,7 @@
         <td >
 
 
-          <p-dropdown [options]="actions" [(ngModel)]="selectedCity1[i]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
+          <p-dropdown [options]="actions" [(ngModel)]="selectedAction[i]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
 
       </td>
       <td style="text-align: center;">

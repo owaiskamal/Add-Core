@@ -38,13 +38,14 @@ export class FrmTransStageComponent implements OnInit {
   filesData :any[] =[];
 
   totalrecords: number;
-  selectedCity: any;
+  preSelectFile: any;
   filesDropdown :any  = {};
-  cities1: any[] = []
+  fileActions: boolean;
   visibleSidebar1;
   fileView: any;
   submitted: boolean;
-  selectedCity1: any[] =[];
+  selectedAction: any[] =[];
+  actionByFile: any;
   first: number = 0;
 
   //totalRecords: number = 120;
@@ -58,8 +59,8 @@ export class FrmTransStageComponent implements OnInit {
   }
   authAll()
   {
-    console.log(this.cities1 , "Auth All");
-
+    console.log(this.fileActions , "Auth All");
+    
   }
   getFilesData(){
     this.checkerService.getFiles().subscribe(res=>{
@@ -74,9 +75,9 @@ export class FrmTransStageComponent implements OnInit {
       value : o
       }))
       console.log(this.filesDropdown,"raw data");
-       this.selectedCity =this.filesDropdown[0];
-       console.log(this.selectedCity , "pre-select");
-      this.selectedFile(this.selectedCity , this.opt);
+       this.preSelectFile =this.filesDropdown[0];
+       console.log(this.preSelectFile , "pre-select");
+      this.selectedFile(this.preSelectFile , this.opt);
     })
   }
   viewDetails(transaction,index) {
