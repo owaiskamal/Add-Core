@@ -88,7 +88,7 @@
             [columns] = "cols"
             [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [filterDelay]="0"  [globalFilterFields]="['CustomeRefNumber','country.name','representative.name','Amount']">
+            [filterDelay]="0"  [globalFilterFields]="['CustomeRefNumber','CNIC','Name','Amount']">
           >
             <ng-template pTemplate="caption">
 
@@ -98,23 +98,23 @@
                   <span style="font-weight: 700 ; font-size: 1.2rem; margin-right:9.3% ;"> Transaction Details</span>
 
                   <div class="p-field-checkbox"  >
-                  <p-radioButton name="city" value="Authorize All" [(ngModel)]="cities1"  inputId="city7"></p-radioButton>
+                  <p-radioButton name="city" value="Authorize All" [(ngModel)]="cities1" (onClick)="authAll()"  inputId="city7"></p-radioButton>
                   <label for="city7">Authorize All</label>
                   </div>
                   <div class="p-field-checkbox" >
-                    <p-radioButton name="city" value="Reject All" [(ngModel)]="cities1"  inputId="city6"></p-radioButton>
+                    <p-radioButton name="city" value="Reject All" [(ngModel)]="cities1" (onClick)="authAll()"  inputId="city6"></p-radioButton>
                     <label for="city6">Reject All</label>
                     </div>
                     <div class="p-field-checkbox"  >
-                      <p-radioButton name="city" value="Hold" [(ngModel)]="cities1" inputId="city5"></p-radioButton>
+                      <p-radioButton name="city" value="Hold" [(ngModel)]="cities1" (onClick)="authAll()" inputId="city5"></p-radioButton>
                       <label for="city5">Hold</label>
                       </div>
                       <div class="p-field-checkbox"  >
-                        <p-radioButton name="city" value="Send to Repair" [(ngModel)]="cities1" inputId="city4"></p-radioButton>
+                        <p-radioButton name="city" value="Send to Repair" [(ngModel)]="cities1" (onClick)="authAll()" inputId="city4"></p-radioButton>
                         <label for="city4">Send to Repair</label>
                         </div>
                         <div class="p-field-checkbox"  >
-                          <p-radioButton name="city" value="Resest All" [(ngModel)]="cities1" inputId="city3"></p-radioButton>
+                          <p-radioButton name="city" value="Resest All" [(ngModel)]="cities1" (onClick)="authAll()"  inputId="city3"></p-radioButton>
                           <label for="city3">Resest All</label>
                           </div>
                   <span class="p-input-icon-left">
@@ -157,11 +157,22 @@
             {{transaction.Amount}}
         </td>
         <td >
+          <span class="p-column-title">CNIC</span>
+          {{transaction.CNIC}}
+      </td>
+      <td >
+        <span class="p-column-title">Name</span>
+        {{transaction.Name}}
+    </td>
+        <td >
 
 
           <p-dropdown [options]="actions" [(ngModel)]="selectedCity1[i]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
 
       </td>
+      <td style="text-align: center;">
+        <button pButton pRipple  icon="pi pi-info-circle" class="p-button-rounded p-button-text" (click)="viewDetails(transaction , i)"></button>
+    </td>
 
           </tr>
       </ng-template>
@@ -174,3 +185,53 @@
         </div>
     </div>
  </p-card>
+
+ <p-dialog [(visible)]="productDialog" [style]="{width: '500px'}"  header="Transaction Details" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <!--   <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image"> -->
+      <div class="p-field">
+         <!--  <label for="name">Name</label>
+          <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
+          <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small> -->
+      </div>
+
+
+      <div class="p-field">
+          <label class="p-mb-3"></label>
+          <div class="p-formgrid p-grid"  *ngFor="let item of filesData" >
+              <div class="p-field p-col-6" >
+                  <!-- <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="product.category"></p-radioButton> -->
+                  <label for="category1" class="filename_font"> {{item.key}}: </label>
+              </div>
+              <div class="p-field p-col-6">
+           <!--        <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.category"></p-radioButton> -->
+                  <label for="category2">{{item.value}}</label>
+              </div>
+
+          </div>
+
+      </div>
+
+
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+     <!--  <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button> -->
+
+      <!--  <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button> -->
+      <div class="p-grid p-align-center">
+        <!-- <div class="p-col-1">
+            <p-button icon="pi pi-refresh" (onClick)="refresh()"></p-button>
+        </div> -->
+        <div class="p-col-12">
+            <p-paginator [first]="pageIndex" [rows]="1"   [totalRecords]="totalRecords2" (onPageChange)="onPageChange($event)"
+            ></p-paginator>
+        </div>
+        <!-- <div class="p-col-1 p-grid p-justify-end">
+            <p-button icon="pi pi-search"></p-button>
+        </div> -->
+    </div>
+
+    </ng-template>
+</p-dialog>
+

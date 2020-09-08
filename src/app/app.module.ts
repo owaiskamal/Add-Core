@@ -50,7 +50,7 @@ import {ListboxModule} from 'primeng/listbox';
 import {RippleModule} from 'primeng/ripple';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputTextareaModule} from 'primeng/inputtextarea';
-
+import {PaginatorModule} from 'primeng/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,7 +104,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     ListboxModule,
     RippleModule,
     RadioButtonModule,
-    InputTextareaModule
+    InputTextareaModule,
+    PaginatorModule
   ],
   providers: [
     MessageService,
