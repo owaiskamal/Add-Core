@@ -10,7 +10,7 @@
 $font-primary: "Courier New", Courier, monospace;
 html *
 {
-  font-size : 15px !important;
+  font-size : 14px !important;
   -webkit-font-smoothing: antialiased;
 }
  body {
@@ -29,5 +29,10 @@ html *
     width: 100%;
     padding-bottom: 3%;
   }
+  html *
+{
+  font-size : 17px !important;
+  -webkit-font-smoothing: antialiased;
+}
 
 }
