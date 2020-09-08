@@ -105,7 +105,7 @@ import {PaginatorModule} from 'primeng/paginator';
     RippleModule,
     RadioButtonModule,
     InputTextareaModule,
-    PaginatorModule
+   PaginatorModule
   ],
   providers: [
     MessageService,

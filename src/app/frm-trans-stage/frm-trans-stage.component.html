@@ -186,15 +186,8 @@
     </div>
  </p-card>
 
- <p-dialog [(visible)]="productDialog"  header="Transaction Details" [style]="{width: '450px'}" [baseZIndex]="10000" [modal]="true" styleClass="p-fluid">
+ <p-dialog [(visible)]="productDialog"  header="Transaction Details" [style]="{width: '450px'}" [baseZIndex]="10000" [modal]="true" styleClass="p-fluid dialog">
   <ng-template pTemplate="content">
-    <!--   <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image"> -->
-      <div class="p-field">
-         <!--  <label for="name">Name</label>
-          <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
-          <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small> -->
-      </div>
-
 
       <div class="p-field">
           <label class="p-mb-3"></label>
@@ -225,7 +218,7 @@
         </div> -->
         <div class="p-col-12">
             <p-paginator [first]="pageIndex" [rows]="1"   [totalRecords]="totalRecords2" (onPageChange)="onPageChange($event)"
-            ></p-paginator>
+            showJumpToPageDropdown="true"></p-paginator>
         </div>
         <!-- <div class="p-col-1 p-grid p-justify-end">
             <p-button icon="pi pi-search"></p-button>
