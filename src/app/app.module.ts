@@ -51,6 +51,7 @@ import {RippleModule} from 'primeng/ripple';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {PaginatorModule} from 'primeng/paginator';
+import {TooltipModule} from 'primeng/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,7 +106,8 @@ import {PaginatorModule} from 'primeng/paginator';
     RippleModule,
     RadioButtonModule,
     InputTextareaModule,
-   PaginatorModule
+    PaginatorModule,
+    TooltipModule
   ],
   providers: [
     MessageService,
