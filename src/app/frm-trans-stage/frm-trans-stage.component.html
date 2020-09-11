@@ -92,7 +92,7 @@
                 <div class="p-formgroup-inline">
 
                   <span style="font-weight: 700 ; font-size: 1.2rem; margin-right:9.3% ;"> Transaction Details</span>
-
+                <div class="p-formgroup-inline">
                   <div class="p-field-checkbox"  >
                   <p-radioButton  name="city" value="Authorize All" [(ngModel)]="fileActions" (onClick)="authAll()"  inputId="city7"></p-radioButton>
                   <label for="city7">Authorize All</label>
@@ -100,20 +100,21 @@
                   <div class="p-field-checkbox" >
                     <p-radioButton name="city" value="Reject All" [(ngModel)]="fileActions" (onClick)="authAll()"  inputId="city6"></p-radioButton>
                     <label for="city6">Reject All</label>
-                    </div>
+                  </div>
                     <div class="p-field-checkbox"  >
                       <p-radioButton name="city" value="Hold" [(ngModel)]="fileActions" (onClick)="authAll()" inputId="city5"></p-radioButton>
                       <label for="city5">Hold</label>
-                      </div>
+                    </div>
                       <div class="p-field-checkbox"  >
                         <p-radioButton name="city" value="Send to Repair" [(ngModel)]="fileActions" (onClick)="authAll()" inputId="city4"></p-radioButton>
                         <label for="city4">Send to Repair</label>
-                        </div>
+                      </div>
                         <div class="p-field-checkbox"  >
                           <p-radioButton name="city" value="Resest All" [(ngModel)]="fileActions" (onClick)="authAll()"  inputId="city3"></p-radioButton>
                           <label for="city3">Resest All</label>
-                          </div>
-                  <span class="p-input-icon-left">
+                        </div>
+                    </div>
+                  <span class="p-input-icon-left table_filter">
                     <i class="pi pi-search"></i>
                     <input
                       type="text"

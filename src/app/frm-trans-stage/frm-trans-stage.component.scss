@@ -95,7 +95,7 @@
 
     :host ::ng-deep .p-card .p-card-body
     {
-        padding-top: 4em;
+        padding-top: 2em;
         padding-right: 2em;
         padding-bottom: 2em;
         padding-left: 2em;
@@ -108,6 +108,9 @@
     :host ::ng-deep .p-card{
         margin-top: 2em;
         margin-bottom: 4em;
+    }
+    .table_filter{
+      margin-top: 10px;
     }
 }
   :host ::ng-deep .p-listbox {
