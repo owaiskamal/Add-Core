@@ -25,6 +25,7 @@ import { DynamicFormBuilderComponent } from "../dynamic-form-builder/dynamic-for
 import { DatePipe } from "@angular/common";
 import { stringify } from 'querystring';
 import { Title } from '@angular/platform-browser';
+import { UserauthService } from '../userauth.service';
 
 
 @Component({
@@ -95,7 +96,8 @@ export class FrmCreateTransComponent
     private messageService: MessageService,
     private formBuilder: FormBuilder,
     private router : Router,
-    private title : Title
+    private title : Title,
+    private logoutService : UserauthService
   ) {
     this.products = [];
     this.accounts = [];
@@ -267,6 +269,8 @@ export class FrmCreateTransComponent
   getuserdata(invoiceDataparam) {
     console.log(invoiceDataparam, "invoice daat param");
     this.invoiceValues = Object.values(invoiceDataparam);
+    console.log(this.invoiceValues , "data");
+
     this.totalrecords = this.invoiceValues.length;
     // this.cols = Object.keys(this.userLists[0]);
     this.cols = [];
@@ -276,7 +280,7 @@ export class FrmCreateTransComponent
         field: Object.keys(invoiceDataparam[0])[i],
       };
     }
-    console.log(this.totalrecords, "asdasd");
+    console.log(this.cols, "asdasd");
 
     //  this.userarray.push(this.userList);
   }
@@ -335,10 +339,18 @@ export class FrmCreateTransComponent
           summary: "Connection Failed",
           detail: "Session Expired"
         });
+        var username = sessionStorage.getItem('username');
+        console.log(username , "userNAME");
 
+        this.logoutService.userLogout(username).subscribe(res =>
+          {
+            console.log(res);
+
+          });
  sessionStorage.removeItem("token");
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("menuitem");
+
           setTimeout(() => {
             this.router.navigateByUrl('');
 
@@ -626,6 +638,7 @@ const reader = new FileReader();
 const file = event.files[0];
 this.invoiceData = this.invForm.getRawValue();
 this.expectedSequence = Object.keys(this.invoiceData);
+this.invoiceData=[]
 console.log(file,"file is here");
 var regex = /(xlsx|csv|txt)$/i
 var extension = regex.exec(file.name);
@@ -640,8 +653,7 @@ reader.onload = (ev) => {
   workBook = xlsx.read(data, { type: 'binary'  ,cellDates: true });
   jsonData = workBook.SheetNames.reduce((initial, name) => {
     const sheet = workBook.Sheets[name];
-    initial[name] = xlsx.utils.sheet_to_json(sheet , {raw:false,dateNF:'dd/mm/yyyy'});
-
+    initial[name] = xlsx.utils.sheet_to_json(sheet , {header:1, raw:false,dateNF:'dd/mm/yyyy'});
     return initial;
   }, {});
   const dataString = JSON.stringify(jsonData);
@@ -651,15 +663,17 @@ reader.onload = (ev) => {
   console.log(Object.keys(this.jsonArr['data'][0]))
 
 console.log(this.expectedSequence , "this is seq");
+var jsonDATA = []
+for(let i = 1; i<this.jsonArr['data'].length;i++){
+  console.log(    this.jsonArr['data'][i]  , "datat");
 
-// for(let i = 1; i<this.jsonArr['data'].length;i++){
-//   console.log(    this.jsonArr['data'][i]  , "datat");
+this.jsonArr['data'][i] = Object.assign({}, ...Object.entries(this.jsonArr['data'][i])
+         .map(([, prop], index) => ({[this.expectedSequence[index]]: prop})));
+          jsonDATA.push(this.jsonArr['data'][i]);
+}
+         console.log(jsonDATA , "changed header");
 
-// this.jsonArr['data'][i] = Object.assign({}, ...Object.entries(this.jsonArr['data'][i])
-//          .map(([, prop], index) => ({[this.expectedSequence[index]]: prop})));
-// }
-//          console.log(this.jsonArr['data'] , "changed header");
-//          this.invoiceValues = this.jsonArr['data']
+          this.getuserdata(jsonDATA)
 
 // const sortObject = (obj) =>
 //   Object.fromEntries(
@@ -671,9 +685,9 @@ console.log(this.expectedSequence , "this is seq");
 
 // const updated = this.jsonArr['data'].map(sortObject);
 // console.log(updated , "QWEQE");
-const updated = this.autoFormatter(this.expectedSequence , this.jsonArr['data'])
- console.log(updated , "QWEQE");
-this.invoiceValues = updated
+// const updated = this.autoFormatter(this.expectedSequence , this.jsonArr['data'])
+//  console.log(updated , "QWEQE");
+// this.invoiceValues = updated
 
 // for(let i = 0 ; i< da.length ; i++)
 // {
@@ -686,11 +700,11 @@ this.invoiceValues = updated
 
 // }
 // console.log(this.array_move(da , arr[1] , arr[0]), "Asdasdashdkasgdjhasgdjhasgajhg");
-const p =JSON.stringify(this.invoiceValues);
-this.messageService.add({severity:'success', summary:'File uploaded', detail:'Corrected sequence'});
-setTimeout(() => {
-  alert(p);
-}, 1000);
+// const p =JSON.stringify(this.invoiceValues);
+// this.messageService.add({severity:'success', summary:'File uploaded', detail:'Corrected sequence'});
+// setTimeout(() => {
+//   alert(p);
+// }, 1000);
 
 
 }

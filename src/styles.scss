@@ -5,6 +5,7 @@
 // @import "~node_modules/primeng/resources/themes/nova-light/theme.css";
 @import "~bootstrap/dist/css/bootstrap.css";
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
 
 
 $font-primary: "Courier New", Courier, monospace;
@@ -12,12 +13,19 @@ html *
 {
   font-size : 14px !important;
   -webkit-font-smoothing: antialiased;
+
+
 }
- body {
+*
+{
+  font-family: 'Nunito Sans', sans-serif;
+}
+ body  {
 
   height: 100%;
    position: fixed;
   width: 100%;
+
 
 }
 
