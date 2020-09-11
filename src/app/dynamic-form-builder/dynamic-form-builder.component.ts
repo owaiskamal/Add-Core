@@ -76,16 +76,37 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
       //  if (f.IsLookup != 'Y') {
         if(f.Mandatory === 'Y')
         {
-      fieldsCtrls[f.ColumnName] = new FormControl(
-        f.DefaultValue || "",
-        [Validators.required,Validators.minLength(f.MinLeng)]
-      );
+          if(f.Editable == 'N')
+          {
+            fieldsCtrls[f.ColumnName] = new FormControl(
+              f.DefaultValue || "",
+              [Validators.required,Validators.minLength(f.MinLeng)]
+            );
+          }
+          else{
+                fieldsCtrls[f.ColumnName] = new FormControl(
+                   {value :f.DefaultValue || "", disabled: true} ,
+                  [Validators.required,Validators.minLength(f.MinLeng)]
+                );
+          }
+      
       
         }
         else{
-          fieldsCtrls[f.ColumnName] = new FormControl(
-            f.DefaultValue || "" , Validators.minLength(f.MinLeng)
-          );
+          if(f.Editable == 'N')
+          {
+            fieldsCtrls[f.ColumnName] = new FormControl(
+              f.DefaultValue || "",
+              [Validators.required,Validators.minLength(f.MinLeng)]
+            );
+          }
+          else{
+                fieldsCtrls[f.ColumnName] = new FormControl(
+                   {value :f.DefaultValue || "", disabled: true} ,
+                  [Validators.required,Validators.minLength(f.MinLeng)]
+                );
+          }
+      
         }
       console.log("data F ", f);
      
