@@ -25,10 +25,11 @@ export class FrmTransStageComponent implements OnInit {
     private messageService: MessageService, private confirmationService: ConfirmationService
   ) {
     this.actions = [
-      {name: 'Signatory', code: 'NY'},
-      {name: 'Authorizer', code: 'RM'},
-      {name: 'Releaser', code: 'LDN'},
-  ];
+      {name: 'Authorize', code: 'Authorize'},
+      {name: 'Reject All', code: 'Reject All'},
+      {name: 'Hold', code: 'Hold'},
+      {name: 'Send to repair' , code : 'Send to Repair'}
+     ];
   }
   actions:any[] = []
   files:any[] = []
@@ -60,7 +61,7 @@ export class FrmTransStageComponent implements OnInit {
   authAll()
   {
     console.log(this.fileActions , "Auth All");
-    
+
   }
   getFilesData(){
     this.checkerService.getFiles().subscribe(res=>{
