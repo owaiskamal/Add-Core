@@ -1,4 +1,4 @@
-:host ::ng-deep {    
+:host ::ng-deep {
   .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
       display: none;
   }
@@ -46,6 +46,7 @@
     margin-bottom: 3em;
 }
 
+
 .p-card-header
 {
     background-color: #1f89ce;
@@ -64,7 +65,7 @@
     position: relative;
 }
 
-:host ::ng-deep .p-card .p-card-body
+:host ::ng-deep .upperCard .p-card-body
 {
     padding: 4em 1em 0em 1em;
 }
@@ -122,7 +123,12 @@
   .filename_font{
     font-weight: bold;
   }
+:host ::ng-deep .p-panel .p-panel-header
+{
+  border:none;
+  background: #dcdcdc
 
+}
 
   :host ::ng-deep .ActionText .p-panel .p-panel-content
   {
@@ -133,7 +139,7 @@
   :host ::ng-deep .detail .p-panel .p-panel-content
   {
     padding: 1rem .5rem 0 1rem;
-
+    border: none;
   }
 
   :host ::ng-deep  .textareaP

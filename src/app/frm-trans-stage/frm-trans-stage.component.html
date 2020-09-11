@@ -3,7 +3,7 @@
     <p-listbox (onClick)="selectedFile($event,op)" [options]="filesDropdown" [(ngModel)]="preSelectFile" optionLabel="name" [style]="{'width':'15rem'}"></p-listbox>
   </ng-template>
 </p-overlayPanel>
-<p-card class="p-card ">
+<p-card class="p-card upperCard ">
     <p-header class="p-card-header">
         <div class="card-text">
         Transaction Checker
@@ -38,13 +38,7 @@
                 <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 ">
                   <span>{{item.value}}</span>
                 </div>
-                <hr
-                style="
 
-                  width: 100%;
-                  margin: 0;
-                "
-              />
 
               </div>
             </p-panel>
@@ -75,8 +69,10 @@
   </div>
 </div>
 </div>
-
-
+    </div>
+</p-card>
+<p-card class="p-cards ">
+  <div class="p-grid">
         <div class=" p-col-12 p-md-12 p-lg-12 p-sm-12">
             <p-table [value] = "filesTables"
             #dt
@@ -171,7 +167,7 @@
 
       </td>
       <td style="text-align: center;">
-        <button pButton pRipple  icon="pi pi-info-circle" class="p-button-rounded p-button-text" (click)="viewDetails(transaction , i)" tooltipPosition="top" pTooltip="View Details"></button>
+        <button pButton pRipple   icon="pi pi-info-circle" class="p-button-rounded p-button-text" (click)="viewDetails(transaction , i)" tooltipPosition="top" pTooltip="View Details"></button>
     </td>
 
           </tr>
