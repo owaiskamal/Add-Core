@@ -13,6 +13,7 @@ import { FormGroup } from "@angular/forms";
 
       <input
         type="text"
+        class="form-control"
         *ngIf="field.IsLookup == 'N'"
         style="font-weight:500;"
         [attr.maxLength]="field.MaxLeng"
