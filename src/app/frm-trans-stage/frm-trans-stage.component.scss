@@ -67,7 +67,7 @@
 
 :host ::ng-deep .upperCard .p-card-body
 {
-    padding: 4em 1em 0em 1em;
+    padding: 3em 1em 0em 1em;
 }
 .card-text
 {
@@ -112,6 +112,10 @@
     .table_filter{
       margin-top: 10px;
     }
+    .fileBtn{
+      margin-top: 10px;
+    }
+
 }
   :host ::ng-deep .p-listbox {
     border: none;

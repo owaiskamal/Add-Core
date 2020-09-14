@@ -97,13 +97,13 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
           {
             fieldsCtrls[f.ColumnName] = new FormControl(
               f.DefaultValue || "",
-              [Validators.required,Validators.minLength(f.MinLeng)]
+              [Validators.minLength(f.MinLeng)]
             );
           }
           else{
                 fieldsCtrls[f.ColumnName] = new FormControl(
                    {value :f.DefaultValue || "", disabled: true} ,
-                  [Validators.required,Validators.minLength(f.MinLeng)]
+                  [Validators.minLength(f.MinLeng)]
                 );
           }
       
