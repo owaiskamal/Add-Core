@@ -10,7 +10,83 @@
 
 
 </head>
+<style type="text/css">
+.splash-logo {
+    left: 50%;
+    top: 50%;
+    margin-left: -34px;
+    margin-top: -23px;
+    z-index: 2;
+    position: absolute;
+    width: 70px;
+}
+
+.splash-loader,
+.splash-loader:before,
+.splash-loader:after {
+  left: 50%;
+  top: 50%;
+  margin-left: -45px;
+  margin-top: -45px;
+  position: absolute;
+  vertical-align: middle;
+  background:#a5cfecb8;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.splash-loader {
+    background: transparent;
+}
+
+.splash-loader:before {
+  content: "";
+  animation: bounce 1.5s infinite;
+}
+.splash-loader:after {
+  content: "";
+  animation: bounce 1.5s -0.4s infinite;
+}
+
+@keyframes bounce {
+        0% {
+        transform: scale(0.3);
+        -webkit-transform: scale(0.3);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes bounce {
+    0% {
+        transform: scale(0.3);
+        -webkit-transform: scale(0.3);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.splash-screen {
+    background-color: #f3f3f3;
+    height: 100%;
+}
+</style>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <div class="splash-screen">
+      <div class="splash-loader"></div>
+      <img class="splash-logo" src="assets/images/mainlogo.svg">
+  </div>
+</app-root>
 </body>
 </html>
