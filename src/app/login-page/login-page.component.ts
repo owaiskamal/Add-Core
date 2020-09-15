@@ -7,14 +7,44 @@ import { HttpClient } from '@angular/common/http';
 import { PushNotificationService} from '../push-notification.service';
 import { Title } from '@angular/platform-browser';
 import {ConfirmationService} from 'primeng/api';
-
+import { animate, group, keyframes, style, transition, trigger } from '@angular/animations';
+export type FadeState = 'visible' | 'hidden';
 @Component({
   selector: "app-login-page",
   templateUrl: "./login-page.component.html",
   styleUrls: ["./login-page.component.scss"],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService],
+  animations: [
+    trigger('state', [
+      transition('* => visible' , 
+      [ group([
+         
+      animate(
+        '1000ms',
+        keyframes([
+          style({ opacity: 0, easing: 'ease', offset: 0 }),
+          style({ opacity: 1, easing: 'ease', offset: 0.5 }),
+          style({ opacity: 1, easing: 'ease', offset: 1 })
+        ])
+      ),
+      animate(
+        '1000ms',
+        keyframes([
+          style({ visibility: 'visible', transform: 'scale3d(0.3, 0.3, 0.3)', easing: 'ease', offset: 0 }),
+          style({ transform: 'scale3d(1, 1, 1)', easing: 'ease', offset: 1 })
+        ])
+      )
+    ])
+       ] )
+       
+
+     
+    ])
+  ]
 })
 export class LoginPageComponent implements OnInit {
+  state: FadeState;
+  loginShow: boolean = true;
   spinnerIcon: boolean;
   passwordShow = false;
   constructor(
@@ -38,6 +68,7 @@ export class LoginPageComponent implements OnInit {
 
   ipAddress: '';
   ngOnInit() {
+    this.state = "visible"
     //this.getIPAddress();
 
   }
