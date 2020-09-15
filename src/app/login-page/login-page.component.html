@@ -7,7 +7,7 @@
 
   <p-toast position="top-right"></p-toast>
   <div class="p-grid main">
-    <p-card class="p-col-12 card_body">
+    <p-card class="p-col-12 card_body" [@state]="state" *ngIf="loginShow">
       <div>
         <p-header>
           <h2 class="header_style">Sign in</h2>
