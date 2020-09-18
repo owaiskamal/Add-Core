@@ -127,6 +127,7 @@ getNotifications(){
       }
       else if(res.code == "03")
       {
+        this.spinnerIcon = false;
         console.log(res.description);
 
         this.sessionLogout("top");

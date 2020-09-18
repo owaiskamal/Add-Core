@@ -170,7 +170,7 @@
                 <div class="p-helper-clearfix p-lg-6 p-md-12 p-sm-12">
 
                   <!-- <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="p-button-success"></button> -->
-                  <p-fileUpload mode="basic" customUpload="true"  name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="1000000" (uploadHandler)="onBasicUpload($event)"></p-fileUpload>
+                  <p-fileUpload #form mode="basic" customUpload="true"  name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="1000000" (uploadHandler)="onBasicUpload($event,form)"></p-fileUpload>
                 </div>
               </div>
             </form>

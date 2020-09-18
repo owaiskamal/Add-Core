@@ -618,7 +618,7 @@ console.log(this.transactionData,"new trasactionata");
 //     });
 // }
 
-onBasicUpload(event : any){
+onBasicUpload(event : any,form){
 /*   console.log(event,"file event")
   for(let file of event.files) {
     this.uploadedFiles.push(file);
@@ -844,6 +844,7 @@ else
   });
 
 }
+form.clear();
 }
 autoFormatter(expectedSequence , convArray)
 {
