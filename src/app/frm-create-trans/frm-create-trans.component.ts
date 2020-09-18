@@ -26,6 +26,8 @@ import { DatePipe } from "@angular/common";
 import { stringify } from 'querystring';
 import { Title } from '@angular/platform-browser';
 import { UserauthService } from '../userauth.service';
+import { IfStmt } from '@angular/compiler';
+import { LoginPageComponent } from '../login-page/login-page.component';
 
 
 @Component({
@@ -650,30 +652,101 @@ reader.onload = (ev) => {
   console.log(ev , "asdasdad");
 
   const data = reader.result;
-  workBook = xlsx.read(data, { type: 'binary'  ,cellDates: true });
-  jsonData = workBook.SheetNames.reduce((initial, name) => {
-    const sheet = workBook.Sheets[name];
-    initial[name] = xlsx.utils.sheet_to_json(sheet , {header:1, raw:false,dateNF:'dd/mm/yyyy'});
-    return initial;
-  }, {});
-  const dataString = JSON.stringify(jsonData);
-  console.log(dataString,"stringify data");
-  this.jsonArr = JSON.parse(dataString)
-  console.log(this.jsonArr,"parsed json");
-  console.log(Object.keys(this.jsonArr['data'][0]))
 
-console.log(this.expectedSequence , "this is seq");
-var jsonDATA = []
-for(let i = 1; i<this.jsonArr['data'].length;i++){
-  console.log(    this.jsonArr['data'][i]  , "datat");
+  var listrow = []
+  workBook = xlsx.read(data, { type: 'array'  ,cellDates: true });
+  var sheet = workBook.Sheets[workBook.SheetNames[0]];
+  var range = xlsx.utils.decode_range(sheet['!ref']); // get the range
+  for(var R = range.s.r; R <= range.e.r; ++R) {
+    var list = [];
+    for(var C = range.s.c; C <= range.e.c; ++C) {
 
-this.jsonArr['data'][i] = Object.assign({}, ...Object.entries(this.jsonArr['data'][i])
-         .map(([, prop], index) => ({[this.expectedSequence[index]]: prop})));
-          jsonDATA.push(this.jsonArr['data'][i]);
-}
-         console.log(jsonDATA , "changed header");
 
-          this.getuserdata(jsonDATA)
+
+      /* find the cell object */
+
+
+      if(this.invoiceArr[C] === undefined)
+      {
+        console.log("your work is done");
+      }
+      else{
+
+        var lol = parseInt(this.invoiceArr[C].SEQ) ;
+        console.log('Column : ' + C);
+        var cellref = xlsx.utils.encode_cell({c:lol , r:R}); // construct A1 reference for cell
+
+
+        if(!sheet[cellref]) continue; // if cell doesn't exist, move on
+        var cell = sheet[cellref];
+        console.log(cell.v , "this is works")
+
+        list.push(cell.v)
+
+        }
+
+        }
+        console.log(list , "this is list");
+
+
+        listrow.push(list)
+      }
+      console.log(listrow , "real array");
+      var jsonDATA = []
+      const dataString = JSON.stringify(listrow);
+      console.log(dataString);
+      this.jsonArr = JSON.parse(dataString);
+      console.log(this.jsonArr,"parsed json");
+      for(let i = 1; i<this.jsonArr.length;i++){
+          console.log(    this.jsonArr.length , "datat");
+
+        this.jsonArr[i] = Object.assign({}, ...Object.entries(this.jsonArr[i])
+                 .map(([, prop], index) =>(this.expectedSequence[index] == undefined) ? console.log('this')  :
+                 ({[this.expectedSequence[index]]: prop})
+                 ));
+                    console.log(this.jsonArr[i] , "this is after");
+
+                  jsonDATA.push(this.jsonArr[i]);
+
+                }
+                console.log(jsonDATA , "changed header");
+                this.getuserdata(jsonDATA)
+  // jsonData = workBook.SheetNames.reduce((initial, name) => {
+  //   const sheet = workBook.Sheets[name];
+  //   initial[name] = xlsx.utils.sheet_to_json(sheet , {header:1, raw:false,dateNF:'dd/mm/yyyy'}); //OLD WORK
+  //   return initial;
+  // }, {});
+//   const dataString = JSON.stringify(jsonData);
+//   console.log(dataString,"stringify data");
+//   this.jsonArr = JSON.parse(dataString)
+//   console.log(this.jsonArr,"parsed json");
+//   console.log(Object.keys(this.jsonArr['data'][0]))
+//   console.log(this.invoiceArr[0].SEQ , "this is real config");
+
+// console.log(this.expectedSequence , "this is seq");
+// var jsonDATA = []
+
+// for(let i = 1; i<this.jsonArr['data'].length;i++){
+//   console.log(    this.jsonArr['data'].length , "datat");
+
+// this.jsonArr['data'][i] = Object.assign({}, ...Object.entries(this.jsonArr['data'][i])
+//          .map(([, prop], index) =>(this.expectedSequence[index] == undefined) ? console.log('this')  :
+//          ({[this.expectedSequence[index]]: prop})
+//          ));
+//             console.log(this.jsonArr['data'][i] , "this is after");
+
+//           jsonDATA.push(this.jsonArr['data'][i]);
+
+//         }
+
+
+
+
+//          console.log(jsonDATA , "changed header");
+
+//           this.getuserdata(jsonDATA)
+
+/*##this is work*/
 
 // const sortObject = (obj) =>
 //   Object.fromEntries(
@@ -708,7 +781,7 @@ this.jsonArr['data'][i] = Object.assign({}, ...Object.entries(this.jsonArr['data
 
 
 }
-reader.readAsBinaryString(file);
+reader.readAsArrayBuffer(file);
 
 }
 else if(extension[0] === 'txt'){

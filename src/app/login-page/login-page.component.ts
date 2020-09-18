@@ -16,9 +16,9 @@ export type FadeState = 'visible' | 'hidden';
   providers: [ConfirmationService],
   animations: [
     trigger('state', [
-      transition('* => visible' , 
+      transition('* => visible' ,
       [ group([
-         
+
       animate(
         '1000ms',
         keyframes([
@@ -36,9 +36,9 @@ export type FadeState = 'visible' | 'hidden';
       )
     ])
        ] )
-       
 
-     
+
+
     ])
   ]
 })
@@ -94,11 +94,10 @@ getNotifications(){
      loginUser() {
        this.spinnerIcon = true;
     this.authService.userAuth(this.userName, this.password).pipe(first()).subscribe(res => {
-        this.spinnerIcon = false;
       console.log(res,"Complete response");
       if (res.code == "-1") {
           console.log(res);
-
+          this.spinnerIcon = false;
         this.messageService.add({
           severity: "error",
           summary: "Login Failed",
@@ -109,6 +108,8 @@ getNotifications(){
 
        else if(res.code == "00") {
         //this.getNotifications();
+        this.spinnerIcon = false;
+
         this.messageService.add({
           severity: "success",
           summary: "Login Successfully",
@@ -132,10 +133,13 @@ getNotifications(){
       }
     },
     (error)=> {
+      this.spinnerIcon = false;
+      console.log(error.name);
+
       this.messageService.add({
         severity: "error",
         summary: "Login Failed",
-        detail: "Connection Timed Out"
+        detail: error.name
       });
     });
   }
