@@ -10,7 +10,12 @@ export class TransStageService {
 
   constructor(private http:HttpClient) { }
 
-  getFiles(): Observable<any>{
-    return this.http.get(environment.fakeJson)
+  getFiles(formID , UserID , AccessToken): Observable<any>{
+    // let obj = {
+    //   formID : formID ,
+    //    UserID : UserID ,
+    //     AccessToken : AccessToken
+    // }
+    return this.http.get(environment.fakeJson )
   }
 }
