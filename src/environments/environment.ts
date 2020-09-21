@@ -14,7 +14,8 @@ export const environment = {
   accountsJson : "http://localhost:3000/Account",
   txnFields : "http://132.147.160.71/AddCoreAPI/API/Core/SetTxnFieldView",
   test :    "http://132.147.160.71/AddCoreAPI/API/Core/SubmitNewTxn",
-  ImageURL: "http://localhost:42000/"
+  ImageURL: "http://localhost:42000/",
+  transStageGet:"http://132.147.160.71/AddCoreAPI/API/Core/GetTxnForStage"
 };
 
 /*

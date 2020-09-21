@@ -18,6 +18,9 @@ export class FrmTransStageComponent implements OnInit {
   filesMaster: any[] = [];
   filesTables: any[] =[];
   pageIndex: any;
+  formID: any;
+  UserID: string;
+  AccessToken: string;
   constructor(
     private _route: ActivatedRoute,
     private title: Title,
@@ -53,10 +56,16 @@ export class FrmTransStageComponent implements OnInit {
 
   totalRecords2: number;
   ngOnInit(): void {
-    this.cols = [];
-    var title1 =this._route.snapshot.paramMap.get('title')
-      this.title.setTitle("CR-PL - " +title1);
-   this.getFilesData();
+    this._route.params.subscribe((params) => {
+      this.formID = params["id"];
+      this.cols = [];
+      this.UserID = sessionStorage.getItem("username");
+      this.AccessToken = sessionStorage.getItem("token");
+      var title1 =this._route.snapshot.paramMap.get('title')
+        this.title.setTitle("CR-PL - " +title1);
+     this.getFilesData();
+    })
+
   }
   authAll()
   {
@@ -64,7 +73,8 @@ export class FrmTransStageComponent implements OnInit {
 
   }
   getFilesData(){
-    this.checkerService.getFiles().subscribe(res=>{
+
+    this.checkerService.getFiles(this.formID , this.UserID , this.AccessToken).subscribe(res=>{
     console.log(res,"files data")
     this.filesMaster = res;
     this.files = Object.keys(res);
@@ -152,14 +162,14 @@ refresh() {
 
   console.log(filesTables , "files Tables");
 
-  this.filesTables = filesTables['Transactions'];
+  this.filesTables = filesTables['Transaction'];
   this.totalRecords2 = this.filesTables.length;
   //this.totalrecords = this.filesTables.length;
   this.cols = [
-    { field: 'CustomeRefNumber', header: 'CustomeRefNumber' },
-    { field: 'Amount', header: 'Amount' },
-    {field :'CNIC' , header: 'CNIC'},
-    {field :'Name' , header: 'Name'}
+    { field: 'BeneName', header: 'BeneName' },
+    { field: 'trans_id', header: 'trans_id' },
+    {field :'txnrefno' , header: 'txnrefno'},
+
 
   ];
 

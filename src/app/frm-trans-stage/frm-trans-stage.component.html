@@ -1,6 +1,8 @@
 <p-overlayPanel  #op [dismissable]="true" [showCloseIcon]="true">
   <ng-template pTemplate>
-    <p-listbox (onClick)="selectedFile($event,op)" [options]="filesDropdown" [(ngModel)]="preSelectFile" optionLabel="name" [style]="{'width':'15rem'}"></p-listbox>
+    <p-listbox (onClick)="selectedFile($event,op)" [filter]="true" [options]="filesDropdown" [(ngModel)]="preSelectFile" optionLabel="name" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
+
+    </p-listbox>
   </ng-template>
 </p-overlayPanel>
 <p-card class="p-card upperCard ">
@@ -138,6 +140,7 @@
                 <p-sortIcon [field]="col.field"></p-sortIcon>
             </th>
             <th > Initiator</th>
+            <th > View Details</th>
                        </tr>
         </ng-template>
         <ng-template pTemplate="body"  let-transaction let-i="rowIndex">
@@ -146,28 +149,25 @@
               <p-tableCheckbox [value]="transaction"></p-tableCheckbox>
           </td>
             <td >
-              <span class="p-column-title">CustomeRefNumber</span>
-              {{transaction.CustomeRefNumber}}
+              <span class="p-column-title">BeneName</span>
+              {{transaction.BeneName}}
           </td>
           <td >
-            <span class="p-column-title">Amount</span>
-            {{transaction.Amount}}
+            <span class="p-column-title">trans_id</span>
+            {{transaction.trans_id}}
         </td>
         <td >
-          <span class="p-column-title">CNIC</span>
-          {{transaction.CNIC}}
+          <span class="p-column-title">txnrefno</span>
+          {{transaction.txnrefno}}
       </td>
-      <td >
-        <span class="p-column-title">Name</span>
-        {{transaction.Name}}
-    </td>
+
         <td >
 
 
           <p-dropdown [options]="actions" [(ngModel)]="selectedAction[i]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
 
       </td>
-      <td style="text-align: center;">
+      <td>
         <button pButton pRipple   icon="pi pi-info-circle" class="p-button-rounded p-button-text" (click)="viewDetails(transaction , i)" tooltipPosition="top" pTooltip="View Details"></button>
     </td>
 
