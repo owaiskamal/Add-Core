@@ -29,6 +29,7 @@ import { FormGroup } from "@angular/forms";
         *ngIf="field.DataType == 'C'"
         [attr.maxLength]="field.MaxLeng"
         [formControlName]="field.ColumnName"
+        [placeholder]="field.ColumnLabel"
         mode="currency"
         currency="PKR"
         locale="en-IN"

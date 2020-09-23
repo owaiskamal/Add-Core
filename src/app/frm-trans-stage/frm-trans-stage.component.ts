@@ -5,6 +5,8 @@ import {TransStageService} from "./../trans-stage.service";
 import { element } from 'protractor';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { log } from 'console';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-frm-trans-stage',
@@ -20,6 +22,7 @@ export class FrmTransStageComponent implements OnInit {
   pageIndex: any;
   formID: any;
   UserID: string;
+  indexOfView : any;
   AccessToken: string;
   constructor(
     private _route: ActivatedRoute,
@@ -27,31 +30,41 @@ export class FrmTransStageComponent implements OnInit {
     private checkerService: TransStageService,
     private messageService: MessageService, private confirmationService: ConfirmationService
   ) {
-    this.actions = [
+    this.transActions= [
+      {name: 'Authorize', code: 'A'},
+      {name: 'Reject All', code: 'R'},
+      {name: 'Hold', code: 'H'},
+      {name: 'Send to repair' , code : 'S'}
+     ];
+     this.fileActions = [
       {name: 'Authorize', code: 'Authorize'},
       {name: 'Reject All', code: 'Reject All'},
       {name: 'Hold', code: 'Hold'},
       {name: 'Send to repair' , code : 'Send to Repair'}
      ];
   }
-  actions:any[] = []
+  transActions:any[] = []
+  fileActions: any;
   files:any[] = []
   productDialog: boolean;
   filesArray:any[] = [];
   cols: any[] = [];
   filesData :any[] =[];
-
+  selectedActionByTrans: any[] = []
   totalrecords: number;
   preSelectFile: any;
   filesDropdown :any  = {};
-  fileActions: boolean;
+  actionData: any[] = [];
+  trnasComments:any[] = [];
+  commentsArr:any[] = [];
+  fileOpts: boolean;
   visibleSidebar1;
   fileView: any;
   submitted: boolean;
   selectedAction: any[] =[];
   actionByFile: any;
   first: number = 0;
-
+  selectedFile : any
   //totalRecords: number = 120;
 
   totalRecords2: number;
@@ -88,7 +101,7 @@ export class FrmTransStageComponent implements OnInit {
       console.log(this.filesDropdown,"raw data");
        this.preSelectFile =this.filesDropdown[0];
        console.log(this.preSelectFile , "pre-select");
-      this.selectedFile(this.preSelectFile , this.opt);
+      this.selectedFiles(this.preSelectFile , this.opt);
     })
   }
   viewDetails(transaction,index) {
@@ -109,6 +122,11 @@ export class FrmTransStageComponent implements OnInit {
   }
 
      console.log(this.filesData,"file data data");
+
+}
+addComments(){
+
+console.log(this.trnasComments,"comments arr");
 
 }
 hideDialog() {
@@ -136,32 +154,32 @@ onPageChange(event) {
 refresh() {
   this.first = 0;
 }
-  selectedFile(event,element){
+  selectedFiles(event,element){
    element.hide();
    this.filesArray =[]
    var filesArray = []
    var filesTables = [];
-   var selectedFile = ""
+   this.selectedFile = ""
    if(event.value.name == undefined)
    {
 
-    selectedFile = event['value'];
+    this.selectedFile = event['value'];
     console.log(event['value'] , "this is pre-selected ");
    }
    else
    {
-    selectedFile = event.value.name;
-    console.log(selectedFile , "this is event ");
+    this.selectedFile = event.value.name;
+    console.log(this.selectedFile , "this is event ");
    }
 
    var filesArray = []
-  filesArray = this.filesMaster[selectedFile];
+  filesArray = this.filesMaster[this.selectedFile];
   var filesTables = [];
 
   filesTables = filesArray[1];
 
   console.log(filesTables , "files Tables");
-
+console.log(filesTables['Transaction'],"filesTables['Transaction']")
   this.filesTables = filesTables['Transaction'];
   this.totalRecords2 = this.filesTables.length;
   //this.totalrecords = this.filesTables.length;
@@ -185,5 +203,35 @@ refresh() {
   console.log(filesArray,"file array");
 
     console.log("Selected file",this.filesTables);
+  }
+  submitData(){
+    var array = [];
+    var sarray = []
+    var carray = []
+   
+    console.log(this.selectedActionByTrans,"selected action by file")
+    this.selectedActionByTrans.forEach((element,index) => {
+      console.log(index,"file indx");
+      console.log(element,"file elemr");
+      console.log(this.filesTables[index],"file index")
+      sarray.push(element.code)
+      array.push(this.filesTables[index]) 
+      carray.push(this.trnasComments[index]);
+       
+    });
+    
+    console.log(array,"chek array")
+   for (let i = 0; i < array.length; i++) {
+    this.actionData[i] = {
+      File : this.selectedFile,
+     UserAction : sarray[i],
+     TXN_ID : array[i].trans_id,
+     Remarks : carray[i],
+     SubmitType : "T"
+
+    }
+  }
+    console.log(this.actionData,"final data")
+   
   }
 }
