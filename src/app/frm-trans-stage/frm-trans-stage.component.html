@@ -1,6 +1,6 @@
 <p-overlayPanel  #op [dismissable]="true" [showCloseIcon]="true">
   <ng-template pTemplate>
-    <p-listbox (onClick)="selectedFile($event,op)" [filter]="true" [options]="filesDropdown" [(ngModel)]="preSelectFile" optionLabel="name" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
+    <p-listbox (onClick)="selectedFiles($event,op)" [filter]="true" [options]="filesDropdown" [(ngModel)]="preSelectFile" optionLabel="name" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
 
     </p-listbox>
   </ng-template>
@@ -28,7 +28,7 @@
 
       <span class="p-overlay-badge">
         <p-button pRipple  type="button"   label="Available File List" (click)="op.toggle($event)"></p-button>
-        <span class="p-badge p-badge-info" style="font-size: .5em">{{files.length}}</span>
+        <span class="p-badge p-badge-warning" style="font-size: 0.8em !important;">{{files.length}}</span>
     </span>
       </div>
         <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
@@ -60,10 +60,10 @@
           <label style="margin-top: 0.5rem;">Action By File: </label>
        </div>
        <div class=" p-field ">
-        <p-dropdown [options]="actions" [(ngModel)]="actionByFile" placeholder="Select Action" optionLabel="name" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="fileActions" [(ngModel)]="actionByFile" placeholder="Select Action" optionLabel="name" [showClear]="true"></p-dropdown>
        </div>
      <div class="p-field ">
-      <button pButton pRipple type="button" label="Submit"></button>
+      <button pButton pRipple type="button" (click)="submitData()" label="Submit"></button>
     </div>
    <div class="p-field ">
     <button pButton pRipple type="button"  class="p-button-outlined p-button-secondary" label="Reset"></button>
@@ -84,9 +84,10 @@
             [paginator]="true"
             [rows]="15"
             [columns] = "cols"
+            styleClass="p-table-customers p-datatable-striped p-datatable-responsive-demo"
             [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [filterDelay]="0"  [globalFilterFields]="['CustomeRefNumber','CNIC','Name','Amount']">
+            [filterDelay]="0"  [globalFilterFields]="['BeneName','trans_id ','txnrefno']">
           >
             <ng-template pTemplate="caption">
 
@@ -96,23 +97,23 @@
                   <span style="font-weight: 700 ; font-size: 1.2rem; margin-right:9.3% ;"> Transaction Details</span>
                 <div class="p-formgroup-inline">
                   <div class="p-field-checkbox"  >
-                  <p-radioButton  name="city" value="Authorize All" [(ngModel)]="fileActions" (onClick)="authAll()"  inputId="city7"></p-radioButton>
+                  <p-radioButton  name="city" value="Authorize All" [(ngModel)]="fileOpts" (onClick)="authAll()"  inputId="city7"></p-radioButton>
                   <label for="city7">Authorize All</label>
                   </div>
                   <div class="p-field-checkbox" >
-                    <p-radioButton name="city" value="Reject All" [(ngModel)]="fileActions" (onClick)="authAll()"  inputId="city6"></p-radioButton>
+                    <p-radioButton name="city" value="Reject All" [(ngModel)]="fileOpts" (onClick)="authAll()"  inputId="city6"></p-radioButton>
                     <label for="city6">Reject All</label>
                   </div>
                     <div class="p-field-checkbox"  >
-                      <p-radioButton name="city" value="Hold" [(ngModel)]="fileActions" (onClick)="authAll()" inputId="city5"></p-radioButton>
+                      <p-radioButton name="city" value="Hold" [(ngModel)]="fileOpts" (onClick)="authAll()" inputId="city5"></p-radioButton>
                       <label for="city5">Hold</label>
                     </div>
                       <div class="p-field-checkbox"  >
-                        <p-radioButton name="city" value="Send to Repair" [(ngModel)]="fileActions" (onClick)="authAll()" inputId="city4"></p-radioButton>
+                        <p-radioButton name="city" value="Send to Repair" [(ngModel)]="fileOpts" (onClick)="authAll()" inputId="city4"></p-radioButton>
                         <label for="city4">Send to Repair</label>
                       </div>
                         <div class="p-field-checkbox"  >
-                          <p-radioButton name="city" value="Resest All" [(ngModel)]="fileActions" (onClick)="authAll()"  inputId="city3"></p-radioButton>
+                          <p-radioButton name="city" value="Resest All" [(ngModel)]="fileOpts" (onClick)="authAll()"  inputId="city3"></p-radioButton>
                           <label for="city3">Resest All</label>
                         </div>
                     </div>
@@ -136,11 +137,11 @@
             </th>
 
               <th *ngFor="let col of columns"  [pSortableColumn]="col.field">
-                {{col.header}}
+                {{col.header | titlecase}} 
                 <p-sortIcon [field]="col.field"></p-sortIcon>
             </th>
-            <th > Initiator</th>
-            <th > View Details</th>
+            <th> Initiator</th>
+            <th> View Details</th>
                        </tr>
         </ng-template>
         <ng-template pTemplate="body"  let-transaction let-i="rowIndex">
@@ -164,7 +165,7 @@
         <td >
 
 
-          <p-dropdown [options]="actions" [(ngModel)]="selectedAction[i]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
+          <p-dropdown [options]="transActions" [(ngModel)]="selectedActionByTrans[i]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
 
       </td>
       <td>
@@ -186,20 +187,28 @@
  <p-dialog [(visible)]="productDialog"  header="Transaction Details" [style]="{width: '450px'}" [baseZIndex]="10000" [modal]="true" styleClass="p-fluid dialog">
   <ng-template pTemplate="content">
 
-      <div class="p-field">
+      <div class="p-field" >
           <label class="p-mb-3"></label>
-          <div class="p-formgrid p-grid"  *ngFor="let item of filesData" >
+          <div class="p-formgrid p-grid"  *ngFor="let item of filesData">
               <div class="p-field p-col-6" >
                   <!-- <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="product.category"></p-radioButton> -->
-                  <label for="category1" class="filename_font"> {{item.key}}: </label>
+                  <label for="category1" class="filename_font"> {{item.key | titlecase}}</label>
               </div>
               <div class="p-field p-col-6">
            <!--        <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.category"></p-radioButton> -->
                   <label for="category2">{{item.value}}</label>
               </div>
-
+              
+               
+                
+                 
+                
+              
+          
           </div>
 
+          <textarea placeholder="Enter File level comments" [(ngModel)]="trnasComments[pageIndex]"   pInputTextarea autoResize="autoResize"></textarea>
+           <button pButton pRipple type="button" (click)="addComments()" label="Add"></button>
       </div>
 
 
