@@ -28,6 +28,7 @@ export class FrmTransStageComponent implements OnInit {
   AccessToken: string;
   tableDisabled: boolean;
   checkedTrans: boolean;
+  applyChecked: boolean;
   constructor(
     private _route: ActivatedRoute,
     private title: Title,
@@ -129,6 +130,7 @@ export class FrmTransStageComponent implements OnInit {
     this.selectedTransactions = []
     this.fileComments = "";
     this.actionByFile = null;
+    this.applyChecked = false;
   }
   viewDetails(transaction,index) {
     console.log(index , "data index");
@@ -151,21 +153,27 @@ export class FrmTransStageComponent implements OnInit {
 
 }
 viewSelected(){
-  this.gtotalRecords2 = this.selectedTransactions.length;
-  this.gpageIndex = 0;
-  console.log(this.selectedTransactions,"selected trans");
-  this.transDialog = true;
-   
-  for (let i = 0; i < Object.keys(this.selectedTransactions[0]).length; i++) {
+
+  if(this.selectedTransactions.length > 0)
+  {
+    this.transDialog = true
+    this.gtotalRecords2 = this.selectedTransactions.length;
+    this.gpageIndex = 0;
+    console.log(this.selectedTransactions,"selected trans");
 
 
-    this.selectedfilesData[i] = {
-     key : Object.keys(this.selectedTransactions[0])[i],
-     value : Object.values(this.selectedTransactions[0])[i]
+    for (let i = 0; i < Object.keys(this.selectedTransactions[0]).length; i++) {
 
-    };
+
+      this.selectedfilesData[i] = {
+       key : Object.keys(this.selectedTransactions[0])[i],
+       value : Object.values(this.selectedTransactions[0])[i]
+
+      };
+    }
+    console.log(this.selectedfilesData,"file selected");
   }
-  console.log(this.selectedfilesData,"file selected");
+
 }
 addComments(){
 
@@ -174,9 +182,17 @@ console.log(this.trnasComments,"comments arr");
 }
 
 gaddComments(){
+  if(this.applyChecked === true){
+    console.log(this.applyChecked,"checkbox value");
 
-  
-  
+    for(let i =0 ;i <this.selectedTransactions.length; i++){
+        this.selectedActionByTrans[i] = this.selectedActionByTrans[0];
+        this.gtrnasComments[i] = this.gtrnasComments[0];
+    }
+
+    console.log(this.selectedActionByTrans , "this is all apply");
+
+  }
   }
 hideDialog() {
   this.productDialog = false;
@@ -184,12 +200,12 @@ hideDialog() {
 }
 
 onPageChange(event) {
- 
-  
+
+
   console.log(this.filesTables[event.first],"paginator trans");
   this.trnasComments[event.first];
   this.pageIndex = event.first;
- 
+
   for (let i = 0; i < Object.keys(this.filesTables[event.first]).length; i++) {
 
 
@@ -198,29 +214,32 @@ onPageChange(event) {
      value : Object.values(this.filesTables[event.first])[i]
 
     };
-  
-    
+
+
   }
 }
 gonPageChange(event){
     console.log(this.selectedTransactions[event.first]);
     this.gpageIndex = event.first;
+    console.log(this.selectedActionByTrans , "data drop");
+
     for (let i = 0; i < Object.keys(this.selectedTransactions[event.first]).length; i++) {
 
 
       this.selectedfilesData[i] = {
        key : Object.keys(this.selectedTransactions[event.first])[i],
        value : Object.values(this.selectedTransactions[event.first])[i]
-  
+
       };
-    
-      
+
+
     }
     console.log(this.selectedfilesData,"file selected");
 }
 
   selectedFiles(event,element){
    element.hide();
+   this.resetFileData();
    this.filesArray =[]
    var filesArray = []
    var filesTables = [];
@@ -273,7 +292,7 @@ console.log(filesTables['Transaction'],"filesTables['Transaction']")
     var array = [];
     var sarray = []
     var carray = []
-   
+
     console.log(this.selectedActionByTrans,"selected action by file")
     if(this.selectedActionByTrans.length > 0){
     this.selectedActionByTrans.forEach((element,index) => {
@@ -281,13 +300,13 @@ console.log(filesTables['Transaction'],"filesTables['Transaction']")
       console.log(element,"file elemr");
       console.log(this.filesTables[index],"file index")
       sarray.push(element.code)
-      array.push(this.filesTables[index]) 
+      array.push(this.filesTables[index])
       console.log(array,"file tables array");
-      
+
       carray.push(this.trnasComments[index]);
-       
+
     });
-    
+
     console.log(array,"chek array")
    for (let i = 0; i < array.length; i++) {
     if(typeof carray[i] === "undefined"){
@@ -308,17 +327,17 @@ console.log(filesTables['Transaction'],"filesTables['Transaction']")
 }
 else{
   console.log("action by file");
-  
+
   this.actionDataByFile  = {
      File: this.selectedFile,
      UserAction : this.actionByFile.code,
      TXN_ID : "",
      Remarks : this.fileComments,
      SubmitType : "F"
-  } 
+  }
 }
     console.log(this.actionDataByFile,"final data")
-   
+
   }
-  
+
 }
