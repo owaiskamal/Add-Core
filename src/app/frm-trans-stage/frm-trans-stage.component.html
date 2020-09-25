@@ -27,15 +27,15 @@
 
 
       <span class="p-overlay-badge">
-        <p-button pRipple  type="button"   label="Available File List" (click)="op.toggle($event)"></p-button>
-        <span class="p-badge p-badge-warning" style="font-size: 0.8em !important;">{{files.length}}</span>
+        <p-button pRipple  type="button" label="Available File List" (click)="op.toggle($event)"></p-button>
+        <span class="file-badge p-badge p-badge-warning">{{files.length}}</span>
     </span>
       </div>
         <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
             <p-panel header="File Detail" class="detail">
               <div class="p-grid" *ngFor="let item of filesArray" >
                 <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 ">
-                <span class="filename_font">{{item.key}}</span>
+                <span class="filename-font">{{item.key}}</span>
                 </div>
                 <div class="p-col-12 p-md-6 p-lg-6 p-sm-12 ">
                   <span>{{item.value}}</span>
@@ -57,7 +57,7 @@
     <div class="p-formgroup-inline p-col-12 p-lg-12 p-sm-12 p-md-12" >
 
       <div class="p-field">
-          <label style="margin-top: 0.5rem;">Action By File: </label>
+          <label class="file-dropdown">Action By File: </label>
        </div>
        <div class=" p-field ">
         <p-dropdown [options]="fileActions" (onClick)="tableAction()" [(ngModel)]="actionByFile" placeholder="Select Action" optionLabel="name" [showClear]="true"></p-dropdown>
@@ -76,16 +76,19 @@
 <p-card class="p-cards ">
   <div class="p-grid">
         <div class=" p-col-12 p-md-12 p-lg-12 p-sm-12">
-          
-        
-            
+
+
+
             <p-toolbar styleClass="p-mb-4">
               <ng-template pTemplate="left">
-                <button pButton pRipple label="View Details" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="viewSelected()"></button>
+                <span class="p-overlay-badge">
+                <p-button label="Selected Transactions"  [disabled]="selectedTransactions.length <= 0" styleClass="p-button-sm"  (click)="viewSelected()"></p-button>
+                <span class="selected-file-badge p-badge p-badge-warning">{{selectedTransactions.length}}</span>
+              </span>
               </ng-template>
-      
+
           </p-toolbar>
-        
+
             <p-table [value] = "filesTables"
             #dt
             [rowsPerPageOptions]="[10, 25, 50]"
@@ -105,7 +108,7 @@
               <div class="table-header" >
                 <div class="p-formgroup-inline">
 
-                  <span style="font-weight: 700 ; font-size: 1.2rem; margin-right:9.3% ;"> Transaction Details</span>
+                  <span class="trans-header"> Transaction Details</span>
                 <div class="p-formgroup-inline">
                   <div class="p-field-checkbox"  >
                   <p-radioButton  name="city" value="Authorize All" [(ngModel)]="fileOpts" (onClick)="authAll()"  inputId="city7"></p-radioButton>
@@ -143,12 +146,12 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
             <tr>
-              <th style="width: 3rem">
+              <th class="header-checkbox">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
 
               <th *ngFor="let col of columns"  [pSortableColumn]="col.field">
-                {{col.header | titlecase}} 
+                {{col.header | titlecase}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
             </th>
             <th> Initiator</th>
@@ -203,21 +206,20 @@
           <div class="p-formgrid p-grid"  *ngFor="let item of filesData">
               <div class="p-field p-col-6" >
                   <!-- <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="product.category"></p-radioButton> -->
-                  <label for="category1" class="filename_font"> {{item.key | titlecase}}</label>
+                  <label for="category1" class="filename-font"> {{item.key | titlecase}}</label>
               </div>
               <div class="p-field p-col-6">
            <!--        <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.category"></p-radioButton> -->
                   <label for="category2">{{item.value}}</label>
               </div>
-              
-               
-                
-                 
-                
-              
-          
-          </div>
 
+
+
+
+
+
+
+          </div>
           <textarea placeholder="Enter File level comments" [(ngModel)]="trnasComments[pageIndex]"   pInputTextarea autoResize="autoResize"></textarea>
            <button pButton pRipple type="button" (click)="addComments()" label="Add"></button>
       </div>
@@ -246,32 +248,50 @@
 </p-dialog>
 
 <p-dialog [(visible)]="transDialog"  header="Selected Transaction Details" [style]="{width: '450px'}" [baseZIndex]="10000" [modal]="true" styleClass="p-fluid dialog">
+  <p-header>
+    <span class="selected-count">{{selectedActionByTrans.length + "/" +selectedTransactions.length}}  </span>
+</p-header>
   <ng-template pTemplate="content">
-
+<p-fieldset legend="Details" >
       <div class="p-field" >
           <label class="p-mb-3"></label>
           <div class="p-formgrid p-grid"  *ngFor="let item of selectedfilesData">
             <div class="p-field p-col-6" >
                 <!-- <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="product.category"></p-radioButton> -->
-                <label for="category1" class="filename_font"> {{item.key | titlecase}}</label>
+                <label for="category1" class="filename-font"> {{item.key | titlecase}}</label>
             </div>
             <div class="p-field p-col-6">
          <!--        <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.category"></p-radioButton> -->
                 <label for="category2">{{item.value}}</label>
             </div>
-            
-             
-              
-               
-              
-            
-        
+
+
+
+
+
+
+
         </div>
-
-          <textarea placeholder="Enter comments" [(ngModel)]="gtrnasComments[gpageIndex]"   pInputTextarea autoResize="autoResize"></textarea>
-           <button pButton pRipple type="button" (click)="gaddComments()" label="Add"></button>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col">
+        <p-dropdown [options]="transActions" (onClick)="transactionAction()" [(ngModel)]="selectedActionByTrans[gpageIndex]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
+        <div class="p-field-checkbox" *ngIf="selectedTransactions[0] == selectedTransactions[gpageIndex]">
+          <p-checkbox  binary="true" [(ngModel)]="applyChecked" inputId="binary"></p-checkbox>
+          <span class="popup-chcekcbox-label"> Apply for all</span>
+        </div>
       </div>
+           <div class="p-field p-col">
+          <textarea placeholder="Enter comments" [(ngModel)]="gtrnasComments[gpageIndex]"   pInputTextarea autoResize="autoResize"></textarea>
 
+           </div>
+
+      </div>
+    </div>
+    <button pButton pRipple type="button"  class="popup-comment-btn p-button-outlined" (click)="gaddComments()" label="Add"></button>
+  </p-fieldset >
+      <p-footer >
+
+    </p-footer>
 
   </ng-template>
 
@@ -285,7 +305,7 @@
         </div> -->
         <div class="p-col-12">
             <p-paginator [first]="gpageIndex" [rows]="1"   [totalRecords]="gtotalRecords2" (onPageChange)="gonPageChange($event)"
-            showJumpToPageDropdown="true"></p-paginator>
+            showJumpToPageDropdown="true" [showPageLinks]="false"></p-paginator>
         </div>
         <!-- <div class="p-col-1 p-grid p-justify-end">
             <p-button icon="pi pi-search"></p-button>

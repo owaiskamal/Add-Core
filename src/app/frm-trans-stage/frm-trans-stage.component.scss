@@ -38,7 +38,23 @@
   }
 }
 
+.file-badge{
+  font-size: 0.8em !important;
+}
 
+.file-dropdown{
+  margin-top: 0.5rem;
+}
+
+.selected-file-badge{
+  font-size: 0.8em !important;
+}
+.trans-header{
+  font-weight: 700 ; font-size: 1.2rem; margin-right:9.3% ;
+}
+.header-checkbox{
+  width: 3rem;
+}
 :host ::ng-deep .p-card{
     background-color: #f4f5f7!important;
     border-radius: 12px;
@@ -127,8 +143,17 @@
     margin-top: 0.7rem;
   }
 
-  .filename_font{
+  .filename-font{
     font-weight: bold;
+  }
+  .selected-count{
+    background-color: #2196F3 ; color: white; padding: 10px; border-radius: 12px;
+  }
+  .popup-chcekcbox-label{
+    margin-left: 5px;
+  }
+  .popup-comment-btn{
+    width: 20%; float: right; margin-bottom: 20px;
   }
 :host ::ng-deep .p-panel .p-panel-header
 {
