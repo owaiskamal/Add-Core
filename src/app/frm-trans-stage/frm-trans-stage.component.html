@@ -50,7 +50,7 @@
         <div class=" p-col-12 p-md-12 p-lg-12 p-sm-12 ">
 
             <p-panel header="Action" class="ActionText">
-              <textarea placeholder="Enter File level comments" class="textareaP"  pInputTextarea autoResize="autoResize"></textarea>
+              <textarea placeholder="Enter File level comments" class="textareaP" [(ngModel)] = "fileComments"  pInputTextarea autoResize="autoResize"></textarea>
             </p-panel>
         </div>
 
@@ -60,13 +60,13 @@
           <label style="margin-top: 0.5rem;">Action By File: </label>
        </div>
        <div class=" p-field ">
-        <p-dropdown [options]="fileActions" [(ngModel)]="actionByFile" placeholder="Select Action" optionLabel="name" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="fileActions" (onClick)="tableAction()" [(ngModel)]="actionByFile" placeholder="Select Action" optionLabel="name" [showClear]="true"></p-dropdown>
        </div>
      <div class="p-field ">
       <button pButton pRipple type="button" (click)="submitData()" label="Submit"></button>
     </div>
    <div class="p-field ">
-    <button pButton pRipple type="button"  class="p-button-outlined p-button-secondary" label="Reset"></button>
+    <button pButton pRipple type="button" (click)="resetFileData()"  class="p-button-outlined p-button-secondary" label="Reset"></button>
    </div>
   </div>
 </div>
@@ -76,6 +76,16 @@
 <p-card class="p-cards ">
   <div class="p-grid">
         <div class=" p-col-12 p-md-12 p-lg-12 p-sm-12">
+          
+        
+            
+            <p-toolbar styleClass="p-mb-4">
+              <ng-template pTemplate="left">
+                <button pButton pRipple label="View Details" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="viewSelected()"></button>
+              </ng-template>
+      
+          </p-toolbar>
+        
             <p-table [value] = "filesTables"
             #dt
             [rowsPerPageOptions]="[10, 25, 50]"
@@ -84,6 +94,7 @@
             [paginator]="true"
             [rows]="15"
             [columns] = "cols"
+            [(selection)]="selectedTransactions"
             styleClass="p-table-customers p-datatable-striped p-datatable-responsive-demo"
             [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -165,7 +176,7 @@
         <td >
 
 
-          <p-dropdown [options]="transActions" [(ngModel)]="selectedActionByTrans[i]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
+          <p-dropdown [options]="transActions" (onClick)="transactionAction()" [(ngModel)]="selectedActionByTrans[i]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
 
       </td>
       <td>
@@ -234,3 +245,52 @@
     </ng-template>
 </p-dialog>
 
+<p-dialog [(visible)]="transDialog"  header="Selected Transaction Details" [style]="{width: '450px'}" [baseZIndex]="10000" [modal]="true" styleClass="p-fluid dialog">
+  <ng-template pTemplate="content">
+
+      <div class="p-field" >
+          <label class="p-mb-3"></label>
+          <div class="p-formgrid p-grid"  *ngFor="let item of selectedfilesData">
+            <div class="p-field p-col-6" >
+                <!-- <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="product.category"></p-radioButton> -->
+                <label for="category1" class="filename_font"> {{item.key | titlecase}}</label>
+            </div>
+            <div class="p-field p-col-6">
+         <!--        <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.category"></p-radioButton> -->
+                <label for="category2">{{item.value}}</label>
+            </div>
+            
+             
+              
+               
+              
+            
+        
+        </div>
+
+          <textarea placeholder="Enter comments" [(ngModel)]="gtrnasComments[gpageIndex]"   pInputTextarea autoResize="autoResize"></textarea>
+           <button pButton pRipple type="button" (click)="gaddComments()" label="Add"></button>
+      </div>
+
+
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+     <!--  <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button> -->
+
+      <!--  <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button> -->
+      <div class="p-grid p-align-center">
+        <!-- <div class="p-col-1">
+            <p-button icon="pi pi-refresh" (onClick)="refresh()"></p-button>
+        </div> -->
+        <div class="p-col-12">
+            <p-paginator [first]="gpageIndex" [rows]="1"   [totalRecords]="gtotalRecords2" (onPageChange)="gonPageChange($event)"
+            showJumpToPageDropdown="true"></p-paginator>
+        </div>
+        <!-- <div class="p-col-1 p-grid p-justify-end">
+            <p-button icon="pi pi-search"></p-button>
+        </div> -->
+    </div>
+
+    </ng-template>
+</p-dialog>
