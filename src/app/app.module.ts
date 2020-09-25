@@ -52,6 +52,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {PaginatorModule} from 'primeng/paginator';
 import {TooltipModule} from 'primeng/tooltip';
+import {ToolbarModule} from 'primeng/toolbar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -107,7 +108,8 @@ import {TooltipModule} from 'primeng/tooltip';
     RadioButtonModule,
     InputTextareaModule,
     PaginatorModule,
-    TooltipModule
+    TooltipModule,
+    ToolbarModule
   ],
   providers: [
     MessageService,
