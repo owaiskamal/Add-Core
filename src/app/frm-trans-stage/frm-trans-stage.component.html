@@ -1,6 +1,6 @@
 <p-overlayPanel  #op [dismissable]="true" [showCloseIcon]="true">
   <ng-template pTemplate>
-    <p-listbox (onClick)="selectedFiles($event,op)" [filter]="true" [options]="filesDropdown" [(ngModel)]="preSelectFile" optionLabel="name" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
+    <p-listbox (onClick)="selectedFiles($event,op)" [filter]="true" [options]="filesDropdown" [(ngModel)]="preSelectFile" optionLabel="name" [listStyle]="{'max-height':'200px'}" [style]="{'width':'15rem'}">
 
     </p-listbox>
   </ng-template>
@@ -89,7 +89,8 @@
 
           </p-toolbar>
 
-            <p-table [value] = "filesTables"
+            <p-table
+            [value] = "filesTables"
             #dt
             [rowsPerPageOptions]="[10, 25, 50]"
             selectionMode="single"
@@ -98,10 +99,10 @@
             [rows]="15"
             [columns] = "cols"
             [(selection)]="selectedTransactions"
-            styleClass="p-table-customers p-datatable-striped p-datatable-responsive-demo"
+            styleClass="p-datatable-responsive-demo"
             [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [filterDelay]="0"  [globalFilterFields]="['BeneName','trans_id ','txnrefno']">
+            [filterDelay]="0">
           >
             <ng-template pTemplate="caption">
 
@@ -109,7 +110,7 @@
                 <div class="p-formgroup-inline">
 
                   <span class="trans-header"> Transaction Details</span>
-                <div class="p-formgroup-inline">
+                <!-- <div class="p-formgroup-inline">
                   <div class="p-field-checkbox"  >
                   <p-radioButton  name="city" value="Authorize All" [(ngModel)]="fileOpts" (onClick)="authAll()"  inputId="city7"></p-radioButton>
                   <label for="city7">Authorize All</label>
@@ -130,7 +131,7 @@
                           <p-radioButton name="city" value="Resest All" [(ngModel)]="fileOpts" (onClick)="authAll()"  inputId="city3"></p-radioButton>
                           <label for="city3">Resest All</label>
                         </div>
-                    </div>
+                    </div> -->
                   <span class="p-input-icon-left table_filter">
                     <i class="pi pi-search"></i>
                     <input
@@ -154,7 +155,7 @@
                 {{col.header | titlecase}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
             </th>
-            <th> Initiator</th>
+            <!-- <th> Initiator</th> -->
             <th> View Details</th>
                        </tr>
         </ng-template>
@@ -164,24 +165,35 @@
               <p-tableCheckbox [value]="transaction"></p-tableCheckbox>
           </td>
             <td >
-              <span class="p-column-title">BeneName</span>
-              {{transaction.BeneName}}
+              <span class="p-column-title">CustRefNo</span>
+              {{transaction.CustRefNo}}
           </td>
           <td >
-            <span class="p-column-title">trans_id</span>
-            {{transaction.trans_id}}
+            <span class="p-column-title">BeneIdent</span>
+            {{transaction.BeneIdent}}
         </td>
         <td >
-          <span class="p-column-title">txnrefno</span>
-          {{transaction.txnrefno}}
+          <span class="p-column-title">BeneName</span>
+          {{transaction.BeneName}}
       </td>
-
-        <td >
+      <td >
+        <span class="p-column-title">DrAccount</span>
+        {{transaction.DrAccount}}
+    </td>
+      <td >
+        <span class="p-column-title">TxnAmount</span>
+        {{transaction.TxnAmount}}
+    </td>
+      <!-- <td *ngFor="let col of columns">
+        <span class="p-column-title">{{ col.header }}</span>
+        {{ transaction[col.field] }}
+      </td> -->
+        <!-- <td >
 
 
           <p-dropdown [options]="transActions" (onClick)="transactionAction()" [(ngModel)]="selectedActionByTrans[i]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
 
-      </td>
+      </td> -->
       <td>
         <button pButton pRipple   icon="pi pi-info-circle" class="p-button-rounded p-button-text" (click)="viewDetails(transaction , i)" tooltipPosition="top" pTooltip="View Details"></button>
     </td>
@@ -249,7 +261,7 @@
 
 <p-dialog [(visible)]="transDialog"  header="Selected Transaction Details" [style]="{width: '450px'}" [baseZIndex]="10000" [modal]="true" styleClass="p-fluid dialog">
   <p-header>
-    <span class="selected-count">{{selectedActionByTrans.length + "/" +selectedTransactions.length}}  </span>
+    <span class="selected-count">{{selectedCounter + "/" +selectedTransactions.length}}  </span>
 </p-header>
   <ng-template pTemplate="content">
 <p-fieldset legend="Details" >
@@ -274,7 +286,7 @@
         </div>
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col">
-        <p-dropdown [options]="transActions" (onClick)="transactionAction()" [(ngModel)]="selectedActionByTrans[gpageIndex]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="transActions" (onChange)="onDropChange(gpageIndex)" (onClick)="transactionAction()" [(ngModel)]="selectedActionByTrans[gpageIndex]" placeholder="Select Action" optionLabel="name" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
         <div class="p-field-checkbox" *ngIf="selectedTransactions[0] == selectedTransactions[gpageIndex]">
           <p-checkbox  binary="true" [(ngModel)]="applyChecked" inputId="binary"></p-checkbox>
           <span class="popup-chcekcbox-label"> Apply for all</span>
@@ -287,7 +299,7 @@
 
       </div>
     </div>
-    <button pButton pRipple type="button"  class="popup-comment-btn p-button-outlined" (click)="gaddComments()" label="Add"></button>
+    <button pButton pRipple type="button" *ngIf="selectedTransactions[0] == selectedTransactions[gpageIndex]"    class="popup-comment-btn p-button-outlined" (click)="gaddComments()" label="Apply All"></button>
   </p-fieldset >
       <p-footer >
 

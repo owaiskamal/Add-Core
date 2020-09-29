@@ -29,6 +29,7 @@ export class FrmTransStageComponent implements OnInit {
   tableDisabled: boolean;
   checkedTrans: boolean;
   applyChecked: boolean;
+  prev: any[] = [];
   constructor(
     private _route: ActivatedRoute,
     private title: Title,
@@ -78,6 +79,7 @@ export class FrmTransStageComponent implements OnInit {
   first: number = 0;
   selectedFile : any
   gFileView : any;
+  selectedCounter : any = 0;
   //totalRecords: number = 120;
 
   totalRecords2: number;
@@ -102,11 +104,12 @@ export class FrmTransStageComponent implements OnInit {
 
     this.checkerService.getFiles(this.formID , this.UserID , this.AccessToken).subscribe(res=>{
     console.log(res,"files data")
-    this.filesMaster = res;
-    this.files = Object.keys(res);
+    this.filesMaster = JSON.parse(res.detailData.detail);
+    this.files = Object.keys(this.filesMaster);
 
+console.log(this.files,"filesn");
 
-    console.log(this.files,"filesnames");
+    console.log(this.filesMaster,"filesnames");
     this.filesDropdown = this.files.map((o) => ({
       name : o,
       value : o
@@ -131,6 +134,38 @@ export class FrmTransStageComponent implements OnInit {
     this.fileComments = "";
     this.actionByFile = null;
     this.applyChecked = false;
+    this.selectedCounter = 0;
+  }
+  onDropChange(index)
+  {
+    var prevD = []
+    this.prev.push(index);
+    if(this.selectedActionByTrans[index] != null && this.applyChecked == true)
+    {
+      console.log("it is applied");
+      this.prev.push(index);
+    }
+
+    console.log( this.prev);
+
+      if(this.selectedActionByTrans[index]  == null)
+      {
+        this.prev = []
+        this.selectedCounter = this.selectedCounter -1;
+
+      }
+      else if (this.prev.length >= 1)
+      {
+        if(this.prev[index] == index)
+          console.log("this is workihng");
+
+      }
+      else
+      {
+        this.selectedCounter = this.selectedCounter +1;
+
+      }
+
   }
   viewDetails(transaction,index) {
     console.log(index , "data index");
@@ -183,11 +218,21 @@ console.log(this.trnasComments,"comments arr");
 
 gaddComments(){
   if(this.applyChecked === true){
-    console.log(this.applyChecked,"checkbox value");
+    console.log(this.selectedTransactions,"checkbox value");
 
-    for(let i =0 ;i <this.selectedTransactions.length; i++){
+    for(let i =1 ;i <this.selectedTransactions.length; i++){
         this.selectedActionByTrans[i] = this.selectedActionByTrans[0];
         this.gtrnasComments[i] = this.gtrnasComments[0];
+
+        if(this.selectedActionByTrans[i]  == null)
+        {
+
+          this.selectedCounter = this.selectedCounter - 1;
+        }
+        else
+        {
+          this.selectedCounter = this.selectedTransactions.length;
+        }
     }
 
     console.log(this.selectedActionByTrans , "this is all apply");
@@ -219,6 +264,7 @@ onPageChange(event) {
   }
 }
 gonPageChange(event){
+  this.prev = []
     console.log(this.selectedTransactions[event.first]);
     this.gpageIndex = event.first;
     console.log(this.selectedActionByTrans , "data drop");
@@ -258,32 +304,54 @@ gonPageChange(event){
 
    var filesArray = []
   filesArray = this.filesMaster[this.selectedFile];
-  var filesTables = [];
+  console.log(filesArray,"filesArray");
 
-  filesTables = filesArray[1];
-
-  console.log(filesTables , "files Tables");
-console.log(filesTables['Transaction'],"filesTables['Transaction']")
-  this.filesTables = filesTables['Transaction'];
-  this.totalRecords2 = this.filesTables.length;
-  //this.totalrecords = this.filesTables.length;
-  this.cols = [
-    { field: 'BeneName', header: 'BeneName' },
-    { field: 'trans_id', header: 'trans_id' },
-    {field :'txnrefno' , header: 'txnrefno'},
+  /*  */
 
 
-  ];
+  this.checkerService.getTransDetails(this.formID , this.UserID , this.AccessToken,this.selectedFile)
+  .subscribe(res=>
+    {
+      console.log(JSON.parse(res.detailData.detail),"tans data");
+      var filesTables = [];
+      var parserArray = []
+      parserArray = JSON.parse(res.detailData.detail);
+      filesTables = parserArray['Data'];
+
+      console.log(filesTables , "files Tables");
+/*     console.log(filesTables['Transaction'],"filesTables['Transaction']")
+       */
+
+      this.filesTables = filesTables;
+      this.totalRecords2 = this.filesTables.length;
+      //this.totalrecords = this.filesTables.length;
+      this.cols = [
+        {field :'CustRefNo' , header: 'CustRefNo'},
+        { field: 'BeneIdent', header: 'BeneIdent' },
+        { field: 'BeneName', header: 'BeneName' },
+        { field: 'DrAccount', header: 'DrAccount' },
+        { field: 'TxnAmount', header: 'TxnAmount' },
 
 
 
-   for (let i = 0; i < Object.keys(filesArray[0]).length; i++) {
+
+
+
+
+      ];
+
+    })
+
+
+
+   for (let i = 0; i < Object.keys(filesArray).length; i++) {
     this.filesArray[i] = {
-     key : Object.keys(filesArray[0])[i],
-     value : Object.values(filesArray[0])[i]
+     key : Object.keys(filesArray)[i],
+     value : Object.values(filesArray)[i]
 
     };
   }
+
   console.log(filesArray,"file array");
 
     console.log("Selected file",this.filesTables);
@@ -317,7 +385,7 @@ console.log(filesTables['Transaction'],"filesTables['Transaction']")
 
       File : this.selectedFile,
      UserAction : sarray[i],
-     TXN_ID : array[i].trans_id,
+     TXN_ID : array[i].TxnID,
      Remarks : carray[i],
      SubmitType : "T"
 
