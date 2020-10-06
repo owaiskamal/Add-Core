@@ -27,4 +27,10 @@ export class TransStageService {
       }
      return this.http.post(environment.transFileStageGet,obj)
    }
+
+   submitTransDetails(obj):Observable<any>
+   {
+     return this.http.post(environment.submitTranStage , obj)
+   }
+
 }

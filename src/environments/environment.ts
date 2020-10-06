@@ -16,7 +16,8 @@ export const environment = {
   test :    "http://132.147.160.71/AddCoreAPI/API/Core/SubmitNewTxn",
   ImageURL: "http://localhost:42000/",
   transStageGet: "http://132.147.160.71/AddCoreAPI/API/Core/GetFileForStage",
-  transFileStageGet:"http://132.147.160.71/AddCoreAPI/API/Core/GetTxnForStage"
+  transFileStageGet:"http://132.147.160.71/AddCoreAPI/API/Core/GetTxnForStage",
+  submitTranStage:"http://132.147.160.71/AddCoreAPI/API/Core/PostTxnForStage"
 };
 
 /*
