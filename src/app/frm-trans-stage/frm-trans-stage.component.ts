@@ -32,6 +32,15 @@ export class FrmTransStageComponent implements OnInit {
   applyChecked: boolean;
   prev: any[] = [];
   nulls: boolean;
+  /**
+   * Creates an instance of FrmTransStageComponent.
+   * @param {ActivatedRoute} _route
+   * @param {Title} title
+   * @param {TransStageService} checkerService
+   * @param {MessageService} messageService
+   * @param {ConfirmationService} confirmationService
+   * @memberof FrmTransStageComponent
+   */
   constructor(
     private _route: ActivatedRoute,
     private title: Title,
@@ -104,6 +113,11 @@ export class FrmTransStageComponent implements OnInit {
   authAll() {
     console.log(this.fileActions, "Auth All");
   }
+  /**
+   *
+   *
+   * @memberof FrmTransStageComponent
+   */
   getFilesData() {
     this.checkerService
       .getFiles(this.formID, this.UserID, this.AccessToken)
@@ -332,6 +346,7 @@ export class FrmTransStageComponent implements OnInit {
 
     console.log("Selected file", this.filesTables);
   }
+
   submitData() {
     var array = [];
     var sarray = [];
