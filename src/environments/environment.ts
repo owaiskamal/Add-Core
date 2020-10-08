@@ -17,7 +17,8 @@ export const environment = {
   ImageURL: "http://localhost:42000/",
   transStageGet: "http://132.147.160.71/AddCoreAPI/API/Core/GetFileForStage",
   transFileStageGet:"http://132.147.160.71/AddCoreAPI/API/Core/GetTxnForStage",
-  submitTranStage:"http://132.147.160.71/AddCoreAPI/API/Core/PostTxnForStage"
+  submitTranStage:"http://132.147.160.71/AddCoreAPI/API/Core/PostTxnForStage",
+  blkUpload :    "http://132.147.160.71/AddCoreAPI/API/Core/UploadTxn",
 };
 
 /*
