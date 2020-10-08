@@ -28,6 +28,7 @@ import { Title } from '@angular/platform-browser';
 import { UserauthService } from '../userauth.service';
 import { IfStmt } from '@angular/compiler';
 import { LoginPageComponent } from '../login-page/login-page.component';
+import { fromEventPattern } from 'rxjs';
 
 
 @Component({
@@ -635,12 +636,21 @@ reader.onload = (e) => {
   console.log(csv);
 } */
 let workBook = null;
-let jsonData = null;
 const reader = new FileReader();
 const file = event.files[0];
-this.invoiceData = this.invForm.getRawValue();
-this.expectedSequence = Object.keys(this.invoiceData);
-this.invoiceData=[]
+
+// this.invoiceData = this.invForm.getRawValue();
+// this.expectedSequence = Object.values(this.transactionArr['ColumnName']);
+
+ this.transactionArr.forEach(element => {
+
+
+    this.expectedSequence.push(element['ColumnName'])
+
+});
+console.log(this.expectedSequence , " this is exp");
+
+// this.invoiceData=[]
 console.log(file,"file is here");
 var regex = /(xlsx|csv|txt)$/i
 var extension = regex.exec(file.name);
@@ -666,22 +676,31 @@ reader.onload = (ev) => {
       /* find the cell object */
 
 
-      if(this.invoiceArr[C] === undefined)
+      if(this.transactionArr[C] === undefined)
       {
         console.log("your work is done");
       }
       else{
 
-        var lol = parseInt(this.invoiceArr[C].SEQ) ;
+        var lol = parseInt(this.transactionArr[C].SEQ) -1 ;
         console.log('Column : ' + C);
         var cellref = xlsx.utils.encode_cell({c:lol , r:R}); // construct A1 reference for cell
 
 
-        if(!sheet[cellref]) continue; // if cell doesn't exist, move on
+        // if(!sheet[cellref]) continue; // if cell doesn't exist, move on
         var cell = sheet[cellref];
-        console.log(cell.v , "this is works")
 
-        list.push(cell.v)
+        if(cell == undefined)
+        {
+
+          console.log("working");
+          list.push("")
+        }
+        else
+        {
+          list.push(cell.v)
+        }
+
 
         }
 
@@ -709,8 +728,79 @@ reader.onload = (ev) => {
                   jsonDATA.push(this.jsonArr[i]);
 
                 }
+
+
+
+
+                jsonDATA.forEach((element , tIndex) => {
+                 var keyObj = Object.keys(element);
+                 var keyVal = Object.values(element);
+
+                  console.log(tIndex , "outer loop");
+
+
+                  for(let [index , x] of keyObj.entries()  )
+                  {
+
+                      jsonDATA[tIndex]['FileName'] = file.name;
+                    if(this.transactionArr[index].Mandatory === 'Y')
+                          {
+
+
+                            if(keyVal[index] == "")
+                            {
+                              console.log(index , "empty index");
+                              console.log(keyVal);
+
+                             jsonDATA[tIndex]['Status'] = x +" is mandatory"
+                              break;
+
+                            }
+                            else
+                            {
+                              jsonDATA[tIndex]['Status'] = "Success"
+                            }
+                          }
+
+                  }
+                //  keyObj.forEach((element , index) => {
+
+
+                //     console.log(index , "outer index");
+
+
+
+                //       if(this.transactionArr[index].Mandatory === 'Y')
+                //       {
+
+
+                //         if(keyVal[index] == "")
+                //         {
+                //           console.log(index , "empty index");
+                //           console.log(keyVal);
+
+                //          jsonDATA[tIndex]['Status'] = element +" is mandatory"
+                //           return;
+
+                //         }
+                //         else
+                //         {
+                //           jsonDATA[tIndex]['Status'] = "Success"
+                //         }
+                //       }
+
+
+
+
+
+
+
+                //  });
+
+
+                });
                 console.log(jsonDATA , "changed header");
-                this.getuserdata(jsonDATA)
+              //  this.getuserdata(jsonDATA)
   // jsonData = workBook.SheetNames.reduce((initial, name) => {
   //   const sheet = workBook.Sheets[name];
   //   initial[name] = xlsx.utils.sheet_to_json(sheet , {header:1, raw:false,dateNF:'dd/mm/yyyy'}); //OLD WORK
@@ -805,9 +895,27 @@ const headings = wordsPerLine.shift();
 // Combine lines with heading
 const result = wordsPerLine.reduce((all :any, line) => {
   const obj ={};
+  console.log(line , "this is a line");
 
   line.forEach((word, index) => {
-    obj[headings[index]] = word;
+
+    if(this.invoiceArr[index] === undefined)
+    {
+      console.log("your work is done");
+    }
+    else if(parseInt(this.invoiceArr[index].SEQ)  == index)
+    {
+      console.log(this.invoiceArr[index].SEQ , 'this is seq');
+
+      obj[headings[index]] = word;
+      console.log("this is working");
+
+    }
+    else{
+      console.log(parseInt(this.invoiceArr[index].SEQ) , "log this is " , index);
+
+    }
+
   });
 
   all.push(obj);

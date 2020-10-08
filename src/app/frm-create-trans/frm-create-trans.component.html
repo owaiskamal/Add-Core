@@ -52,6 +52,8 @@
 
     <!-- App Form Template Start -->
     <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+      <p-fileUpload #form mode="basic" customUpload="true"  name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="1000000" (uploadHandler)="onBasicUpload($event,form)"></p-fileUpload>
+
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
     </div>
   </div>
