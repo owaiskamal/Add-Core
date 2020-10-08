@@ -1,0 +1,65 @@
+<p-toast  position="top-right"></p-toast>
+
+<p-card class="p-card">
+  <p-header class="p-card-header">
+    <div class="card-text">
+    Bulk Transaction
+  </div>
+</p-header>
+  <div class="p-grid p-fluid">
+    <!--  <div class="p-md-6 p-lg-6 col-md-6 p-sm-12">
+        <label for="companytitle">Company title</label>
+        <input id="companytitle" type="text" pInputText>
+    </div> -->
+    <div class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
+      <label style="font-weight: 700;" for="producttitle">Product title</label>
+      <p-dropdown
+        #myDropdown
+        [options]="products"
+        [(ngModel)]="selectedProduct"
+        (onChange)="OnProductChange($event)"
+        placeholder="Select a Product"
+        optionLabel="ProName"
+        [showClear]="true"
+      ></p-dropdown>
+
+      <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+      <label style="font-weight: 700;" for="accountitle">Account title</label>
+      <p-dropdown
+        [options]="accounts"
+        [(ngModel)]="selectedAccount"
+        name="selectedAccount"
+        placeholder="Select an account"
+        optionLabel="AcTitel"
+        [showClear]="true"
+      ></p-dropdown>
+      <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+      <label style="font-weight: 700;" for="filetemplate">File template</label>
+      <p-dropdown
+        [options]="templates"
+        [(ngModel)]="selectedTemplate"
+        (onChange)="getTemplates($event)"
+        placeholder="Select a template"
+        optionLabel="ConfName"
+        [showClear]="true"
+      ></p-dropdown>
+      <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
+    </div>
+
+    <!-- App Form Template Start -->
+    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+        <label style="font-weight: 700;" for="filetemplate">File Upload</label>
+      <p-fileUpload  [disabled] = "!selectedAccount || !selectedProduct || !selectedTemplate"
+       #form mode="basic" customUpload="true"  [auto]="true"  name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="1000000"
+      (uploadHandler)="onBasicUpload($event,form)"></p-fileUpload>
+      <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
+    </div>
+  
+    <div *ngIf="showSubmit" class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+        <button   type="button" pRipple pButton icon="pi pi-check" (click)="submitBulk()" label="Submit"></button>
+    </div>
+  </div>

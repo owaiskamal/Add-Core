@@ -45,4 +45,10 @@ export class CreateTransService {
   {
     return this.http.post(environment.test  , masterobj);
   }
+
+  
+  postBulkTransaction(masterobj): Observable<Object>
+  {
+    return this.http.post(environment.blkUpload  , masterobj);
+  }
 }

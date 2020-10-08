@@ -53,6 +53,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {PaginatorModule} from 'primeng/paginator';
 import {TooltipModule} from 'primeng/tooltip';
 import {ToolbarModule} from 'primeng/toolbar';
+import { FrmBulkTransComponent } from './frm-bulk-trans/frm-bulk-trans.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +71,8 @@ import {ToolbarModule} from 'primeng/toolbar';
     //SearchTableComponent,
     FrmlistComponent,
     FrmCreateTransComponent,
-    FrmTransStageComponent
+    FrmTransStageComponent,
+    FrmBulkTransComponent
   ],
   imports: [
     BrowserModule,
