@@ -52,14 +52,47 @@
 
     <!-- App Form Template Start -->
     <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
-        <label style="font-weight: 700;" for="filetemplate">File Upload</label>
-      <p-fileUpload  [disabled] = "!selectedAccount || !selectedProduct || !selectedTemplate"
-       #form mode="basic" customUpload="true"  [auto]="true"  name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="1000000"
-      (uploadHandler)="onBasicUpload($event,form)"></p-fileUpload>
+      
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
     </div>
   
-    <div *ngIf="showSubmit" class="p-col-12 p-md-6 p-lg-6 p-sm-12">
-        <button   type="button" pRipple pButton icon="pi pi-check" (click)="submitBulk()" label="Submit"></button>
-    </div>
+   
+
   </div>
+  <div class="p-grid p-mt-2 p-fluid">
+    <div class="p-grid p-col-12">
+      <div class="p-col-12">
+      <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+        
+           
+            <p-fileUpload  [disabled] = "!selectedAccount || !selectedProduct || !selectedTemplate || jsonData.length > 0"
+             #form mode="basic" customUpload="true"  [auto]="true"  name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="1000000"
+            (uploadHandler)="onBasicUpload($event,form)"></p-fileUpload>
+           
+          
+
+        </ng-template>
+          
+        
+      </p-toolbar>
+    </div>
+    </div>
+    <div class="p-col-12" >
+      <div class="p-col-3" style="float: right;">
+        <button
+          pButton
+          pRipple
+          type="button"
+          (click)="reset()"
+          class="p-button-outlined p-button-secondary"
+          label="Reset"
+        ></button>
+      </div>
+      <div *ngIf="showSubmit" class="p-col-3" style="float: right;" > 
+      <button   type="button" pRipple pButton icon="pi pi-check" (click)="submitBulk()" label="Submit"></button>
+    </div>
+  
+  </div>
+  </div>
+  </p-card>
