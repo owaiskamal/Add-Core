@@ -31,6 +31,7 @@ export class FrmBulkTransComponent implements OnInit {
   filename: string;
   isValid: boolean = false;
   showSubmit: boolean = false;
+  fileUpload: boolean = false;
  
   constructor( private transService: CreateTransService,
     private messageService: MessageService,
@@ -403,7 +404,7 @@ if(extension[0] === 'xlsx'){
    
   }
 
-  this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: this.filename});
+  this.messageService.add({severity: 'info', summary: this.filename, detail: 'File is ready to Upload'});
   this.showSubmit = true;
 
 }
@@ -440,12 +441,21 @@ if(extension[0] === 'xlsx'){
           summary: res['description'],
           detail: res['detailData']['detail']
            });
+           this.selectedProduct = "";
+    this.selectedAccount = "";
+    this.selectedTemplate = "";
+    this.jsonData = []
       }
       
     })
-    this.products = [];
-    this.accounts = [];
-    this.templates = [];
+    
+    
+  }
+  reset(){
+    this.selectedProduct = "";
+    this.selectedAccount = "";
+    this.selectedTemplate = "";
+    this.jsonData = []
   }
   convertToString(obj){
     Object.keys(obj).forEach(i=>{
