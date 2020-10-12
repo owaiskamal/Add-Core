@@ -17,6 +17,7 @@ import { DragDropComponent } from './drag-drop/drag-drop.component';
 import { FrmCreateTransComponent } from './frm-create-trans/frm-create-trans.component';
 import { FrmTransStageComponent } from './frm-trans-stage/frm-trans-stage.component';
 import { FrmBulkTransComponent } from './frm-bulk-trans/frm-bulk-trans.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 //import { SearchTableComponent } from './search-table/search-table.component';
 
 
@@ -26,6 +27,7 @@ import { FrmBulkTransComponent } from './frm-bulk-trans/frm-bulk-trans.component
 const routes: Routes = [
   {path: 'changepassword',component:ChangePasswordPageComponent},
   {path: '', component:LoginPageComponent},
+
 
 {path:'menu', component: AppLayoutComponent, canActivate : [AuthGuard],
 
@@ -41,11 +43,13 @@ const routes: Routes = [
      {path:'frmCreateTrans/:id' , component: FrmCreateTransComponent , data :{state : 'menu/frmCreateTrans'}},
      {path:'frmTransStage/:id' , component: FrmTransStageComponent , data :{state : 'menu/frmTransStage'}},
      {path:'frmUploadTrans/:id' , component: FrmBulkTransComponent , data :{state : 'menu/frmUploadTrans'}},
+
   ]
+
 },
   {path: 'loginsettings' , component : LoginSecuritiesPageComponent,canActivate: [AuthGuard]},
  // {path: 'objectform' , component : ObjectFormComponent},
-
+ { path: '**', component: PageNotFoundComponent },
 
 
 ];

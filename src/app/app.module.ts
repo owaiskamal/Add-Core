@@ -54,6 +54,7 @@ import {PaginatorModule} from 'primeng/paginator';
 import {TooltipModule} from 'primeng/tooltip';
 import {ToolbarModule} from 'primeng/toolbar';
 import { FrmBulkTransComponent } from './frm-bulk-trans/frm-bulk-trans.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,8 @@ import { FrmBulkTransComponent } from './frm-bulk-trans/frm-bulk-trans.component
     FrmlistComponent,
     FrmCreateTransComponent,
     FrmTransStageComponent,
-    FrmBulkTransComponent
+    FrmBulkTransComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
