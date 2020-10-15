@@ -12,6 +12,7 @@ import { interval, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { IfStmt } from '@angular/compiler';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { FileUpload } from 'primeng/fileupload';
 @Component({
   selector: 'app-frm-bulk-trans',
   templateUrl: './frm-bulk-trans.component.html',
@@ -19,6 +20,7 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 })
 export class FrmBulkTransComponent implements OnInit {
   @Output() onProgress: EventEmitter<any> = new EventEmitter();
+  @ViewChild("form") form: FileUpload;
   formID: any;
   uploadProgress : any;
   progress : boolean = false;
@@ -49,7 +51,8 @@ export class FrmBulkTransComponent implements OnInit {
   obs: Observable<any>;
   progressNumberSubs : any
   ind = 0
-
+  upCompleted : boolean = false;
+  progressArray :any[] = [];
   constructor( private transService: CreateTransService,
     private messageService: MessageService,
     private logoutService : UserauthService,
@@ -60,6 +63,14 @@ export class FrmBulkTransComponent implements OnInit {
     private prgService : ProgService
 
     ) {
+      this.progressArray =
+      [
+        {msg : 'Reading File ' , status:false},
+        {msg : 'Processing File' , status:false},
+        {msg : 'Validating File' , status:false},
+        {msg : 'Uploading File' , status:false},
+
+      ]
       this.prgService.data.subscribe((datas) =>{
 
 
@@ -255,7 +266,7 @@ export class FrmBulkTransComponent implements OnInit {
 
         ind = ind+5
          console.log(ind , "15");
-
+         this.progressArray[0]["status"] = true;
        this.prgService.data.next(ind);
       }
 
@@ -265,16 +276,18 @@ export class FrmBulkTransComponent implements OnInit {
 
         clearInterval(interval)
       }
-    }, 200)
+    }, 0)
 
     this.progress = true;
-    this.uploadProgress = "Uploading Start...."
+
     this.progressDialog = true;
 
-    console.log(this.progressDialog);
+
 
 if(this.progressDialog === true)
 {
+setTimeout(() => {
+
 
 
 let workBook = null;
@@ -355,27 +368,27 @@ if(extension[0] === 'xlsx'){
 
 
     } */
-    if(listrow.length > 0){
-        ind = 15;
-        let interval = setInterval(()=>{
-          if(ind >= 15 && ind <=25)
-          {
-    
-            ind = ind+5
-             console.log(ind , "25");
-    
-           this.prgService.data.next(ind);
-          }
-    
-          if(ind >= 25)
-          {
-            console.log("clear 25");
-    
-            clearInterval(interval)
-          }
-        }, 200)
 
-    }
+        // ind = 15;
+        // let interval = setInterval(()=>{
+        //   if(ind >= 15 && ind <=25)
+        //   {
+
+        //     ind = ind+5
+        //      console.log(ind , "25");
+
+        //    this.prgService.data.next(ind);
+        //   }
+
+        //   if(ind >= 25)
+        //   {
+        //     console.log("clear 25");
+
+        //     clearInterval(interval)
+        //   }
+        // }, 0)
+
+
    var jsonDATA = []
      // const dataString = JSON.stringify(listrow);
       // console.log(dataString);
@@ -401,20 +414,20 @@ if(extension[0] === 'xlsx'){
         let interval = setInterval(()=>{
           if(ind >= 25 && ind <=50)
           {
-    
+
             ind = ind+5
              console.log(ind , "55");
-    
+             this.progressArray[1]["status"] = true;
            this.prgService.data.next(ind);
           }
-    
+
           if(ind >= 50)
           {
             console.log("clear 50");
-    
+
             clearInterval(interval)
           }
-        }, 200)
+        }, 500)
                 }
                 console.log("seq comp");
 
@@ -610,21 +623,22 @@ if(extension[0] === 'xlsx'){
                   let interval = setInterval(()=>{
                     if(ind >= 50 && ind <=75)
                     {
-              
+
                       ind = ind+5
                        console.log(ind , "75");
-              
+
                      this.prgService.data.next(ind);
+                     this.progressArray[2]["status"] = true;
                      this.ind = ind
                     }
-              
+
                     if(ind >= 75)
                     {
                       console.log("clear 75");
                       this.submitBulk();
                       clearInterval(interval)
                     }
-                  }, 200)
+                  }, 500)
                 }
                 console.log(jsonDATA , "changed header");
 
@@ -648,6 +662,7 @@ else{
   console.log("not working !!!!!!");
 
 }
+}, 200);
 
 }
 
@@ -690,22 +705,24 @@ else{
         let interval = setInterval(()=>{
           if(ind >= 75 && ind <=100)
           {
-    
+            this.upCompleted = true;
             ind = ind+5
              console.log(ind , "100");
-    
+
+
+             this.form.clear();
            this.prgService.data.next(ind);
           }
-    
+
           if(ind >= 100)
-          {
+          { this.progressArray[3]["status"] = true;
             console.log("clear 100");
             this.prgService.data.complete()
              this.prgService.data.unsubscribe()
             clearInterval(interval)
           }
 
-        }, 200)
+        }, 100)
         this.messageService.add({
           severity: "success",
           summary: res['description'],
