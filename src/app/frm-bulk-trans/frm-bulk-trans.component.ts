@@ -48,7 +48,7 @@ export class FrmBulkTransComponent implements OnInit {
   accUpl: boolean = false;
   obs: Observable<any>;
   progressNumberSubs : any
-   ind = 0
+  ind = 0
 
   constructor( private transService: CreateTransService,
     private messageService: MessageService,
@@ -344,7 +344,7 @@ if(extension[0] === 'xlsx'){
 
   }
 
-    if(listrow.length > 0)
+  /*   if(listrow.length > 0)
     {
      var ind = 15;
 
@@ -353,6 +353,27 @@ if(extension[0] === 'xlsx'){
 
      this.prgService.data.next(25);
 
+
+    } */
+    if(listrow.length > 0){
+        ind = 15;
+        let interval = setInterval(()=>{
+          if(ind >= 15 && ind <=25)
+          {
+    
+            ind = ind+5
+             console.log(ind , "25");
+    
+           this.prgService.data.next(ind);
+          }
+    
+          if(ind >= 25)
+          {
+            console.log("clear 25");
+    
+            clearInterval(interval)
+          }
+        }, 200)
 
     }
    var jsonDATA = []
@@ -374,23 +395,27 @@ if(extension[0] === 'xlsx'){
 
                 }
 
-                // if(jsonDATA.length > 0)
-                // {
-                //   console.log(this.ind ,"value");
-
-                //   let interval = setInterval(()=>{
-                //     if(this.ind < 50)
-                //     {
-                //       this.ind = this.ind+5
-                //       this.prgService.data.next(this.ind);
-                //     }
-
-                //   else if(this.ind >= 50)
-                //   {
-                //     clearInterval(interval)
-                //   }
-                // }, 200)
-                // }
+                if(jsonDATA.length > 0)
+                {
+                  ind = 25;
+        let interval = setInterval(()=>{
+          if(ind >= 25 && ind <=50)
+          {
+    
+            ind = ind+5
+             console.log(ind , "55");
+    
+           this.prgService.data.next(ind);
+          }
+    
+          if(ind >= 50)
+          {
+            console.log("clear 50");
+    
+            clearInterval(interval)
+          }
+        }, 200)
+                }
                 console.log("seq comp");
 
 
@@ -579,18 +604,28 @@ if(extension[0] === 'xlsx'){
 
                /*                  this.uploadProgress = "Ready to Upload" */
                 this.jsonData = jsonDATA;
-                // if(this.jsonData.length > 0)
-                // {
-                //   this.submitBulk();
-                //   let interval = setInterval(()=>{
-                //     this.ind = this.ind+5
-                //   this.prgService.data.next(this.ind);
-                //   if(this.ind === 75)
-                //   {
-                //     clearInterval(interval)
-                //   }
-                // }, 200)
-                // }
+                if(this.jsonData.length > 0)
+                {
+                  ind = 50;
+                  let interval = setInterval(()=>{
+                    if(ind >= 50 && ind <=75)
+                    {
+              
+                      ind = ind+5
+                       console.log(ind , "75");
+              
+                     this.prgService.data.next(ind);
+                     this.ind = ind
+                    }
+              
+                    if(ind >= 75)
+                    {
+                      console.log("clear 75");
+                      this.submitBulk();
+                      clearInterval(interval)
+                    }
+                  }, 200)
+                }
                 console.log(jsonDATA , "changed header");
 
 
@@ -651,14 +686,26 @@ else{
 
       console.log(res);
       if(res['code'] == 0){
-      //   let interval = setInterval(()=>{
-      //     this.ind = this.ind+5
-      //   this.prgService.data.next(this.ind);
-      //   if(this.ind === 100)
-      //   {
-      //     clearInterval(interval)
-      //   }
-      // }, 10)
+        var ind = this.ind;
+        let interval = setInterval(()=>{
+          if(ind >= 75 && ind <=100)
+          {
+    
+            ind = ind+5
+             console.log(ind , "100");
+    
+           this.prgService.data.next(ind);
+          }
+    
+          if(ind >= 100)
+          {
+            console.log("clear 100");
+            this.prgService.data.complete()
+             this.prgService.data.unsubscribe()
+            clearInterval(interval)
+          }
+
+        }, 200)
         this.messageService.add({
           severity: "success",
           summary: res['description'],
