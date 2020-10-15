@@ -55,6 +55,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import {ToolbarModule} from 'primeng/toolbar';
 import { FrmBulkTransComponent } from './frm-bulk-trans/frm-bulk-trans.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -113,7 +114,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     InputTextareaModule,
     PaginatorModule,
     TooltipModule,
-    ToolbarModule
+    ToolbarModule,
+    ProgressSpinnerModule
   ],
   providers: [
     MessageService,

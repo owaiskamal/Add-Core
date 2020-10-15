@@ -115,4 +115,13 @@
         margin-top: 2em;
         margin-bottom: 4em;
     }
+
+    :host ::ng-deep .p-fileupload-buttonbar .p-button
+  {
+  margin-bottom: 1em !important;
+  width: 100%;
+  }
+
 }
+
+
