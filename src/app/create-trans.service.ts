@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { map } from "rxjs/operators"; 
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,7 @@ export class CreateTransService {
        RequestBy : selectedTemplate
     }
     //console.log("obj" , obj)
-   return this.http.post(environment.txnFields , obj )    
+   return this.http.post(environment.txnFields , obj )
   }
 
   postMasterTransaction(masterobj): Observable<Object>
@@ -46,8 +46,8 @@ export class CreateTransService {
     return this.http.post(environment.test  , masterobj);
   }
 
-  
-  postBulkTransaction(masterobj): Observable<Object>
+
+  postBulkTransaction(masterobj): Observable<any>
   {
     return this.http.post(environment.blkUpload  , masterobj);
   }
