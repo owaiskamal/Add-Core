@@ -1,18 +1,16 @@
-<p-toast  position="top-right"></p-toast>
+<p-toast position="top-right"></p-toast>
 
 <p-card class="p-card">
   <p-header class="p-card-header">
-    <div class="card-text">
-    Bulk Transaction
-  </div>
-</p-header>
+    <div class="card-text">Bulk Transaction</div>
+  </p-header>
   <div class="p-grid p-fluid">
     <!--  <div class="p-md-6 p-lg-6 col-md-6 p-sm-12">
         <label for="companytitle">Company title</label>
         <input id="companytitle" type="text" pInputText>
     </div> -->
-    <div *ngIf="!prodUpl" class=" p-col-12 p-md-6 p-lg-6 p-sm-12">
-      <label style="font-weight: 700;" for="producttitle">Product title</label>
+    <div *ngIf="!prodUpl" class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+      <label style="font-weight: 700" for="producttitle">Product title</label>
       <p-dropdown
         #myDropdown
         [options]="products"
@@ -26,7 +24,7 @@
       <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
     </div>
     <div *ngIf="!accUpl" class="p-col-12 p-md-6 p-lg-6 p-sm-12">
-      <label style="font-weight: 700;" for="accountitle">Account title</label>
+      <label style="font-weight: 700" for="accountitle">Account title</label>
       <p-dropdown
         [options]="accounts"
         [(ngModel)]="selectedAccount"
@@ -38,7 +36,7 @@
       <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
     </div>
     <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
-      <label style="font-weight: 700;" for="filetemplate">File template</label>
+      <label style="font-weight: 700" for="filetemplate">File template</label>
       <p-dropdown
         [options]="templates"
         [(ngModel)]="selectedTemplate"
@@ -52,75 +50,98 @@
 
     <!-- App Form Template Start -->
     <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
-
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
     </div>
-
-
-
   </div>
   <div class="p-grid p-mt-2">
     <div class="p-grid p-col-12">
-      <div class="p-col-6">
-
-
-
-
-            <p-fileUpload
-            [disabled] ="!selectedAccount || !selectedProduct || !selectedTemplate"
-             #form customUpload	="true" (onClear)="clearSelected()"    name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="10000000"
-            (uploadHandler)="onBasicUpload($event,form)">
-           </p-fileUpload>
-
-
-
-
-
-
-
-
+      <div class="p-lg-6 p-sm-12 p-md-6">
+        <p-fileUpload
+          [disabled]="!selectedAccount || !selectedProduct || !selectedTemplate"
+          #form
+          customUpload="true"
+          [previewWidth]="10"
+          (onClear)="clearSelected()"
+          name="demo[]"
+          accept=".xlsx,application/msexcel,.csv,.txt"
+          maxFileSize="10000000"
+          (uploadHandler)="onBasicUpload($event, form)"
+        >
+        </p-fileUpload>
+      </div>
     </div>
-    </div>
-
   </div>
   <div class="p-grid p-fluid">
     <div class="p-grid p-col-12">
-<div class="p-col-12">
-
-    <div class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right;">
-      <button
-        pButton
-        pRipple
-        type="button"
-        (click)="reset()"
-        class="p-button-outlined p-button-secondary"
-        label="Reset"
-      ></button>
-    </div>
-    <div   class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right;" >
-    <button [disabled] = "jsonData.length == 0 "  type="button" pRipple pButton icon="pi pi-check" (click)="submitBulk()" label="Submit"></button>
-
-
-</div>
-</div>
+      <div class="p-col-12">
+        <div class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
+          <button
+            pButton
+            pRipple
+            type="button"
+            (click)="reset()"
+            class="p-button-outlined p-button-secondary"
+            label="Reset"
+          ></button>
+        </div>
+        <div class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
+          <button
+            [disabled]="jsonData.length == 0"
+            type="button"
+            pRipple
+            pButton
+            icon="pi pi-check"
+            (click)="submitBulk()"
+            label="Submit"
+          ></button>
+        </div>
+      </div>
     </div>
   </div>
-  </p-card>
-  <p-dialog header="Progress" [closable]="false" [closeOnEscape]="false" position="top" [modal]="true" [(visible)]="progressDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
-    <div *ngIf="progressValue <= 100" >
+</p-card>
+<p-dialog
+  header="File Uploading Progress"
+  [closable]="false"
+  [closeOnEscape]="false"
+  [modal]="true"
+  [(visible)]="progressDialog"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+>
+  <div *ngIf="progressValue <= 100">
     <p-progressBar [value]="progressValue"></p-progressBar>
   </div>
 
-  <div style="margin-top: 10px;">
-  <div class="p-grid" *ngFor="let item of progressArray ; let i = index">
-    <div class="p-col-6"><label [ngClass]="{'loading' : !item.status}" style="margin-right: 20px; font-weight: bold;"> {{item.msg }}</label> </div>
-    <div class="p-col-6"> <i style="color: green;" *ngIf="item.status"  class="pi pi-check"></i></div>
+  <div style="margin-top: 15px">
+    <p-panel header="{{ 'Filename: ' + filename }}">
+      <div class="p-grid" *ngFor="let item of progressArray; let i = index">
+        <div class="p-col-6">
+          <label
+            [ngClass]="{ loading: !item.status }"
+            style="margin-right: 20px; font-weight: bold"
+          >
+            {{ item.msg }}</label
+          >
+        </div>
+        <div class="p-col-6">
+          <i style="color: green" *ngIf="item.status" class="pi pi-check"></i>
+        </div>
+      </div>
+    </p-panel>
   </div>
-</div>
+  <!--  <div style="margin-top: 10px;">
 
-   <!--  <p-progressSpinner ></p-progressSpinner>
+</div> -->
+
+  <!--  <p-progressSpinner ></p-progressSpinner>
     {{uploadProgress}} -->
-    <ng-template pTemplate="footer">
-      <p-button *ngIf="upCompleted" icon="pi pi-arrow-right" (click)="progressDialog=false" label="Next" styleClass="p-button-text"></p-button>
-    </ng-template>
+  <ng-template pTemplate="footer">
+    <p-button
+      *ngIf="upCompleted"
+      icon="pi pi-arrow-right"
+      (click)="next()"
+      label="Next"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
 </p-dialog>
