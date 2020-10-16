@@ -119,11 +119,18 @@
     :host ::ng-deep .p-fileupload-buttonbar .p-button
   {
   margin-bottom: 1em !important;
-  width: 100%;
+  // width: 100%;
   }
 
 }
-
+@media (max-width: 511px) {
+  :host ::ng-deep .p-fileupload-buttonbar{
+    max-width: 89%!important;
+  }
+  :host ::ng-deep .p-fileupload-content{
+    max-width: 89%!important;
+  }
+}
 .loading:after {
   content: '...';
   animation: dots 1s steps(5, end) infinite;}
@@ -148,5 +155,15 @@
       .25em 0 0 black,
       .5em 0 0 black;}}
 
+
+    :host ::ng-deep  .p-fileupload {
+
+        .p-fileupload-content {
+
+        .p-fileupload-row > div:first-child:empty:after {
+        content: url("../../assets/images/fileIcon.png");
+        }
+        }
+        }
 
 

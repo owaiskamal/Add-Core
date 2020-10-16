@@ -61,14 +61,14 @@
   </div>
   <div class="p-grid p-mt-2">
     <div class="p-grid p-col-12">
-      <div class="p-col-6">
 
 
 
 
+      <div class="p-lg-6 p-sm-12 p-md-6">
             <p-fileUpload
             [disabled] ="!selectedAccount || !selectedProduct || !selectedTemplate"
-             #form customUpload	="true" (onClear)="clearSelected()"    name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="10000000"
+             #form customUpload	="true" [previewWidth]="10" (onClear)="clearSelected()"    name="demo[]" accept=".xlsx,application/msexcel,.csv,.txt" maxFileSize="10000000"
             (uploadHandler)="onBasicUpload($event,form)">
            </p-fileUpload>
 
@@ -106,17 +106,27 @@
     </div>
   </div>
   </p-card>
-  <p-dialog header="Progress" [closable]="false" [closeOnEscape]="false" position="top" [modal]="true" [(visible)]="progressDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
+  <p-dialog header="File Uploading Progress" [closable]="false" [closeOnEscape]="false" [modal]="true" [(visible)]="progressDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
     <div *ngIf="progressValue <= 100" >
     <p-progressBar [value]="progressValue"></p-progressBar>
   </div>
 
-  <div style="margin-top: 10px;">
-  <div class="p-grid" *ngFor="let item of progressArray ; let i = index">
-    <div class="p-col-6"><label [ngClass]="{'loading' : !item.status}" style="margin-right: 20px; font-weight: bold;"> {{item.msg }}</label> </div>
-    <div class="p-col-6"> <i style="color: green;" *ngIf="item.status"  class="pi pi-check"></i></div>
-  </div>
+  <div style="margin-top:15px;">
+  <p-panel  header="{{'Filename: ' + filename }}">
+    <div class="p-grid" *ngFor="let item of progressArray ; let i = index">
+      <div class="p-col-6">
+        <label [ngClass]="{'loading' : !item.status}" style="margin-right: 20px; font-weight: bold;"> {{item.msg }}</label>
+      </div>
+      <div class="p-col-6">
+         <i style="color: green;" *ngIf="item.status"  class="pi pi-check"></i>
+        </div>
+
+    </div>
+</p-panel>
 </div>
+ <!--  <div style="margin-top: 10px;">
+
+</div> -->
 
    <!--  <p-progressSpinner ></p-progressSpinner>
     {{uploadProgress}} -->
