@@ -266,12 +266,13 @@ export class FrmBulkTransComponent implements OnInit {
 
         ind = ind+5
          console.log(ind , "15");
-         this.progressArray[0]["status"] = true;
+
        this.prgService.data.next(ind);
       }
 
       else if(ind >= 15)
       {
+        this.progressArray[0]["status"] = true;
         console.log("clear 15");
 
         clearInterval(interval)
@@ -417,12 +418,13 @@ if(extension[0] === 'xlsx'){
 
             ind = ind+5
              console.log(ind , "55");
-             this.progressArray[1]["status"] = true;
            this.prgService.data.next(ind);
           }
 
           if(ind >= 50)
           {
+            this.progressArray[1]["status"] = true;
+
             console.log("clear 50");
 
             clearInterval(interval)
@@ -628,12 +630,13 @@ if(extension[0] === 'xlsx'){
                        console.log(ind , "75");
 
                      this.prgService.data.next(ind);
-                     this.progressArray[2]["status"] = true;
+
                      this.ind = ind
                     }
 
                     if(ind >= 75)
                     {
+                      this.progressArray[2]["status"] = true;
                       console.log("clear 75");
                       this.submitBulk();
                       clearInterval(interval)
