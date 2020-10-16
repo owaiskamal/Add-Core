@@ -314,7 +314,7 @@ if(extension[0] === 'xlsx'){
 
    reader.onload =  (ev)=>{
 //  console.log(ev , "asdasdad");
-
+var jsonDATA = []
   const data = reader.result;
   var listrow = [];
   workBook = xlsx.read(data, { type: 'array'  ,cellDates: true });
@@ -356,6 +356,15 @@ if(extension[0] === 'xlsx'){
     listrow.push(list)
 
 
+    listrow[R] = Object.assign({}, ...Object.entries(listrow[R])
+    .map(([, prop], index) =>(this.expectedSequence[index] == undefined) ? console.log('this')  :
+    ({[this.expectedSequence[index]]: prop})
+    ));
+       // console.log(this.jsonArr[i] , "this is after");
+
+     jsonDATA.push(listrow[R]);
+
+   
   }
 
   /*   if(listrow.length > 0)
@@ -390,24 +399,24 @@ if(extension[0] === 'xlsx'){
         // }, 0)
 
 
-   var jsonDATA = []
+   
      // const dataString = JSON.stringify(listrow);
       // console.log(dataString);
-      this.jsonArr = listrow
+      // this.jsonArr = listrow
      // console.log(this.jsonArr,"parsed json");
 
-      for(let i = 1; i<this.jsonArr.length;i++){
-        //  console.log(    this.jsonArr.length , "datat");
+      // for(let i = 1; i<this.jsonArr.length;i++){
+      //   //  console.log(    this.jsonArr.length , "datat");
 
-        this.jsonArr[i] = Object.assign({}, ...Object.entries(this.jsonArr[i])
-                 .map(([, prop], index) =>(this.expectedSequence[index] == undefined) ? console.log('this')  :
-                 ({[this.expectedSequence[index]]: prop})
-                 ));
-                    // console.log(this.jsonArr[i] , "this is after");
+      //   this.jsonArr[i] = Object.assign({}, ...Object.entries(this.jsonArr[i])
+      //            .map(([, prop], index) =>(this.expectedSequence[index] == undefined) ? console.log('this')  :
+      //            ({[this.expectedSequence[index]]: prop})
+      //            ));
+      //               // console.log(this.jsonArr[i] , "this is after");
 
-                  jsonDATA.push(this.jsonArr[i]);
+      //             jsonDATA.push(this.jsonArr[i]);
 
-                }
+      //           }
 
                 if(jsonDATA.length > 0)
                 {
