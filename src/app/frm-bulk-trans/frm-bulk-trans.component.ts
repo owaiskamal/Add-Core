@@ -364,7 +364,59 @@ var jsonDATA = []
 
      jsonDATA.push(listrow[R]);
 
-   
+     var keyObj = Object.keys(jsonDATA[R]);
+     var keyVal = Object.values(jsonDATA[R]);
+    console.log(keyObj);
+
+    jsonDATA[R]['Status'] = "Success"
+    for(let [index , x] of keyObj.entries()  )
+    {
+
+
+      if(this.transactionArr[index].Mandatory === 'Y' && keyVal[index]== "")
+      {
+        jsonDATA[R]['Status'] = x +" is Mandatory";
+        break;
+      }
+      if(keyVal[index].toString().length > parseInt(this.transactionArr[index].MaxLeng) || keyVal[index].toString().length < parseInt(this.transactionArr[index].MinLeng) )
+      {
+        jsonDATA[R]['Status'] = x + " Provided value should be between " + this.transactionArr[index].MinLeng + " and " + this.transactionArr[index].MaxLeng;
+        break;
+      }
+
+
+    switch (this.transactionArr[index].DataType) {
+      case "N":
+        try
+        {
+            //int.Parse(sValidateVal);
+           parseInt(keyVal[index].toString())
+
+        }
+        catch (Exception)
+        {
+          jsonDATA[R]['Status'] = x + " Provided value is not numeric";
+        }
+        break;
+        case "C":
+          try
+          {
+              //int.Parse(sValidateVal);
+              this.isDouble(keyVal[index])
+
+          }
+          catch (Exception)
+          {
+            jsonDATA[R]['Status'] = x + " Provided value is not currency";
+          }
+          break;
+
+        default:
+          break;
+      }
+
+    }
+    
   }
 
   /*   if(listrow.length > 0)
@@ -446,168 +498,168 @@ var jsonDATA = []
 
 
 
-                jsonDATA.forEach((element , tIndex) => {
-                 var keyObj = Object.keys(element);
-                 var keyVal = Object.values(element);
+//                 jsonDATA.forEach((element , tIndex) => {
+//                  var keyObj = Object.keys(element);
+//                  var keyVal = Object.values(element);
 
 
 
 
-                        // this.prgService.data.next(tIndex);
+//                         // this.prgService.data.next(tIndex);
 
 
-                  //this.progressValue =  Math.round((tIndex / (jsonDATA.length-1) ) * 100 );
+//                   //this.progressValue =  Math.round((tIndex / (jsonDATA.length-1) ) * 100 );
 
 
-                  // this.onProgress.emit({[this.progressNumberSubs]: this.progressValue})
+//                   // this.onProgress.emit({[this.progressNumberSubs]: this.progressValue})
 
 
-              //    let interval = setInterval(() => {
-              //     this.progressValue =  Math.round((tIndex / (jsonDATA.length-1) ) * 100 );
-              //     if (this.progressValue < 100) {
-              //        // this.messageService.add({severity: 'info', summary: 'Success', detail: 'Processing'});
-              //         clearInterval(interval);
-              //     }
-              //     else if (this.progressValue === 100) {
+//               //    let interval = setInterval(() => {
+//               //     this.progressValue =  Math.round((tIndex / (jsonDATA.length-1) ) * 100 );
+//               //     if (this.progressValue < 100) {
+//               //        // this.messageService.add({severity: 'info', summary: 'Success', detail: 'Processing'});
+//               //         clearInterval(interval);
+//               //     }
+//               //     else if (this.progressValue === 100) {
 
-              //       //this.messageService.add({severity: 'info', summary: 'Success', detail: 'Process Completed'});
-              //       clearInterval(interval);
-              //   }
-              // }, 0);
-
-
-
-
-
-                    //this.progressValue =  Math.round((tIndex / (jsonDATA.length-1) ) * 100 );
-                   /*  console.log(this.progressValue , tIndex , "this is prec");
-
-                    if (this.progressValue < 100) {
-                      this.uploadProgress = "Validating File...."
-                      this.onProgress.emit({progressValue: this.progressValue});
-                    }
-                    else if (this.progressValue === 100) {
-                      this.uploadProgress = "File Ready to upload!!"
-
-                  } */
+//               //       //this.messageService.add({severity: 'info', summary: 'Success', detail: 'Process Completed'});
+//               //       clearInterval(interval);
+//               //   }
+//               // }, 0);
 
 
 
 
 
+//                     //this.progressValue =  Math.round((tIndex / (jsonDATA.length-1) ) * 100 );
+//                    /*  console.log(this.progressValue , tIndex , "this is prec");
+
+//                     if (this.progressValue < 100) {
+//                       this.uploadProgress = "Validating File...."
+//                       this.onProgress.emit({progressValue: this.progressValue});
+//                     }
+//                     else if (this.progressValue === 100) {
+//                       this.uploadProgress = "File Ready to upload!!"
+
+//                   } */
 
 
-/*
-                 console.log(keyObj,"keyObj");
-                 console.log(keyVal,"keyVal");
- */
-                  //console.log(tIndex , "outer loop");
-
-                  jsonDATA[tIndex]['Status'] = "Success"
-                  for(let [index , x] of keyObj.entries()  )
-                  {
 
 
-                    if(this.transactionArr[index].Mandatory === 'Y' && keyVal[index]== "")
-                    {
-                      jsonDATA[tIndex]['Status'] = x +" is Mandatory";
-                      break;
-                    }
-                    if(keyVal[index].toString().length > parseInt(this.transactionArr[index].MaxLeng) || keyVal[index].toString().length < parseInt(this.transactionArr[index].MinLeng) )
-                    {
-                      jsonDATA[tIndex]['Status'] = x + " Provided value should be between " + this.transactionArr[index].MinLeng + " and " + this.transactionArr[index].MaxLeng;
-                      break;
-                    }
 
 
-                  switch (this.transactionArr[index].DataType) {
-                    case "N":
-                      try
-                      {
-                          //int.Parse(sValidateVal);
-                         parseInt(keyVal[index].toString())
 
-                      }
-                      catch (Exception)
-                      {
-                        jsonDATA[tIndex]['Status'] = x + " Provided value is not numeric";
-                      }
-                      break;
-                      case "C":
-                        try
-                        {
-                            //int.Parse(sValidateVal);
-                            this.isDouble(keyVal[index])
+// /*
+//                  console.log(keyObj,"keyObj");
+//                  console.log(keyVal,"keyVal");
+//  */
+//                   //console.log(tIndex , "outer loop");
 
-                        }
-                        catch (Exception)
-                        {
-                          jsonDATA[tIndex]['Status'] = x + " Provided value is not currency";
-                        }
-                        break;
-
-                      default:
-                        break;
-                    }
-
-                  }
+//                   jsonDATA[tIndex]['Status'] = "Success"
+//                   for(let [index , x] of keyObj.entries()  )
+//                   {
 
 
-                   /*  if(this.transactionArr[index].DataType === 'T')
-                    {
-                      if(typeof(keyVal[index]) != "string")
-                      {
-                        jsonDATA[tIndex]['Status'] = x +" Data type in incorrect";
-                        break;
-                      }
-                      else {
-                        if(this.transactionArr[index].Mandatory === 'Y')
-                        {
+//                     if(this.transactionArr[index].Mandatory === 'Y' && keyVal[index]== "")
+//                     {
+//                       jsonDATA[tIndex]['Status'] = x +" is Mandatory";
+//                       break;
+//                     }
+//                     if(keyVal[index].toString().length > parseInt(this.transactionArr[index].MaxLeng) || keyVal[index].toString().length < parseInt(this.transactionArr[index].MinLeng) )
+//                     {
+//                       jsonDATA[tIndex]['Status'] = x + " Provided value should be between " + this.transactionArr[index].MinLeng + " and " + this.transactionArr[index].MaxLeng;
+//                       break;
+//                     }
 
 
-                          if(keyVal[index] == "")
-                          {
-                            console.log(index , "empty index");
-                            console.log(keyVal);
+//                   switch (this.transactionArr[index].DataType) {
+//                     case "N":
+//                       try
+//                       {
+//                           //int.Parse(sValidateVal);
+//                          parseInt(keyVal[index].toString())
 
-                           jsonDATA[tIndex]['Status'] = x +" is mandatory"
-                            break;
+//                       }
+//                       catch (Exception)
+//                       {
+//                         jsonDATA[tIndex]['Status'] = x + " Provided value is not numeric";
+//                       }
+//                       break;
+//                       case "C":
+//                         try
+//                         {
+//                             //int.Parse(sValidateVal);
+//                             this.isDouble(keyVal[index])
 
-                          }
-                          else
-                          {
-                            jsonDATA[tIndex]['Status'] = "Success"
-                          }
-                        }
-                      }
+//                         }
+//                         catch (Exception)
+//                         {
+//                           jsonDATA[tIndex]['Status'] = x + " Provided value is not currency";
+//                         }
+//                         break;
 
-                    }else if (this.transactionArr[index].DataType === 'C')
-                    {
-                      if(!this.isDouble((keyVal[index])))
-                      {
-                        jsonDATA[tIndex]['Status'] = x +" Data type in incorrect";
-                        break;
-                      }
-                    }
-                    else if (this.transactionArr[index].DataType === "N")
-                    {
-                      if(typeof(keyVal[index]) != "number")
-                      {
-                        jsonDATA[tIndex]['Status'] = x +" Data type in incorrect";
-                        break;
-                      }
-                    }
-                    else if(this.transactionArr[index].DataType === "T" && this.transactionArr[index].IsLookup === "Y" )
-                    {
-                      jsonDATA[tIndex]['Status'] ="Success";
-                    }
-                  */
+//                       default:
+//                         break;
+//                     }
+
+//                   }
 
 
-                  }
+//                    /*  if(this.transactionArr[index].DataType === 'T')
+//                     {
+//                       if(typeof(keyVal[index]) != "string")
+//                       {
+//                         jsonDATA[tIndex]['Status'] = x +" Data type in incorrect";
+//                         break;
+//                       }
+//                       else {
+//                         if(this.transactionArr[index].Mandatory === 'Y')
+//                         {
 
 
-                );
+//                           if(keyVal[index] == "")
+//                           {
+//                             console.log(index , "empty index");
+//                             console.log(keyVal);
+
+//                            jsonDATA[tIndex]['Status'] = x +" is mandatory"
+//                             break;
+
+//                           }
+//                           else
+//                           {
+//                             jsonDATA[tIndex]['Status'] = "Success"
+//                           }
+//                         }
+//                       }
+
+//                     }else if (this.transactionArr[index].DataType === 'C')
+//                     {
+//                       if(!this.isDouble((keyVal[index])))
+//                       {
+//                         jsonDATA[tIndex]['Status'] = x +" Data type in incorrect";
+//                         break;
+//                       }
+//                     }
+//                     else if (this.transactionArr[index].DataType === "N")
+//                     {
+//                       if(typeof(keyVal[index]) != "number")
+//                       {
+//                         jsonDATA[tIndex]['Status'] = x +" Data type in incorrect";
+//                         break;
+//                       }
+//                     }
+//                     else if(this.transactionArr[index].DataType === "T" && this.transactionArr[index].IsLookup === "Y" )
+//                     {
+//                       jsonDATA[tIndex]['Status'] ="Success";
+//                     }
+//                   */
+
+
+//                   }
+
+
+//                 );
 
 
 
