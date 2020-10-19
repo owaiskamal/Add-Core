@@ -109,7 +109,7 @@
   [baseZIndex]="10000"
 >
   <div *ngIf="progressValue <= 100">
-    <p-progressBar [ngClass]="{'danger' : !cross}" [value]="progressValue"></p-progressBar>
+    <p-progressBar  [value]="progressValue"></p-progressBar>
   </div>
 
   <div style="margin-top: 15px">
@@ -124,11 +124,12 @@
           >
         </div>
         <div class="p-col-6">
-          <i style="color: green" *ngIf="item.status" class="pi pi-check"></i>
-          <i style="color: red" *ngIf="item.error" class="pi pi-times"></i>
+          <i style="color: green" *ngIf="item.status" class="fa fa-check"></i>
+          <i style="color: red" *ngIf="item.error" class="fa fa-times"></i>
         </div>
       </div>
     </p-panel>
+    <p-messages [(value)]="msgs2" [enableService]="false"></p-messages>
   </div>
   <!--  <div style="margin-top: 10px;">
 
