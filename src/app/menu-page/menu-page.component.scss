@@ -36,6 +36,13 @@
 
 
 }
+
+.search-input{
+  height: 30px;
+}
+.p-input-icon-left{
+  margin-left: 20px;
+}
 .navbaricon {
   display: inline-block;
   width: 1.5em;
@@ -205,5 +212,9 @@
 .actNav:focus
 {
   color: #00458a;
+}
+
+:host ::ng-deep .p-inputtext:enabled:focus{
+  box-shadow: none!important;
 }
 // /* footer */linear-gradient(rgba(146, 190, 43, 0.726)),
