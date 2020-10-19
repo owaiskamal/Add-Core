@@ -17,6 +17,22 @@
       />
     </li>
   </ul>
+  <ul class="list-unstyled">
+    <li>
+
+      <span class="p-input-icon-left">
+        <i class="fa fa-search fa-2x"></i>
+        <input type="text" class="search-input" pInputText placeholder="Search" [(ngModel)]="selectedLink" (input) = "filterUsers()" />
+    </span>
+      <hr
+        style="
+          height: 0.5px;
+          width: 100%;
+          background-color: rgb(185, 183, 183);
+        "
+      />
+    </li>
+  </ul>
   <app-sidenav
     *ngFor="let item of links"
     [item]="item"
