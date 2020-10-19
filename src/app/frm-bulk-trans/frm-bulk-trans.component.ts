@@ -61,6 +61,7 @@ export class FrmBulkTransComponent implements OnInit {
   upCompleted: boolean = false;
   progressArray: any[] = [];
   cross: boolean = true;
+  msgs2: { severity: string; summary: string; detail: string; }[];
   constructor(
     private transService: CreateTransService,
     private messageService: MessageService,
@@ -69,7 +70,8 @@ export class FrmBulkTransComponent implements OnInit {
     private title: Title,
     private router: Router,
     public cd: ChangeDetectorRef,
-    private prgService: ProgService
+    private prgService: ProgService,
+    private messageServices: MessageService,
   ) {
     this.progressArray = [
       { msg: "Reading File ", status: false  , error:false},
@@ -301,8 +303,8 @@ export class FrmBulkTransComponent implements OnInit {
             var range = xlsx.utils.decode_range(sheet["!ref"]); // get the range
             for (var R = range.s.r; R <= range.e.r; ++R) {
               var list = [];
-            
-              
+
+
               for (var C = range.s.c; C <= range.e.c; ++C) {
                 //console.log(this.transactionArr[C],"this.transactionArr[C]");
 
@@ -314,7 +316,7 @@ export class FrmBulkTransComponent implements OnInit {
                   var cellref = xlsx.utils.encode_cell({ c: seq, r: R }); // construct A1 reference for cell
                   // console.log(cellref,"cellref");
                   var cell = sheet[cellref];
-                 
+
 
                   if (cell === undefined) {
                     //  console.log("working");
@@ -327,8 +329,8 @@ export class FrmBulkTransComponent implements OnInit {
               // console.log(list , "this is list");
 
               listrow.push(list);
-              console.log(listrow);
-              
+
+
               listrow[R] = Object.assign(
                 {},
                 ...Object.entries(listrow[R]).map(([, prop], index) =>
@@ -435,7 +437,7 @@ export class FrmBulkTransComponent implements OnInit {
                 }
               }, 500);
             }
-            console.log(jsonDATA, "changed header");
+            console.log(this.jsonData, "changed header");
 
             // this.progress = false;
             //this.progressDialog = false;
@@ -473,7 +475,7 @@ export class FrmBulkTransComponent implements OnInit {
 
   submitBulk() {
     var finalDAta = this.jsonData.shift();
-    
+
     var master = {
       UserID: this.UserID,
       AccessToken: this.AccessToken,
@@ -483,7 +485,7 @@ export class FrmBulkTransComponent implements OnInit {
       DrAccount: this.selectedAccount["AC"],
       TempConfigID: this.selectedTemplate["ConfCode"],
       FileNme: this.filename,
-      data: finalDAta,
+      data: this.jsonData,
     };
 
     console.log(master, "master obj");
@@ -497,7 +499,7 @@ export class FrmBulkTransComponent implements OnInit {
           if (ind >= 75 && ind <= 100) {
             this.upCompleted = true;
             ind = ind + 5;
-            console.log(ind, "100");
+
 
             this.form.clear();
             this.prgService.data.next(ind);
@@ -526,6 +528,9 @@ export class FrmBulkTransComponent implements OnInit {
       this.progressArray[3]["error"] = true;
       this.cross = false;
       this.upCompleted = true;
+      this.msgs2 = [
+        {severity:'info', summary:error.name, detail:error.message}
+    ];
     });
   }
   reset() {
@@ -544,5 +549,5 @@ export class FrmBulkTransComponent implements OnInit {
     });
     return obj;
   }
-  
+
 }
