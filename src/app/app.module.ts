@@ -56,6 +56,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import { FrmBulkTransComponent } from './frm-bulk-trans/frm-bulk-trans.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { FrmCbsPostingComponent } from './frm-cbs-posting/frm-cbs-posting.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +76,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     FrmCreateTransComponent,
     FrmTransStageComponent,
     FrmBulkTransComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    FrmCbsPostingComponent
   ],
   imports: [
     BrowserModule,
