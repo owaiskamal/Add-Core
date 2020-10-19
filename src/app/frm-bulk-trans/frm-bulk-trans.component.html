@@ -109,7 +109,7 @@
   [baseZIndex]="10000"
 >
   <div *ngIf="progressValue <= 100">
-    <p-progressBar [ngClass]="{'danger' : !cross}" [value]="progressValue"></p-progressBar>
+    <p-progressBar  [value]="progressValue"></p-progressBar>
   </div>
 
   <div style="margin-top: 15px">
@@ -129,6 +129,7 @@
         </div>
       </div>
     </p-panel>
+    <p-messages [(value)]="msgs2" [enableService]="false"></p-messages>
   </div>
   <!--  <div style="margin-top: 10px;">
 

@@ -84,12 +84,16 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
   @Input() depth: number;
   myDiv: any;
   menuState: string = "out";
+  selectedLink: any;
+  mainLinks : any[] = [];
 
   private renderer: Renderer2;
   @ViewChild("appDrawer") appDrawer: boolean;
   @ViewChild(SidenavComponent) sidenav;
   screenHeight: number;
   screenWidth: number;
+  slinks: any[] =[];
+  xlinks: any[] = [];
   constructor(
     private router: Router,
     private navlinkservice: NavlinksService,
@@ -133,6 +137,56 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
 
     this.title.setTitle('CR-PL - Menu Page')
   }
+  filterUsers() {
+    var x =[];
+    console.log(this.selectedLink);
+
+    if(this.selectedLink == "")
+    {
+      console.log("empty");
+
+
+      this.links = this.mainLinks
+    }
+    // this.links = this.links.filter(
+    //   item => item.Node.toLowerCase().includes(this.selectedLink.toLowerCase()));
+    else{
+         this.xlinks = this.mainLinks.filter(
+      item => item.Node.toLowerCase().includes(this.selectedLink.toLowerCase()));
+
+          if(this.xlinks.length == 0)
+          {
+            for (let index = 0; index < this.mainLinks.length; index++) {
+              this.slinks = this.mainLinks[index]["Forms"].filter( items => items.Name.toLowerCase().includes(this.selectedLink.toLowerCase()))
+               if(this.slinks.length > 0)
+               {
+
+                 x.push(...this.slinks);
+                 console.log(x);
+
+                 this.links = x
+
+               }
+          }
+        }
+          else
+          {
+            console.log(this.xlinks);
+
+            this.links = this.xlinks
+          }
+
+
+    }
+    }
+
+
+
+
+
+
+
+
 
   ngAfterViewInit() {
     // this.navService.appDrawer = this.appDrawer;
@@ -160,7 +214,10 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
     var data = sessionStorage.getItem("menuitem");
     console.log(JSON.parse(data));
 
-    this.links = JSON.parse(data);
+    this.mainLinks = JSON.parse(data);
+    this.links = this.mainLinks;
+
+
     // this.navlinkservice
     //   .getLinks()
     //   .subscribe(res => {
@@ -203,5 +260,5 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
   changeTitle()
 {
   this.title.setTitle('CR-PL - Menu Page')
-}  
+}
 }
