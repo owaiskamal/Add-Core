@@ -60,6 +60,7 @@ export class FrmBulkTransComponent implements OnInit {
   ind = 0;
   upCompleted: boolean = false;
   progressArray: any[] = [];
+  cross: boolean = true;
   constructor(
     private transService: CreateTransService,
     private messageService: MessageService,
@@ -71,10 +72,10 @@ export class FrmBulkTransComponent implements OnInit {
     private prgService: ProgService
   ) {
     this.progressArray = [
-      { msg: "Reading File ", status: false },
-      { msg: "Processing File", status: false },
-      { msg: "Validating File", status: false },
-      { msg: "Uploading File", status: false },
+      { msg: "Reading File ", status: false  , error:false},
+      { msg: "Processing File", status: false  , error:false},
+      { msg: "Validating File", status: false  , error:false},
+      { msg: "Uploading File", status: false  , error:false},
     ];
     this.prgService.data.subscribe((datas) => {
       this.progressValue = datas;
@@ -300,6 +301,8 @@ export class FrmBulkTransComponent implements OnInit {
             var range = xlsx.utils.decode_range(sheet["!ref"]); // get the range
             for (var R = range.s.r; R <= range.e.r; ++R) {
               var list = [];
+            
+              
               for (var C = range.s.c; C <= range.e.c; ++C) {
                 //console.log(this.transactionArr[C],"this.transactionArr[C]");
 
@@ -311,7 +314,7 @@ export class FrmBulkTransComponent implements OnInit {
                   var cellref = xlsx.utils.encode_cell({ c: seq, r: R }); // construct A1 reference for cell
                   // console.log(cellref,"cellref");
                   var cell = sheet[cellref];
-                  //console.log(cell,"cell");
+                 
 
                   if (cell === undefined) {
                     //  console.log("working");
@@ -324,7 +327,8 @@ export class FrmBulkTransComponent implements OnInit {
               // console.log(list , "this is list");
 
               listrow.push(list);
-
+              console.log(listrow);
+              
               listrow[R] = Object.assign(
                 {},
                 ...Object.entries(listrow[R]).map(([, prop], index) =>
@@ -456,8 +460,20 @@ export class FrmBulkTransComponent implements OnInit {
   clearSelected() {
     this.jsonData = [];
   }
+  next() {
+    this.progressDialog = false;
+    this.progressValue = 0;
+    this.progressArray = [
+      { msg: "Reading File ", status: false  , error:false},
+      { msg: "Processing File", status: false  , error:false},
+      { msg: "Validating File", status: false  , error:false},
+      { msg: "Uploading File", status: false  , error:false},
+    ];
+  }
 
   submitBulk() {
+    var finalDAta = this.jsonData.shift();
+    
     var master = {
       UserID: this.UserID,
       AccessToken: this.AccessToken,
@@ -467,7 +483,7 @@ export class FrmBulkTransComponent implements OnInit {
       DrAccount: this.selectedAccount["AC"],
       TempConfigID: this.selectedTemplate["ConfCode"],
       FileNme: this.filename,
-      data: this.jsonData,
+      data: finalDAta,
     };
 
     console.log(master, "master obj");
@@ -504,6 +520,12 @@ export class FrmBulkTransComponent implements OnInit {
         this.selectedTemplate = "";
         this.jsonData = [];
       }
+    },
+    (error)=>{
+      console.log(error);
+      this.progressArray[3]["error"] = true;
+      this.cross = false;
+      this.upCompleted = true;
     });
   }
   reset() {
@@ -522,14 +544,5 @@ export class FrmBulkTransComponent implements OnInit {
     });
     return obj;
   }
-  next() {
-    this.progressDialog = false;
-    this.progressValue = 0;
-    this.progressArray = [
-      { msg: "Reading File ", status: false },
-      { msg: "Processing File", status: false },
-      { msg: "Validating File", status: false },
-      { msg: "Uploading File", status: false },
-    ];
-  }
+  
 }

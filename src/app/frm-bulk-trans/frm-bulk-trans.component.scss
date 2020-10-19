@@ -149,3 +149,8 @@
     }
   }
 }
+
+:host ::ng-deep .danger .p-progressbar .p-progressbar-value 
+{
+    background: #ff6060;
+}
