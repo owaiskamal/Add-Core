@@ -1,0 +1,305 @@
+<p-toast position="top-right"></p-toast>
+<!-- <p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
+  <ng-template pTemplate>
+    <p-listbox
+      (onClick)="selectedFiles($event, op)"
+      [filter]="true"
+      [options]="filesDropdown"
+      [(ngModel)]="preSelectFile"
+      optionLabel="name"
+      [listStyle]="{ 'max-height': '200px' }"
+      [style]="{ width: '15rem' }"
+    >
+    </p-listbox>
+  </ng-template>
+</p-overlayPanel> -->
+<p-card class="p-card upperCard">
+  <p-header class="p-card-header">
+    <div class="card-text">CBS Posting</div>
+  </p-header>
+
+  <!--   <p-overlayPanel #op>
+        <ng-template pTemplate>
+            Content
+        </ng-template>
+    </p-overlayPanel> -->
+
+  <!--  <button type="text" pButton label="Basic" (click)="op.toggle($event)"></button> -->
+  <div class="p-grid">
+<!--     <div class="p-col-12 p-md-12 pd-lg-12 p-sm-12 fileBtn">
+      <span class="p-overlay-badge">
+        <p-button
+          pRipple
+          type="button"
+          label="Available File List"
+          (click)="op.toggle($event)"
+        ></p-button>
+        <span class="file-badge p-badge p-badge-warning">{{
+          files.length
+        }}</span>
+      </span>
+    </div> -->
+    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+      <p-panel header="File Detail" class="detail">
+      <!--   <div class="p-grid" *ngFor="let item of filesArray">
+          <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+            <span class="filename-font">{{ item.key }}</span>
+          </div>
+          <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+            <span>{{ item.value }}</span>
+          </div>
+        </div> -->
+      </p-panel>
+    </div>
+    <div class="p-col-12 p-sm-12 p-lg-6">
+      <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
+          <p-panel header="Action" class="ActionText">
+            <textarea
+              placeholder="Enter File level comments"
+              class="textareaP"
+              
+              pInputTextarea
+              autoResize="autoResize"
+            ></textarea>
+            <!-- [(ngModel)]="fileComments" -->
+          </p-panel>
+        </div>
+
+        <div class="p-formgroup-inline p-col-12 p-lg-12 p-sm-12 p-md-12">
+          <div class="p-field">
+            <label class="file-dropdown">Action By File: </label>
+          </div>
+          <div class="p-field">
+            <p-dropdown
+              [options]="fileActions"
+              
+              placeholder="Select Action"
+              optionLabel="name"
+              [showClear]="true"
+            ></p-dropdown>
+            <!-- (onClick)="tableAction()"
+              [(ngModel)]="actionByFile" -->
+          </div>
+          <div class="p-field">
+            <button
+              pButton
+              pRipple
+              type="button"
+              
+              label="Submit"
+            ></button>
+             <!--(click)="submitData()" -->
+          </div>
+          <div class="p-field">
+            <button
+              pButton
+              pRipple
+              type="button"
+             
+              class="p-button-outlined p-button-secondary"
+              label="Reset"
+            ></button>
+            <!--  (click)="resetFileData()" -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-card>
+<p-card class="p-cards">
+  <div class="p-grid">
+    <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
+      <!-- <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+          <span class="p-overlay-badge">
+            <p-button
+              label="Selected Transactions"
+              [disabled]="selectedTransactions.length <= 0"
+              styleClass="p-button-sm"
+              (click)="viewSelected()"
+            ></p-button>
+            <span class="selected-file-badge p-badge p-badge-warning">{{
+              selectedTransactions.length
+            }}</span>
+          </span>
+        </ng-template>
+      </p-toolbar> -->
+
+      <p-table
+       
+        #dt
+        [rowsPerPageOptions]="[10, 25, 50]"
+        selectionMode="single"
+        [responsive]="true"
+        [paginator]="true"
+        [rows]="15"
+        
+       
+        styleClass="p-datatable-responsive-demo"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [filterDelay]="0"
+      >
+        
+       
+      </p-table>
+    </div>
+  </div>
+</p-card>
+
+<!-- <p-dialog
+  [(visible)]="productDialog"
+  header="Transaction Details"
+  [style]="{ width: '450px' }"
+  [baseZIndex]="10000"
+  [modal]="true"
+  styleClass="p-fluid dialog"
+>
+  <ng-template pTemplate="content">
+    <div class="p-field">
+      <label class="p-mb-3"></label>
+      <div class="p-formgrid p-grid" *ngFor="let item of filesData">
+        <div class="p-field p-col-6">
+          
+          <label for="category1" class="filename-font">
+            {{ item.key | titlecase }}</label
+          >
+        </div>
+        <div class="p-field p-col-6">
+      
+          <label for="category2">{{ item.value }}</label>
+        </div>
+      </div>
+      <textarea
+        placeholder="Enter File level comments"
+        [(ngModel)]="trnasComments[pageIndex]"
+        pInputTextarea
+        autoResize="autoResize"
+      ></textarea>
+      <button
+        pButton
+        pRipple
+        type="button"
+        (click)="addComments()"
+        label="Add"
+      ></button>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+  
+    <div class="p-grid p-align-center">
+   
+      <div class="p-col-12">
+        <p-paginator
+          [first]="pageIndex"
+          [rows]="1"
+          [totalRecords]="totalRecords2"
+          (onPageChange)="onPageChange($event)"
+          showJumpToPageDropdown="true"
+        ></p-paginator>
+      </div>
+  
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="transDialog"
+  header="Selected Transaction Details"
+  [style]="{ width: '450px' }"
+  [baseZIndex]="10000"
+  [modal]="true"
+  styleClass="p-fluid dialog"
+>
+  <p-header>
+    <span class="selected-count"
+      >{{ selectedCounter + "/" + selectedTransactions.length }}
+    </span>
+  </p-header>
+  <ng-template pTemplate="content">
+    <p-fieldset legend="Details">
+      <div class="p-field">
+        <label class="p-mb-3"></label>
+        <div class="p-formgrid p-grid" *ngFor="let item of selectedfilesData">
+          <div class="p-field p-col-6">
+           
+            <label for="category1" class="filename-font">
+              {{ item.key | titlecase }}</label
+            >
+          </div>
+          <div class="p-field p-col-6">
+          
+            <label for="category2">{{ item.value }}</label>
+          </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col">
+            <p-dropdown
+              [options]="transActions"
+              (onChange)="onDropChange(gpageIndex)"
+              (onClick)="transactionAction(gpageIndex)"
+              [(ngModel)]="selectedActionByTrans[gpageIndex]"
+              placeholder="Select Action"
+              optionLabel="name"
+              [style]="{ width: '100%' }"
+              [showClear]="true"
+            ></p-dropdown>
+            <div
+              class="p-field-checkbox"
+              *ngIf="
+                selectedTransactions[0] == selectedTransactions[gpageIndex]
+              "
+            >
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="applyChecked"
+                inputId="binary"
+              ></p-checkbox>
+              <span class="popup-chcekcbox-label"> Apply for all</span>
+            </div>
+          </div>
+          <div class="p-field p-col">
+            <textarea
+              placeholder="Enter comments"
+              [(ngModel)]="gtrnasComments[gpageIndex]"
+              pInputTextarea
+              autoResize="autoResize"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <button
+        pButton
+        pRipple
+        type="button"
+        *ngIf="selectedTransactions[0] == selectedTransactions[gpageIndex]"
+        class="popup-comment-btn p-button-outlined"
+        (click)="gaddComments()"
+        label="Apply All"
+      ></button>
+    </p-fieldset>
+    <p-footer> </p-footer>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+   
+    <div class="p-grid p-align-center">
+     
+      <div class="p-col-12">
+        <p-paginator
+          [first]="gpageIndex"
+          [rows]="1"
+          [totalRecords]="gtotalRecords2"
+          (onPageChange)="gonPageChange($event)"
+          showJumpToPageDropdown="true"
+          [showPageLinks]="false"
+        ></p-paginator>
+      </div>
+     
+    </div>
+  </ng-template>
+</p-dialog>
+
+ -->
