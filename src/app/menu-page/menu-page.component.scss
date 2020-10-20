@@ -215,6 +215,17 @@
 }
 
 :host ::ng-deep .p-inputtext:enabled:focus{
-  box-shadow: none!important;
-}
+  box-shadow: none !important;
+  background-color: rgba(255,255,255,.2);}
+  :host ::ng-deep .p-inputtext{
+    border: none;
+    background:  rgba(255,255,255,.1);
+    border-radius: 15px;
+    padding-right: 2rem;
+    caret-color: white;
+  }
+  ::placeholder  {
+    color: white;
+    opacity:.9; /* Firefox */
+  }
 // /* footer */linear-gradient(rgba(146, 190, 43, 0.726)),
