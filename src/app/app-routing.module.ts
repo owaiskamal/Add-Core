@@ -19,6 +19,8 @@ import { FrmTransStageComponent } from './frm-trans-stage/frm-trans-stage.compon
 import { FrmBulkTransComponent } from './frm-bulk-trans/frm-bulk-trans.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FrmCbsPostingComponent } from './frm-cbs-posting/frm-cbs-posting.component';
+import { FrmAccountStatementComponent } from './frm-account-statement/frm-account-statement.component';
+import { FrmTransStatusComponent } from './frm-trans-status/frm-trans-status.component';
 //import { SearchTableComponent } from './search-table/search-table.component';
 
 
@@ -45,7 +47,8 @@ const routes: Routes = [
      {path:'frmTransStage/:id' , component: FrmTransStageComponent , data :{state : 'menu/frmTransStage'}},
      {path:'frmUploadTrans/:id' , component: FrmBulkTransComponent , data :{state : 'menu/frmUploadTrans'}},
      {path:'frmBkofficPub/:id' , component: FrmCbsPostingComponent , data :{state : 'menu/frmBkofficPub'}},
-
+     {path:'frmAccStatement/:id' , component: FrmAccountStatementComponent , data :{state : 'menu/frmAccStatement'}},
+     {path:'frmTransStatus/:id' , component: FrmTransStatusComponent , data :{state : 'menu/frmTransStatus'}},
   ]
 
 },

@@ -57,6 +57,8 @@ import { FrmBulkTransComponent } from './frm-bulk-trans/frm-bulk-trans.component
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { FrmCbsPostingComponent } from './frm-cbs-posting/frm-cbs-posting.component';
+import { FrmAccountStatementComponent } from './frm-account-statement/frm-account-statement.component';
+import { FrmTransStatusComponent } from './frm-trans-status/frm-trans-status.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +79,9 @@ import { FrmCbsPostingComponent } from './frm-cbs-posting/frm-cbs-posting.compon
     FrmTransStageComponent,
     FrmBulkTransComponent,
     PageNotFoundComponent,
-    FrmCbsPostingComponent
+    FrmCbsPostingComponent,
+    FrmAccountStatementComponent,
+    FrmTransStatusComponent
   ],
   imports: [
     BrowserModule,
