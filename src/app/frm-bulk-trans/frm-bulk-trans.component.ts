@@ -20,6 +20,7 @@ import { take } from "rxjs/operators";
 import { IfStmt } from "@angular/compiler";
 import { HttpEvent, HttpEventType } from "@angular/common/http";
 import { FileUpload } from "primeng/fileupload";
+import { log } from 'console';
 @Component({
   selector: "app-frm-bulk-trans",
   templateUrl: "./frm-bulk-trans.component.html",
@@ -59,8 +60,16 @@ export class FrmBulkTransComponent implements OnInit {
   progressNumberSubs: any;
   ind = 0;
   upCompleted: boolean = false;
+  showRepeater: boolean = false;
   progressArray: any[] = [];
   cross: boolean = true;
+  validatedArr : any[] = [];
+  validatedObj : Object = {};
+  validatedTableData: any[] = []
+  finalTableData: any[] = []
+  totalrecords : number;
+  cols: any[] = [];
+  showTable: boolean = false;
   msgs2: { severity: string; summary: string; detail: string; }[];
   constructor(
     private transService: CreateTransService,
@@ -93,6 +102,7 @@ export class FrmBulkTransComponent implements OnInit {
   public fields = [];
   @ViewChild("myDropdown") myDropdown: Dropdown;
   ngOnInit(): void {
+    this.cols = [];
     this._route.params.subscribe((params) => {
       this.formID = params["id"];
       var title1 = this._route.snapshot.paramMap.get("title");
@@ -462,8 +472,10 @@ export class FrmBulkTransComponent implements OnInit {
   clearSelected() {
     this.jsonData = [];
   }
+  
   next() {
     this.progressDialog = false;
+    this.showRepeater = true;
     this.progressValue = 0;
     this.progressArray = [
       { msg: "Reading File ", status: false  , error:false},
@@ -471,6 +483,9 @@ export class FrmBulkTransComponent implements OnInit {
       { msg: "Validating File", status: false  , error:false},
       { msg: "Uploading File", status: false  , error:false},
     ];
+  }
+  preview(){
+    this.showTable = true
   }
 
   submitBulk() {
@@ -482,6 +497,7 @@ export class FrmBulkTransComponent implements OnInit {
       FormID: this.formID,
       Company_Code: "",
       Product_Code: this.selectedProduct["ProCode"],
+      ProBehavior: this.selectedProduct["ProBehavior"],
       DrAccount: this.selectedAccount["AC"],
       TempConfigID: this.selectedTemplate["ConfCode"],
       FileNme: this.filename,
@@ -493,7 +509,7 @@ export class FrmBulkTransComponent implements OnInit {
     this.convertToString(master);
     this.transService.postBulkTransaction(master).subscribe((res) => {
       console.log(res);
-      if (res["code"] == 0) {
+      if (res["code"] == "00") {
         var ind = this.ind;
         let interval = setInterval(() => {
           if (ind >= 75 && ind <= 100) {
@@ -515,12 +531,81 @@ export class FrmBulkTransComponent implements OnInit {
         this.messageService.add({
           severity: "success",
           summary: res["description"],
-          detail: res["detailData"]["detail"],
+         // detail: res["detailData"]["detail"],
         });
+        console.log(JSON.parse(res["detailData"]["detail"]),"validated ata")
+        this.validatedArr = JSON.parse(res["detailData"]["detail"]);
+         this.validatedTableData = this.validatedArr['data']
+         console.log(this.validatedTableData,"data ready for table");
+        
+          this.finalTableData = Object.values(this.validatedTableData);
+       
+    
+     console.log(this.finalTableData,"values for table");
+    
+     this.totalrecords = this.finalTableData.length;
+   /*   for(let i=0;i< this.finalTableData.length;i++){
+      for (var propName in this.finalTableData[i]) { 
+        if (this.finalTableData[i][propName] === "") {
+         
+          
+           delete this.finalTableData[i][propName];
+        }
+      }
+      
+     } */
+     console.log(this.finalTableData,"clean");
+     // this.cols = Object.keys(this.userLists[0]);
+     this.cols = [];
+     console.log(Object.keys(this.validatedTableData[0]),"table keys");
+      var colKeys = Object.keys(this.finalTableData[0])
+
+      this.cols = [
+        { field: "file_name", header: "File name" },
+        { field: "product_name", header: "Product Name" },
+        { field: "txnrefno", header: "Cust-Ref#" },
+        { field: "benemname", header: "Bene Name" },
+        { field: "benecell", header: "Bene Cell" },
+        { field: "transactionamount", header: "Amount" },
+        { field: "status", header: "Status" },
+      ];
+    /*  this.cols = colKeys.map((o) => ({
+      header : o,
+      field : o
+      }))
+      console.log(this.cols,"cols") */
+ 
+  
+        
+        this.validatedObj = {
+          Filename: this.filename,
+          totalRecord: this.validatedArr['TotalRecord'],
+          totalSuccess: this.validatedArr['TotalSuccess'],
+          totalFailed: this.validatedArr['TotalFailed'],
+          successAmount: this.validatedArr['SuccessAmunt'],
+          failedAmount: this.validatedArr['FailedAmount'],
+        }
+        console.log(this.validatedObj,"validatedObj");
+        
         this.selectedProduct = "";
         this.selectedAccount = "";
         this.selectedTemplate = "";
         this.jsonData = [];
+        
+      }
+      if(res["code"] == "-1"){
+
+        this.msgs2 = [
+          {severity:'info', summary:"Error", detail:res["description"]}
+      ];
+      this.progressArray[3]["error"] = true;
+      this.cross = false;
+      this.upCompleted = true;
+        /* this.messageService.add({
+          severity: "info",
+          summary: "Error",
+          detail: res["description"],
+        }); */
       }
     },
     (error)=>{
@@ -531,7 +616,9 @@ export class FrmBulkTransComponent implements OnInit {
       this.msgs2 = [
         {severity:'info', summary:error.name, detail:error.message}
     ];
-    });
+    }
+   
+    );
   }
   reset() {
     this.selectedProduct = "";

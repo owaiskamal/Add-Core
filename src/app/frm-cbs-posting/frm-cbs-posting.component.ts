@@ -7,13 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrmCbsPostingComponent implements OnInit {
   fileActions: any;
+  filesArray :any[]= [];
   constructor() { 
-
+  this.filesArray = [
+    { name: "Company Name", code: "DAYSWOOD" },
+    { name: "File Name", code: "COC001.xlsx" },
+    { name: "Total Transaction", code: "1" },
+    { name: "Total Amount", code: "100000" },
+  ]
     this.fileActions = [
       { name: "Authorize", code: "A" },
       { name: "Reject All", code: "R" },
-      { name: "Hold", code: "H" },
-      { name: "Send to repair", code: "S" },
+      
     ];
   }
 

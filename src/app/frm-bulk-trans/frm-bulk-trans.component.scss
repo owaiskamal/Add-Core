@@ -141,7 +141,10 @@
     text-shadow: 0.25em 0 0 black, 0.5em 0 0 black;
   }
 }
+.filename-font{
+  font-weight: bold;
 
+}
 :host ::ng-deep .p-fileupload {
   .p-fileupload-content {
     .p-fileupload-row > div:first-child:empty:after {
@@ -153,4 +156,48 @@
 :host ::ng-deep .danger .p-progressbar .p-progressbar-value 
 {
     background: #ff6060;
+}
+
+
+:host ::ng-deep {    
+  .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
+      display: none;
+  }
+}
+.trans-header{
+  font-weight: 700 ; font-size: 1.2rem; margin-right:70.7% ;
+}
+
+@media screen and (max-width: 40rem) {
+  :host ::ng-deep {
+      .p-datatable {
+          &.p-datatable-responsive-demo {
+              .p-datatable-thead > tr > th,
+              .p-datatable-tfoot > tr > td {
+                  display: none !important;
+              }
+
+              .p-datatable-tbody > tr > td {
+                  text-align: left;
+                  display: block;
+                  width: 100%;
+                  float: left;
+                  clear: left;
+                  border: 0 none;
+
+                  .p-column-title {
+                      padding: .4rem;
+                      min-width: 30%;
+                      display: inline-block;
+                      margin: -.4em 1em -.4em -.4rem;
+                      font-weight: bold;
+                  }
+
+                  &:last-child {
+                      border-bottom: 1px solid var(--surface-d);
+                  }
+              }
+          }
+      }
+  }
 }

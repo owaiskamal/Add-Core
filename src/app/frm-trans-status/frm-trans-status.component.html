@@ -1,0 +1,100 @@
+<p-card class="p-card">
+    <p-header class="p-card-header">
+      <div class="card-text">Transaction Status</div>
+    </p-header>
+    <div class="p-grid p-fluid">
+  
+      <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+        <label style="font-weight: 700" for="accountitle">Products</label>
+        <p-dropdown
+        #myDropdown
+        [options]="products"
+        [(ngModel)]="selectedProduct"
+        (onChange)="OnProductChange()"
+        placeholder="Select Product"
+        optionLabel="ProName"
+        [showClear]="true"
+      ></p-dropdown>
+        <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
+      </div>
+    </div>
+      <div class="p-grid p-fluid" style="margin-top: 10px;">
+       
+        
+
+      <div class="p-col-4 p-md-6 p-lg-2 p-sm-12">
+         
+        <div class="p-field-checkbox">
+            
+          <p-checkbox
+            (onChange)="prePublish()"
+            [(ngModel)]="prePublishChecked"
+            binary="true"
+            inputId="binary"
+          ></p-checkbox>
+          <label style="padding-top: 9px" for="binary">Prebublish</label>
+        </div>
+      </div>
+      <div class="p-col-4 p-md-6 p-lg-2 p-sm-12">
+        <div class="p-field-checkbox">
+          <p-checkbox
+            (onChange)="process()"
+            [(ngModel)]="processChecked"
+            binary="true"
+            inputId="binary"
+          ></p-checkbox>
+          <label style="padding-top: 9px" for="binary">Process</label>
+        </div>
+      </div>
+      </div>
+    
+    <div class="p-field">
+      <button
+        pButton
+        pRipple
+        type="button"
+        (click)="fetchData()"
+        
+        label="Fetch"
+      ></button>
+    </div>
+  
+    <div class="p-grid">
+      <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+    <!--     <p-panel header="Account Detail" class="detail">
+          <div class="p-grid" *ngFor="let item of accountDetails">
+            <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+              <span class="filename-font">{{ item.title }}</span>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+              <span>{{ item.detail }}</span>
+            </div>
+          </div>
+        </p-panel> -->
+      </div>
+    </div>
+
+    <div class="p-fluid p-grid">
+        <div class="p-grid">
+            <p-tabView class="p-col-12">
+                
+                <p-tabPanel header="Prepublish">
+                    
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>    
+                </p-tabPanel>
+           
+           
+                <p-tabPanel  header="Process">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </p-tabPanel>
+            
+            </p-tabView>
+        </div>
+    </div>
+  </p-card>
+
