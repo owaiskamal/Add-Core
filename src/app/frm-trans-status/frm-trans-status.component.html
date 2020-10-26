@@ -1,12 +1,11 @@
 <p-card class="p-card">
-    <p-header class="p-card-header">
-      <div class="card-text">Transaction Status</div>
-    </p-header>
-    <div class="p-grid p-fluid">
-  
-      <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
-        <label style="font-weight: 700" for="accountitle">Products</label>
-        <p-dropdown
+  <p-header class="p-card-header">
+    <div class="card-text">Transaction Status</div>
+  </p-header>
+  <div class="p-grid p-fluid">
+    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+      <label style="font-weight: 700" for="accountitle">Products</label>
+      <p-dropdown
         #myDropdown
         [options]="products"
         [(ngModel)]="selectedProduct"
@@ -15,53 +14,69 @@
         optionLabel="ProName"
         [showClear]="true"
       ></p-dropdown>
-        <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
+      <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
+    </div>
+  </div>
+  <div class="p-formgroup-inline  p-grid p-fluid" style="margin-top: 10px">
+    <div class="p-col-12 p-lg-2 p-md-6 p-sm-12">
+      <div class="p-field">
+          <label style="font-weight: bold;" for="transactionStage">Transaction Stage</label>
       </div>
     </div>
-      <div class="p-grid p-fluid" style="margin-top: 10px;">
-       
-        
-
-      <div class="p-col-4 p-md-6 p-lg-2 p-sm-12">
-         
-        <div class="p-field-checkbox">
-            
-          <p-checkbox
-            (onChange)="prePublish()"
-            [(ngModel)]="prePublishChecked"
-            binary="true"
-            inputId="binary"
-          ></p-checkbox>
-          <label style="padding-top: 9px" for="binary">Prebublish</label>
-        </div>
+   <div class="p-col-12 p-lg-2 p-md-6  p-sm-12">
+      <div class="p-field-checkbox">
+        <p-checkbox
+          (onChange)="prePublish()"
+          [(ngModel)]="prePublishChecked"
+          [disabled] = "fetch"
+          binary="true"
+          inputId="binary"
+        ></p-checkbox>
+        <label  for="binary">Prebublish</label>
       </div>
-      <div class="p-col-4 p-md-6 p-lg-2 p-sm-12">
-        <div class="p-field-checkbox">
-          <p-checkbox
-            (onChange)="process()"
-            [(ngModel)]="processChecked"
-            binary="true"
-            inputId="binary"
-          ></p-checkbox>
-          <label style="padding-top: 9px" for="binary">Process</label>
-        </div>
-      </div>
-      </div>
+    </div> 
     
+    <div class="p-col-12 p-lg-2 p-md-6 p-sm-12">
+      <div class="p-field-checkbox">
+        <p-checkbox
+          (onChange)="process()"
+          [(ngModel)]="processChecked"
+          [disabled] = "fetch"
+          binary="true"
+          inputId="binary"
+        ></p-checkbox>
+        <label  for="binary">Process</label>
+      </div>
+    </div>
+   </div> 
+  
+  <div class="p-grid">
+  <div class="p-formgroup-inline p-col-12 p-lg-12 p-sm-12 p-md-12">
     <div class="p-field">
       <button
         pButton
         pRipple
         type="button"
         (click)="fetchData()"
-        
         label="Fetch"
       ></button>
     </div>
-  
-    <div class="p-grid">
-      <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
-    <!--     <p-panel header="Account Detail" class="detail">
+    <div class="p-field">
+      <button
+        pButton
+        pRipple
+        type="button"
+        class="p-button-outlined p-button-secondary"
+        (click)="resetData()"
+        label="Reset"
+      ></button>
+    </div>
+  </div>
+</div>
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+      <!--     <p-panel header="Account Detail" class="detail">
           <div class="p-grid" *ngFor="let item of accountDetails">
             <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
               <span class="filename-font">{{ item.title }}</span>
@@ -71,30 +86,36 @@
             </div>
           </div>
         </p-panel> -->
-      </div>
     </div>
+  </div>
 
-    <div class="p-fluid p-grid">
-        <div class="p-grid">
-            <p-tabView *ngIf="fetch"  class="p-col-12">
-                
-                <p-tabPanel *ngIf="showPublish" header="Prepublish">
-                    
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>    
-                </p-tabPanel>
-           
-           
-                <p-tabPanel *ngIf="showProcess"  header="Process">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </p-tabPanel>
-            
-            </p-tabView>
-        </div>
+  <div class="p-fluid p-grid">
+    <div class="p-grid">
+      <p-tabView *ngIf="fetch" class="p-col-12">
+        <p-tabPanel *ngIf="showPublish" header="Prepublish">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </p-tabPanel>
+
+        <p-tabPanel *ngIf="showProcess" header="Process">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </p-tabPanel>
+      </p-tabView>
     </div>
-  </p-card>
-
+  </div>
+</p-card>

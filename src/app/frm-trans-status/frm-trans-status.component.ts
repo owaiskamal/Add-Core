@@ -94,5 +94,13 @@ export class FrmTransStatusComponent implements OnInit {
     console.log("data fetched");
      this.fetch = true;
   }
+  resetData(){
+    this.prePublishChecked = false;
+    this.processChecked = false;
+    this.selectedProduct = null;
+    this.showProcess= false;
+    this.showPublish = false;
+    this.fetch = false;
+  }
 
 }
