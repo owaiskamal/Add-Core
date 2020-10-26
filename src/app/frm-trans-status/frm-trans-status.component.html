@@ -76,9 +76,9 @@
 
     <div class="p-fluid p-grid">
         <div class="p-grid">
-            <p-tabView class="p-col-12">
+            <p-tabView *ngIf="fetch"  class="p-col-12">
                 
-                <p-tabPanel header="Prepublish">
+                <p-tabPanel *ngIf="showPublish" header="Prepublish">
                     
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                         ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
@@ -87,7 +87,7 @@
                 </p-tabPanel>
            
            
-                <p-tabPanel  header="Process">
+                <p-tabPanel *ngIf="showProcess"  header="Process">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                       ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                       Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

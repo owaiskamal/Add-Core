@@ -13,6 +13,7 @@ export class FrmTransStatusComponent implements OnInit {
   processChecked: boolean;
   showPublish : boolean = false;
   showProcess : boolean = false;
+  fetch: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -46,35 +47,52 @@ export class FrmTransStatusComponent implements OnInit {
   prePublish(){
     
     console.log(this.prePublishChecked);
-   /*  if(this.prePublishChecked == true){
+    if(this.prePublishChecked == true){
       this.showPublish = true;
-    }else if(this.prePublishChecked == false)
-    {
+    }
+    else if(this.prePublishChecked == false){
       this.showPublish = false;
     }
     else if(this.processChecked == true && this.prePublishChecked == true){
-      this.showProcess = true;
       this.showPublish = true;
-  } */
+      this.showProcess = true;
+    }
+    else if(this.processChecked == false && this.prePublishChecked == false){
+      this.showPublish = false;
+      this.showProcess = false;
+    }
+    else{
+      this.showPublish = false;
+      this.showProcess = false;
+    }
     
   }
   process(){
      
     console.log(this.processChecked);
+    
     if(this.processChecked == true){
       this.showProcess = true;
-    }else if(this.processChecked == false)
-    {
+    }
+    else if(this.processChecked == false){
       this.showProcess = false;
     }
     else if(this.processChecked == true && this.prePublishChecked == true){
-        this.showProcess = true;
-        this.showPublish = true;
+      this.showPublish = true;
+      this.showProcess = true;
+    }
+    else if(this.processChecked == false && this.prePublishChecked == false){
+      this.showPublish = false;
+      this.showProcess = false;
+    }
+    else{
+      this.showPublish = false;
+      this.showProcess = false;
     }
   }
   fetchData(){
     console.log("data fetched");
-    
+     this.fetch = true;
   }
 
 }
