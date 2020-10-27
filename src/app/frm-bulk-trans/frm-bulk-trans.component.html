@@ -124,14 +124,41 @@
   <div class="p-grid p-fluid">
     <div class="p-grid p-col-12">
       <div class="p-col-12">
+    
+        <div class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
+          <button
+            [disabled]="!showRepeater"
+            type="button"
+            pRipple
+            pButton
+            icon="pi pi-directions-alt"
+            class="p-button-outlined p-button-secondary"   
+            label="Roll Back"
+            (click) ="rollBack()"
+          ></button>
+        </div>
         <div class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
           <button
             pButton
             pRipple
             type="button"
+            icon="pi pi-refresh"
             (click)="reset()"
             class="p-button-outlined p-button-secondary"
             label="Reset"
+          ></button>
+        </div>
+      </div>
+      <div class="p-col-12">
+        <div class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
+          <button
+            [disabled]="!showRepeater"
+            type="button"
+            pRipple
+            pButton 
+            icon="pi pi-file-o"
+            label="Preview"
+            (click) ="preview()"
           ></button>
         </div>
         <div class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
@@ -140,9 +167,9 @@
             type="button"
             pRipple
             pButton
-            icon="pi pi-check"      
-            label="Preview"
-            (click) ="preview()"
+            icon="pi pi-check"
+            label="Submit"
+            (click) ="submit()"
           ></button>
         </div>
       </div>
@@ -150,7 +177,7 @@
   </div>
 </p-card>
 
-<p-card class="p-cards" *ngIf="showTable">
+<p-card class="p-cards" *ngIf="showTable && finalTableData">
   <div class="p-grid">
    
 
@@ -226,31 +253,31 @@
         <ng-template pTemplate="body" let-transaction let-i="rowIndex">
           <tr>
             <td>
-              
+              <span class="p-column-title">File name</span>
               {{ transaction.file_name }}
             </td>
             <td>
-         
+              <span class="p-column-title">Product Name</span>
               {{ transaction.product_name }}
             </td>
             <td>
-              
+              <span class="p-column-title">Cust-Ref#</span>
               {{ transaction.txnrefno }}
             </td>
             <td>
-            
-              {{ transaction.benemname }}
+              <span class="p-column-title">Bene Name</span>
+              {{ transaction.benefname }}
             </td>
             <td>
-              
+              <span class="p-column-title">Bene Cell</span>
               {{ transaction.benecell }}
             </td>
             <td>
-              
+              <span class="p-column-title">Amount</span>
               {{ transaction.transactionamount }}
             </td>
             <td>
-             
+              <span class="p-column-title">Status</span>
               {{ transaction.status }}
             </td>
           </tr>
@@ -275,6 +302,7 @@
   [(visible)]="progressDialog"
   [style]="{ width: '50vw' }"
   [baseZIndex]="10000"
+  styleClass="p-fluid dialog"
 >
   <div *ngIf="progressValue <= 100">
     <p-progressBar  [value]="progressValue"></p-progressBar>

@@ -167,7 +167,10 @@
 .trans-header{
   font-weight: 700 ; font-size: 1.2rem; margin-right:70.7% ;
 }
-
+:host ::ng-deep .dialog
+{
+  width: 45em !important;
+}
 @media screen and (max-width: 40rem) {
   :host ::ng-deep {
       .p-datatable {

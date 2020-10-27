@@ -531,7 +531,7 @@ export class FrmBulkTransComponent implements OnInit {
         this.messageService.add({
           severity: "success",
           summary: res["description"],
-         // detail: res["detailData"]["detail"],
+         detail: "File Uploaded Successfully",
         });
         console.log(JSON.parse(res["detailData"]["detail"]),"validated ata")
         this.validatedArr = JSON.parse(res["detailData"]["detail"]);
@@ -564,7 +564,7 @@ export class FrmBulkTransComponent implements OnInit {
         { field: "file_name", header: "File name" },
         { field: "product_name", header: "Product Name" },
         { field: "txnrefno", header: "Cust-Ref#" },
-        { field: "benemname", header: "Bene Name" },
+        { field: "benefname", header: "Bene Name" },
         { field: "benecell", header: "Bene Cell" },
         { field: "transactionamount", header: "Amount" },
         { field: "status", header: "Status" },
@@ -626,6 +626,86 @@ export class FrmBulkTransComponent implements OnInit {
     this.selectedTemplate = "";
     this.jsonData = [];
     this.clearSelected();
+  }
+  rollBack(){
+     let userAction = "ROL";
+     let rolObj = {
+      UserID: this.UserID,
+      AccessToken: this.AccessToken,
+      FormID: this.formID,
+      FileName: this.filename,
+      UserAction: userAction,
+      TxnTD: "",
+      SubmitType: "F",
+     }
+     this.transService.postSubRoll(rolObj).subscribe(res=>{
+       console.log(res,"rolled back");
+       if(res["code"]=="00"){
+        this.messageService.add({
+          severity: "success",
+          summary: "Success",
+          detail: res["description"],
+        });
+        this.selectedProduct = "";
+        this.selectedAccount = "";
+        this.selectedTemplate = "";
+       }
+       if(res["code"]=="-1"){
+        this.messageService.add({
+          severity:'danger', 
+          summary:"Error", 
+          detail:res["description"]
+        })
+       }
+     },
+     (error)=>{
+      this.messageService.add({
+        severity:'info', 
+        summary:error.name, 
+        detail:error.message
+      });
+     }
+     )
+  }
+
+  submit(){
+    let userAction = "SUB";
+    let subObj = {
+     UserID: this.UserID,
+     AccessToken: this.AccessToken,
+     FormID: this.formID,
+     FileName: this.filename,
+     UserAction: userAction,
+     TxnTD: "",
+     SubmitType: "F",
+    }
+    this.transService.postSubRoll(subObj).subscribe(res=>{
+      console.log(res,"submitted");
+      if(res["code"]=="00"){
+        this.messageService.add({
+          severity: "success",
+          summary: "Success",
+          detail: res["description"],
+        });
+     
+       }
+       if(res["code"]=="-1"){
+        this.messageService.add({
+          severity:'danger', 
+          summary:"Error", 
+          detail:res["description"]
+        })
+       }
+    },
+    (error)=>{
+      this.messageService.add({
+        severity:'info', 
+        summary:error.name, 
+        detail:error.message
+      });
+     }
+    )
+
   }
   convertToString(obj) {
     Object.keys(obj).forEach((i) => {

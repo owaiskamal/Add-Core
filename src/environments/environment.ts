@@ -19,6 +19,7 @@ export const environment = {
   transFileStageGet:"http://132.147.160.71/AddCoreAPI/API/Core/GetTxnForStage",
   submitTranStage:"http://132.147.160.71/AddCoreAPI/API/Core/PostTxnForStage",
   blkUpload :    "http://132.147.160.71/AddCoreAPI/API/Core/UploadTxn",
+  blkSubRoll: "http://132.147.160.71/AddCoreAPI/API/Core/UploadTxnPost"
 };
 
 /*

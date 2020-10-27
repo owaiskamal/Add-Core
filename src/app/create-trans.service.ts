@@ -51,4 +51,8 @@ export class CreateTransService {
   {
     return this.http.post(environment.blkUpload  , masterobj);
   }
+  postSubRoll(obj): Observable<Object>
+  {
+    return this.http.post(environment.blkSubRoll,obj)
+  }
 }
