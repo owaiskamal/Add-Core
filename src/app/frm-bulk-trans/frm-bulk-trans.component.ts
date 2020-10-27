@@ -70,6 +70,9 @@ export class FrmBulkTransComponent implements OnInit {
   totalrecords : number;
   cols: any[] = [];
   showTable: boolean = false;
+  showPreview : boolean = false;
+  showRollBack : boolean = false;
+  showSubmit: boolean = false;
   msgs2: { severity: string; summary: string; detail: string; }[];
   constructor(
     private transService: CreateTransService,
@@ -591,8 +594,14 @@ export class FrmBulkTransComponent implements OnInit {
         this.selectedAccount = "";
         this.selectedTemplate = "";
         this.jsonData = [];
-        this.showbtn = true;
-       
+        this.showPreview = true;
+        this.showRollBack = true;
+        if(this.validatedObj["totalSuccess"] == "0" ){
+          this.showSubmit = false
+        }else{
+          this.showSubmit = true;
+        }
+        
       }
       if(res["code"] == "-1"){
 
