@@ -29,6 +29,7 @@ export class FrmAccountStatementComponent implements OnInit {
   statementPeriodDisabled : boolean = false;
   closingBalanceDate: any;
   diffDays : number;
+  fetch: boolean = false;
   constructor() { 
   
     this.accountNumbers = [
@@ -58,34 +59,34 @@ this.filesTables = [
   {
  
   transactionDate: "10/20/2020",
-  transactionDesc: "UBP-MobileApp",
+  particulars: "UBP-MobileApp",
   drcr: "Debit",
   Amount: 10000,
-  endBalance: 23465.60
+  endBalance: 10000
   
   },
   {
     transactionDate: "11/20/2020",
-    transactionDesc: "UBP-MobileApp",
+    particulars: "UBP-MobileApp",
     drcr: "Credit",
-    Amount: 20000,
-    endBalance: 2465.60
+    Amount: 2000,
+    endBalance: 8000
     
     },
     {
       transactionDate: "12/20/2020",
-      transactionDesc: "UBP-MobileApp",
+      particulars: "UBP-MobileApp",
       drcr: "Debit",
-      Amount: 30000,
-      endBalance: 33465.60
+      Amount: 3000,
+      endBalance: 11000
     
       }
 
 ];
 this.cols = [
   { field: "transactionDate", header: "Transaction Date" },
-  { field: "transactionDesc", header: "Transaction Desc" },
-  { field: "drcr", header: "DRCR" },
+  { field: "particulars", header: "Particulars" },
+  { field: "drcr", header: "DR/CR" },
   { field: "Amount", header: "Amount" },
   { field: "endBalance", header: "End Balance" },
 ];
@@ -286,6 +287,9 @@ this.cols = [
        this.statementPeriodDisabled = false;
      }
   }
+  Fetch(){
+    this.fetch = true;
+  }
   resetData(){
  
     
@@ -316,7 +320,7 @@ this.cols = [
            columns: this.cols.map(col => ({title: col.header, dataKey: col.field}))
            
           })
-          doc.text("Statement details", 82, 10);
+          doc.text("Account Statement", 82, 10);
           doc.save('statement.pdf');
       
   

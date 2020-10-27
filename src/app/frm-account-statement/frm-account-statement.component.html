@@ -79,20 +79,33 @@
       </p-panel>
     </div>
   </div>
-  <div class="p-field">
-    <button
-    style="float: right;"
-      pButton
-      pRipple
-      type="button"
-      (click)="resetData()"
-      class="p-button-outlined p-button-secondary"
-      label="Reset"
-    ></button>
+  <div class="p-formgroup-inline p-col-12 p-lg-12 p-sm-12 p-md-12">
+    <div class="p-field">
+      <button
+     
+        pButton
+        pRipple
+        type="button"
+        (click)="resetData()"
+        class="p-button-outlined p-button-secondary"
+        label="Reset"
+      ></button>
+    </div>
+    <div class="p-field">
+      <button
+    
+        pButton
+        pRipple
+        type="button"
+        (click)="Fetch()"
+        label="Fetch"
+      ></button>
+    </div>
   </div>
+
 </p-card>
 
-<p-card class="p-cards">
+<p-card class="p-cards" *ngIf="fetch">
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
       <p-toolbar styleClass="p-mb-4">
@@ -154,11 +167,11 @@
          
           <td>
             <span class="p-column-title">Transaction Date</span>
-            {{ transaction.transactionDate }}
+            {{ transaction.transactionDate  }}
           </td>
           <td>
             <span class="p-column-title">Transaction Desc</span>
-            {{ transaction.transactionDesc }}
+            {{ transaction.particulars }}
           </td>
           <td>
             <span class="p-column-title">DRCR</span>

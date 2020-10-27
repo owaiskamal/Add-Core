@@ -376,7 +376,7 @@ export class FrmTransStageComponent implements OnInit {
           AccessToken: this.AccessToken,
           FormID: this.formID,
           FileName: this.selectedFile,
-          UserAction: sarray[i],
+          UserAction: sarray[i], //useaction
           TxnTD: array[i].TxnID,
           Remarks: carray[i],
           SubmitType: "T",
