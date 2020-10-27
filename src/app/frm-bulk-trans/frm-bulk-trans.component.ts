@@ -48,7 +48,7 @@ export class FrmBulkTransComponent implements OnInit {
   selectedAccount: string;
   filename: string;
   isValid: boolean = false;
-  showSubmit: boolean = false;
+  showbtn: boolean = false;
   fileUpload: boolean = false;
   progressDialog: boolean = false;
   progressValue: number = 0;
@@ -454,7 +454,7 @@ export class FrmBulkTransComponent implements OnInit {
           };
 
           reader.readAsArrayBuffer(file);
-          this.showSubmit = true;
+          
         }
 
         //this.messageService.add({severity: 'info', summary: this.filename, detail: 'File is ready to Upload'});
@@ -591,7 +591,8 @@ export class FrmBulkTransComponent implements OnInit {
         this.selectedAccount = "";
         this.selectedTemplate = "";
         this.jsonData = [];
-        
+        this.showbtn = true;
+       
       }
       if(res["code"] == "-1"){
 
