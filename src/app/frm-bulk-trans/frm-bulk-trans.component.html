@@ -125,7 +125,7 @@
     <div class="p-grid p-col-12">
       <div class="p-col-12">
     
-        <div *ngIf="showbtn" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
+        <div *ngIf="showRollBack" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
           <button
             [disabled]="!showRepeater"
             type="button"
@@ -149,7 +149,7 @@
           ></button>
         </div>
      
-        <div *ngIf="showbtn" class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
+        <div *ngIf="showPreview" class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
           <button
             [disabled]="!showRepeater"
             type="button"
@@ -160,7 +160,7 @@
             (click) ="preview()"
           ></button>
         </div>
-        <div *ngIf="showbtn" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
+        <div *ngIf="showSubmit" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
           <button
             [disabled]="!showRepeater"
             type="button"
