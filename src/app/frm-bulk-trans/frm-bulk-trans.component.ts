@@ -30,7 +30,7 @@ import autoTable from 'jspdf-autotable';
 })
 export class FrmBulkTransComponent implements OnInit {
   @Output() onProgress: EventEmitter<any> = new EventEmitter();
-  @ViewChild("form") form: FileUpload;
+  @ViewChild("fileUploaded") fileUploaded: FileUpload;
   formID: any;
   uploadProgress: any;
   progress: boolean = false;
@@ -527,7 +527,7 @@ export class FrmBulkTransComponent implements OnInit {
             ind = ind + 5;
 
 
-            this.form.clear();
+            this.fileUploaded.clear();
             this.prgService.data.next(ind);
           }
 
@@ -662,6 +662,7 @@ export class FrmBulkTransComponent implements OnInit {
     this.selectedAccount = "";
     this.selectedTemplate = "";
     this.jsonData = [];
+    this.fileUploaded.clear()
     this.clearSelected();
   }
   rollBack(){
@@ -686,6 +687,13 @@ export class FrmBulkTransComponent implements OnInit {
         this.selectedProduct = "";
         this.selectedAccount = "";
         this.selectedTemplate = "";
+        this.validatedObj = {}
+        this.showRepeater = false;
+        this.finalTableData = [];
+        this.showTable = false;
+        this.showPreview = false;
+        this.showSubmit  = false;
+        this.showRollBack = false;
        }
        if(res["code"]=="-1"){
         this.messageService.add({

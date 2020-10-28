@@ -56,20 +56,20 @@
   <div class="p-grid p-mt-2">
    
     <div class="p-col-12 p-sm-12 p-lg-6 p-md-6">
-      <div class="p-lg-12 p-sm-12 p-md-6">
+     
         <p-fileUpload
           [disabled]="!selectedAccount || !selectedProduct || !selectedTemplate"
-          #form
+          #fileUploaded
           customUpload="true"
           [previewWidth]="10"
           (onClear)="clearSelected()"
           name="demo[]"
           accept=".xlsx,application/msexcel,.csv,.txt"
           maxFileSize="10000000"
-          (uploadHandler)="onBasicUpload($event, form)"
+          (uploadHandler)="onBasicUpload($event, fileUpload)"
         >
         </p-fileUpload>
-      </div>
+     
     </div>
 
   <div class="p-col-12 p-sm-12 p-lg-6 p-md-6 p-mt-2" *ngIf="showRepeater">
