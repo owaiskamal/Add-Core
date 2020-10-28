@@ -662,7 +662,8 @@ export class FrmBulkTransComponent implements OnInit {
     this.selectedAccount = "";
     this.selectedTemplate = "";
     this.jsonData = [];
-    this.fileUploaded.clear()
+    this.fileUploaded.clear();
+    this.showRepeater = false;
     this.clearSelected();
   }
   rollBack(){
