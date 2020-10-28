@@ -83,22 +83,23 @@
             <span>{{validatedObj['Filename']}}</span>
           </div>
           <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span class="filename-font">Total Record</span>
+            <span class="filename-font">Total Records</span>
           </div>
           <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span>{{validatedObj['totalRecord']}}</span>
+            <a class="filename-font cursor-style" (click)="showTotal()">{{validatedObj['totalRecord']}}</a>
           </div>
           <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
             <span class="filename-font">Total Success</span>
           </div>
           <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span>{{validatedObj['totalSuccess']}}</span>
+            <a class="filename-font cursor-style" (click)="showSuccess()">{{validatedObj['totalSuccess']}}</a>
           </div>
           <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
             <span class="filename-font">Total Failed</span>
           </div>
           <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span>{{validatedObj['totalFailed']}}</span>
+            <a class="filename-font cursor-style"  (click)="showFailed()">{{validatedObj['totalFailed']}}</a>
+  
           </div>
           <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
             <span class="filename-font">Success Amount</span>
@@ -155,11 +156,12 @@
             type="button"
             pRipple
             pButton 
-            icon="pi pi-file-o"
-            label="Preview"
+            icon="{{showTable ? 'pi pi-arrow-up' : 'pi pi-arrow-down'}}"
+            label="{{showTable ? 'Hide Preview' : 'Show Preview' }}"
             (click) ="preview()"
           ></button>
         </div>
+      
         <div *ngIf="showSubmit" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
           <button
             [disabled]="!showRepeater"
@@ -178,8 +180,16 @@
 
 <p-card class="p-cards" *ngIf="showTable && finalTableData">
   <div class="p-grid">
-   
-
+    <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
+      <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <div class="p-d-flex">
+                <button type="button" pButton pRipple icon="pi pi-file-o" (click)="dt.exportCSV()" class="p-mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success p-mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+            </div>
+        </ng-template>
+      </p-toolbar>
       <p-table
         [value]="finalTableData"
         #dt
@@ -288,7 +298,7 @@
         </ng-template>
       </p-table>
     </div>
-
+</div>
 </p-card>
 
 

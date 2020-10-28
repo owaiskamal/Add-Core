@@ -21,6 +21,8 @@ import { IfStmt } from "@angular/compiler";
 import { HttpEvent, HttpEventType } from "@angular/common/http";
 import { FileUpload } from "primeng/fileupload";
 import { log } from 'console';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 @Component({
   selector: "app-frm-bulk-trans",
   templateUrl: "./frm-bulk-trans.component.html",
@@ -36,6 +38,8 @@ export class FrmBulkTransComponent implements OnInit {
   UserID: string;
   products: Object[] = [];
   accounts: Object[] = [];
+  successArr :any[] = [];
+  failedArr :any[] = [];
   templates: Object[] = [];
   rawData: any[] = [];
   transactionArr: any[] = [];
@@ -488,8 +492,11 @@ export class FrmBulkTransComponent implements OnInit {
     ];
   }
   preview(){
-    this.showTable = true
+    this.showTable = !this.showTable;
+    console.log(this.showTable,"showtable");
+    
   }
+  
 
   submitBulk() {
     var finalDAta = this.jsonData.shift();
@@ -540,11 +547,16 @@ export class FrmBulkTransComponent implements OnInit {
         this.validatedArr = JSON.parse(res["detailData"]["detail"]);
          this.validatedTableData = this.validatedArr['data']
          console.log(this.validatedTableData,"data ready for table");
-        
-          this.finalTableData = Object.values(this.validatedTableData);
+         this.successArr =  this.validatedTableData.filter(x => x['status'] == "Success");
+         console.log(this.successArr,"Success Array");
+         this.failedArr =  this.validatedTableData.filter(x => x['status'] != "Success");
+         
+     this.finalTableData = Object.values(this.validatedTableData);
        
     
      console.log(this.finalTableData,"values for table");
+   
+    
     
      this.totalrecords = this.finalTableData.length;
    /*   for(let i=0;i< this.finalTableData.length;i++){
@@ -557,7 +569,9 @@ export class FrmBulkTransComponent implements OnInit {
       }
       
      } */
-     console.log(this.finalTableData,"clean");
+
+
+ 
      // this.cols = Object.keys(this.userLists[0]);
      this.cols = [];
      console.log(Object.keys(this.validatedTableData[0]),"table keys");
@@ -611,6 +625,7 @@ export class FrmBulkTransComponent implements OnInit {
       this.progressArray[3]["error"] = true;
       this.cross = false;
       this.upCompleted = true;
+      this.showRollBack = true;
         /* this.messageService.add({
           severity: "info",
           summary: "Error",
@@ -629,6 +644,18 @@ export class FrmBulkTransComponent implements OnInit {
     }
    
     );
+  }
+  showSuccess(){
+    this.finalTableData = this.successArr;
+    this.showTable = true;
+  }
+  showFailed(){
+    this.finalTableData = this.failedArr;
+    this.showTable = true;
+  }
+  showTotal(){
+    this.finalTableData = this.validatedTableData;
+    this.showTable = true;
   }
   reset() {
     this.selectedProduct = "";
@@ -666,6 +693,7 @@ export class FrmBulkTransComponent implements OnInit {
           summary:"Error", 
           detail:res["description"]
         })
+        
        }
      },
      (error)=>{
@@ -697,7 +725,13 @@ export class FrmBulkTransComponent implements OnInit {
           summary: "Success",
           detail: res["description"],
         });
-     
+       this.validatedObj = {}
+       this.showRepeater = false;
+       this.finalTableData = [];
+       this.showTable = false;
+       this.showPreview = false;
+       this.showSubmit  = false;
+       this.showRollBack = false;
        }
        if(res["code"]=="-1"){
         this.messageService.add({
@@ -717,6 +751,53 @@ export class FrmBulkTransComponent implements OnInit {
     )
 
   }
+  exportPdf() {
+    
+  
+    const doc = new jsPDF();
+
+    autoTable(doc,{
+     
+      showHead: true,
+      body: this.finalTableData,
+     columns: this.cols.map(col => ({title: col.header, dataKey: col.field}))
+     
+    })
+    doc.text("File Records", 82, 10);
+    doc.save('statement.pdf');
+
+
+ 
+
+}
+
+exportExcel() {
+var specArray = this.finalTableData;
+specArray.forEach((v) => { 
+  delete v['bank'], delete v['beneemail'],delete v['benelname'],delete v['benemname'],delete v['instrumentno'],delete v['productcode']
+}
+  );
+  console.log(specArray,"specArray");
+  
+import("xlsx").then(xlsx => {
+  const worksheet = xlsx.utils.json_to_sheet(specArray);
+  const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+  const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+  this.saveAsExcelFile(excelBuffer, "statement");
+});
+}
+
+saveAsExcelFile(buffer: any, fileName: string): void {
+import("file-saver").then(FileSaver => {
+  let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  let EXCEL_EXTENSION = '.xlsx';
+  const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+  });
+  FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+});
+}
+
   convertToString(obj) {
     Object.keys(obj).forEach((i) => {
       if (typeof obj[i] === "object") {
