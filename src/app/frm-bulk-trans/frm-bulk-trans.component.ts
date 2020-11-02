@@ -665,6 +665,10 @@ export class FrmBulkTransComponent implements OnInit {
     this.fileUploaded.clear();
     this.showRepeater = false;
     this.clearSelected();
+    if(this.upCompleted == true){
+      this.rollBack();
+    }
+   
   }
   rollBack(){
      let userAction = "ROL";
@@ -695,6 +699,7 @@ export class FrmBulkTransComponent implements OnInit {
         this.showPreview = false;
         this.showSubmit  = false;
         this.showRollBack = false;
+        this.upCompleted = false;
        }
        if(res["code"]=="-1"){
         this.messageService.add({

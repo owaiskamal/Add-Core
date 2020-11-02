@@ -89,6 +89,11 @@
   min-height: 200px;
   padding: 1rem 1.5rem 2rem 1.5rem;
 }
+:host ::ng-deep .p-fileupload-buttonbar  {
+  text-align: center !important;
+  
+  // width: 100%;
+}
 @media (max-width: 768px) {
   :host ::ng-deep .p-card .p-card-body {
     padding-top: 4em;
@@ -107,17 +112,18 @@
 
   :host ::ng-deep .p-fileupload-buttonbar .p-button {
     margin-bottom: 1em !important;
+    
     // width: 100%;
   }
 }
-@media (max-width: 511px) {
+/* @media (max-width: 511px) {
   :host ::ng-deep .p-fileupload-buttonbar {
     max-width: 89% !important;
   }
   :host ::ng-deep .p-fileupload-content {
     max-width: 89% !important;
   }
-}
+} */
 .loading:after {
   content: "...";
   animation: dots 1s steps(5, end) infinite;
@@ -174,6 +180,13 @@
 {
   width: 45em !important;
 }
+:host ::ng-deep .p-fileupload-row>div {
+  width: auto!important;
+}
+:host ::ng-deep .p-fileupload-row>div:last-child .p-button {
+
+  width: 100% !important;
+}
 @media screen and (max-width: 40rem) {
   :host ::ng-deep {
       .p-datatable {
@@ -205,5 +218,8 @@
               }
           }
       }
+  }
+  :host ::ng-deep .p-fileupload-row{
+    display: block;
   }
 }
