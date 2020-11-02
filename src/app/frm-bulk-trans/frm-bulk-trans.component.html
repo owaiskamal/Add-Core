@@ -318,10 +318,12 @@
         #dt
         [rowsPerPageOptions]="[10, 25, 50]"
         selectionMode="single"
+        [scrollable]="true"
+        
         [paginator]="true"
         [rows]="15"
         [columns]="cols"
-        styleClass="p-datatable-responsive-demo p-datatable-striped"
+        styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped"
         [showCurrentPageReport]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [filterDelay]="0"
@@ -359,7 +361,13 @@
        
           </div>
           </div>
+         
         </ng-template>
+        <ng-template pTemplate="colgroup" let-columns>
+          <colgroup>
+              <col *ngFor="let col of columns ; let i = index" [style.width]="i ===5 ? '300px' : '100px' ">
+          </colgroup>
+      </ng-template>
         <ng-template pTemplate="header" let-columns>
           <tr>
             <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -395,10 +403,7 @@
               <span class="p-column-title">Bene Name</span>
               {{ transaction.benefname }}
             </td>
-            <td>
-              <span class="p-column-title">Bene Cell</span>
-              {{ transaction.benecell }}
-            </td>
+           
             <td>
               <span class="p-column-title">Amount</span>
               {{ transaction.transactionamount }}
