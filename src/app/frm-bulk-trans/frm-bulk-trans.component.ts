@@ -582,7 +582,6 @@ export class FrmBulkTransComponent implements OnInit {
         { field: "product_name", header: "Product Name" },
         { field: "txnrefno", header: "Cust-Ref#" },
         { field: "benefname", header: "Bene Name" },
-        { field: "benecell", header: "Bene Cell" },
         { field: "transactionamount", header: "Amount" },
         { field: "status", header: "Status" },
       ];
