@@ -9,7 +9,8 @@
         <label for="companytitle">Company title</label>
         <input id="companytitle" type="text" pInputText>
     </div> -->
-    <div *ngIf="!prodUpl" class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+    <div class="p-col-12 p-lg-6 p-md-6 p-sm-12">
+    <div *ngIf="!prodUpl" class="p-col-12 p-md-6 p-lg-12 p-sm-12">
       <label style="font-weight: 700" for="producttitle">Product title</label>
       <p-dropdown
         #myDropdown
@@ -23,7 +24,9 @@
 
       <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
     </div>
-    <div *ngIf="!accUpl" class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+  
+  
+    <div *ngIf="!accUpl" class="p-col-12 p-md-6 p-lg-12 p-sm-12">
       <label style="font-weight: 700" for="accountitle">Account title</label>
       <p-dropdown
         [options]="accounts"
@@ -35,7 +38,10 @@
       ></p-dropdown>
       <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
     </div>
-    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+ 
+
+
+    <div class="p-col-12 p-md-6 p-lg-12 p-sm-12">
       <label style="font-weight: 700" for="filetemplate">File template</label>
       <p-dropdown
         [options]="templates"
@@ -47,34 +53,28 @@
       ></p-dropdown>
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
     </div>
-
-    <!-- App Form Template Start -->
-    <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
-      <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
-    </div>
-  </div>
-  <div class="p-grid p-mt-2">
+  
+    <div class="p-col-12 p-md-6 p-lg-12 p-sm-12">
+     
+      <p-fileUpload
+        [disabled]="!selectedAccount || !selectedProduct || !selectedTemplate"
+        #fileUploaded
+        customUpload="true"
+        [previewWidth]="10"
+        (onClear)="clearSelected()"
+        name="demo[]"
+        accept=".xlsx,application/msexcel,.csv,.txt"
+        maxFileSize="10000000"
+        (uploadHandler)="onBasicUpload($event, fileUpload)"
+      >
+      </p-fileUpload>
    
-    <div class="p-col-12 p-sm-12 p-lg-6 p-md-6">
-     
-        <p-fileUpload
-          [disabled]="!selectedAccount || !selectedProduct || !selectedTemplate"
-          #fileUploaded
-          customUpload="true"
-          [previewWidth]="10"
-          (onClear)="clearSelected()"
-          name="demo[]"
-          accept=".xlsx,application/msexcel,.csv,.txt"
-          maxFileSize="10000000"
-          (uploadHandler)="onBasicUpload($event, fileUpload)"
-        >
-        </p-fileUpload>
-     
-    </div>
+  </div>
+  </div>
 
-  <div class="p-col-12 p-sm-12 p-lg-6 p-md-6 p-mt-2" *ngIf="showRepeater">
-     
-        <p-panel header="File Details" class="detail">
+  <div class="p-col-12 p-lg-6 p-md-6 p-sm-12" style="margin-top: 27px;">
+    <div class="p-md-6 p-lg-12 p-sm-12">
+    <p-panel header="File Details" class="detail">
       <div class="p-grid">
           <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
             <span class="filename-font">Filename</span>
@@ -115,13 +115,134 @@
           </div>
       </div>
         </p-panel>
-      
+     <!--  </div>
+      <div class="p-md-6 p-lg-12 p-sm-12"> -->
     </div>
+        <div *ngIf="showRollBack" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
+         
+          <button
+            [disabled]="!showRepeater"
+            type="button"
+            pRipple
+            pButton
+           
+            class="p-button-outlined p-button-secondary"   
+            label="RollBack"
+            
+            (click) ="rollBack()"
+          ></button>
+        </div>
+        <div class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-refresh"
+            (click)="reset()"
+            class="p-button-outlined p-button-secondary"
+            label="Reset"
+          ></button>
+        </div>
+     
+        <div *ngIf="showPreview" class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
+          <button
+            [disabled]="!showRepeater"
+            type="button"
+            pRipple
+            pButton 
+            icon="{{showTable ? 'pi pi-arrow-up' : 'pi pi-arrow-down'}}"
+            label="{{showTable ? 'Hide' : 'Preview' }}"
+            (click) ="preview()"
+          ></button>
+        </div>
+      
+        <div *ngIf="showSubmit" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
+          <button
+            [disabled]="!showRepeater"
+            type="button"
+            pRipple
+            pButton
+            icon="pi pi-check"
+            label="Submit"
+            (click) ="submit()"
+          ></button>
+        
+      </div>
+   
+
   </div>
+</div>
+  <!-- 
+    <div class="p-grid p-fluid">
+    <div class="p-col-6 p-md-6 p-lg-12 p-sm-12" *ngIf="showRepeater">
+      <p-panel header="File Details" class="detail">
+        <div class="p-grid">
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Filename</span>
+            </div>
+            <div class="p-col-6  p-lg-6 p-md-6 p-sm-12">
+              <span>{{validatedObj['Filename']}}</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Total Records</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <a class="filename-font cursor-style" (click)="showTotal()">{{validatedObj['totalRecord']}}</a>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Total Success</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <a class="filename-font cursor-style" (click)="showSuccess()">{{validatedObj['totalSuccess']}}</a>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Total Failed</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <a class="filename-font cursor-style"  (click)="showFailed()">{{validatedObj['totalFailed']}}</a>
+    
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Success Amount</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span>{{validatedObj['successAmount']}}</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Failed Amount</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span>{{validatedObj['failedAmount']}}</span>
+            </div>
+        </div>
+          </p-panel>
+    </div>
+  </div> -->
+ <!--  <div class="p-grid p-mt-2">
+   
+    <div class="p-col-12 p-sm-12 p-lg-6 p-md-6">
+     
+        <p-fileUpload
+          [disabled]="!selectedAccount || !selectedProduct || !selectedTemplate"
+          #fileUploaded
+          customUpload="true"
+          [previewWidth]="10"
+          (onClear)="clearSelected()"
+          name="demo[]"
+          accept=".xlsx,application/msexcel,.csv,.txt"
+          maxFileSize="10000000"
+          (uploadHandler)="onBasicUpload($event, fileUpload)"
+        >
+        </p-fileUpload>
+     
+    </div>
+
+  
+  </div> -->
      
     
    
-
+<!-- 
   <div class="p-grid p-fluid">
     <div class="p-grid p-col-12">
       <div class="p-col-12">
@@ -175,13 +296,15 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </p-card>
 
-<p-card class="p-cards" *ngIf="showTable && finalTableData">
+<p-card  class="p-cards" *ngIf="showTable && finalTableData">
+  
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
-      <p-toolbar styleClass="p-mb-4">
+      
+     <!--  <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
             <div class="p-d-flex">
                 <button type="button" pButton pRipple icon="pi pi-file-o" (click)="dt.exportCSV()" class="p-mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
@@ -189,7 +312,7 @@
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
-      </p-toolbar>
+      </p-toolbar> -->
       <p-table
         [value]="finalTableData"
         #dt
@@ -198,7 +321,7 @@
         [paginator]="true"
         [rows]="15"
         [columns]="cols"
-        styleClass="p-datatable-responsive-demo"
+        styleClass="p-datatable-responsive-demo p-datatable-striped"
         [showCurrentPageReport]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [filterDelay]="0"
@@ -207,29 +330,10 @@
         <ng-template pTemplate="caption">
           <div class="table-header">
             <div class="p-formgroup-inline">
-              <span class="trans-header"> Transaction Details</span>
-              <!-- <div class="p-formgroup-inline">
-                  <div class="p-field-checkbox"  >
-                  <p-radioButton  name="city" value="Authorize All" [(ngModel)]="fileOpts" (onClick)="authAll()"  inputId="city7"></p-radioButton>
-                  <label for="city7">Authorize All</label>
-                  </div>
-                  <div class="p-field-checkbox" >
-                    <p-radioButton name="city" value="Reject All" [(ngModel)]="fileOpts" (onClick)="authAll()"  inputId="city6"></p-radioButton>
-                    <label for="city6">Reject All</label>
-                  </div>
-                    <div class="p-field-checkbox"  >
-                      <p-radioButton name="city" value="Hold" [(ngModel)]="fileOpts" (onClick)="authAll()" inputId="city5"></p-radioButton>
-                      <label for="city5">Hold</label>
-                    </div>
-                      <div class="p-field-checkbox"  >
-                        <p-radioButton name="city" value="Send to Repair" [(ngModel)]="fileOpts" (onClick)="authAll()" inputId="city4"></p-radioButton>
-                        <label for="city4">Send to Repair</label>
-                      </div>
-                        <div class="p-field-checkbox"  >
-                          <p-radioButton name="city" value="Resest All" [(ngModel)]="fileOpts" (onClick)="authAll()"  inputId="city3"></p-radioButton>
-                          <label for="city3">Resest All</label>
-                        </div>
-                    </div> -->
+           
+              
+            <div class="p-col-12 p-lg-6 p-md-6 p-sm-12">
+              <span class="trans-header">Transaction Details</span>
               <span class="p-input-icon-left table_filter">
                 <i class="pi pi-search"></i>
                 <input
@@ -240,6 +344,20 @@
                 />
               </span>
             </div>
+           
+       
+              <div class="p-col-12 p-lg-6 p-md-6 p-sm-12" style="padding-top:28px">
+               
+                  <div class="p-d-flex" style="float:right;">
+                    <span class="filename-font" style="padding-right: 5px; padding-top: 10px;">
+                      Export options</span>
+                      <button type="button" pButton pRipple icon="pi pi-file-o" (click)="dt.exportCSV()" class="p-mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
+                      <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success p-mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                      <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                  </div>
+                </div>
+       
+          </div>
           </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
