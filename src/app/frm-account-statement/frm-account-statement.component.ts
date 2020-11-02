@@ -1,10 +1,11 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { log } from 'console';
 
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import moment, { months } from 'moment';
+import { Calendar } from 'primeng/calendar';
 
 
 
@@ -14,6 +15,7 @@ import moment, { months } from 'moment';
   styleUrls: ['./frm-account-statement.component.scss']
 })
 export class FrmAccountStatementComponent implements OnInit {
+  @ViewChild("dt") dt: Calendar;
   rangeDates: Date[] = [];
   accountNumbers : any[] = [];
   selectedAccountNo : string;
@@ -30,8 +32,8 @@ export class FrmAccountStatementComponent implements OnInit {
   closingBalanceDate: any;
   diffDays : number;
   fetch: boolean = false;
-  constructor() { 
-  
+  constructor() {
+
     this.accountNumbers = [
       {name: '305411944-UFONE', code: 'NY'},
       {name: '305411945-PTCL', code: 'RM'},
@@ -46,7 +48,7 @@ export class FrmAccountStatementComponent implements OnInit {
     {name: 'Last Six Months', code: 'LSM'},
     {name: 'Last Twelve Months', code: 'TLM'}
 ];
- 
+
 this.accountDetails = [
   {title: 'Account Title', detail: ''},
   {title: 'From Date', detail: ''},
@@ -57,13 +59,13 @@ this.accountDetails = [
 
 this.filesTables = [
   {
- 
+
   transactionDate: "10/20/2020",
   particulars: "UBP-MobileApp",
   drcr: "Debit",
   Amount: 10000,
   endBalance: 10000
-  
+
   },
   {
     transactionDate: "11/20/2020",
@@ -71,7 +73,7 @@ this.filesTables = [
     drcr: "Credit",
     Amount: 2000,
     endBalance: 8000
-    
+
     },
     {
       transactionDate: "12/20/2020",
@@ -79,7 +81,7 @@ this.filesTables = [
       drcr: "Debit",
       Amount: 3000,
       endBalance: 11000
-    
+
       }
 
 ];
@@ -98,13 +100,13 @@ this.cols = [
     this.rangeDates[0] = new Date();
     this.dateRangeDisabled = true;
     console.log(this.rangeDates,"range dates on init");
-    
+
   }
 
 
   OnAccountChange(){
     console.log(this.selectedAccountNo,"Selected Account");
-  
+
     if (this.selectedAccountNo == null) {
       this.accountDetails[0].detail = null;
       this.accountDetails[3].detail = null;
@@ -115,34 +117,38 @@ this.cols = [
       this.accountDetails[3].detail = accountname[0];
     }
   }
- 
+
+
+
+
   OnPeriodChange(){
-    
+
     console.log(this.selectedPeriod,"Selected Period");
-    
+
     if(this.selectedPeriod){
-     
-      
+
+
       this.dateRangeDisabled = false;
      /*  this.rangeDates.shift() */
       var periodicDate = new Date()
 
       console.log(periodicDate,"todaydate");
-      
-   
+
+
        if(this.selectedPeriod['code'] == "LOW"){
          console.log("inside low");
         console.log(periodicDate,"periodic date");
-      
-         
-        
+
+
+
         let lowDate = moment().subtract(7,'d').toDate();
-        
+
         console.log(lowDate,"subt days");
-       
+
         this.rangeDates[1] = periodicDate;
         this.rangeDates[0] = lowDate;
-        
+        this.dt.updateInputfield();
+
         console.log(this.rangeDates);
        let formattedFromDate = this.singleFormatDate(periodicDate)
        let formattedToDate = this.singleFormatDate(lowDate)
@@ -150,16 +156,16 @@ this.cols = [
         this.accountDetails[2].detail = formattedFromDate
       this.accountDetails[4].detail = formattedToDate
       this.closingBalanceDate = formattedFromDate;
-          
+
         }
         else if(this.selectedPeriod['code'] == "LOM"){
           let lowDate = moment().subtract(1,'months').toDate();
-        
+
           console.log(lowDate,"subt days");
-         
+
           this.rangeDates[1] = periodicDate;
           this.rangeDates[0] = lowDate;
-          
+          this.dt.updateInputfield();
           console.log(this.rangeDates);
          let formattedFromDate = this.singleFormatDate(periodicDate)
          let formattedToDate = this.singleFormatDate(lowDate)
@@ -170,12 +176,12 @@ this.cols = [
         }
         else if(this.selectedPeriod['code'] == "LTM"){
           let lowDate = moment().subtract(3,'months').toDate();
-        
+
           console.log(lowDate,"subt days");
-         
+
           this.rangeDates[1] = periodicDate;
           this.rangeDates[0] = lowDate;
-          
+          this.dt.updateInputfield();
           console.log(this.rangeDates);
          let formattedFromDate = this.singleFormatDate(periodicDate)
          let formattedToDate = this.singleFormatDate(lowDate)
@@ -186,12 +192,12 @@ this.cols = [
         }
         else if(this.selectedPeriod['code'] == "LSM"){
           let lowDate = moment().subtract(6,'months').toDate();
-        
+
           console.log(lowDate,"subt days");
-         
+
           this.rangeDates[1] = periodicDate;
           this.rangeDates[0] = lowDate;
-          
+          this.dt.updateInputfield();
           console.log(this.rangeDates);
          let formattedFromDate = this.singleFormatDate(periodicDate)
          let formattedToDate = this.singleFormatDate(lowDate)
@@ -202,12 +208,12 @@ this.cols = [
         }
         else if(this.selectedPeriod['code'] == "TLM"){
           let lowDate = moment().subtract(12,'months').toDate();
-        
+
           console.log(lowDate,"subt days");
-         
+
           this.rangeDates[1] = periodicDate;
           this.rangeDates[0] = lowDate;
-          
+          this.dt.updateInputfield();
           console.log(this.rangeDates);
          let formattedFromDate = this.singleFormatDate(periodicDate)
          let formattedToDate = this.singleFormatDate(lowDate)
@@ -216,7 +222,7 @@ this.cols = [
         this.accountDetails[4].detail = formattedToDate
         this.closingBalanceDate = formattedFromDate;
         }
-        
+
   }
 
   }
@@ -225,31 +231,31 @@ this.cols = [
     if(this.rangeDates.length == 0){
       this.clearDate();
     }else{
-     
+
       var returnedDates =  this.formatDate(this.rangeDates[0],this.rangeDates[1])
       this.accountDetails[1].detail = returnedDates['fromDate']
       this.accountDetails[2].detail = returnedDates['toDate']
       this.accountDetails[4].detail = returnedDates['fromDate']
       this.closingBalanceDate = this.accountDetails[2].detail
-      
+
       if(returnedDates['toDate'] == null){
         /* let numToDate = parseInt(toDate);
         let numfromDate = parseInt(fromDate)
         let diffDays =  numToDate - numfromDate
         console.log(diffDays + " days");  */
         console.log( "it is null");
-        
+
       } else{
         console.log("not null here do process");
-        
+
         let numToDate = parseInt(returnedDates['toDate']);
         let numfromDate = parseInt(returnedDates['fromDate'])
         this.diffDays =  numToDate - numfromDate
-        console.log(this.diffDays + " days"); 
-      } 
-     
+        console.log(this.diffDays + " days");
+      }
+
     }
-   
+
   }
 
   singleFormatDate(dateToFormat){
@@ -266,12 +272,14 @@ this.cols = [
     returnedDates["toDate"] = toDateFormatted;
     return returnedDates;
   }
- 
+
   clearDate(){
     this.accountDetails[1].detail = "";
     this.accountDetails[2].detail = "";
     this.accountDetails[4].detail = "";
     this.closingBalanceDate = ""
+    this.rangeDates = []
+    this.rangeDates[0] = new Date();
   }
   changeDateFormat(){
 
@@ -281,7 +289,7 @@ this.cols = [
      if(this.checked == true){
        this.dateRangeDisabled = false;
        this.statementPeriodDisabled = true;
-     } 
+     }
      else if(this.checked == false){
        this.dateRangeDisabled = true;
        this.statementPeriodDisabled = false;
@@ -291,8 +299,8 @@ this.cols = [
     this.fetch = true;
   }
   resetData(){
- 
-    
+
+
     this.selectedAccountNo = "";
     this.selectedPeriod = "";
     this.rangeDates = null;
@@ -304,28 +312,28 @@ this.cols = [
     this.accountDetails[2].detail = "";
     this.accountDetails[4].detail = "";
     this.dateRangeDisabled = true;
-  
+
   }
 
-   
+
   exportPdf() {
-    
-  
+
+
           const doc = new jsPDF();
-  
+
           autoTable(doc,{
-           
+
             showHead: true,
             body: this.filesTables,
            columns: this.cols.map(col => ({title: col.header, dataKey: col.field}))
-           
+
           })
           doc.text("Account Statement", 82, 10);
           doc.save('statement.pdf');
-      
-  
-       
-    
+
+
+
+
 }
 
 exportExcel() {
