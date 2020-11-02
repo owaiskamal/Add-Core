@@ -38,7 +38,7 @@ import { Title } from '@angular/platform-browser';
       ]),
       transition(':leave', [
         style({ opacity: 1}),
-        animate('500ms ease-in', style({ opacity: 0}))
+        animate('300ms ease-in', style({ opacity: 0}))
       ])
     ]
   )
@@ -74,11 +74,11 @@ export class SidenavComponent implements OnInit {
 
     this.title.setTitle( 'CR-PL - '+item.Name);
       if(this.route.isActive('menu/'+item.RLink+'/' +item.id , true))
-    
+
       {
       console.log('is active' );
       this.title.setTitle( 'CR-PL - '+item.Name);
-      
+
       }
       else {
         console.log('not active');

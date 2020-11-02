@@ -105,6 +105,8 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
       this.depth = 0;
     }
 
+    this.userName = sessionStorage.getItem("username");
+
     this.onResize();
   }
   @HostListener("window:resize", ["$event"])

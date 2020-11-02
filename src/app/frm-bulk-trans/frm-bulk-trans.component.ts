@@ -700,6 +700,7 @@ export class FrmBulkTransComponent implements OnInit {
         this.showSubmit  = false;
         this.showRollBack = false;
         this.upCompleted = false;
+        this.fileUploaded.clear()
        }
        if(res["code"]=="-1"){
         this.messageService.add({
