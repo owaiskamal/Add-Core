@@ -21,6 +21,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FrmCbsPostingComponent } from './frm-cbs-posting/frm-cbs-posting.component';
 import { FrmAccountStatementComponent } from './frm-account-statement/frm-account-statement.component';
 import { FrmTransStatusComponent } from './frm-trans-status/frm-trans-status.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 //import { SearchTableComponent } from './search-table/search-table.component';
 
 
@@ -49,6 +50,7 @@ const routes: Routes = [
      {path:'frmBkofficPub/:id' , component: FrmCbsPostingComponent , data :{state : 'menu/frmBkofficPub'}},
      {path:'frmAccStatement/:id' , component: FrmAccountStatementComponent , data :{state : 'menu/frmAccStatement'}},
      {path:'frmTransStatus/:id' , component: FrmTransStatusComponent , data :{state : 'menu/frmTransStatus'}},
+     {path:'Dashboard' , component: DashboardComponent , data :{state : 'menu/Dashboard'}},
   ]
 
 },

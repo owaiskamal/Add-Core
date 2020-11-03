@@ -22,6 +22,7 @@ import {
 } from "@angular/animations";
 import { HostListener } from "@angular/core";
 import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: "app-menu-page",
@@ -86,7 +87,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
   menuState: string = "out";
   selectedLink: any;
   mainLinks : any[] = [];
-
+  sideMenu : boolean
   private renderer: Renderer2;
   @ViewChild("appDrawer") appDrawer: boolean;
   @ViewChild(SidenavComponent) sidenav;
@@ -101,6 +102,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
     private userService: UserauthService,
     private title : Title
   ) {
+    this.sideMenu = environment.sideMenu;
     if (this.depth === undefined) {
       this.depth = 0;
     }
@@ -110,7 +112,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
     this.onResize();
   }
   @HostListener("window:resize", ["$event"])
-  onResize(event?) {
+  onResize() {
     this.screenWidth = window.innerWidth;
     /*  console.log(this.screenWidth); */
     if (window.innerWidth <= 768 && this.myDiv != "dropdown") {

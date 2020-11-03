@@ -1,12 +1,13 @@
 <div
   [@slideInOut]="menuState"
   [ngClass]="{ sidebar: this.sidebarOpen }"
+  *ngIf="sideMenu"
   class="sidenav"
 >
   <ul class="list-unstyled">
     <li>
       <span class="mat-list">
-       <i  class="piuser fa fa-user-circle-o "></i> {{userName}}
+       <i  class="piuser fa fa-user-circle-o"></i> {{userName}}
       </span>
       <hr
         style="
@@ -89,7 +90,7 @@
 
             </ul> -->
 
-<nav class="navbar navbar-light bg-light fixer">
+<nav [ngClass]="{'fixer' : sideMenu == true , 'notfixer' : sideMenu == false}" class="navbar navbar-light bg-light">
   <div>
     <!--  <a class="btn_side" style="margin-right:20px;"
     (click)="toggleNavbar()" >
@@ -111,7 +112,7 @@
       </span>
     </a>
 
-    <a class="navbar-item" (click)="changeTitle()" [routerLink]="['/menu']">
+    <a class="navbar-item" (click)="changeTitle()" [routerLink]="['/menu/Dashboard']">
       <img
         class="logo img-responsive"
         src="assets/images/logo.png"
@@ -120,7 +121,13 @@
       />
     </a>
   </div>
-
+  <div style="display: inherit;">
+    <a href="#" class="nav-link nav-user-img actNav">
+      <i  class="piuser fas fa-bell"></i>
+    </a>
+    <a href="#" class="nav-link nav-user-img actNav">
+    <i  class="piuser fas fa-calculator"></i>
+  </a>
   <a
     class="nav-link nav-user-img actNav"
     href="#"
@@ -128,8 +135,9 @@
     data-toggle="dropdown"
     aria-haspopup="true"
     aria-expanded="false"
-    ><i class="pi pi-ellipsis-v"></i
-  ></a>
+    > <i  class="piuser fas fa-user "> {{userName}}</i>
+  </a>
+  
   <div
     class="dropdown-menu dropdown-menu-right nav-user-dropdown"
     aria-labelledby="navbarDropdownMenuLink2"
@@ -150,4 +158,6 @@
     <button pButton pRipple type="button" style="margin-left: 10px;width: 100%;"  label="Logout" class=" flax p-button-text " (click)="logout()">
       <i class="pi padding-pi pi-power-off"></i></button>
   </div>
+  </div>
 </nav>
+

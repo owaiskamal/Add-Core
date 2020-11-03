@@ -10,7 +10,7 @@
         <input id="companytitle" type="text" pInputText>
     </div> -->
     <div class="p-col-12 p-lg-6 p-md-6 p-sm-12">
-    <div *ngIf="!prodUpl" class="p-col-12 p-md-6 p-lg-12 p-sm-12">
+    <div *ngIf="!prodUpl" class="p-col-12 p-md-12 p-lg-12 p-sm-12">
       <label style="font-weight: 700" for="producttitle">Product title</label>
       <p-dropdown
         #myDropdown
@@ -26,7 +26,7 @@
     </div>
   
   
-    <div *ngIf="!accUpl" class="p-col-12 p-md-6 p-lg-12 p-sm-12">
+    <div *ngIf="!accUpl" class="p-col-12 p-md-12 p-lg-12 p-sm-12">
       <label style="font-weight: 700" for="accountitle">Account title</label>
       <p-dropdown
         [options]="accounts"
@@ -41,7 +41,7 @@
  
 
 
-    <div class="p-col-12 p-md-6 p-lg-12 p-sm-12">
+    <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
       <label style="font-weight: 700" for="filetemplate">File template</label>
       <p-dropdown
         [options]="templates"
@@ -54,7 +54,7 @@
       <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
     </div>
   
-    <div class="p-col-12 p-md-6 p-lg-12 p-sm-12">
+    <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
      
       <p-fileUpload
         [disabled]="!selectedAccount || !selectedProduct || !selectedTemplate"
@@ -73,7 +73,7 @@
   </div>
 
   <div class="p-col-12 p-lg-6 p-md-6 p-sm-12" style="margin-top: 27px;">
-    <div class="p-md-6 p-lg-12 p-sm-12">
+    <div class="p-md-12 p-lg-12 p-sm-12">
     <p-panel header="File Details" class="detail">
       <div class="p-grid">
           <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
@@ -118,7 +118,7 @@
      <!--  </div>
       <div class="p-md-6 p-lg-12 p-sm-12"> -->
     </div>
-        <div *ngIf="showRollBack" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
+        <div *ngIf="showRollBack" class="p-col-12 p-lg-3 p-md-6 p-sm-12"  style="float: right">
          
           <button
             [disabled]="!showRepeater"
@@ -132,7 +132,7 @@
             (click) ="rollBack()"
           ></button>
         </div>
-        <div class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
+        <div class="p-col-12 p-lg-3 p-md-6 p-sm-12" style="float: right">
           <button
             pButton
             pRipple
@@ -144,7 +144,7 @@
           ></button>
         </div>
      
-        <div *ngIf="showPreview" class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
+        <div *ngIf="showPreview" class="p-col-12 p-lg-3 p-md-6 p-sm-12" style="float: right">
           <button
             [disabled]="!showRepeater"
             type="button"
@@ -156,7 +156,7 @@
           ></button>
         </div>
       
-        <div *ngIf="showSubmit" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
+        <div *ngIf="showSubmit" class="p-col-12 p-lg-3 p-md-6 p-sm-12"  style="float: right">
           <button
             [disabled]="!showRepeater"
             type="button"
@@ -318,8 +318,6 @@
         #dt
         [rowsPerPageOptions]="[10, 25, 50]"
         selectionMode="single"
-        [scrollable]="true"
-        
         [paginator]="true"
         [rows]="15"
         [columns]="cols"
@@ -363,9 +361,9 @@
           </div>
          
         </ng-template>
-        <ng-template pTemplate="colgroup" let-columns>
+        <ng-template *ngIf="colgroup"  pTemplate="colgroup" let-columns>
           <colgroup>
-              <col *ngFor="let col of columns ; let i = index" [style.width]="i ===5 ? '300px' : '100px' ">
+              <col *ngFor="let col of columns ; let i = index" [ngClass]="(i ===5 )? 'lastColWidth':'colWidth'">
           </colgroup>
       </ng-template>
         <ng-template pTemplate="header" let-columns>
