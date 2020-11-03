@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~10.0.7",
     "@angular/platform-browser-dynamic": "~10.0.7",
     "@angular/router": "~10.0.7",
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "@types/xlsx": "0.0.36",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.4.1",

@@ -122,7 +122,7 @@ getNotifications(){
      var name = 'usama';
      localStorage.setItem('name',name);
          setTimeout(() => {
-           this.router.navigateByUrl("/menu");
+           this.router.navigateByUrl("/menu/Dashboard");
         }, 1000);
       }
       else if(res.code == "03")

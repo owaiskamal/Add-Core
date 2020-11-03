@@ -1,0 +1,43 @@
+:host ::ng-deep  .box .p-card
+{
+    border-radius: 8px;
+}
+:host ::ng-deep .box .p-card .p-card-header
+{
+    border-radius: 3px;
+    background-color: rgb(12, 44, 139);
+    padding: 15px;
+    margin-top: -20px;
+    margin-right: 15px;
+    float: left;
+    margin-left: 15px;
+}
+
+:host ::ng-deep .box .p-card:hover{
+    transform: scale(1.05);
+    border-radius: .5rem;
+    box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+    cursor: pointer;
+}
+:host ::ng-deep .box .p-card:active{
+    transform: scale(1.04);
+    border-radius: .5rem;
+    box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+    cursor: pointer;
+}
+:host ::ng-deep .box .p-card:focus{
+   outline: none !important;
+}
+:host ::ng-deep .box:focus{
+    outline: none !important;
+ }
+:host ::ng-deep .box .p-card .p-card-body:focus{
+    outline: none !important;
+ }
+ 
+
+.icons
+{
+    font-size: 30px !important;
+    color: white;
+}

@@ -1,4 +1,4 @@
-<app-menu-page></app-menu-page>
-<div class="main"  [@routerTransition]="getState(o)">
+<app-menu-page ></app-menu-page>
+<div [ngClass]="{'main' : sideMenu == true , 'notmain' : sideMenu == false}"  [@routerTransition]="getState(o)">
   <router-outlet #o="outlet"></router-outlet>
 </div>

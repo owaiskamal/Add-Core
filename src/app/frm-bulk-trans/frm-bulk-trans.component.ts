@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  HostListener,
   OnInit,
   Output,
   ViewChild,
@@ -78,6 +79,8 @@ export class FrmBulkTransComponent implements OnInit {
   showRollBack : boolean = false;
   showSubmit: boolean = false;
   msgs2: { severity: string; summary: string; detail: string; }[];
+  colgroup: boolean = true;
+  
   constructor(
     private transService: CreateTransService,
     private messageService: MessageService,
@@ -89,6 +92,7 @@ export class FrmBulkTransComponent implements OnInit {
     private prgService: ProgService,
     private messageServices: MessageService,
   ) {
+   
     this.progressArray = [
       { msg: "Reading File ", status: false  , error:false},
       { msg: "Processing File", status: false  , error:false},
@@ -106,8 +110,22 @@ export class FrmBulkTransComponent implements OnInit {
     this.accounts = [];
     this.templates = [];
   }
+  onResize(event?) {
+    if (window.innerWidth <= 768)
+    {
+      this.colgroup = false;
+    }
+    else if(window.innerWidth >= 768){
+      this.colgroup = true;
+      console.log(this.colgroup);
+      
+    }
+    
+  }
+
   public fields = [];
   @ViewChild("myDropdown") myDropdown: Dropdown;
+  @HostListener("window:resize", ["$event"])
   ngOnInit(): void {
     this.cols = [];
     this._route.params.subscribe((params) => {
