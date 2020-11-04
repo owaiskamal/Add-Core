@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { Router } from "@angular/router";
 import { UserauthService } from "../userauth.service";
@@ -42,7 +42,7 @@ export type FadeState = 'visible' | 'hidden';
     ])
   ]
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit , OnDestroy {
   state: FadeState;
   loginShow: boolean = true;
   spinnerIcon: boolean;
@@ -55,12 +55,15 @@ export class LoginPageComponent implements OnInit {
     private _notificationService: PushNotificationService,
     private title : Title,
     private confirmationService : ConfirmationService,
-    private userService : UserauthService
+    private userService : UserauthService,
+    private elementRef: ElementRef
   ) {
     this._notificationService.requestPermission();
     this.title.setTitle('CR-PL - Login page')
   }
-
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
+  }
   userName:string;
   password:string;
   showProgress = false;
