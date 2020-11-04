@@ -6,6 +6,7 @@ import {
   AfterViewInit,
   ElementRef,
   Renderer2,
+  OnDestroy,
 } from "@angular/core";
 import { MenuItem } from "primeng/api";
 import { Router } from "@angular/router";
@@ -77,7 +78,7 @@ import { environment } from 'src/environments/environment';
     "(window:click)": "onResize()",
   },
 })
-export class AdminPageComponent implements OnInit, AfterViewInit {
+export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
   items: MenuItem[];
   visibleSidebar1: boolean;
   isHamburguer = true;
@@ -100,7 +101,8 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
     private navlinkservice: NavlinksService,
     private navService: NavService,
     private userService: UserauthService,
-    private title : Title
+    private title : Title,
+    private elementRef : ElementRef
   ) {
     this.sideMenu = environment.sideMenu;
     if (this.depth === undefined) {
@@ -110,6 +112,9 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
     this.userName = sessionStorage.getItem("username");
 
     this.onResize();
+  }
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
   }
   @HostListener("window:resize")
   onResize() {

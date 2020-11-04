@@ -1,8 +1,10 @@
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   HostListener,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
@@ -29,7 +31,7 @@ import autoTable from 'jspdf-autotable';
   templateUrl: "./frm-bulk-trans.component.html",
   styleUrls: ["./frm-bulk-trans.component.scss"],
 })
-export class FrmBulkTransComponent implements OnInit {
+export class FrmBulkTransComponent implements OnInit,OnDestroy {
   @Output() onProgress: EventEmitter<any> = new EventEmitter();
   @ViewChild("fileUploaded") fileUploaded: FileUpload;
   formID: any;
@@ -91,6 +93,7 @@ export class FrmBulkTransComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private prgService: ProgService,
     private messageServices: MessageService,
+    private elementRef: ElementRef
   ) {
 
     this.progressArray = [
@@ -109,6 +112,9 @@ export class FrmBulkTransComponent implements OnInit {
     this.products = [];
     this.accounts = [];
     this.templates = [];
+  }
+  ngOnDestroy(): void {
+    //this.elementRef.nativeElement.remove();
   }
   onResize(event?) {
     if (window.innerWidth <= 768)
