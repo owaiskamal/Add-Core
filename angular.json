@@ -19,8 +19,12 @@
           "options": {
             "allowedCommonJsDependencies": [
               "papaparse",
-              "ng-push",
-              "xlsx"
+              "xlsx",
+              "file-saver",
+              "jspdf",
+              "jspdf-autotable",
+              "moment",
+              "raf"
 
            ],
             "outputPath": "dist/login-demo",
@@ -46,7 +50,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-       
+
             ]
           },
           "configurations": {
