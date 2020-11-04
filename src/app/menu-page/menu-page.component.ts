@@ -42,8 +42,8 @@ import { environment } from 'src/environments/environment';
           transform: "translate3d(100%, 0, 0)",
         })
       ),
-      transition("in => out", animate("400ms ease-in-out")),
-      transition("out => in", animate("400ms ease-in-out")),
+      transition("in => out", animate("100ms ease-in-out")),
+      transition("out => in", animate("100ms ease-in-out")),
     ]),
     trigger("hamburguerX", [
       state("hamburguer", style({})),
@@ -84,7 +84,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
   userName: string;
   @Input() depth: number;
   myDiv: any;
-  menuState: string = "out";
+  menuState: string = "in";
   selectedLink: any;
   mainLinks : any[] = [];
   sideMenu : boolean
@@ -111,7 +111,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit {
 
     this.onResize();
   }
-  @HostListener("window:resize", ["$event"])
+  @HostListener("window:resize")
   onResize() {
     this.screenWidth = window.innerWidth;
     /*  console.log(this.screenWidth); */

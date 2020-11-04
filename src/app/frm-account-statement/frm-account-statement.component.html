@@ -40,6 +40,7 @@
     <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
       <label style="font-weight: 700" for="filetemplate">Date Range</label>
       <p-calendar
+        #dt
         (onSelect)="OnDateChange()"
         (onClearClick)="clearDate()"
         dateFormat="dd/mm/yy"
@@ -63,7 +64,7 @@
       </div>
     </div>
   </div>
-  
+
 
   <div class="p-grid" style="margin-top: 10px;">
     <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
@@ -82,7 +83,7 @@
   <div class="p-formgroup-inline p-col-12 p-lg-12 p-sm-12 p-md-12">
     <div class="p-field">
       <button
-     
+
         pButton
         pRipple
         type="button"
@@ -93,7 +94,7 @@
     </div>
     <div class="p-field">
       <button
-    
+
         pButton
         pRipple
         type="button"
@@ -137,7 +138,7 @@
         <div class="table-header">
           <div class="p-formgroup-inline">
             <span class="trans-header"> Transaction Details</span>
-       
+
             <span class="p-input-icon-left table_filter">
               <i class="pi pi-search"></i>
               <input
@@ -152,19 +153,19 @@
       </ng-template>
       <ng-template pTemplate="header" let-columns>
         <tr>
-         
+
 
           <th *ngFor="let col of columns" [pSortableColumn]="col.field">
             {{ col.header}}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
           <!-- <th> Initiator</th> -->
-         
+
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-transaction let-i="rowIndex">
         <tr>
-         
+
           <td>
             <span class="p-column-title">Transaction Date</span>
             {{ transaction.transactionDate  }}
@@ -185,7 +186,7 @@
             <span class="p-column-title">End Balance</span>
             {{ transaction.endBalance }}
           </td>
-    
+
         </tr>
       </ng-template>
         <ng-template pTemplate="emptymessage">
@@ -193,7 +194,7 @@
             <td colspan="8">No Transaction found.</td>
           </tr>
         </ng-template>
-        
+
       </p-table>
       <span style="font-weight: bold;">Closing Balance as on {{closingBalanceDate}}</span> <br/>
       <span style="font-weight: bold;">Available Balance as on {{closingBalanceDate}}</span>

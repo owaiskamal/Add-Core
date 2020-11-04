@@ -14,7 +14,7 @@
   box-shadow: none;
   border-bottom: 1.3px solid #ddd;
   /* margin-right: 11px !important; */
-  
+
 }
 
 
@@ -28,7 +28,8 @@
   z-index: 1;
   right: auto;
   left: -277px;
-  background: $sidenav-background;
+  background: linear-gradient(180deg ,rgba(30, 30, 30, 0.918), rgba(37, 37, 38, 0.856)),
+  url("../../assets/images/sidenav_bg.jpg") no-repeat;;
   font-family: "Work Sans", sans-serif;
   background-size: cover;
   background-position: top;
@@ -82,7 +83,7 @@
   margin-right: 5px;
     padding-top: 3.5px;
     color: #ffffff;
-   
+
 }
 .mat-list {
   padding: 10px 0px 0px 16px;
@@ -177,7 +178,8 @@
     z-index: 1;
     right: auto;
     left: -277px;
-    background: $sidenav-background;
+    background: linear-gradient(180deg ,rgba(30, 30, 30, 0.918), rgba(37, 37, 38, 0.856)),
+    url("../../assets/images/sidenav_bg.jpg") no-repeat;;
     font-family: "Work Sans", sans-serif;
     background-size: cover;
     background-position: top;
@@ -194,7 +196,7 @@
 
 
   }
-  
+
 
   // .sidebar{
   //   display: none;
