@@ -1,6 +1,6 @@
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { ChangePasswordPageComponent } from "./change-password-page/change-password-page.component";
-import { PushNotificationsModule } from 'ng-push';
+
 import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
@@ -112,7 +112,6 @@ import {GalleriaModule} from 'primeng/galleria';
     PickListModule,
     MegaMenuModule,
     ConfirmDialogModule,
-    PushNotificationsModule,
     CalendarModule,
     TabViewModule,
     InputNumberModule,

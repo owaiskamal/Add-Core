@@ -22,7 +22,6 @@
     "@angular/router": "~10.0.7",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@types/xlsx": "0.0.36",
-    "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.4.1",
     "class-transformer": ">=0.3.1",
     "css-loader": "^4.2.0",
@@ -32,7 +31,6 @@
     "jspdf": "^2.1.1",
     "jspdf-autotable": "^3.5.13",
     "moment": "^2.29.1",
-    "ng-push": "^0.2.2",
     "papaparse": "^5.2.0",
     "popper.js": "^1.16.1",
     "primeflex": "^2.0.0-rc.1",
@@ -45,7 +43,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1000.5",
+    "@angular-devkit/build-angular": "^0.1002.0",
     "@angular/cli": "~10.0.5",
     "@angular/compiler-cli": "~10.0.7",
     "@angular/language-service": "~10.0.7",

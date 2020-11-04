@@ -118,7 +118,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: $login-background;
+  background: linear-gradient(90deg ,rgba(2, 0, 124, 0.918), rgba(69, 106, 226, 0.808)),
+  url("../../assets/images/slider.jpg");
   height: 100%;
   overflow: auto;
   background-size: cover;
