@@ -29,6 +29,31 @@ html *
 
 }
 
+*::-webkit-scrollbar {
+  width: 8px;
+
+}
+
+// background:
+// linear-gradient(-180deg ,rgba(165, 190, 105, 0.404), rgb(73, 104, 2)),
+// url("src/assets/images/sidenav_bg.jpg") no-repeat;
+*::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(134, 134, 134, 0.459);
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(134, 134, 134, 0.644);
+  border-radius: 10px;
+
+}
+
+
 @media (max-width: 768px) {
   body {
 
