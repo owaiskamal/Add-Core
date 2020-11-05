@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { log } from 'console';
 
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import moment, { months } from 'moment';
 import { Calendar } from 'primeng/calendar';
+import { Dropdown } from 'primeng/dropdown';
 
 
 
@@ -14,7 +15,7 @@ import { Calendar } from 'primeng/calendar';
   templateUrl: './frm-account-statement.component.html',
   styleUrls: ['./frm-account-statement.component.scss']
 })
-export class FrmAccountStatementComponent implements OnInit {
+export class FrmAccountStatementComponent implements OnInit , AfterViewInit {
   @ViewChild("dt") dt: Calendar;
   rangeDates: Date[] = [];
   accountNumbers : any[] = [];
@@ -32,6 +33,7 @@ export class FrmAccountStatementComponent implements OnInit {
   closingBalanceDate: any;
   diffDays : number;
   fetch: boolean = false;
+  @ViewChild("myDropdown") myDropdown: Dropdown;
   constructor() {
 
     this.accountNumbers = [
@@ -93,6 +95,11 @@ this.cols = [
   { field: "endBalance", header: "End Balance" },
 ];
 
+  }
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.myDropdown.focus();
+    }, 1);
   }
 
   ngOnInit(): void {

@@ -16,6 +16,34 @@
   /* margin-right: 11px !important; */
 
 }
+.dropdown-menu
+{
+  transition: all .3s cubic-bezier(.215,.61,.355,1) 0s,opacity .3s ease 0s,height 0s linear .35s;
+
+}
+
+.navbar .dropdown-menu:before
+{
+  border-bottom: 11px solid #f1eae0;
+  border-left: 10px solid transparent;
+  border-right: 11px solid transparent;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  right: 28px;
+  top: -12px;
+
+}
+.navbar .dropdown-menu:after {
+  border-bottom: 11px solid #fff;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  right: 28px;
+  top: -11px;
+}
 
 
 

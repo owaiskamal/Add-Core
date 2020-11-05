@@ -126,7 +126,7 @@ getNotifications(){
      localStorage.setItem('name',name);
          setTimeout(() => {
            this.router.navigateByUrl("/menu/Dashboard");
-        }, 1000);
+        }, 600);
       }
       else if(res.code == "03")
       {

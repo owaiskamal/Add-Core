@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { log } from 'console';
+import { Dropdown } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-frm-trans-status',
   templateUrl: './frm-trans-status.component.html',
   styleUrls: ['./frm-trans-status.component.scss']
 })
-export class FrmTransStatusComponent implements OnInit {
+export class FrmTransStatusComponent implements OnInit , AfterViewInit {
   products: any[] = [];
   selectedProduct: string;
   prePublishChecked: boolean;
@@ -14,7 +15,13 @@ export class FrmTransStatusComponent implements OnInit {
   showPublish : boolean = false;
   showProcess : boolean = false;
   fetch: boolean = false;
+  @ViewChild("myDropdown") myDropdown: Dropdown;
   constructor() { }
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.myDropdown.focus();
+    }, 1);
+  }
 
   ngOnInit(): void {
     this.products = [
@@ -22,30 +29,30 @@ export class FrmTransStatusComponent implements OnInit {
         ProName: "UBP-UFONE-POSTPAID",
         ProBehavior: "U",
         ProCode: "9004",
-       
+
       },
       {
         ProName: "Coperate Cheque",
         ProBehavior: "K",
         ProCode: "CPC",
-       
+
       },
       {
         ProName: "Internal Bank Fund Transfer",
         ProBehavior: "B",
         ProCode: "IBFT",
-       
+
       }
     ]
-    
-    
+
+
   }
   OnProductChange(){
     console.log(this.selectedProduct,"selected Product");
-    
+
   }
   prePublish(){
-    
+
     console.log(this.prePublishChecked);
     if(this.prePublishChecked == true){
       this.showPublish = true;
@@ -65,12 +72,12 @@ export class FrmTransStatusComponent implements OnInit {
       this.showPublish = false;
       this.showProcess = false;
     }
-    
+
   }
   process(){
-     
+
     console.log(this.processChecked);
-    
+
     if(this.processChecked == true){
       this.showProcess = true;
     }

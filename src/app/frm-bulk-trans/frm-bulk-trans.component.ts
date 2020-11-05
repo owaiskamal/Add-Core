@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -31,9 +32,10 @@ import autoTable from 'jspdf-autotable';
   templateUrl: "./frm-bulk-trans.component.html",
   styleUrls: ["./frm-bulk-trans.component.scss"],
 })
-export class FrmBulkTransComponent implements OnInit,OnDestroy {
+export class FrmBulkTransComponent implements OnInit,OnDestroy , AfterViewInit {
   @Output() onProgress: EventEmitter<any> = new EventEmitter();
   @ViewChild("fileUploaded") fileUploaded: FileUpload;
+
   formID: any;
   uploadProgress: any;
   progress: boolean = false;
@@ -145,6 +147,13 @@ export class FrmBulkTransComponent implements OnInit,OnDestroy {
       this.getTransCreation();
     });
   }
+  ngAfterViewInit() {
+    //  this.cdref.detectChanges();
+    setTimeout(() => {
+      this.myDropdown.focus();
+    }, 1);
+  }
+
   getTransCreation() {
     this.transService
       .getCreateTransaction(this.formID, this.UserID, this.AccessToken)
