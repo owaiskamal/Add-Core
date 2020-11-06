@@ -392,6 +392,8 @@ export class FrmTransStageComponent implements OnInit {
 
         // }
       }
+      console.log(this.actionData);
+
       this.sendByTrans = {
         data: this.actionData,
       };
