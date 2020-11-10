@@ -54,6 +54,12 @@ export class DashboardComponent implements OnInit {
         route:'/frmCreate',
         imgRoute:"../../assets/images/galleria11.jpg"
       },
+      {
+        name: 'Repair Transaction',
+        icon: 'fas fa-wrench',
+        route:'/frmCreate',
+        imgRoute:"../../assets/images/galleria11.jpg"
+      },
     ];
   }
 

@@ -1,4 +1,6 @@
 <app-menu-page ></app-menu-page>
 <div [ngClass]="{'main' : sideMenu == true , 'notmain' : sideMenu == false}"  [@routerTransition]="getState(o)">
+<div class="breadCrumbs"> <a [routerLink]="['/menu/Dashboard']" class="dashboard" >   <i class="fas fa-home"></i> &nbsp; Dashboard &nbsp; </a> <span *ngIf="!root" > <span style="font-weight: 900;"> - </span>  &nbsp;  {{activeRoute}}</span></div>
+ 
   <router-outlet #o="outlet"></router-outlet>
 </div>
