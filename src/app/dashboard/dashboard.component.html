@@ -1,22 +1,18 @@
-<div class="p-grid ">
+<!-- <div class="p-grid ">
     <div class="p-col-12">
     <p-galleria [(value)]="columns" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '100%'}" [numVisible]="5" [circular]="true"
         [autoPlay]="true" [showThumbnails]="false" [showItemNavigators]="true" [transitionInterval]="5000"> 
         <ng-template pTemplate="item" let-item>
             <img [src]="item.imgRoute" style="width: 100%; background-size: auto; display: block;" />
         </ng-template>
-   <!--      <ng-template pTemplate="thumbnail" let-item>
-            <div class="p-grid p-nogutter p-justify-center">
-                <img [src]="item.thumbnailImageSrc" style="display: block;" />
-            </div>
-        </ng-template> -->
+  
 </p-galleria>
 </div>
-</div>
+</div> -->
 
 <div class="p-grid p-mt-5" *ngIf="sideMenu == false">
-    <div class="p-col-12 p-lg-4 p-md-4 p-sm-12" *ngFor="let col of columns; let i=index">
-        <p-card [routerLink]="[col['route']]"  [header]="col['name']" class="box">
+    <div class="p-col-12 p-lg-3 p-md-4 p-sm-12" *ngFor="let col of columns; let i=index">
+        <p-card [routerLink]="[col['route'] , {title : col.name}]"  [header]="col['name']" class="box">
             <p-header>
                 <i class="icons" [ngClass]="col['icon']"></i>
             </p-header>

@@ -252,6 +252,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
   changeOpt(){
     console.log(this.sideMenu);
     
+    this.cookieService.set("user" , "KKFMAK")
     // console.log(environment.sideMenu,"optcheck");
 
     console.log(this.sideMenu,"Menu page compoennt");
