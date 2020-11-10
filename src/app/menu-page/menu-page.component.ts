@@ -24,6 +24,7 @@ import {
 import { HostListener } from "@angular/core";
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: "app-menu-page",
@@ -96,15 +97,19 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
   screenWidth: number;
   slinks: any[] =[];
   xlinks: any[] = [];
+  cookieString: string;
   constructor(
     private router: Router,
     private navlinkservice: NavlinksService,
     private navService: NavService,
     private userService: UserauthService,
+    private cookieService : CookieService,
     private title : Title,
     private elementRef : ElementRef
   ) {
-    this.sideMenu = environment.sideMenu;
+  
+    console.log(this.cookieString);
+   
     if (this.depth === undefined) {
       this.depth = 0;
     }
@@ -145,6 +150,10 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
     this.getLinks();
 
     this.title.setTitle('CR-PL - Menu Page')
+    this.navlinkservice.currentData.subscribe(data => {
+      console.log(data,"Dashboard compoennt");
+      this.sideMenu = data
+    });
   }
   filterUsers() {
     var x =[];
@@ -240,6 +249,23 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
 
     //this.sidebarOpen = $event;
   }
+  changeOpt(){
+    console.log(this.sideMenu);
+    
+    // console.log(environment.sideMenu,"optcheck");
+
+    console.log(this.sideMenu,"Menu page compoennt");
+    
+      this.navlinkservice.setData(this.sideMenu);
+      if(this.sideMenu == true){
+        this.cookieService.set('menuState',"sideTrue")
+      }
+      else if(this.sideMenu == false){
+        this.cookieService.set('menuState',"sideFalse")
+      }
+
+ 
+  }
   toggleNavbar($event) {
     $event.stopPropagation();
 
@@ -256,6 +282,8 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("username");
         sessionStorage.removeItem("menuitem");
+        
+       
         this.router.navigateByUrl("");
       },
       (error) => {

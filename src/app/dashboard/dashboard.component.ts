@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { NavlinksService } from '../menu-page/navlinks.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,8 +9,9 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() {
-    this.sideMenu = environment.sideMenu;
+  constructor( private navlinkservice: NavlinksService) {
+    
+    
    }
   sideMenu: boolean;
   columns: any[] = [];
@@ -29,6 +31,10 @@ export class DashboardComponent implements OnInit {
 ];
 
   ngOnInit(): void {
+    this.navlinkservice.currentData.subscribe(data => {
+      console.log(data,"Dashboard compoennt");
+      this.sideMenu = data
+    });
     this.columns = [
       {
         name: 'Create Transaction',
