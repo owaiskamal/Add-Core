@@ -99,6 +99,21 @@
   margin: 2px;
   position: relative;
 }
+.toggle-text{
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+
+  
+
+}
 .piuser
 {
   // margin-right: 5px;
@@ -106,12 +121,20 @@
     color: #555555;
     font-size: 16px!important;
 }
+.toggle-switch
+{
+  font-size: 10px !important;
+}
 .piusers
 {
   margin-right: 5px;
     padding-top: 3.5px;
     color: #ffffff;
 
+}
+.toggler-nav
+{
+  display: none;
 }
 .piuser:hover
 {
@@ -175,10 +198,11 @@
 .cursor_style{
   cursor: pointer;
 }
-.nav-item {
-  margin: auto;
-}
 
+.nav-link
+{
+  padding: 0.5rem .8rem !important;
+}
 .main {
   margin-left: 200px; /* Same as the width of the sidenav */
   // font-size: 28px; /* Increased text to enable scrolling */
@@ -197,11 +221,20 @@
 //   .sidenav {padding-top: 15px;}
 //   .sidenav a {font-size: 18px;}
 // }
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .btn_side {
     display: inline;
   }
-
+.toggler-nav
+{
+  display: initial;
+}
+.dropdown-menu.show1
+{
+  margin: 0 !important;
+ box-shadow: none !important;
+  border-radius: .5em !important ;
+}
   .fixer{
     position: fixed;
     top: 0;
@@ -209,7 +242,7 @@
     left: 0;
     z-index: 1030;
     margin-left: 0px;
-    background-color: #f8f9fa!important;
+    background-color: rgba(244, 243, 239 ,1)!important;
   }
   .sidenav {
 
@@ -268,7 +301,12 @@
 /* footer */
 .dropdown-menu.show
 {box-shadow: 1px 2px 7px 1px rgba(0,0,0,.125);
-  margin: 0.125rem 12px 0;
+ 
+  border-radius: .5em;
+}
+.dropdown-menu.show1
+{box-shadow: 1px 2px 7px 1px rgba(0,0,0,.125);
+  margin:0 -1.5rem 0 0;
   border-radius: .5em;
 }
 .padding-pi

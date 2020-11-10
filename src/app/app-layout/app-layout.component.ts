@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {trigger, animate, style, group, animateChild, query, stagger, transition} from '@angular/animations';
 import { environment } from 'src/environments/environment';
+import { NavlinksService } from '../menu-page/navlinks.service';
 
 @Component({
   selector: 'app-app-layout',
@@ -29,12 +30,18 @@ import { environment } from 'src/environments/environment';
 export class AppLayoutComponent implements OnInit {
 
   sideMenu : boolean
-  constructor() {
-    this.sideMenu = environment.sideMenu;
+  cookieString: string;
+  constructor(private navlinkservice: NavlinksService) {
+    
+   
+    
    }
    urlEmpty : boolean
   ngOnInit() {
-
+    this.navlinkservice.currentData.subscribe(data => {
+      console.log(data,"app layout compoennt");
+      this.sideMenu = data
+    });
   }
   getState(outlet) {
 

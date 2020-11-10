@@ -90,12 +90,12 @@
 
             </ul> -->
 
-<nav [ngClass]="{'fixer' : sideMenu == true , 'notfixer' : sideMenu == false}" class="navbar navbar-light bg-light">
-  <div>
+<nav [ngClass]="{'fixer' : sideMenu == true , 'notfixer' : sideMenu == false}" class="navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <div class="mr-auto">
     <!--  <a class="btn_side" style="margin-right:20px;"
     (click)="toggleNavbar()" >
     <span class="navbar-toggler-icon"></span></a> -->
-    <a class="btn_side" (click)="toggleNavbar($event)">
+    <a *ngIf="sideMenu" class="btn_side" (click)="toggleNavbar($event)">
       <span class="navbaricon">
         <div
           class="icon-bar"
@@ -121,13 +121,60 @@
       />
     </a>
   </div>
-  <div style="display: inherit;">
-    <a href="#" class="nav-link nav-user-img actNav">
-      <span><i  class="piuser fas fa-bell"></i></span>
-    </a>
-    <a href="#" class="nav-link nav-user-img actNav">
-    <span><i  class="piuser fas fa-calculator"></i></span>
+  <a class="piuser toggler-nav" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <span class="fas fa-chevron-circle-down"></span>
   </a>
+  <div class="navbar-collapse flex-grow-0 collapse"  id="navbarSupportedContent">
+  <ul class="navbar-nav text-right" >
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <span><i style="font-size: 18px !important;"  class="piuser fas fa-bell"></i></span>
+       
+      </a>
+      
+    </li>
+    <li class="nav-item"> <a class="nav-link" href="#" >
+      <span><i style="font-size: 18px !important;"  class="piuser fas fa-calculator"></i></span>
+     
+    </a></li>
+
+    <li class="nav-item dropdown">
+  <a
+  class="nav-link nav-user-img actNav"
+  href="#"
+  id="navbarDropdownMenuLink"
+  data-toggle="dropdown"
+  aria-haspopup="true"
+  aria-expanded="false"
+  > <span class="piuser" ><i  class="piuser fas fa-cog "></i> </span>
+</a>
+
+<div
+class="dropdown-menu dropdown-menu-right show1"
+aria-labelledby="navbarDropdownMenuLink"
+>
+<!-- <div style="text-align: center;">
+  <i class="pi padding-pi pi-user"></i>
+  <span>{{ userName }}</span>
+</div>
+<a class="dropdown-item" [routerLink]="['/menu/formtemplate']"
+  ><i class="pi padding-pi pi-users"></i>Dynamic Forms</a
+>
+<a class="dropdown-item" [routerLink]="['/menu/resetpassword']"
+  ><i class="pi padding-pi pi-user-edit"></i>Setting</a
+>
+<a class="dropdown-item" [routerLink]="['/menu/templatecreator']"
+  ><i class="pi padding-pi pi-user-edit"></i>Template Creator</a
+>
+<button pButton pRipple type="button" style="margin-left: 10px;width: 100%;"  label="Logout" class=" flax p-button-text " (click)="logout()">
+  <i class="pi padding-pi pi-power-off"></i></button> -->
+  <div style="display: flex; padding:.5rem .5rem;">
+  <span class="toggle-text">Toggle SideMenu</span>
+  <p-inputSwitch styleClass="toggle-switch" (onChange) = "changeOpt()" [(ngModel)]="sideMenu"></p-inputSwitch>
+</div>
+</div>
+</li>
+<li class="nav-item dropdown">
   <a
     class="nav-link nav-user-img actNav"
     href="#"
@@ -158,6 +205,8 @@
     <button pButton pRipple type="button" style="margin-left: 10px;width: 100%;"  label="Logout" class=" flax p-button-text " (click)="logout()">
       <i class="pi padding-pi pi-power-off"></i></button>
   </div>
-  </div>
+</li>
+</ul>
+</div>
 </nav>
 

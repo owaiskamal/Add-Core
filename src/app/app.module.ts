@@ -61,7 +61,7 @@ import { FrmAccountStatementComponent } from './frm-account-statement/frm-accoun
 import { FrmTransStatusComponent } from './frm-trans-status/frm-trans-status.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {GalleriaModule} from 'primeng/galleria';
-
+import {InputSwitchModule} from 'primeng/inputswitch';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +76,7 @@ import {GalleriaModule} from 'primeng/galleria';
     TemplateCreatorComponent,
     DragDropComponent,
     SidenavComponent,
+    
     //SearchTableComponent,
     FrmlistComponent,
     FrmCreateTransComponent,
@@ -125,7 +126,8 @@ import {GalleriaModule} from 'primeng/galleria';
     TooltipModule,
     ToolbarModule,
     ProgressSpinnerModule,
-    GalleriaModule
+    GalleriaModule,
+    InputSwitchModule
   ],
   providers: [
     MessageService,
