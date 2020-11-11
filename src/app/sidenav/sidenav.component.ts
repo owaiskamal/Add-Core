@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, HostBinding, Output ,EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { trigger, state, transition, animate, style } from '@angular/animations';
+import { trigger, state, transition, animate, style, group } from '@angular/animations';
 import { NavService } from '../nav.service';
 import { Title } from '@angular/platform-browser';
 
@@ -19,28 +19,37 @@ import { Title } from '@angular/platform-browser';
       ),
     ]),
     trigger('dropdown',[
-     /*  state('collapsed', style({
-        opacity: 0
+      state('in', style({
+          'max-height': '500px', 'opacity': '1', 'visibility': 'visible'
       })),
-      state('expanded', style({
-        opacity: 1
+      state('out', style({
+          'max-height': '0px', 'opacity': '0', 'visibility': 'hidden'
       })),
-      transition('collapsed => expanded', animate('800ms ease-in-out')),
-      transition('expanded => collapsed', animate('800ms ease-in-out')) */
-    /*   state('collapsed', style({transform: 'rotate(0deg)'})),
-      state('expanded', style({transform: 'rotate(180deg)'})),
-      transition('expanded <=> collapsed',
-        animate('10000ms cubic-bezier(0.4,0.0,0.2,1)')
-      ), */
-      transition(':enter', [
-        style({ opacity: 0}),
-        animate('500ms ease-in', style({opacity: 1}))
-      ]),
-      transition(':leave', [
-        style({ opacity: 1}),
-        animate('300ms ease-in', style({ opacity: 0}))
-      ])
-    ]
+      transition('in => out', [group([
+          animate('200ms ease-in-out', style({
+              'opacity': '0'
+          })),
+          animate('400ms ease-in-out', style({
+              'max-height': '0px'
+          })),
+          animate('500ms ease-in-out', style({
+              'visibility': 'hidden'
+          }))
+      ]
+      )]),
+      transition('out => in', [group([
+          animate('1ms ease-in-out', style({
+              'visibility': 'visible'
+          })),
+          animate('600ms ease-in-out', style({
+              'max-height': '500px'
+          })),
+          animate('800ms ease-in-out', style({
+              'opacity': '1'
+          }))
+      ]
+      )])
+  ]
   )
   ]
 })
@@ -52,6 +61,7 @@ export class SidenavComponent implements OnInit {
   visibleSidebar1 = true;
   messa = "ASdasdasdasdasdasdasd1q231231"
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
+  animationState = 'out';
   constructor(public route : Router , public navService: NavService , private title : Title) {
     if (this.depth === undefined) {
       this.depth = 0;
@@ -88,7 +98,8 @@ export class SidenavComponent implements OnInit {
 
     }
     if (item.Forms && item.Forms.length) {
-      this.expanded = !this.expanded;
+      this.expanded =! this.expanded
+      this.animationState = this.animationState === 'out' ? 'in' : 'out';
       this.messageEvent.emit("dropdown");
     }
   }
