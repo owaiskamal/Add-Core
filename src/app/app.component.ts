@@ -16,31 +16,13 @@ export class AppComponent implements OnInit{
    */
   sideMenu : boolean
   cookieString: string;
-  constructor(private title : Title ,private primengConfig: PrimeNGConfig,
-    private navlinkservice: NavlinksService ,   private cookieService : CookieService) {
-   this.cookieString =  this.cookieService.get("menuState")
-   // this.title.setTitle( SampleJson.AppSettings[0].Title);
-   if(this.cookieString == "sideFalse")
-   {
-     this.sideMenu =false
-     console.log(this.sideMenu , "componentapp");
-     
-     this.navlinkservice.setData(this.sideMenu)
-   }
-   else if(this.cookieString == "sideTrue")
-   {
-     this.sideMenu = true
-     this.navlinkservice.setData(this.sideMenu)
-   }
-   else{
-     this.sideMenu = true;
-     this.navlinkservice.setData(this.sideMenu)
-   }
+  constructor(private title : Title ,private primengConfig: PrimeNGConfig) {
+
 
   }
   ngOnInit() {
     this.primengConfig.ripple = true;
-    
+
 }
 
 
