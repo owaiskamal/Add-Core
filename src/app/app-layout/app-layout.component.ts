@@ -68,12 +68,14 @@ export class AppLayoutComponent implements OnInit {
   breadcrumbList: Array<any> = [];
   activeRoute: String;
   root: boolean = false;
+  parentName: any ;
   constructor(
     private navlinkservice: NavlinksService,
     private _router: Router,
     private route: ActivatedRoute,
     private cookieService : CookieService
   ) {
+    this.menu = JSON.parse(sessionStorage.getItem("menuitem"));
     this.listenRouting();
     this.cookieString =  this.cookieService.get("menuState")
    // this.title.setTitle( SampleJson.AppSettings[0].Title);
@@ -98,7 +100,7 @@ export class AppLayoutComponent implements OnInit {
   }
   urlEmpty: boolean;
   ngOnInit() {
-    this.menu = JSON.parse(sessionStorage.getItem("menuitem"));
+   
 
     this.navlinkservice.currentData.subscribe((data) => {
       console.log(data, "app layout compoennt");
@@ -111,7 +113,7 @@ export class AppLayoutComponent implements OnInit {
   listenRouting() {
     console.log("listening routes");
     this.breadcrumbList.length = 0;
-
+    this.parentName = null
     let routerUrl: string, routerList: Array<any>, target: any;
     this._router.events.subscribe((router: any) => {
       routerUrl = router.urlAfterRedirects;
@@ -124,10 +126,28 @@ export class AppLayoutComponent implements OnInit {
           var title = decodeURI(routerList[1]);
           this.activeRoute = title;
           console.log(title);
+          loop: for(let i = 0 ;i<this.menu.length;i++){
+            
+           
+            console.log(i);
+            
+             for(let k of this.menu[i]['Forms']){
+               if(k.Name == title){
+              
+                 this.parentName = this.menu[i]["Node"];
+               
+                 
+                 break loop;
+              }
+             }
+           
+           
+          }
         } else {
           this.root = true;
         }
       }
     });
+
   }
 }
