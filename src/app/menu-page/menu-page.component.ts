@@ -107,9 +107,9 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
     private title : Title,
     private elementRef : ElementRef
   ) {
-  
+
     console.log(this.cookieString);
-   
+
     if (this.depth === undefined) {
       this.depth = 0;
     }
@@ -251,21 +251,29 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
   }
   changeOpt(){
     console.log(this.sideMenu);
-    
-    this.cookieService.set("user" , "KKFMAK")
+
+
     // console.log(environment.sideMenu,"optcheck");
 
     console.log(this.sideMenu,"Menu page compoennt");
-    
+
       this.navlinkservice.setData(this.sideMenu);
       if(this.sideMenu == true){
-        this.cookieService.set('menuState',"sideTrue")
+        console.log("cookies true");
+
+        this.cookieService.set('menuState',"sideTrue" ,{  path:'/', expires:365} )
       }
       else if(this.sideMenu == false){
-        this.cookieService.set('menuState',"sideFalse")
+        console.log("cookies false");
+        this.cookieService.set('menuState',"sideFalse" ,{path:'/' , expires:365} )
+      }
+      else
+      {
+        console.log("cookises not working");
+
       }
 
- 
+
   }
   toggleNavbar($event) {
     $event.stopPropagation();
@@ -283,8 +291,8 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("username");
         sessionStorage.removeItem("menuitem");
-        
-       
+
+
         this.router.navigateByUrl("");
       },
       (error) => {
