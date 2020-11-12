@@ -291,30 +291,39 @@ export class FrmCreateTransComponent
   //console.log(this.userarray);
 
   OnProductChange($event) {
-    console.log(this.selectedProduct["ProCode"], "PRODUCTS");
-    console.log(this.selectedProduct["ProBehavior"], "Product Behavior");
-    this.transactionArr = [];
-    this.invoiceArr = [];
 
-    this.fields = [];
-    var RawAccounts = this.rawData["Account"];
-    console.log(this.rawData["Account"], "data");
+    if(this.selectedProduct == null)
+    {
+      this.selectedAccount = null
+      this.selectedTemplate = null
+      this.fields = []
+    }
+    else
+    {
 
-    this.accounts = RawAccounts.filter(
-      (k: { ProCode: any }) => k.ProCode == this.selectedProduct["ProCode"]
-    );
+      this.transactionArr = [];
+      this.invoiceArr = [];
 
-    var RawTemplates = this.rawData["TxnTemplate"];
-    if (
-      RawTemplates.filter(
-        (k) => k.ProCode == this.selectedProduct["ProCode"]
-      ) == ""
-    ) {
-      this.templates = this.rawData["TxnTemplate"];
-    } else {
-      this.templates = RawTemplates.filter(
-        (k) => k.ProCode == this.selectedProduct["ProCode"]
+      this.fields = [];
+      var RawAccounts = this.rawData["Account"];
+      console.log(this.rawData["Account"], "data");
+
+      this.accounts = RawAccounts.filter(
+        (k: { ProCode: any }) => k.ProCode == this.selectedProduct["ProCode"]
       );
+
+      var RawTemplates = this.rawData["TxnTemplate"];
+      if (
+        RawTemplates.filter(
+          (k) => k.ProCode == this.selectedProduct["ProCode"]
+        ) == ""
+      ) {
+        this.templates = this.rawData["TxnTemplate"];
+      } else {
+        this.templates = RawTemplates.filter(
+          (k) => k.ProCode == this.selectedProduct["ProCode"]
+        );
+      }
     }
   }
   getTransCreation() {

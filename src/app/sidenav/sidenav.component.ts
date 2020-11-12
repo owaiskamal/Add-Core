@@ -12,10 +12,10 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./sidenav.component.scss'],
   animations: [
     trigger('indicatorRotate', [
-      state('collapsed', style({transform: 'rotate(0deg)'})),
-      state('expanded', style({transform: 'rotate(180deg)'})),
-      transition('expanded <=> collapsed',
-        animate('500ms cubic-bezier(0.4,0.0,0.2,1)')
+      state('out', style({transform: 'rotate(0deg)'})),
+      state('in', style({transform: 'rotate(180deg)'})),
+      transition('in <=> out',
+        animate('701ms cubic-bezier(0.4,0.0,0.2,1)')
       ),
     ]),
     trigger('dropdown',[
@@ -41,10 +41,10 @@ import { Title } from '@angular/platform-browser';
           animate('1ms ease-in-out', style({
               'visibility': 'visible'
           })),
-          animate('600ms ease-in-out', style({
+          animate('300ms ease-in-out', style({
               'max-height': '500px'
           })),
-          animate('800ms ease-in-out', style({
+          animate('400ms ease-in-out', style({
               'opacity': '1'
           }))
       ]
@@ -100,6 +100,8 @@ export class SidenavComponent implements OnInit {
     if (item.Forms && item.Forms.length) {
       this.expanded =! this.expanded
       this.animationState = this.animationState === 'out' ? 'in' : 'out';
+      console.log(this.animationState);
+
       this.messageEvent.emit("dropdown");
     }
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit } from "@angular/core";
 import {
   trigger,
   animate,
@@ -61,7 +61,7 @@ import { CookieService } from 'ngx-cookie-service';
 
   ],
 })
-export class AppLayoutComponent implements OnInit {
+export class AppLayoutComponent implements OnInit ,OnDestroy {
   sideMenu: boolean;
   cookieString: string;
   menu: any[] = [];
@@ -73,7 +73,8 @@ export class AppLayoutComponent implements OnInit {
     private navlinkservice: NavlinksService,
     private _router: Router,
     private route: ActivatedRoute,
-    private cookieService : CookieService
+    private cookieService : CookieService,
+    private elementRef: ElementRef
   ) {
     this.menu = JSON.parse(sessionStorage.getItem("menuitem"));
     this.listenRouting();
@@ -100,12 +101,15 @@ export class AppLayoutComponent implements OnInit {
   }
   urlEmpty: boolean;
   ngOnInit() {
-   
+
 
     this.navlinkservice.currentData.subscribe((data) => {
       console.log(data, "app layout compoennt");
       this.sideMenu = data;
     });
+  }
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
   }
   getState(outlet) {
     return outlet.activatedRouteData.state;
@@ -127,21 +131,21 @@ export class AppLayoutComponent implements OnInit {
           this.activeRoute = title;
           console.log(title);
           loop: for(let i = 0 ;i<this.menu.length;i++){
-            
-           
+
+
             console.log(i);
-            
+
              for(let k of this.menu[i]['Forms']){
                if(k.Name == title){
-              
+
                  this.parentName = this.menu[i]["Node"];
-               
-                 
+
+
                  break loop;
               }
              }
-           
-           
+
+
           }
         } else {
           this.root = true;
