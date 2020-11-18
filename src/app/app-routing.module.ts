@@ -22,6 +22,8 @@ import { FrmCbsPostingComponent } from './frm-cbs-posting/frm-cbs-posting.compon
 import { FrmAccountStatementComponent } from './frm-account-statement/frm-account-statement.component';
 import { FrmTransStatusComponent } from './frm-trans-status/frm-trans-status.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditorComponent } from './editor/editor.component';
+import { FrmInstrumentSetupComponent } from './frm-instrument-setup/frm-instrument-setup.component';
 //import { SearchTableComponent } from './search-table/search-table.component';
 
 
@@ -31,6 +33,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 const routes: Routes = [
   {path: 'changepassword',component:ChangePasswordPageComponent},
   {path: '', component:LoginPageComponent},
+  {path: 'editor', component:FrmInstrumentSetupComponent},
 
 
 {path:'menu', component: AppLayoutComponent, canActivate : [AuthGuard],

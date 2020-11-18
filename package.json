@@ -31,6 +31,7 @@
     "jspdf": "^2.1.1",
     "jspdf-autotable": "^3.5.13",
     "moment": "^2.29.1",
+    "ngx-ckeditor4": "^10.0.0",
     "ngx-cookie-service": "^10.1.1",
     "papaparse": "^5.2.0",
     "popper.js": "^1.16.1",
