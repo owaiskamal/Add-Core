@@ -24,7 +24,7 @@ import { formatNumber, DatePipe } from '@angular/common';
         <div *ngFor="let field of fields" class="p-col-12 p-md-6 p-sm-12">
           <field-builder [field]="field" [form]="form"></field-builder>
         </div>
-        
+
       </div>
       <!-- <div class="p-md-2">
    <button type="submit" (click)= "saveData()" pButton  label="Save"></button>
@@ -89,8 +89,8 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
                   [Validators.required,Validators.minLength(f.MinLeng)]
                 );
           }
-      
-      
+
+
         }
         else{
           if(f.Editable == 'N')
@@ -106,18 +106,18 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
                   [Validators.minLength(f.MinLeng)]
                 );
           }
-      
+
         }
       console.log("data F ", f);
-     
+
       // } else {
       //  var subMenu = f.LookupVal;
       //   console.log(f.LookupVal , "dadad");
-        
+
       //   var array = [];
       //   array = subMenu.split('|');
       //   console.log(array , "this is splitted");
-        
+
       //    let opts = {};
       //   for (let opt of array) {
       //     opts[opt.key] = new FormControl(opt.value);
@@ -125,7 +125,7 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
       //   fieldsCtrls[f.ColumnName] = new FormGroup(opts)
       // }
     }
-    
+
     this.form = new FormGroup(fieldsCtrls);
   }
   saveData() {
@@ -137,7 +137,7 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
       {
         const name = user.ColumnName;
           console.log(name , "name");
-          
+
         this.transFormData.forEach((t)=>{
           var formkey =Object.keys(t)
           var formValues = Object.values(t);
@@ -147,21 +147,22 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
              var index =formkey.indexOf(name)
                 console.log(index);
 
-                var nDate= formValues[index];
+                var nDate= ""
+                nDate= formValues[index].toString();
                 const pipe = new DatePipe("en-US");
                 const fDate = pipe.transform(nDate, "dd/MM/yyyy");
                 console.log(fDate , "date is ");
-               
+
                 this.valueDate = {
                   [name]: fDate
                 };
-                        
 
-                
+
+
             }
           });
-        
-          
+
+
         })
         if (this.valueDate != null) {
           for (
@@ -176,18 +177,18 @@ export class DynamicFormBuilderComponent implements OnInit, OnChanges {
         }
         console.log(this.transFormData  , "UDatate Dadsd");
 
-        
-        
+
+
        }
-     
+
     })
     this.savedata.emit(this.transFormData[0]);
-    
+
     //this.form.reset();
-    
+
     //this.savedata.emit(this.form.getRawValue());
 
     //console.log("loggg" , this.form.getRawValue());
-   
+
   }
 }
