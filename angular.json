@@ -34,6 +34,11 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "./node_modules/ckeditor/",
+                "output": "/assets/ckeditor/"
+              },
               "src/favicon.png",
               "src/assets"
             ],

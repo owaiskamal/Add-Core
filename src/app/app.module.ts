@@ -62,6 +62,8 @@ import { FrmTransStatusComponent } from './frm-trans-status/frm-trans-status.com
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {GalleriaModule} from 'primeng/galleria';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import { NgxCkeditorModule } from "ngx-ckeditor4";
+import { FrmInstrumentSetupComponent } from './frm-instrument-setup/frm-instrument-setup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +78,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     TemplateCreatorComponent,
     DragDropComponent,
     SidenavComponent,
-    
+
     //SearchTableComponent,
     FrmlistComponent,
     FrmCreateTransComponent,
@@ -86,7 +88,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     FrmCbsPostingComponent,
     FrmAccountStatementComponent,
     FrmTransStatusComponent,
-    DashboardComponent
+    DashboardComponent,
+    FrmInstrumentSetupComponent
   ],
   imports: [
     BrowserModule,
@@ -127,7 +130,14 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     ToolbarModule,
     ProgressSpinnerModule,
     GalleriaModule,
-    InputSwitchModule
+    InputSwitchModule,
+    NgxCkeditorModule.forRoot({
+      url: 'https://cdn.bootcss.com/ckeditor/4.11.3/ckeditor.js',
+      config: {
+        filebrowserUploadMethod: 'xhr',
+        filebrowserUploadUrl: 'http://127.0.0.1:8000/index/index/uploads',
+      },
+    }),
   ],
   providers: [
     MessageService,
