@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FrmTransStageComponent } from './frm-trans-stage.component';
 
@@ -6,7 +6,7 @@ describe('FrmTransStageComponent', () => {
   let component: FrmTransStageComponent;
   let fixture: ComponentFixture<FrmTransStageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FrmTransStageComponent ]
     })

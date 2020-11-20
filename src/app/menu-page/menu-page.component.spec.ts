@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AdminPageComponent } from './menu-page.component';
 
@@ -6,7 +6,7 @@ describe('AdminPageComponent', () => {
   let component: AdminPageComponent;
   let fixture: ComponentFixture<AdminPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminPageComponent ]
     })
