@@ -20,4 +20,8 @@ export class TemplateCreatorService {
   {
     return this.http.post(environment.baseUrl + prog , obj);
   }
+  getMarkup():Observable<any>
+  {
+    return this.http.get(environment.markupJson);
+  }
 }
