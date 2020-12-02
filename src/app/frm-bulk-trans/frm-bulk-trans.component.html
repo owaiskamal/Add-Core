@@ -1,178 +1,190 @@
 <p-toast position="top-right"></p-toast>
+<div class="p-grid p-fluid">
+  <div class="p-col-12 p-lg-6 p-md-6 p-sm-12">
+    <p-card class="p-card">
+      <p-header class="p-card-header">
+        <div class="card-text">Bulk Transaction</div>
+      </p-header>
+      <div class="p-grid p-fluid">
+        <!--  <div class="p-md-6 p-lg-6 col-md-6 p-sm-12">
+            <label for="companytitle">Company title</label>
+            <input id="companytitle" type="text" pInputText>
+        </div> -->
+        <div class="p-col-12 p-sm-12">
+        <div *ngIf="!prodUpl" class="p-col-12 p-md-12 p-lg-12 p-sm-12">
+          <label style="font-weight: 700" for="producttitle">Product title</label>
+          <p-dropdown
+            #myDropdown
+            [options]="products"
+            [(ngModel)]="selectedProduct"
+            (onChange)="OnProductChange($event)"
+            placeholder="Select a Product"
+            optionLabel="ProName"
+            [showClear]="true"
+          ></p-dropdown>
 
-<p-card class="p-card">
-  <p-header class="p-card-header">
-    <div class="card-text">Bulk Transaction</div>
-  </p-header>
-  <div class="p-grid p-fluid">
-    <!--  <div class="p-md-6 p-lg-6 col-md-6 p-sm-12">
-        <label for="companytitle">Company title</label>
-        <input id="companytitle" type="text" pInputText>
-    </div> -->
-    <div class="p-col-12 p-lg-6 p-md-6 p-sm-12">
-    <div *ngIf="!prodUpl" class="p-col-12 p-md-12 p-lg-12 p-sm-12">
-      <label style="font-weight: 700" for="producttitle">Product title</label>
-      <p-dropdown
-        #myDropdown
-        [options]="products"
-        [(ngModel)]="selectedProduct"
-        (onChange)="OnProductChange($event)"
-        placeholder="Select a Product"
-        optionLabel="ProName"
-        [showClear]="true"
-      ></p-dropdown>
-
-      <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
-    </div>
-  
-  
-    <div *ngIf="!accUpl" class="p-col-12 p-md-12 p-lg-12 p-sm-12">
-      <label style="font-weight: 700" for="accountitle">Account title</label>
-      <p-dropdown
-        [options]="accounts"
-        [(ngModel)]="selectedAccount"
-        name="selectedAccount"
-        placeholder="Select an account"
-        optionLabel="AcTitel"
-        [showClear]="true"
-      ></p-dropdown>
-      <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
-    </div>
- 
+          <!--  <p>Selected Product: {{selectedProduct ? selectedProduct.name : 'none'}}</p> -->
+        </div>
 
 
-    <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
-      <label style="font-weight: 700" for="filetemplate">File template</label>
-      <p-dropdown
-        [options]="templates"
-        [(ngModel)]="selectedTemplate"
-        (onChange)="getTemplates($event)"
-        placeholder="Select a template"
-        optionLabel="ConfName"
-        [showClear]="true"
-      ></p-dropdown>
-      <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
-    </div>
-  
-    <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
-     
-      <p-fileUpload
-        [disabled]="!selectedAccount || !selectedProduct || !selectedTemplate"
-        #fileUploaded
-        customUpload="true"
-        [previewWidth]="10"
-        (onClear)="clearSelected()"
-        name="demo[]"
-        accept=".xlsx,application/msexcel,.csv,.txt"
-        maxFileSize="10000000"
-        (uploadHandler)="onBasicUpload($event, fileUpload)"
-      >
-      </p-fileUpload>
-   
-  </div>
-  </div>
+        <div *ngIf="!accUpl" class="p-col-12 p-md-12 p-lg-12 p-sm-12">
+          <label style="font-weight: 700" for="accountitle">Account title</label>
+          <p-dropdown
+            [options]="accounts"
+            [(ngModel)]="selectedAccount"
+            name="selectedAccount"
+            placeholder="Select an account"
+            optionLabel="AcTitel"
+            [showClear]="true"
+          ></p-dropdown>
+          <!--  <p>Selected Account: {{selectedAccount ? selectedAccount.name : 'none'}}</p> -->
+        </div>
 
-  <div class="p-col-12 p-lg-6 p-md-6 p-sm-12" style="margin-top: 27px;">
-    <div class="p-md-12 p-lg-12 p-sm-12">
-    <p-panel header="File Details" class="detail">
-      <div class="p-grid">
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span class="filename-font">Filename</span>
-          </div>
-          <div class="p-col-6  p-lg-6 p-md-6 p-sm-12">
-            <span>{{validatedObj['Filename']}}</span>
-          </div>
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span class="filename-font">Total Records</span>
-          </div>
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <a class="filename-font cursor-style" (click)="showTotal()">{{validatedObj['totalRecord']}}</a>
-          </div>
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span class="filename-font">Total Success</span>
-          </div>
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <a class="filename-font cursor-style" (click)="showSuccess()">{{validatedObj['totalSuccess']}}</a>
-          </div>
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span class="filename-font">Total Failed</span>
-          </div>
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <a class="filename-font cursor-style"  (click)="showFailed()">{{validatedObj['totalFailed']}}</a>
-  
-          </div>
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span class="filename-font">Success Amount</span>
-          </div>
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span>{{validatedObj['successAmount']}}</span>
-          </div>
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span class="filename-font">Failed Amount</span>
-          </div>
-          <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
-            <span>{{validatedObj['failedAmount']}}</span>
-          </div>
+
+
+        <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
+          <label style="font-weight: 700" for="filetemplate">File template</label>
+          <p-dropdown
+            [options]="templates"
+            [(ngModel)]="selectedTemplate"
+            (onChange)="getTemplates($event)"
+            placeholder="Select a template"
+            optionLabel="ConfName"
+            [showClear]="true"
+          ></p-dropdown>
+          <!--   <p>Selected Template: {{selectedTemplate ? selectedTemplate.name : 'none'}}</p> -->
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
+
+          <p-fileUpload
+            [disabled]="!selectedAccount || !selectedProduct || !selectedTemplate"
+            #fileUploaded
+            customUpload="true"
+            [previewWidth]="10"
+            (onClear)="clearSelected()"
+            name="demo[]"
+            accept=".xlsx,application/msexcel,.csv,.txt"
+            maxFileSize="10000000"
+            (uploadHandler)="onBasicUpload($event, fileUpload)"
+          >
+          </p-fileUpload>
+
       </div>
-        </p-panel>
-     <!--  </div>
-      <div class="p-md-6 p-lg-12 p-sm-12"> -->
-    </div>
-        <div *ngIf="showRollBack" class="p-col-12 p-lg-3 p-md-6 p-sm-12"  style="float: right">
-         
-          <button
-            [disabled]="!showRepeater"
-            type="button"
-            pRipple
-            pButton
-           
-            class="p-button-outlined p-button-secondary"   
-            label="RollBack"
-            
-            (click) ="rollBack()"
-          ></button>
-        </div>
-        <div class="p-col-12 p-lg-3 p-md-6 p-sm-12" style="float: right">
-          <button
-            pButton
-            pRipple
-            type="button"
-            icon="pi pi-refresh"
-            (click)="reset()"
-            class="p-button-outlined p-button-secondary"
-            label="Reset"
-          ></button>
-        </div>
-     
-        <div *ngIf="showPreview" class="p-col-12 p-lg-3 p-md-6 p-sm-12" style="float: right">
-          <button
-            [disabled]="!showRepeater"
-            type="button"
-            pRipple
-            pButton 
-            icon="{{showTable ? 'pi pi-arrow-up' : 'pi pi-arrow-down'}}"
-            label="{{showTable ? 'Hide' : 'Preview' }}"
-            (click) ="preview()"
-          ></button>
-        </div>
-      
-        <div *ngIf="showSubmit" class="p-col-12 p-lg-3 p-md-6 p-sm-12"  style="float: right">
-          <button
-            [disabled]="!showRepeater"
-            type="button"
-            pRipple
-            pButton
-            icon="pi pi-check"
-            label="Submit"
-            (click) ="submit()"
-          ></button>
-        
       </div>
-   
-
+      </div>
+    </p-card>
   </div>
+  <div class="p-col-12 p-lg-6 p-md-6 p-sm-12">
+    <p-card class="p-card">
+      <div class="p-grid p-fluid">
+    <div class="p-col-12 " style="margin-top: 27px;">
+      <div class="p-md-12 p-lg-12 p-sm-12">
+      <p-panel header="File Details" class="detail">
+        <div class="p-grid">
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Filename</span>
+            </div>
+            <div class="p-col-6  p-lg-6 p-md-6 p-sm-12">
+              <span>{{validatedObj['Filename']}}</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Total Records</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <a class="filename-font cursor-style" (click)="showTotal()">{{validatedObj['totalRecord']}}</a>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Total Success</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <a class="filename-font cursor-style" (click)="showSuccess()">{{validatedObj['totalSuccess']}}</a>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Total Failed</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <a class="filename-font cursor-style"  (click)="showFailed()">{{validatedObj['totalFailed']}}</a>
+
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Success Amount</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span>{{validatedObj['successAmount']}}</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span class="filename-font">Failed Amount</span>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
+              <span>{{validatedObj['failedAmount']}}</span>
+            </div>
+        </div>
+          </p-panel>
+       <!--  </div>
+        <div class="p-md-6 p-lg-12 p-sm-12"> -->
+      </div>
+          <div *ngIf="showRollBack" class="p-col-12 p-lg-3 p-md-6 p-sm-12"  style="float: right">
+
+            <button
+              [disabled]="!showRepeater"
+              type="button"
+              pRipple
+              pButton
+
+              class="p-button-outlined p-button-secondary"
+              label="RollBack"
+
+              (click) ="rollBack()"
+            ></button>
+          </div>
+          <div class="p-col-12 p-lg-3 p-md-6 p-sm-12" style="float: right">
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-refresh"
+              (click)="reset()"
+              class="p-button-outlined p-button-secondary"
+              label="Reset"
+            ></button>
+          </div>
+
+          <div *ngIf="showPreview" class="p-col-12 p-lg-3 p-md-6 p-sm-12" style="float: right">
+            <button
+              [disabled]="!showRepeater"
+              type="button"
+              pRipple
+              pButton
+              icon="{{showTable ? 'pi pi-arrow-up' : 'pi pi-arrow-down'}}"
+              label="{{showTable ? 'Hide' : 'Preview' }}"
+              (click) ="preview()"
+            ></button>
+          </div>
+
+          <div *ngIf="showSubmit" class="p-col-12 p-lg-3 p-md-6 p-sm-12"  style="float: right">
+            <button
+              [disabled]="!showRepeater"
+              type="button"
+              pRipple
+              pButton
+              icon="pi pi-check"
+              label="Submit"
+              (click) ="submit()"
+            ></button>
+
+        </div>
+
+
+
+    </div>
+  </div>
+    </p-card>
+
 </div>
-  <!-- 
+
+
+  <!--
     <div class="p-grid p-fluid">
     <div class="p-col-6 p-md-6 p-lg-12 p-sm-12" *ngIf="showRepeater">
       <p-panel header="File Details" class="detail">
@@ -200,7 +212,7 @@
             </div>
             <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
               <a class="filename-font cursor-style"  (click)="showFailed()">{{validatedObj['totalFailed']}}</a>
-    
+
             </div>
             <div class="p-col-6 p-lg-6 p-md-6 p-sm-12">
               <span class="filename-font">Success Amount</span>
@@ -219,9 +231,9 @@
     </div>
   </div> -->
  <!--  <div class="p-grid p-mt-2">
-   
+
     <div class="p-col-12 p-sm-12 p-lg-6 p-md-6">
-     
+
         <p-fileUpload
           [disabled]="!selectedAccount || !selectedProduct || !selectedTemplate"
           #fileUploaded
@@ -234,19 +246,19 @@
           (uploadHandler)="onBasicUpload($event, fileUpload)"
         >
         </p-fileUpload>
-     
+
     </div>
 
-  
+
   </div> -->
-     
-    
-   
-<!-- 
+
+
+
+<!--
   <div class="p-grid p-fluid">
     <div class="p-grid p-col-12">
       <div class="p-col-12">
-    
+
         <div *ngIf="showRollBack" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
           <button
             [disabled]="!showRepeater"
@@ -254,7 +266,7 @@
             pRipple
             pButton
             icon="pi pi-directions-alt"
-            class="p-button-outlined p-button-secondary"   
+            class="p-button-outlined p-button-secondary"
             label="Roll Back"
             (click) ="rollBack()"
           ></button>
@@ -270,19 +282,19 @@
             label="Reset"
           ></button>
         </div>
-     
+
         <div *ngIf="showPreview" class="p-col-12 p-lg-3 p-md-3 p-sm-12" style="float: right">
           <button
             [disabled]="!showRepeater"
             type="button"
             pRipple
-            pButton 
+            pButton
             icon="{{showTable ? 'pi pi-arrow-up' : 'pi pi-arrow-down'}}"
             label="{{showTable ? 'Hide Preview' : 'Show Preview' }}"
             (click) ="preview()"
           ></button>
         </div>
-      
+
         <div *ngIf="showSubmit" class="p-col-12 p-lg-3 p-md-3 p-sm-12"  style="float: right">
           <button
             [disabled]="!showRepeater"
@@ -297,13 +309,13 @@
       </div>
     </div>
   </div> -->
-</p-card>
+
 
 <p-card  class="p-cards" *ngIf="showTable && finalTableData">
-  
+
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
-      
+
      <!--  <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
             <div class="p-d-flex">
@@ -326,12 +338,12 @@
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [filterDelay]="0"
       >
-        
+
         <ng-template pTemplate="caption">
           <div class="table-header">
             <div class="p-formgroup-inline">
-           
-              
+
+
             <div class="p-col-12 p-lg-6 p-md-6 p-sm-12">
               <span class="trans-header">Transaction Details</span>
               <span class="p-input-icon-left table_filter">
@@ -344,10 +356,10 @@
                 />
               </span>
             </div>
-           
-       
+
+
               <div class="p-col-12 p-lg-6 p-md-6 p-sm-12" style="padding-top:28px">
-               
+
                   <div class="p-d-flex" style="float:right;">
                     <span class="filename-font" style="padding-right: 5px; padding-top: 10px;">
                       Export options</span>
@@ -356,10 +368,10 @@
                       <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
                   </div>
                 </div>
-       
+
           </div>
           </div>
-         
+
         </ng-template>
         <ng-template *ngIf="colgroup"  pTemplate="colgroup" let-columns>
           <colgroup>
@@ -373,7 +385,7 @@
               <p-sortIcon [field]="col.field"></p-sortIcon>
             </th>
           </tr>
-    
+
         </ng-template>
  <!--        <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr>
@@ -401,7 +413,7 @@
               <span class="p-column-title">Bene Name</span>
               {{ transaction.benefname }}
             </td>
-           
+
             <td>
               <span class="p-column-title">Amount</span>
               {{ transaction.transactionamount }}

@@ -16,5 +16,6 @@ export const environment = {
   submitTranStage:"http://132.147.160.71/AddCoreAPI/API/Core/PostTxnForStage",
   blkUpload :    "http://132.147.160.71/AddCoreAPI/API/Core/UploadTxn",
   blkSubRoll: "http://132.147.160.71/AddCoreAPI/API/Core/UploadTxnPost",
+  markupJson: "http://localhost:3000/data",
   sideMenu:true
 };

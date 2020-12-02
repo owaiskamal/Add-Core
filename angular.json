@@ -24,7 +24,8 @@
               "jspdf",
               "jspdf-autotable",
               "moment",
-              "raf"
+              "raf",
+              "canvg"
 
            ],
             "outputPath": "dist/login-demo",
