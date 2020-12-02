@@ -1,62 +1,18 @@
 @import "../../theme.scss";
 
-.header_style {
-  color: #00458a;
-  //font-weight: bold;
-  top: 5px;
-  font-size: 30px !important;
-  font-family: BMWTypeNextLatin,Helvetica,Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif !important;
-}
 
 
 
-.hr_style {
-  height: 2px;
-  width: 100%;
-  background-color: #00458a;
-}
 
-.login_btn {
-  background-color: #00458a !important;
-  border-color: #00458a !important;
-  margin-top: 0px;
-  width: 100%;
-  padding: 0.3rem .7rem;
-  font-weight: bold;
-}
 
-.login_btn:hover {
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 124, 0.918),
-    rgba(69, 106, 226, 0.808)
-  );
-}
-.form_style{
-  width: 100%;
-  height: 100%;
-}
+
+
+
 .disableCss:hover {
-  background: #dddddd;
   cursor: default;
 }
 
-:host ::ng-deep .p-card {
-  border-radius: 20px;
-  background-color: #f8f9fe;
 
-  border: 0;
-  box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
-}
-
-.main {
-  margin-top: 15%;
-  width: 50%;
-  height: 50%;
-  font-size: 26px;
-  margin-left: 25%;
-  text-align: center;
-}
 
 :host ::ng-deep .p-progressbar .p-progressbar-value {
   background: #090080 !important;
@@ -85,29 +41,7 @@
   text-align: right;
 }
 
-.input-field {
-  width: 100%;
-  padding: 10px;
-  text-indent: 20px;
-  background-color: white;
-  border: 1px solid #e3e3e3;
-  border-radius: 30px !important;
-  color: #2c2c2c;
-  line-height: normal;
-  font-size: 0.9571em;
-  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out,
-    background-color 0.3s ease-in-out;
-  box-shadow: none;
 
-
-}
-
-.input-field:focus {
-  border: 1px solid #00458a;
-  box-shadow: none;
-  outline: 0 !important;
-  color: #2c2c2c;
-}
 
 .fa-lock {
   font-size: 16px;
@@ -128,14 +62,14 @@
 
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .main {
     width: 100%;
     margin: 35% 0 0 0;
     footer
 {
   min-height:100%;
-  margin-bottom: -40px; /* Put negative height of the footer here */
+  margin-bottom: -40px;
   padding-bottom: 40px;
 }
 .container
@@ -147,6 +81,71 @@
 :host ::ng-deep .p-toast {
   width: 75%;
 }
-}
+} */
 
 
+
+
+/* New css start */
+
+.container{
+  height: 100%;
+  align-content: center;
+  }
+
+  .card{
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: rgba(0,0,0,0.5) !important;
+  }
+
+
+
+  .card-header h3{
+  color: white;
+  text-align: center;
+  font-size: 30px!important;
+  }
+
+
+
+  input:focus{
+  outline: 0 0 0 0  !important;
+  box-shadow: 0 0 0 0 !important;
+
+  }
+
+  .remember{
+  color: white;
+  }
+
+  .remember input
+  {
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
+  }
+
+  .login_btn{
+  color: black;
+  background-color: #FFC312;
+  width: 100px;
+  }
+
+  .login_btn:hover{
+  color: black;
+  background-color: white;
+  }
+
+  .links{
+  color: white;
+  }
+
+  .links a{
+  margin-left: 4px;
+  }
+
+/* New css end */

@@ -91,7 +91,7 @@
 }
 :host ::ng-deep .p-fileupload-buttonbar  {
   text-align: center !important;
-  
+
   // width: 100%;
 }
 @media (max-width: 768px) {
@@ -112,18 +112,10 @@
 
   :host ::ng-deep .p-fileupload-buttonbar .p-button {
     margin-bottom: 1em !important;
-    
-    // width: 100%;
+
   }
 }
-/* @media (max-width: 511px) {
-  :host ::ng-deep .p-fileupload-buttonbar {
-    max-width: 89% !important;
-  }
-  :host ::ng-deep .p-fileupload-content {
-    max-width: 89% !important;
-  }
-} */
+
 .loading:after {
   content: "...";
   animation: dots 1s steps(5, end) infinite;
@@ -162,13 +154,13 @@
   }
 }
 
-:host ::ng-deep .danger .p-progressbar .p-progressbar-value 
+:host ::ng-deep .danger .p-progressbar .p-progressbar-value
 {
     background: #ff6060;
 }
 
 
-:host ::ng-deep {    
+:host ::ng-deep {
   .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
       display: none;
   }
