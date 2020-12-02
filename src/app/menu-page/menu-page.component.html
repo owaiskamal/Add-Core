@@ -1,10 +1,10 @@
 <div
-  [@slideInOut]="menuState"
+  id="mySidenav"
   [ngClass]="{ sidebar: this.sidebarOpen }"
   *ngIf="sideMenu"
   class="sidenav"
 >
-  <ul class="list-unstyled">
+ <!--  <ul class="list-unstyled">
     <li>
       <span class="mat-list">
        <i  class="piusers fas fa-user-circle"></i> {{userName}}
@@ -17,21 +17,51 @@
         "
       />
     </li>
-  </ul>
-  <ul class="list-unstyled">
-    <li>
+  </ul> -->
+  <div class="logo" style="margin-left:15px;">
+    <a class="simple-text"  (click)="changeTitle()" [routerLink]="['/menu/Dashboard']">
+      <div class="logo-img">
+        <img width="36px" src="../../assets/images/side-logo.png">
+      </div>
+    </a>
+    <a style="padding-left: 10px;" class="simple-text logo-normal"> CR-PL </a>
+  </div>
 
-      <span class="p-input-icon-left">
+  <ul class="list-unstyled">
+     <ul  class="navbar logo nav">
+    <li class="nav-item main_link dropdown">
+  
+  
+    <a data-toggle="collapse" class="nav-link  link-text" data-target="#navdrop" style="cursor: pointer; color: white !important;">{{userName}}
+      <i class="pi pi-angle-down sub-menu-icon"> </i> </a>
+  
+  <div class="collapse"  id="navdrop">
+    <ul class="nav">
+  <li class="nav-item main_link">
+  
+    <a class="nav-link link-text" [routerLinkActive]="['is-active']" [routerLink] ="['/menu/businessunit']"><i class="pi pi-circle-off"></i> <span style="padding-left: 5px;"> Business Unit</span></a>
+  </li>
+  
+  <li class="nav-item main_link">
+    <a class="nav-link link-text" [routerLinkActive]="['is-active']" [routerLink] ="['/menu/costcenters']"><i class="pi pi-circle-off"></i> <span style="padding-left: 5px;"> Cost Centers</span></a>
+  </li>
+  <li class="nav-item main_link">
+    <a class="nav-link link-text" [routerLinkActive]="['is-active']" [routerLink] ="['/menu/customermaster']"><i class="pi pi-circle-off"></i> <span style="padding-left: 5px;">Customer Master</span></a>
+  </li>
+  <li class="nav-item main_link">
+    <a class="nav-link link-text" [routerLinkActive]="['is-active']" [routerLink] ="['/menu/chartofaccount']"><i class="pi pi-circle-off"></i> <span style="padding-left: 5px;">Chart Of Account</span></a>
+  </li>
+  </ul>
+  </div>
+  </li>
+    </ul>
+    <li>
+    
+      <span style="margin-top: 1rem;" class="p-input-icon-left">
         <i style="color: white;" class="fa fa-search fa-2x"></i>
         <input type="text" class="search-input" pInputText placeholder="Search" [(ngModel)]="selectedLink" (input) = "filterUsers()" />
     </span>
-      <hr
-        style="
-          height: 0.5px;
-          width: 100%;
-          background-color: rgb(185, 183, 183);
-        "
-      />
+     
     </li>
   </ul>
   <app-sidenav
@@ -90,7 +120,7 @@
 
             </ul> -->
 
-<nav [ngClass]="{'fixer' : sideMenu == true , 'notfixer' : sideMenu == false}" class="navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+<nav id="main" [ngClass]="{'fixer' : sideMenu == true , 'notfixer' : sideMenu == false}" class="navbar navbar-expand-lg navbar-light bg-light justify-content-end">
   <div class="mr-auto">
     <!--  <a class="btn_side" style="margin-right:20px;"
     (click)="toggleNavbar()" >
@@ -112,14 +142,7 @@
       </span>
     </a>
 
-    <a class="navbar-item" (click)="changeTitle()" [routerLink]="['/menu/Dashboard']">
-      <img
-        class="logo img-responsive"
-        src="assets/images/logo.png"
-        width="80px"
-        height="50px"
-      />
-    </a>
+    
   </div>
   <a class="piuser toggler-nav" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
     <span class="fas fa-chevron-circle-down"></span>

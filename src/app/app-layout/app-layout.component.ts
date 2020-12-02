@@ -108,6 +108,16 @@ export class AppLayoutComponent implements OnInit ,OnDestroy {
       this.sideMenu = data;
     });
   }
+
+  openNav($event : any)
+  {
+    var res = $event.toString()
+    var mywindow = window.document.getElementById("mains");
+    console.log(mywindow ,"work");
+    
+    if(mywindow) mywindow.style.marginLeft = res;
+  }
+
   ngOnDestroy(): void {
     this.elementRef.nativeElement.remove();
   }

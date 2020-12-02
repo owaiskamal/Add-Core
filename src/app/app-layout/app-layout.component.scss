@@ -5,6 +5,8 @@
     overflow: auto;
     padding: 2.3em 1em 2.3em 1em !important;
     background-color: rgba(244, 243, 239 ,1);
+    transition: margin-left .5s;
+
     height: 100%; /* Same as the width of the sidenav */
    // font-size: 28px; /* Increased text to enable scrolling */
     //padding: 0px 10px;
@@ -28,7 +30,7 @@
   @media screen and (max-width: 768px) {
     .main {
       margin-top: 70px;
-      margin:70px 0 auto;
+      margin:44px 0 auto;
       overflow: auto;
     }
 
