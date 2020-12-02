@@ -7,6 +7,8 @@ import {
   ElementRef,
   Renderer2,
   OnDestroy,
+  Output,
+  EventEmitter,
 } from "@angular/core";
 import { MenuItem } from "primeng/api";
 import { Router } from "@angular/router";
@@ -98,6 +100,9 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
   slinks: any[] =[];
   xlinks: any[] = [];
   cookieString: string;
+  @Output() messageEvent = new EventEmitter<any>();
+
+  toggleSideNav: boolean;
   constructor(
     private router: Router,
     private navlinkservice: NavlinksService,
@@ -126,20 +131,56 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
     this.screenWidth = window.innerWidth;
     /*  console.log(this.screenWidth); */
     if (window.innerWidth <= 768 && this.myDiv != "dropdown") {
-      this.menuState = "in";
-      console.log("hello conp");
+      var mywindow = window.document.getElementById("mySidenav");
+      if(mywindow) mywindow.style.width = "0"
+     
+      console.log("work is done working");
+      var maindiv = document.getElementById("main")
+      if(maindiv) maindiv.style.marginLeft = "0"
+      console.log("work is done not work");
+      this.messageEvent.emit("0") 
+      
       this.isHamburguer = true;
-    } else if (window.innerWidth <= 768 && this.myDiv === "dropdown") {
-      this.menuState = "out";
-      console.log("hello moppo");
+      this.toggleSideNav = false;
+    // } else if (window.innerWidth <= 768 && this.myDiv === "dropdown") {
+    //   this.menuState = "out";
+    //   console.log("hello moppo");
+    //   this.myDiv = null;
+    //   console.log(this.myDiv, "asdasd");
+    } else if (window.innerWidth <=768 && this.myDiv === "dropdown")   {
+
+      var mywindow = window.document.getElementById("mySidenav");
+      if(mywindow) mywindow.style.width = "270px"
+     
+      this.toggleSideNav = false
       this.myDiv = null;
-      console.log(this.myDiv, "asdasd");
-    } else if (window.innerWidth >= 768) {
-      this.menuState = "out";
-    } else if (window.innerWidth <= 768) {
-      this.menuState = "in";
-      this.isHamburguer = true;
-    }
+       }
+       else if(window.innerWidth >= 768 )
+       {
+        var mywindow = window.document.getElementById("mySidenav");
+        if(mywindow) mywindow.style.width = "270px"
+        var maindiv = document.getElementById("main")
+        if(maindiv) maindiv.style.marginLeft = "270px"
+        console.log("work is done not work");
+        this.messageEvent.emit("270px") 
+        this.toggleSideNav = false
+       }
+
+       else if (window.innerWidth <= 768)
+       {
+        var mywindow = window.document.getElementById("mySidenav");
+        if(mywindow) mywindow.style.width = "0"
+        var maindiv = document.getElementById("main")
+        if(maindiv) maindiv.style.marginLeft = "0"
+        console.log("work is done asdworking");
+        
+        this.messageEvent.emit("0")
+        this.isHamburguer = true;
+        this.toggleSideNav = false;
+       }
+      
+      
+    
   }
   navbarOpen = false;
   sidebarOpen = true;
@@ -278,9 +319,52 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
   toggleNavbar($event) {
     $event.stopPropagation();
 
-    this.menuState = this.menuState === "out" ? "in" : "out";
     this.sidebarOpen = !this.sidebarOpen;
     this.isHamburguer = !this.isHamburguer;
+    if(this.screenWidth >= 768)
+    {
+      if(this.toggleSideNav == true)
+      {
+  
+        var mywindow = window.document.getElementById("mySidenav");
+        if(mywindow) mywindow.style.width = "270px"
+        var maindiv = document.getElementById("main")
+        if(maindiv) maindiv.style.marginLeft = "270px"
+  
+        this.messageEvent.emit("270px")
+        this.toggleSideNav =! this.toggleSideNav
+  
+      }
+      else
+      {
+        var mywindow = window.document.getElementById("mySidenav");
+        if(mywindow) mywindow.style.width = "0"
+        var maindiv = document.getElementById("main")
+        if(maindiv) maindiv.style.marginLeft = "0"
+  
+        this.messageEvent.emit("0")
+        this.toggleSideNav =! this.toggleSideNav
+      }
+    }
+    else{
+      console.log(this.toggleSideNav);
+      
+      if(this.toggleSideNav == true)
+      {
+
+        var mywindow = window.document.getElementById("mySidenav");
+        if(mywindow) mywindow.style.width = "270px"
+        this.toggleSideNav =! this.toggleSideNav
+      }
+      else
+      {
+        var mywindow = window.document.getElementById("mySidenav");
+        if(mywindow) mywindow.style.width = "0"
+        this.toggleSideNav =! this.toggleSideNav
+      }
+
+    }
+    
   }
 
   logout() {
