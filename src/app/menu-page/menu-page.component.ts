@@ -133,13 +133,13 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
     if (window.innerWidth <= 768 && this.myDiv != "dropdown") {
       var mywindow = window.document.getElementById("mySidenav");
       if(mywindow) mywindow.style.width = "0"
-     
+
       console.log("work is done working");
       var maindiv = document.getElementById("main")
       if(maindiv) maindiv.style.marginLeft = "0"
       console.log("work is done not work");
-      this.messageEvent.emit("0") 
-      
+      this.messageEvent.emit("0")
+
       this.isHamburguer = true;
       this.toggleSideNav = false;
     // } else if (window.innerWidth <= 768 && this.myDiv === "dropdown") {
@@ -151,7 +151,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
 
       var mywindow = window.document.getElementById("mySidenav");
       if(mywindow) mywindow.style.width = "270px"
-     
+
       this.toggleSideNav = false
       this.myDiv = null;
        }
@@ -162,7 +162,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
         var maindiv = document.getElementById("main")
         if(maindiv) maindiv.style.marginLeft = "270px"
         console.log("work is done not work");
-        this.messageEvent.emit("270px") 
+        this.messageEvent.emit("270px")
         this.toggleSideNav = false
        }
 
@@ -173,14 +173,14 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
         var maindiv = document.getElementById("main")
         if(maindiv) maindiv.style.marginLeft = "0"
         console.log("work is done asdworking");
-        
+
         this.messageEvent.emit("0")
         this.isHamburguer = true;
         this.toggleSideNav = false;
        }
-      
-      
-    
+
+
+
   }
   navbarOpen = false;
   sidebarOpen = true;
@@ -325,15 +325,16 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
     {
       if(this.toggleSideNav == true)
       {
-  
+
         var mywindow = window.document.getElementById("mySidenav");
         if(mywindow) mywindow.style.width = "270px"
         var maindiv = document.getElementById("main")
         if(maindiv) maindiv.style.marginLeft = "270px"
-  
+
         this.messageEvent.emit("270px")
+
         this.toggleSideNav =! this.toggleSideNav
-  
+
       }
       else
       {
@@ -341,14 +342,14 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
         if(mywindow) mywindow.style.width = "0"
         var maindiv = document.getElementById("main")
         if(maindiv) maindiv.style.marginLeft = "0"
-  
+
         this.messageEvent.emit("0")
         this.toggleSideNav =! this.toggleSideNav
       }
     }
     else{
       console.log(this.toggleSideNav);
-      
+
       if(this.toggleSideNav == true)
       {
 
@@ -364,7 +365,7 @@ export class AdminPageComponent implements OnInit, AfterViewInit ,OnDestroy {
       }
 
     }
-    
+
   }
 
   logout() {
