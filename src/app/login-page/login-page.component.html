@@ -105,13 +105,17 @@
             </div>
             <div class="input-group form-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                <span (click)="showPassword()" class="input-group-text"><i [ngClass]="passwordShow ? 'fas fa-eye' : 'fas fa-eye-slash'   "></i></span>
               </div>
               <input required
               placeholder="Password"
               [(ngModel)]="password"
               name="password"
+              pPassword
+              [showPassword]= "passwordShow"
               type="password" class="form-control">
+
+
             </div>
             <div class="row align-items-center remember">
               <input type="checkbox">Remember Me

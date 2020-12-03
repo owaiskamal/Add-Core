@@ -57,21 +57,20 @@
   position: fixed;
   z-index: 1;
   right: auto;
-  
-  background: linear-gradient(180deg ,rgba(30, 30, 30, 0.918), rgba(37, 37, 38, 0.856)),
+
+  background: linear-gradient(180deg, rgb(12 13 85 / 78%), rgb(0 0 0)),
   url("../../assets/images/sidenav_bg.jpg") no-repeat;;
   font-family: "Work Sans", sans-serif;
   background-size: cover;
   background-position: top;
   //overflow-x: hidden;
-  padding-top: 16px;
+ // padding-top: 16px;
 
   transition: 0.5s;
 
   overflow-y: auto;
   scrollbar-width: thin;
 
-  box-shadow: 0px 0px 19px rgba(0, 0, 0, 1);
 
 
 
@@ -251,7 +250,7 @@
     position: absolute;
     z-index: 1;
     right: auto;
-    
+
     background: linear-gradient(180deg ,rgba(30, 30, 30, 0.918), rgba(37, 37, 38, 0.856)),
     url("../../assets/images/sidenav_bg.jpg") no-repeat;;
     font-family: "Work Sans", sans-serif;
@@ -340,7 +339,7 @@
 /* .main_link a:hover
 {
     background-color:  #e6e6e6!important;
-  
+
     cursor: pointer;
     color: black !important;
 } */
@@ -349,12 +348,13 @@
 
 .sidenav .logo
 {
-   
+
     margin: 0;
     display: block;
     position: relative;
     z-index: 4;
-    
+    padding: 2.5px 0.7rem;
+
 
 }
 .sidenav .logo::after
@@ -366,7 +366,7 @@
   height: 1px;
   width: 100%;
   background-color: hsla(0,0%,70.6%,.3)
-    
+
 
 }
 .sidenav .logo a.logo-mini {
@@ -391,7 +391,7 @@
 }
 
 .sidenav .logo-img {
- 
+
   max-height: 42px;
 }
 .sidenav a {

@@ -3,7 +3,7 @@
         display: none;
     }
   }
-  
+
   @media screen and (max-width: 40rem) {
     :host ::ng-deep {
         .p-datatable {
@@ -12,7 +12,7 @@
                 .p-datatable-tfoot > tr > td {
                     display: none !important;
                 }
-  
+
                 .p-datatable-tbody > tr > td {
                     text-align: left;
                     display: block;
@@ -20,7 +20,7 @@
                     float: left;
                     clear: left;
                     border: 0 none;
-  
+
                     .p-column-title {
                         padding: .4rem;
                         min-width: 30%;
@@ -28,7 +28,7 @@
                         margin: -.4em 1em -.4em -.4rem;
                         font-weight: bold;
                     }
-  
+
                     &:last-child {
                         border-bottom: 1px solid var(--surface-d);
                     }
@@ -37,15 +37,15 @@
         }
     }
   }
-  
+
   .file-badge{
     font-size: 0.8em !important;
   }
-  
+
   .file-dropdown{
     margin-top: 0.5rem;
   }
-  
+
   .selected-file-badge{
     font-size: 0.8em !important;
   }
@@ -58,11 +58,11 @@
   :host ::ng-deep .p-card{
       background-color: #f4f5f7!important;
       border-radius: 12px;
-       box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+      box-shadow: 0 6px 10px -4px rgba(0,0,0,.15);
       margin-bottom: 3em;
   }
-  
-  
+
+
   .p-card-header
   {
       background-color: #1f89ce;
@@ -72,15 +72,15 @@
       line-height: 1.5;
       margin: 0;
   }
-  
+
   .p-card [class*=p-card-header-]
   {
-  
+
       margin: 0 15px;
       padding: 0;
       position: relative;
   }
-  
+
   :host ::ng-deep .upperCard .p-card-body
   {
       padding: 3em 1em 0em 1em;
@@ -108,14 +108,14 @@
     width: 45em !important;
   }
   @media (max-width: 768px) {
-  
+
       :host ::ng-deep .p-card .p-card-body
       {
           padding-top: 2em;
           padding-right: 2em;
           padding-bottom: 2em;
           padding-left: 2em;
-  
+
       }
       :host ::ng-deep .p-toast{
           margin-top: 20%;
@@ -131,18 +131,18 @@
       .fileBtn{
         margin-top: 10px;
       }
-  
+
   }
     :host ::ng-deep .p-listbox {
       border: none;
     }
-  
+
     :host ::ng-deep .p-field-checkbox
     {
       margin-bottom: 0;
       margin-top: 0.7rem;
     }
-  
+
     .filename-font{
       font-weight: bold;
     }
@@ -159,9 +159,9 @@
   {
     border:none;
     background: #dcdcdc
-  
+
   }
-  
+
     :host ::ng-deep .ActionText .p-panel .p-panel-content
     {
       padding: 0rem;
@@ -173,7 +173,7 @@
       padding: 1rem .5rem 0 1rem;
       border: none;
     }
-  
+
     :host ::ng-deep  .textareaP
     {
       padding: 0 0 0 0.5rem !important;
@@ -182,7 +182,7 @@
       border-top-left-radius: 0;
       width: 100% !important;
     }
-  
+
     :host ::ng-deep .pad
     {
       padding: 0;
@@ -191,4 +191,3 @@
   {
       width: 25%;
   } */
-  

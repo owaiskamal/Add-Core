@@ -30,18 +30,18 @@
   <ul class="list-unstyled">
      <ul  class="navbar logo nav">
     <li class="nav-item main_link dropdown">
-  
-  
+
+
     <a data-toggle="collapse" class="nav-link  link-text" data-target="#navdrop" style="cursor: pointer; color: white !important;">{{userName}}
       <i class="pi pi-angle-down sub-menu-icon"> </i> </a>
-  
+
   <div class="collapse"  id="navdrop">
     <ul class="nav">
   <li class="nav-item main_link">
-  
+
     <a class="nav-link link-text" [routerLinkActive]="['is-active']" [routerLink] ="['/menu/businessunit']"><i class="pi pi-circle-off"></i> <span style="padding-left: 5px;"> Business Unit</span></a>
   </li>
-  
+
   <li class="nav-item main_link">
     <a class="nav-link link-text" [routerLinkActive]="['is-active']" [routerLink] ="['/menu/costcenters']"><i class="pi pi-circle-off"></i> <span style="padding-left: 5px;"> Cost Centers</span></a>
   </li>
@@ -56,12 +56,12 @@
   </li>
     </ul>
     <li>
-    
+
       <span style="margin-top: 1rem;" class="p-input-icon-left">
         <i style="color: white;" class="fa fa-search fa-2x"></i>
         <input type="text" class="search-input" pInputText placeholder="Search" [(ngModel)]="selectedLink" (input) = "filterUsers()" />
     </span>
-     
+
     </li>
   </ul>
   <app-sidenav
@@ -125,24 +125,27 @@
     <!--  <a class="btn_side" style="margin-right:20px;"
     (click)="toggleNavbar()" >
     <span class="navbar-toggler-icon"></span></a> -->
-    <a *ngIf="sideMenu" class="btn_side" (click)="toggleNavbar($event)">
+    <button pButton pRipple type="button" *ngIf="toggleSideNav" (click)="toggleNavbar($event)" icon="pi pi-bars" class="p-button-rounded p-button-secondary  p-button-outlined"></button>
+    <button pButton pRipple type="button" *ngIf="!toggleSideNav" (click)="toggleNavbar($event)" icon="pi pi-times" class="p-button-rounded p-button-secondary  p-button-outlined"></button>
+
+    <!-- <a *ngIf="sideMenu" class="btn_side " (click)="toggleNavbar($event)">
       <span class="navbaricon">
         <div
           class="icon-bar"
-          [@hamburguerX]="isHamburguer ? 'hamburguer' : 'topX'"
+          [@hamburguerX]="toggleSideNav ? 'hamburguer' : 'topX'"
         ></div>
         <div
           class="icon-bar"
-          [@hamburguerX]="isHamburguer ? 'hamburguer' : 'hide'"
+          [@hamburguerX]="toggleSideNav ? 'hamburguer' : 'hide'"
         ></div>
         <div
           class="icon-bar"
-          [@hamburguerX]="isHamburguer ? 'hamburguer' : 'bottomX'"
+          [@hamburguerX]="toggleSideNav ? 'hamburguer' : 'bottomX'"
         ></div>
       </span>
-    </a>
+    </a> -->
 
-    
+
   </div>
   <a class="piuser toggler-nav" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
     <span class="fas fa-chevron-circle-down"></span>
